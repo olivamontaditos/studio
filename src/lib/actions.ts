@@ -1,6 +1,8 @@
 "use server";
 
 import { z } from "zod";
+import { getFirestore, collection, addDoc } from "firebase/firestore";
+import { initializeFirebase } from "@/firebase";
 
 const subscribeSchema = z.object({
   name: z.string().min(2, { message: "O nome deve ter pelo menos 2 caracteres." }),
@@ -34,16 +36,12 @@ export async function subscribeToNewsletter(
   const { name, email } = validatedFields.data;
 
   try {
-    // TODO: Implement Firebase Firestore logic here
-    // Example:
-    // import { firestore } from '@/lib/firebase';
-    // await firestore.collection('newsletter_subscriptions').add({
-    //   name,
-    //   email,
-    //   subscribedAt: new Date(),
-    // });
-
-    console.log("Subscribing user:", { name, email });
+    const { firestore } = initializeFirebase();
+    await addDoc(collection(firestore, "newsletter_subscriptions"), {
+      name,
+      email,
+      subscriptionDate: new Date(),
+    });
 
     return {
       message: "Obrigado por se inscrever!",
