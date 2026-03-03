@@ -16,7 +16,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { subscribeToNewsletter, type SubscribeState } from "@/app/lib/actions";
+import { subscribeToNewsletter, type SubscribeState } from "@/lib/actions";
 import { useToast } from "@/hooks/use-toast";
 
 const formSchema = z.object({
