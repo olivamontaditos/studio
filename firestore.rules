@@ -1,0 +1,85 @@
+/**
+ * This ruleset enforces a "public dropbox" model for newsletter subscriptions,
+ * combined with role-based access control for administrative functions.
+ *
+ * Core Philosophy:
+ * The primary goal is to allow any user, including unauthenticated visitors, to
+ * submit their information to a newsletter subscription list. This list is then
+ * treated as confidential and is only readable by users who are explicitly
+ * designated as administrators.
+ *
+ * Data Structure:
+ * - /newsletter_subscriptions/{subscriptionId}: A top-level collection where anyone can
+ *   create a new document. Reading and listing this collection is restricted.
+ * - /roles_admin/{userId}: A separate top-level collection that is used as a
+ *   lookup table to determine if a user has administrative privileges. A user is
+ *   considered an admin if a document with their UID exists in this collection.
+ *
+ * Key Security Decisions:
+ * - Public Create Access: The `newsletter_subscriptions` collection allows anyone
+ *   to create a new document. This is necessary to support a public-facing
+ *   sign-up form without requiring users to log in.
+ * - Admin-Only Reads: All read access (`get`, `list`) to the subscription list is
+ *   denied by default and only granted to authenticated users whose UID is present
+ *   in the `/roles_admin` collection.
+ * - Immutable Subscriptions: Once a subscription is created, it cannot be modified
+ *   or deleted from the client-side. This prevents any user from tampering with
+ *   the subscription list. All management must be done via a trusted backend or
+ *   the Firebase Console.
+ * - Protected Admin Roles: The `/roles_admin` collection itself is protected. It can
+ *   only be read by other admins and cannot be written to by any client.
+ *
+ * Denormalization for Authorization:
+ * This ruleset relies on a denormalized roles collection (`/roles_admin`) to
+ * grant read permissions. This avoids complex queries or joins within the rules
+ * and allows for a fast, secure `exists()` check to determine a user's role.
+ */
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions for readable, reusable logic
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    /**
+     * Checks if the currently authenticated user has an admin role.
+     * An admin is defined as a user whose UID corresponds to a document
+     * in the /roles_admin collection.
+     */
+    function isAdmin() {
+      return isSignedIn() && exists(/databases/$(database)/documents/roles_admin/$(request.auth.uid));
+    }
+
+    /**
+     * @description Allows anyone to create a subscription, but only admins can read or list them.
+     * @path /newsletter_subscriptions/{subscriptionId}
+     * @allow An unauthenticated user `(create)` a new subscription document.
+     * @deny A non-admin user `(get)` an existing subscription document.
+     * @principle Implements a public 'write-only' dropbox pattern with role-based read access.
+     */
+    match /newsletter_subscriptions/{subscriptionId} {
+      allow get: if isAdmin();
+      allow list: if isAdmin();
+      allow create: if true;
+      allow update: if false;
+      allow delete: if false;
+    }
+
+    /**
+     * @description Secures the admin role documents. Only other admins can see who is an admin.
+     * @path /roles_admin/{adminId}
+     * @allow An authenticated admin `(list)` the collection to see all other admins.
+     * @deny A non-admin user `(get)` a document from this collection.
+     * @principle Protects role-defining data from non-privileged users.
+     */
+    match /roles_admin/{adminId} {
+      allow get: if isAdmin();
+      allow list: if isAdmin();
+      allow create: if false;
+      allow update: if false;
+      allow delete: if false;
+    }
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "entities": {
+    "NewsletterSubscription": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "NewsletterSubscription",
+      "type": "object",
+      "description": "Represents a user's subscription to the restaurant's newsletter, capturing their contact information for updates and promotions.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the NewsletterSubscription entity."
+        },
+        "name": {
+          "type": "string",
+          "description": "The full name of the user subscribing to the newsletter."
+        },
+        "email": {
+          "type": "string",
+          "description": "The email address of the user subscribing to the newsletter.",
+          "format": "email"
+        },
+        "subscriptionDate": {
+          "type": "string",
+          "description": "The date and time when the user subscribed to the newsletter.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "email",
+        "subscriptionDate"
+      ]
+    }
+  },
+  "auth": {
+    "providers": [
+      "password",
+      "anonymous"
+    ]
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "/newsletter_subscriptions/{subscriptionId}",
+        "definition": {
+          "entityName": "NewsletterSubscription",
+          "schema": {
+            "$ref": "#/backend/entities/NewsletterSubscription"
+          },
+          "description": "Stores individual newsletter subscriptions. This collection is designed for public write access (any user can subscribe) and restricted read/list access (only administrators can view the list of subscribers). Includes a unique ID, subscriber name, email, and subscription date. No denormalized authorization fields are required here as creation is public and admin access is role-based from a separate collection.",
+          "params": [
+            {
+              "name": "subscriptionId",
+              "description": "The unique identifier for a specific newsletter subscription document."
+            }
+          ]
+        }
+      }
+    ],
+    "reasoning": "The Firestore structure for the OlivaTable application prioritizes simplicity, security, and adherence to the core design principles, especially Authorization Independence and supporting Query-Able Paths (QAPs). Given the primary requirement for a newsletter subscription form, a single top-level collection, '/newsletter_subscriptions', is recommended.\n\n**Authorization Independence:** Each document within the '/newsletter_subscriptions' collection is entirely self-contained. A new subscription can be created without any dependency on other documents or complex hierarchical relationships. There are no subcollections, and authorization for creating a subscription is public, meaning no `get()` calls are needed to check parent data or user roles. For administrative access to view the subscriptions, authorization will depend on a separate, dedicated `/roles_admin/{uid}` collection, external to the newsletter data itself. This completely eliminates hierarchical authorization dependencies, making security rules atomic and easy to debug.\n\n**QAPs (Rules are not Filters):**\n1.  **Public Create:** The design allows for public creation of newsletter subscriptions. A rule like `allow create: if true;` (or with basic data validation) directly enables the client to write a document if it meets schema requirements, without filtering. The entire operation is atomic.\n2.  **Admin Read/List:** For administrators to view or list subscriptions, the security rule will be based on their authenticated UID existing in a dedicated `/roles_admin/{uid}` collection. For example: `allow read, list: if exists(/databases/$(database)/documents/roles_admin/$(request.auth.uid));`. This rule is a direct access check. If the user is an admin, they can read/list all documents in the collection; if not, the request is denied outright. This ensures that the Firestore rules act as a gatekeeper, not a filter, fully supporting QAPs for both public writes and restricted administrative reads."
+  }
+}
