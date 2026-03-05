@@ -37,8 +37,8 @@ const menuCategories = [
     name: "Sucos Naturais & Sodas",
     items: [
       { name: "Morango com Leite Ninho", description: "O favorito, batido e cremoso.", price: "R$ 18,00" },
-      { name: "Suco de Frutas Vermelhas", description: "Blend de morango, amora e framboesa.", price: "R$ 16,00" },
       { name: "Soda Italiana Monin", description: "Maçã Verde, Morango ou Limão Siciliano.", price: "R$ 16,00" },
+      { name: "Suco de Frutas Vermelhas", description: "Blend de morango, amora e framboesa.", price: "R$ 16,00" },
       { name: "Suco de Laranja", description: "Fresco, espremido na hora.", price: "R$ 12,00" },
       { name: "Suco de Abacaxi com Hortelã", description: "Refrescante e natural.", price: "R$ 12,00" },
     ],
@@ -79,7 +79,7 @@ export default function MenuSection() {
       <div className="container mx-auto px-6">
         <div className="text-center">
             <h2 className="font-headline text-4xl font-bold text-primary">
-                🥖 OLIVA MONTADITOS 🇪🇸
+                🥖 OLIVA MONTADITOS
             </h2>
             <p className="mt-2 text-lg text-muted-foreground">Artesanal por Cirlei Max</p>
             <div className="mt-6 inline-flex items-center justify-center rounded-full bg-primary/10 px-4 py-2 text-base font-semibold text-primary">
