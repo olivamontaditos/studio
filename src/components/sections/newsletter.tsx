@@ -1,10 +1,8 @@
 "use client";
 
-import { useFormState, useFormStatus } from "react-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useEffect } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,7 +14,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { subscribeToNewsletter, type SubscribeState } from "@/lib/actions";
 import { useToast } from "@/hooks/use-toast";
 
 const formSchema = z.object({
@@ -24,17 +21,7 @@ const formSchema = z.object({
   email: z.string().email({ message: "Por favor, insira um email válido." }),
 });
 
-function SubmitButton() {
-  const { pending } = useFormStatus();
-  return (
-    <Button type="submit" disabled={pending} className="w-full sm:w-auto bg-accent text-accent-foreground hover:bg-accent/90">
-      {pending ? "Enviando..." : "OK"}
-    </Button>
-  );
-}
-
 export default function NewsletterSection() {
-  const [state, formAction] = useFormState<SubscribeState, FormData>(subscribeToNewsletter, { message: null, status: null });
   const { toast } = useToast();
   
   const form = useForm<z.infer<typeof formSchema>>({
@@ -45,21 +32,22 @@ export default function NewsletterSection() {
     },
   });
 
-  useEffect(() => {
-    if (state.status === 'success') {
-      toast({
-        title: "Sucesso!",
-        description: state.message,
-      });
-      form.reset();
-    } else if (state.status === 'error') {
-      toast({
-        title: "Erro",
-        description: state.message,
-        variant: "destructive",
-      });
-    }
-  }, [state, toast, form]);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    // This is a client-side mock submission because Server Actions are not
+    // supported in a static export for GitHub Pages.
+    console.log("Newsletter submission (static):", values);
+    
+    // Simulate network delay for better UX
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    toast({
+      title: "Sucesso!",
+      description: "Obrigado por se inscrever!",
+    });
+    form.reset();
+  }
+
+  const { isSubmitting } = form.formState;
 
   return (
     <section className="bg-background py-20 md:py-24">
@@ -73,7 +61,7 @@ export default function NewsletterSection() {
 
         <Form {...form}>
           <form
-            action={formAction}
+            onSubmit={form.handleSubmit(onSubmit)}
             className="mt-8 mx-auto max-w-lg"
           >
             <div className="flex flex-col gap-4 sm:flex-row">
@@ -103,7 +91,9 @@ export default function NewsletterSection() {
                   </FormItem>
                 )}
               />
-              <SubmitButton />
+              <Button type="submit" disabled={isSubmitting} className="w-full sm:w-auto bg-accent text-accent-foreground hover:bg-accent/90">
+                {isSubmitting ? "Enviando..." : "OK"}
+              </Button>
             </div>
             
           </form>
