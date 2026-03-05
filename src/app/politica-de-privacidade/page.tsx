@@ -1,14 +1,23 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 
 export default function PrivacyPolicyPage() {
+  const [date, setDate] = useState("");
+
+  useEffect(() => {
+    setDate(new Date().toLocaleDateString("pt-BR"));
+  }, []);
+
   return (
     <>
       <Header />
       <main className="container mx-auto px-6 py-20">
         <h1 className="font-headline text-4xl font-bold text-primary">Política de Privacidade</h1>
         <div className="prose prose-invert mt-8 max-w-none">
-          <p>Última atualização: {new Date().toLocaleDateString('pt-BR')}</p>
+          <p>Última atualização: {date}</p>
           
           <p>
             A sua privacidade é importante para nós. É política do OLIVA MONTADITOS respeitar a sua privacidade em relação a qualquer informação sua que possamos coletar no site OLIVA MONTADITOS, e outros sites que possuímos e operamos.

@@ -1,14 +1,23 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 
 export default function CookiePolicyPage() {
+  const [date, setDate] = useState("");
+
+  useEffect(() => {
+    setDate(new Date().toLocaleDateString("pt-BR"));
+  }, []);
+
   return (
     <>
       <Header />
       <main className="container mx-auto px-6 py-20">
         <h1 className="font-headline text-4xl font-bold text-primary">Política de Cookies</h1>
         <div className="prose prose-invert mt-8 max-w-none">
-          <p>Última atualização: {new Date().toLocaleDateString('pt-BR')}</p>
+          <p>Última atualização: {date}</p>
           
           <h2>O que são cookies?</h2>
           <p>
@@ -27,7 +36,7 @@ export default function CookiePolicyPage() {
 
           <h2>Mais informações</h2>
           <p>
-            Esperamos que isso tenha esclarecido as coisas para você. Como mencionado anteriormente, se houver algo que você não tem certeza se precisa ou não, geralmente é mais seguro deixar os cookies ativados, caso interaja com um dos recursos que você usa em nosso site.
+            Esperamos que isso tenha esclarecido as coisas para você. Como mencionado anteriormente, se houver algo que você не tem certeza se precisa ou não, geralmente é mais seguro deixar os cookies ativados, caso interaja com um dos recursos que você usa em nosso site.
           </p>
         </div>
       </main>
