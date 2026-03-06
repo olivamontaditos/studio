@@ -3,6 +3,8 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { useFirestore } from "@/firebase";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -15,6 +17,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
+import { errorEmitter } from "@/firebase/error-emitter";
+import { FirestorePermissionError } from "@/firebase/errors";
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "O nome deve ter pelo menos 2 caracteres." }),
@@ -23,6 +27,7 @@ const formSchema = z.object({
 
 export default function NewsletterSection() {
   const { toast } = useToast();
+  const firestore = useFirestore();
   
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -33,18 +38,46 @@ export default function NewsletterSection() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    // This is a client-side mock submission because Server Actions are not
-    // supported in a static export for GitHub Pages.
-    console.log("Newsletter submission (static):", values);
-    
-    // Simulate network delay for better UX
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    if (!firestore) {
+      toast({
+        variant: "destructive",
+        title: "Erro de Conexão",
+        description: "Não foi possível conectar ao banco de dados. Tente novamente mais tarde.",
+      });
+      return;
+    }
 
-    toast({
-      title: "Sucesso!",
-      description: "Obrigado por se inscrever!",
-    });
-    form.reset();
+    const newsletterCollection = collection(firestore, 'newsletter_subscriptions');
+    const dataToSave = {
+      ...values,
+      subscriptionDate: serverTimestamp(),
+    };
+
+    return addDoc(newsletterCollection, dataToSave)
+      .then(() => {
+        toast({
+          title: "Sucesso!",
+          description: "Obrigado por se inscrever!",
+        });
+        form.reset();
+      })
+      .catch((e) => {
+        const permissionError = new FirestorePermissionError({
+            path: newsletterCollection.path,
+            operation: 'create',
+            requestResourceData: dataToSave,
+        });
+        errorEmitter.emit('permission-error', permissionError);
+        
+        toast({
+          variant: "destructive",
+          title: "Uh oh! Algo deu errado.",
+          description: "Não foi possível concluir sua inscrição. Tente novamente.",
+        });
+
+        // Re-throw to let react-hook-form know the submission failed.
+        throw e;
+      });
   }
 
   const { isSubmitting } = form.formState;
