@@ -12,6 +12,17 @@ const TikTokIcon = (props: any) => (
   </svg>
 );
 
+const FacebookIcon = (props: any) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    {...props}
+  >
+    <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-1.5c-1.38 0-1.5.62-1.5 1.4V12h3l-.5 3h-2.5v6.8c4.56-.93 8-4.96 8-9.8z" />
+  </svg>
+);
+
 
 export default function Footer() {
   const legalLinks = [
@@ -49,6 +60,15 @@ export default function Footer() {
                 aria-label="TikTok"
               >
                 <TikTokIcon className="h-6 w-6" />
+              </a>
+               <a
+                href="https://www.facebook.com/olivamontaditos/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground transition-colors hover:text-primary"
+                aria-label="Facebook"
+              >
+                <FacebookIcon className="h-6 w-6" />
               </a>
             </div>
           </div>
