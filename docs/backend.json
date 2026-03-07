@@ -6,10 +6,6 @@
       "type": "object",
       "description": "Represents a user's subscription to the restaurant's newsletter, capturing their contact information for updates and promotions.",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier for the NewsletterSubscription entity."
-        },
         "name": {
           "type": "string",
           "description": "The full name of the user subscribing to the newsletter."
@@ -26,10 +22,40 @@
         }
       },
       "required": [
-        "id",
         "name",
         "email",
         "subscriptionDate"
+      ]
+    },
+    "ComingSoonLead": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "ComingSoonLead",
+      "type": "object",
+      "description": "Represents a lead captured from the 'Coming Soon' page, including their name, email, and WhatsApp for future contact.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The full name of the interested lead."
+        },
+        "email": {
+          "type": "string",
+          "description": "The email address of the lead.",
+          "format": "email"
+        },
+        "whatsapp": {
+          "type": "string",
+          "description": "The WhatsApp number of the lead."
+        },
+        "submissionDate": {
+          "type": "string",
+          "description": "The date and time when the lead was submitted.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "name",
+        "email",
+        "submissionDate"
       ]
     }
   },
@@ -53,6 +79,22 @@
             {
               "name": "subscriptionId",
               "description": "The unique identifier for a specific newsletter subscription document."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/coming_soon_leads/{leadId}",
+        "definition": {
+          "entityName": "ComingSoonLead",
+          "schema": {
+            "$ref": "#/backend/entities/ComingSoonLead"
+          },
+          "description": "Stores leads captured from the 'Coming Soon' page. Public write access is allowed for anyone to submit their interest, but read/list access is restricted to administrators.",
+          "params": [
+            {
+              "name": "leadId",
+              "description": "The unique identifier for a specific lead document."
             }
           ]
         }

@@ -68,6 +68,21 @@ service cloud.firestore {
     }
 
     /**
+     * @description Allows anyone to submit their contact information on the 'Coming Soon' page.
+     * @path /coming_soon_leads/{leadId}
+     * @allow An unauthenticated user `(create)` a new lead document.
+     * @deny A non-admin user `(get)` an existing lead document.
+     * @principle Implements a public 'write-only' dropbox pattern for lead capture.
+     */
+    match /coming_soon_leads/{leadId} {
+      allow get: if isAdmin();
+      allow list: if isAdmin();
+      allow create: if true;
+      allow update: if false;
+      allow delete: if false;
+    }
+
+    /**
      * @description Secures the admin role documents. Only other admins can see who is an admin.
      * @path /roles_admin/{adminId}
      * @allow An authenticated admin `(list)` the collection to see all other admins.
