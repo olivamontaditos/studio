@@ -51,7 +51,11 @@ const FacebookIcon = (props: any) => (
 const formSchema = z.object({
     name: z.string().min(2, { message: "O nome deve ter pelo menos 2 caracteres." }),
     email: z.string().email({ message: "Por favor, insira um email válido." }),
-    whatsapp: z.string().optional(),
+    whatsapp: z.string()
+      .refine(val => !val || /^\d{10,11}$/.test(val), {
+          message: "O WhatsApp deve ter 10 ou 11 dígitos numéricos (DDD + número).",
+      })
+      .optional(),
 });
 
 export default function ComingSoonPage() {
@@ -177,7 +181,18 @@ export default function ComingSoonPage() {
                     <FormItem>
                       <FormLabel className="sr-only">WhatsApp (Opcional)</FormLabel>
                       <FormControl>
-                        <Input placeholder="Seu WhatsApp (Opcional)" {...field} />
+                        <Input
+                          type="tel"
+                          maxLength={11}
+                          placeholder="Seu WhatsApp (Opcional)"
+                          {...field}
+                          onChange={(e) => {
+                            const { value } = e.target;
+                            if (/^\d*$/.test(value)) {
+                              field.onChange(value);
+                            }
+                          }}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
