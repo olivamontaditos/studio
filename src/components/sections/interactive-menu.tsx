@@ -31,7 +31,7 @@ export default function InteractiveMenu() {
         <div className="w-full max-w-2xl mx-auto py-12 px-4">
             <header className="text-center mb-12">
                 <h1 className="font-headline text-5xl font-bold text-primary">
-                    Cardápio Interativo
+                    Cardápio
                 </h1>
                 <p className="mt-2 text-lg text-muted-foreground">
                     Toque em uma categoria para começar sua jornada de sabores!
