@@ -105,7 +105,7 @@ export default function NewsletterSection() {
                   <FormItem className="flex-1">
                     <FormLabel className="sr-only">Nome</FormLabel>
                     <FormControl>
-                      <Input placeholder="Seu nome" {...field} />
+                      <Input placeholder="Nome completo" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
