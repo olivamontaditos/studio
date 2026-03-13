@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ShieldCheck, Star, Instagram } from "lucide-react";
+import Copyright from "./copyright";
 
 const TikTokIcon = (props: any) => (
   <svg
@@ -112,7 +113,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-8 border-t border-white/10 pt-8 text-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} OLIVA MONTADITOS. Todos os direitos reservados.</p>
+          <Copyright />
         </div>
       </div>
     </footer>

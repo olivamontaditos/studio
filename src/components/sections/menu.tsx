@@ -1,6 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 
-const menuCategories = [
+export const menuCategories = [
   {
     name: "Montaditos Salgados",
     description: "Base: Emulsão de tomate, alho e azeite.",
@@ -69,16 +70,16 @@ const menuCategories = [
   },
 ];
 
-const promotions = [
+export const promotions = [
     { title: "🔥 PROMO TRIO", description: "3 Montaditos = Ganhe Batata Chips!" },
     { title: "🎓 Combo Estudante", description: "M01 + Chips + Soda = R$ 32,00" },
     { title: "🥨 Combo Oliva Refresh", description: "M06 + Soda = R$ 30,00" },
     { title: "☕ Café Oliva", description: "Espresso + Torrone P = R$ 15,00" },
 ];
 
-export default function MenuSection() {
+export default function MenuSection({ isPage = false }: { isPage?: boolean }) {
   return (
-    <section id="cardapio" className="bg-secondary py-20 md:py-32">
+    <section id="cardapio" className={cn("bg-secondary", isPage ? "py-8 md:py-12" : "py-20 md:py-32")}>
       <div className="container mx-auto px-6">
         <div className="text-center">
             <h2 className="font-headline text-4xl font-bold text-primary">
