@@ -9,7 +9,7 @@ import {
 import {
     Flame,
     Sandwich,
-    GlassOfWine,
+    Wine,
     Gift,
     Cake,
     Grape,
@@ -19,7 +19,7 @@ import { menuCategories, promotions } from "./menu";
 
 const iconMap: { [key: string]: React.ElementType } = {
     "Montaditos Salgados": Sandwich,
-    "Sangria & Coquetelaria": GlassOfWine,
+    "Sangria & Coquetelaria": Wine,
     "Torrones Artesanais 🇪🇸": Gift,
     "Sobremesas & Croissants Doces": Cake,
     "Sucos Naturais": Grape,
