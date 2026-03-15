@@ -31,11 +31,11 @@ export default function ReservationsSection() {
               </p>
               <p className="flex items-center justify-center md:justify-start gap-3">
                 <Phone className="h-5 w-5 text-primary" />
-                <a href="tel:+5541999999999" className="hover:text-primary transition-colors">(41) 99999-9999</a>
+                <a href="tel:+5541991773334" className="hover:text-primary transition-colors">(41) 99177-3334</a>
               </p>
               <p className="flex items-center justify-center md:justify-start gap-3">
                 <Mail className="h-5 w-5 text-primary" />
-                <a href="mailto:contato@olivamonataditos.com" className="hover:text-primary transition-colors">contato@olivamonataditos.com</a>
+                <a href="mailto:olivamonataditos@gmail.com" className="hover:text-primary transition-colors">olivamonataditos@gmail.com</a>
               </p>
             </div>
           </div>
