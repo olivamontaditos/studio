@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ShieldCheck, Star, Instagram } from "lucide-react";
+import { ShieldCheck, Star, Instagram, Youtube } from "lucide-react";
 import Copyright from "./copyright";
 
 const TikTokIcon = (props: any) => (
@@ -70,6 +70,15 @@ export default function Footer() {
                 aria-label="Facebook"
               >
                 <FacebookIcon className="h-6 w-6" />
+              </a>
+              <a
+                href="https://www.youtube.com/@OlivaMontaditos"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground transition-colors hover:text-primary"
+                aria-label="YouTube"
+              >
+                <Youtube className="h-6 w-6" />
               </a>
             </div>
           </div>

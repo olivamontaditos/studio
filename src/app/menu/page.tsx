@@ -1,6 +1,6 @@
 import Copyright from "@/components/layout/copyright";
 import InteractiveMenu from "@/components/sections/interactive-menu";
-import { Instagram } from "lucide-react";
+import { Instagram, Youtube } from "lucide-react";
 
 export const metadata = {
     title: "Cardápio | OLIVA MONTADITOS",
@@ -62,6 +62,15 @@ export default function MenuPage() {
             aria-label="Facebook"
           >
             <FacebookIcon className="h-6 w-6" />
+          </a>
+          <a
+            href="https://www.youtube.com/@OlivaMontaditos"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-muted-foreground transition-colors hover:text-primary"
+            aria-label="YouTube"
+          >
+            <Youtube className="h-6 w-6" />
           </a>
         </div>
         <Copyright />
