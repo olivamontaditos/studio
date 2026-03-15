@@ -14,7 +14,7 @@ export const menuCategories = [
       { name: "M06. Frango Cremoso Melt", description: "Frango ao cream cheese, muçarela e batata crocante.", price: "R$ 22,90", imageUrl: "https://64.media.tumblr.com/b9e96594fc6d22353cd3cf7c94edeb77/0729a521a5d6cff4-fd/s2048x3072/f3f206f1e6853ae1d967dfc738653dc4fd5489a6.jpg" },
       { name: "M07. Frango Iscas Gourmet", description: "Iscas de frango, muçarela, maionese de alho e tomate cereja.", price: "R$ 26,90", imageUrl: "https://64.media.tumblr.com/7fcab6e70efc0fce1fa7a286d2b2b316/0729a521a5d6cff4-cb/s2048x3072/bd1a81a520067e76c288a701d8889d820dd2ec19.jpg" },
       { name: "M08. Mignon Gruyère", description: "Mignon, queijo gruyère, cebola caramelizada e maionese de alho.", price: "R$ 37,00", imageUrl: "https://64.media.tumblr.com/9e260afe66273c0a6158761992ceb67d/0729a521a5d6cff4-2b/s2048x3072/2bb44eb1a215e7d3eb24b197bf77581526abaf24.jpg" },
-      { name: "M09. Pastrami Oliva", description: "Pastrami, queijo derretido, Vinagrete do William e creme de queijo.", price: "R$ 41,00", imageUrl: "https://64.media.tumblr.com/28aac709f228a8d15e955a38ededda6f/0729a521a5d6cff4-c0/s2048x3072/cb7a37a28cbd6b7a50f8e27913ce9cd96a0e2ddb.jpg" },
+      { name: "M09. Pastrami Oliva", description: "Pastrami, queijo derretido, Vinagrete do William e creme de queijo.", price: "R$ 41,00", imageUrl: "https://64.media.tumblr.com/b52567a2d00f84d7f3651c2444b5bb85/0729a521a5d6cff4-e3/s2048x3072/25b5ca0786e1e362f1a7f8ec67a42e1fe6e14434.jpg" },
     ],
   },
   {
