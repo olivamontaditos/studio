@@ -1,5 +1,5 @@
 import Copyright from "@/components/layout/copyright";
-import InteractiveMenu from "@/components/sections/interactive-menu";
+import MenuSection from "@/components/sections/menu";
 import { Instagram, Youtube } from "lucide-react";
 
 export const metadata = {
@@ -33,7 +33,7 @@ const FacebookIcon = (props: any) => (
 export default function MenuPage() {
   return (
     <main className="min-h-screen bg-secondary flex flex-col items-center">
-      <InteractiveMenu />
+      <MenuSection />
       <footer className="w-full py-6 text-center text-sm text-muted-foreground">
         <div className="flex justify-center items-center space-x-6 mb-4">
           <a
