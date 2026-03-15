@@ -1,11 +1,17 @@
 'use client';
 
+import Image from 'next/image';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 import {
     Flame,
     Sandwich,
@@ -53,17 +59,47 @@ export default function InteractiveMenu() {
                                 </div>
                             </AccordionTrigger>
                             <AccordionContent className="px-6 pb-6">
-                                <ul className="space-y-4 pt-4 border-t border-dashed">
+                                <ul className="space-y-6 pt-4 border-t border-dashed">
                                   {category.items.map((item) => (
                                     <li key={item.name}>
-                                      <div className="flex justify-between items-end gap-4">
-                                        <div className="flex-shrink">
-                                            <p className="text-foreground font-medium">{item.name}</p>
-                                            {item.description && (
-                                                <p className="text-sm text-muted-foreground mt-1">{item.description}</p>
-                                            )}
+                                      <div className="flex items-start gap-4">
+                                        {item.imageUrl && (
+                                          <Dialog>
+                                            <DialogTrigger asChild>
+                                              <div className="relative h-20 w-20 flex-shrink-0 cursor-pointer overflow-hidden rounded-md">
+                                                <Image
+                                                  src={item.imageUrl}
+                                                  alt={item.name}
+                                                  fill
+                                                  className="object-cover"
+                                                  sizes="80px"
+                                                />
+                                              </div>
+                                            </DialogTrigger>
+                                            <DialogContent className="p-0 border-0 max-w-md bg-transparent shadow-none">
+                                              <div className="relative aspect-square w-full">
+                                                <Image
+                                                  src={item.imageUrl}
+                                                  alt={item.name}
+                                                  fill
+                                                  className="object-contain rounded-lg"
+                                                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                                />
+                                              </div>
+                                            </DialogContent>
+                                          </Dialog>
+                                        )}
+                                        <div className="flex-grow">
+                                          <div className="flex justify-between items-start gap-2">
+                                            <div className="flex-shrink">
+                                                <p className="text-foreground font-medium">{item.name}</p>
+                                                {item.description && (
+                                                    <p className="text-sm text-muted-foreground mt-1">{item.description}</p>
+                                                )}
+                                            </div>
+                                            <p className="font-semibold text-foreground whitespace-nowrap pt-1">{item.price}</p>
+                                          </div>
                                         </div>
-                                        <p className="font-semibold text-foreground whitespace-nowrap">{item.price}</p>
                                       </div>
                                     </li>
                                   ))}
