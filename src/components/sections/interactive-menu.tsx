@@ -13,23 +13,20 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import {
-    Flame,
     Sandwich,
     Wine,
     Gift,
     Cake,
-    Grape,
-    Coffee
+    CupSoda
 } from "lucide-react";
-import { menuCategories, promotions } from "./menu";
+import { menuCategories } from "./menu";
 
 const iconMap: { [key: string]: React.ElementType } = {
-    "Montaditos Salgados": Sandwich,
-    "Sangria & Coquetelaria": Wine,
-    "Torrones Artesanais 🇪🇸": Gift,
-    "Sobremesas & Croissants Doces": Cake,
-    "Sucos Naturais": Grape,
-    "Cafeteria": Coffee,
+    "MONTADITOS (No Pão de Coca Espanhol)": Sandwich,
+    "TORRONES ARTESANAIS (Receita Original Espanhola)": Gift,
+    "SOBREMESAS & CROISSANTS DOCES": Cake,
+    "BEBIDAS & SODAS": CupSoda,
+    "COQUETELARIA (Para Viagem)": Wine,
 };
 
 export default function InteractiveMenu() {
@@ -108,29 +105,6 @@ export default function InteractiveMenu() {
                         </AccordionItem>
                     )
                 })}
-
-                {/* Promotions section */}
-                <AccordionItem value="promocoes" className="border-b-0 rounded-lg bg-card text-card-foreground shadow-sm overflow-hidden">
-                    <AccordionTrigger className="p-6 hover:no-underline text-left">
-                        <div className="flex items-center gap-4 w-full">
-                            <Flame className="h-8 w-8 text-accent flex-shrink-0" />
-                            <div className="flex-grow">
-                                <h3 className="text-xl font-headline">Promoções & Combos</h3>
-                            </div>
-                        </div>
-                    </AccordionTrigger>
-                    <AccordionContent className="px-6 pb-6">
-                        <ul className="space-y-4 pt-4 border-t border-dashed">
-                          {promotions.map((promo) => (
-                            <li key={promo.title}>
-                                <h4 className="text-accent font-bold">{promo.title}</h4>
-                                <p className="text-sm text-muted-foreground mt-1">{promo.description}</p>
-                            </li>
-                          ))}
-                        </ul>
-                    </AccordionContent>
-                </AccordionItem>
-
             </Accordion>
         </div>
     )

@@ -3,78 +3,54 @@ import { cn } from "@/lib/utils";
 
 export const menuCategories = [
   {
-    name: "Montaditos Salgados",
-    description: "Base: Emulsão de tomate, alho e azeite.",
+    name: "MONTADITOS (No Pão de Coca Espanhol)",
+    description: "Base: Emulsão de tomate, alho e azeite. Dica: Troque o pão por Croissant Amanteigado por + R$ 7,50.",
     items: [
-      { name: "M01. El Clásico", description: "Muçarela e orégano.", price: "R$ 14,00", imageUrl: "https://64.media.tumblr.com/7460cce4649b86caaa289048d5f0008b/6d7fbaf174ce9a65-b6/s1280x1920/9fc4dc698e71a7057ebf21ff26f4acb2c7bf410d.jpg" },
-      { name: "M02. Salame & Cherry", description: "Salame, cereja e muçarela.", price: "R$ 21,00", imageUrl: "https://64.media.tumblr.com/66cfa45aaa5f3048f8cbfe7002b356be/6d7fbaf174ce9a65-21/s1280x1920/efa04660fa6bd2df453913a4378d480cd533c3f0.jpg" },
-      { name: "M03. Jamón Serrano", description: "Presunto cru e búfala.", price: "R$ 32,00" },
-      { name: "M04. Germânico-Ibérico", description: "Salsicha e Vinagrete.", price: "R$ 24,00", imageUrl: "https://64.media.tumblr.com/008873bbacb74b6f4b669e5630585409/6d7fbaf174ce9a65-db/s1280x1920/3eb742a3c02265fcda940b4bdf69051a4b3139f9.jpg" },
-      { name: "M05. Peito de Peru", description: "Búfala e salada.", price: "R$ 22,00", imageUrl: "https://64.media.tumblr.com/a23afc762c6824cdaad060135077e090/6d7fbaf174ce9a65-3f/s1280x1920/ffb457ddbff54bf83d1a794b0d39f58ab60a17d5.jpg" },
-      { name: "M06. Frango Cremoso", description: "Cream cheese e batata.", price: "R$ 19,00", imageUrl: "https://64.media.tumblr.com/ff69f53f53c26e2059492d678f9c6c6a/6d7fbaf174ce9a65-f9/s1280x1920/76fb357636f0906887fb6c137d15edb7715a5036.jpg" },
-      { name: "M07. Frango Iscas", description: "Iscas de frango e alho.", price: "R$ 22,00" },
-      { name: "M08. Mignon Gruyère", description: "Mignon e cebola caramelizada.", price: "R$ 31,00", imageUrl: "https://64.media.tumblr.com/99de5b3fdc8a2f667bb59742ed92109c/6d7fbaf174ce9a65-fc/s1280x1920/75ef7a5196b08f80f9d9510d72c904a16e28e60b.jpg" },
-      { name: "M09. Pastrami Oliva", description: "Pastrami, e creme de queijo, tomate cereja confitado.", price: "R$ 34,00", imageUrl: "https://64.media.tumblr.com/87c96ac26af1bfc0085b8e8cd64f7830/6d7fbaf174ce9a65-bf/s1280x1920/1e063b8a8f552b3142acea7f5a046c9d7cbf49ee.jpg" },
-    ],
-  },
-    {
-    name: "Sangria & Coquetelaria",
-    items: [
-      { name: "Sangria Oliva", description: "Receita clássica da Chef.", price: "R$ 26,00" },
-      { name: "Pear Sparkling", description: "Espumante e Monin de Pera.", price: "R$ 28,00" },
-      { name: "Carajillo Crème Brûlée", description: "Espresso e Licor 43.", price: "R$ 32,00" },
-      { name: "Drink Sensação", description: "Gin e frutas vermelhas.", price: "R$ 28,00" },
-      { name: "Strawberry Daiquiri", description: "Rum e morangos.", price: "R$ 26,00" },
-      { name: "Sodas Espanholas", description: "Maçã, Framboesa ou Pera.", price: "R$ 16,00" },
-    ],
-  },
-    {
-    name: "Torrones Artesanais 🇪🇸",
-    description: "Receita Original Espanhola com Amêndoas. Frutas Vermelhas | Pistache | Nozes/Limão | Chocolate 70%/Cranberry.",
-    items: [
-      { name: "P (25g)", price: "R$ 9,90" },
-      { name: "M (70g)", price: "R$ 29,90" },
-      { name: "G (90g)", price: "R$ 35,90" },
+      { name: "M01. El Clásico", description: "Muçarela derretida e orégano no pão artesanal.", price: "R$ 16,90", imageUrl: "https://64.media.tumblr.com/5d1bcf7ceba0e04ed8ce2e2412a3c4da/0729a521a5d6cff4-01/s2048x3072/11c42de505012a851baefc2ba66ad487dc7d3134.jpg" },
+      { name: "M02. Salame & Cherry", description: "Salame italiano, tomate cereja, muçarela e maionese de alho.", price: "R$ 25,00", imageUrl: "https://64.media.tumblr.com/c438395e5096bd86e4c1fa290d489651/0729a521a5d6cff4-6b/s2048x3072/9b6910ba0895e79ed1954503aef0992c0b003e4b.jpg" },
+      { name: "M03. Jamón Serrano Supremo", description: "Presunto cru espanhol, búfala, rúcula e pimentão no azeite.", price: "R$ 38,90", imageUrl: "https://64.media.tumblr.com/7fcab6e70efc0fce1fa7a286d2b2b316/0729a521a5d6cff4-cb/s2048x3072/bd1a81a520067e76c288a701d8889d820dd2ec19.jpg" },
+      { name: "M04. Germânico-Ibérico", description: "Salsicha artesanal, Vinagrete do William e maionese de alho.", price: "R$ 28,90", imageUrl: "https://64.media.tumblr.com/80862ce7c59ba9297564ba9c92271ccc/0729a521a5d6cff4-1a/s2048x3072/a63b54494b40a8beac1c6dd677a9fbfa3ec3a86a.jpg" },
+      { name: "M05. Peito de Peru Light", description: "Peito de peru, búfala, tomate, alface e maionese de alho.", price: "R$ 26,90", imageUrl: "https://64.media.tumblr.com/b52567a2d00f84d7f3651c2444b5bb85/0729a521a5d6cff4-e3/s2048x3072/25b5ca0786e1e362f1a7f8ec67a42e1fe6e14434.jpg" },
+      { name: "M06. Frango Cremoso Melt", description: "Frango ao cream cheese, muçarela e batata crocante.", price: "R$ 22,90", imageUrl: "https://64.media.tumblr.com/b9e96594fc6d22353cd3cf7c94edeb77/0729a521a5d6cff4-fd/s2048x3072/f3f206f1e6853ae1d967dfc738653dc4fd5489a6.jpg" },
+      { name: "M07. Frango Iscas Gourmet", description: "Iscas de frango, muçarela, maionese de alho e tomate cereja.", price: "R$ 26,90", imageUrl: "https://64.media.tumblr.com/acb78441e2b45ff3bb2ee86766693d57/0729a521a5d6cff4-ad/s2048x3072/5d7e4371e74beb499fc222df02db822b708f4265.jpg" },
+      { name: "M08. Mignon Gruyère", description: "Mignon, queijo gruyère, cebola caramelizada e maionese de alho.", price: "R$ 37,00", imageUrl: "https://64.media.tumblr.com/9e260afe66273c0a6158761992ceb67d/0729a521a5d6cff4-2b/s2048x3072/2bb44eb1a215e7d3eb24b197bf77581526abaf24.jpg" },
+      { name: "M09. Pastrami Oliva", description: "Pastrami, queijo derretido, Vinagrete do William e creme de queijo.", price: "R$ 41,00", imageUrl: "https://64.media.tumblr.com/28aac709f228a8d15e955a38ededda6f/0729a521a5d6cff4-c0/s2048x3072/cb7a37a28cbd6b7a50f8e27913ce9cd96a0e2ddb.jpg" },
     ],
   },
   {
-    name: "Sobremesas & Croissants Doces",
+    name: "TORRONES ARTESANAIS (Receita Original Espanhola)",
+    description: "Sabores: Frutas Vermelhas, Pistache, Nozes com Limão ou Chocolate 70%.",
     items: [
-        { name: "Torta Basca Simples", price: "R$ 28,00" },
-        { name: "Torta Basca com Calda", description: "Caldas: Frutas Vermelhas, Pistache, Caramelo, Chocolate ou Doce de Leite", price: "R$ 35,00" },
-        { name: "Pistache Real", price: "R$ 34,00" },
-        { name: "Nutella com Morangos", price: "R$ 32,00" },
-        { name: "Amêndoas Tostadas", price: "R$ 28,00" },
-        { name: "Chocolate Blend", price: "R$ 26,00" },
-        { name: "Doce de Leite com Nozes", price: "R$ 26,00" },
+      { name: "Tamanho P (25g)", price: "R$ 12,00" },
+      { name: "Tamanho M (70g)", price: "R$ 35,90" },
+      { name: "Tamanho G (90g)", price: "R$ 42,90" },
     ],
   },
   {
-    name: "Sucos Naturais",
+    name: "SOBREMESAS & CROISSANTS DOCES",
     items: [
-      { name: "Laranja ou Abacaxi/Hortelã", price: "R$ 12,00" },
-      { name: "Frutas Vermelhas", price: "R$ 16,00" },
-      { name: "Morango com Leite Ninho", price: "R$ 18,00" },
+        { name: "Torta Basca de San Sebastián", description: "A autêntica cheesecake espanhola cremosa. Adicional de Calda Artesanal: + R$ 8,00", price: "R$ 34,00" },
+        { name: "Croissant Pistache Real", description: "Recheio de brigadeiro e ganache de pistache.", price: "R$ 41,00", imageUrl: "https://64.media.tumblr.com/0add055745496740cdac0ee959142a72/0729a521a5d6cff4-03/s2048x3072/11612a18f1c46df12f7d3274d3fedb0200c84372.jpg" },
+        { name: "Croissant Nutella com Morangos", description: "Nutella original e morangos frescos.", price: "R$ 38,90", imageUrl: "https://64.media.tumblr.com/6c066210786fb0fe39f2cfa601994f94/3ff45e09a0c7dd34-ae/s2048x3072/7eed66c605a1a87e48ea908cfb53af3cfcc16037.jpg" },
+        { name: "Croissant Chocolate Blend", description: "Chocolate ao leite premium.", price: "R$ 31,00", imageUrl: "https://64.media.tumblr.com/32d746d8e9cd9113ed6811ac3e7b91e2/0729a521a5d6cff4-e9/s2048x3072/8d98fc0f020c1d091ae10db68fda56c69d7ce1cc.jpg" },
     ],
   },
   {
-    name: "Cafeteria",
-    description: "Grãos Especiais",
+    name: "BEBIDAS & SODAS",
     items: [
-      { name: "Espresso / Carioca", price: "R$ 8,00" },
-      { name: "Latte", price: "R$ 10,90" },
-      { name: "Cappuccino Oliva", price: "R$ 16,00" },
-      { name: "Chocolate Quente Tradicional", price: "R$ 15,00" },
-      { name: "Chocolate Suíço Cremoso", price: "R$ 18,00" },
+      { name: "Sodas Espanholas (400ml)", description: "Maçã Verde, Framboesa, Limão Siciliano ou Pera.", price: "R$ 19,00" },
+      { name: "Suco Morango com Leite Ninho", description: "Ultra cremoso e batido na hora.", price: "R$ 22,00" },
+      { name: "Suco de Frutas Vermelhas", description: "Natural (Morango, mirtilo e amora).", price: "R$ 19,00" },
+      { name: "Chocolate Suíço Cremoso (Quente)", description: "Receita densa europeia.", price: "R$ 22,00" },
     ],
   },
-];
-
-export const promotions = [
-    { title: "🔥 PROMO TRIO", description: "3 Montaditos = Ganhe Batata Chips!" },
-    { title: "🎓 Combo Estudante", description: "M01 + Chips + Soda = R$ 32,00" },
-    { title: "🥨 Combo Oliva Refresh", description: "M06 + Soda = R$ 30,00" },
-    { title: "☕ Café Oliva", description: "Espresso + Torrone P = R$ 15,00" },
+  {
+    name: "COQUETELARIA (Para Viagem)",
+    items: [
+      { name: "Sangria Oliva (300ml)", description: "Nossa receita clássica em embalagem segura.", price: "R$ 31,00" },
+      { name: "Pear Sparkling", description: "Espumante brut com Monin de Pera.", price: "R$ 34,00" },
+    ],
+  },
 ];
 
 export default function MenuSection({ isPage = false }: { isPage?: boolean }) {
@@ -94,7 +70,7 @@ export default function MenuSection({ isPage = false }: { isPage?: boolean }) {
                     <strong>PÃO DE COCA:</strong> Tradicional pão espanhol crocante incluso.
                 </p>
                 <p>
-                    <strong>UPGRADE GOURMET:</strong> No Croissant amanteigado adicione R$ 6,00.
+                    <strong>UPGRADE GOURMET:</strong> No Croissant amanteigado adicione R$ 7,50.
                 </p>
                 <p>
                     <strong>EXTRA CROCANTE:</strong> Batata Chips com Páprica Defumada | R$ 5,00.
@@ -127,25 +103,6 @@ export default function MenuSection({ isPage = false }: { isPage?: boolean }) {
             </Card>
           ))}
         </div>
-
-        <div className="mt-20 text-center">
-          <h3 className="font-headline text-3xl font-bold text-foreground md:text-4xl">
-            Promoções & Combos
-          </h3>
-          <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
-            {promotions.map((promo) => (
-                <Card key={promo.title} className="bg-background text-left">
-                    <CardHeader>
-                        <CardTitle className="font-headline text-xl text-accent">{promo.title}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <p className="text-muted-foreground">{promo.description}</p>
-                    </CardContent>
-                </Card>
-            ))}
-          </div>
-        </div>
-
       </div>
     </section>
   );
