@@ -12,7 +12,7 @@ export default function ReservationsSection() {
             Garanta seu lugar
           </h2>
           <h3 className="mt-2 font-headline text-4xl font-bold text-foreground md:text-5xl" id="contato">
-            Reservas & Eventos
+            Eventos & Reservas
           </h3>
           <p className="mt-4 max-w-2xl mx-auto text-muted-foreground">
             Estamos ansiosos para receber você. Entre em contato para fazer sua reserva ou planejar seu evento.
@@ -46,7 +46,7 @@ export default function ReservationsSection() {
             </div>
             <Button asChild size="lg" className="mt-8 bg-accent text-accent-foreground hover:bg-accent/90">
               <Link href="https://wa.me/5541991773334" target="_blank" rel="noopener noreferrer">
-                Reservas & Eventos
+                Eventos & Reservas
               </Link>
             </Button>
             <p className="text-xs text-muted-foreground mt-2">

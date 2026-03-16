@@ -27,11 +27,11 @@ export default function HeroSection() {
             Celebre momentos,<br /> crie memórias
           </h1>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-primary-foreground/80 md:text-xl">
-            Faça sua reserva ou realize seu evento conosco e desfrute de uma experiência gastronômica única.
+            Realize seu evento ou faça sua reserva conosco e desfrute de uma experiência gastronômica única.
           </p>
           <div className="mt-8 flex justify-center">
             <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
-              <Link href="https://wa.me/5541991773334" target="_blank" rel="noopener noreferrer">Reservas & Eventos</Link>
+              <Link href="https://wa.me/5541991773334" target="_blank" rel="noopener noreferrer">Eventos & Reservas</Link>
             </Button>
           </div>
           <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-2">
