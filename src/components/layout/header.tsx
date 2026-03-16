@@ -9,8 +9,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 const navItems = [
   { href: "#inicio", label: "Início" },
   { href: "#cardapio", label: "Cardápio" },
-  { href: "#reservas", label: "Reservas" },
-  { href: "#contato", label: "Contato" },
+  { href: "#reservas", label: "Reservas & Eventos" },
 ];
 
 export default function Header() {
