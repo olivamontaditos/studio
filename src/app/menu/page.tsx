@@ -1,6 +1,8 @@
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import Copyright from "@/components/layout/copyright";
 import MenuSection from "@/components/sections/menu";
-import { Instagram, Youtube } from "lucide-react";
+import { Instagram, Youtube, ArrowLeft } from "lucide-react";
 
 export const metadata = {
     title: "Cardápio | OLIVA MONTADITOS",
@@ -33,6 +35,14 @@ const FacebookIcon = (props: any) => (
 export default function MenuPage() {
   return (
     <main className="min-h-screen bg-secondary flex flex-col items-center">
+      <div className="w-full max-w-6xl mx-auto px-4 pt-8">
+        <Button asChild variant="outline">
+          <Link href="/">
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Voltar ao Início
+          </Link>
+        </Button>
+      </div>
       <MenuSection />
       <footer className="w-full py-6 text-center text-sm text-muted-foreground">
         <div className="flex justify-center items-center space-x-6 mb-4">
