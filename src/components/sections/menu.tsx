@@ -112,6 +112,10 @@ const iconMap: { [key: string]: React.ElementType } = {
 
 export default function MenuSection({ variant = 'full' }: { variant?: 'full' | 'summary' }) {
     const isSummary = variant === 'summary';
+    const summaryItems = menuCategories
+      .flatMap(category => category.items)
+      .filter(item => item.imageUrl)
+      .slice(0, 6);
     
     return (
         <section id="cardapio" className="bg-background py-20 md:py-32">
@@ -129,11 +133,60 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                 </header>
 
                 {isSummary ? (
-                    <div className="text-center">
-                        <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
-                            <Link href="/menu">Ver Cardápio Completo</Link>
-                        </Button>
-                    </div>
+                    <>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                            {summaryItems.map((item) => (
+                                <div key={item.name} className="bg-card rounded-lg shadow-sm overflow-hidden flex flex-col">
+                                    {item.imageUrl ? (
+                                        <Dialog>
+                                        <DialogTrigger asChild>
+                                            <div className="relative h-56 w-full cursor-pointer overflow-hidden">
+                                            <Image
+                                                src={item.imageUrl}
+                                                alt={item.name}
+                                                fill
+                                                className="object-cover transition-transform duration-300 hover:scale-105"
+                                                sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                                            />
+                                            </div>
+                                        </DialogTrigger>
+                                        <DialogContent className="p-0 border-0 max-w-2xl bg-transparent shadow-none">
+                                            <div className="relative aspect-square w-full">
+                                            <Image
+                                                src={item.imageUrl}
+                                                alt={item.name}
+                                                fill
+                                                className="object-contain rounded-lg"
+                                                sizes="100vw"
+                                            />
+                                            </div>
+                                        </DialogContent>
+                                        </Dialog>
+                                    ) : (
+                                        <div className="relative h-56 w-full bg-secondary flex items-center justify-center">
+                                            <Sandwich className="h-16 w-16 text-muted-foreground/50" />
+                                        </div>
+                                    )}
+                                    <div className="p-4 flex flex-col flex-grow">
+                                        <div className="flex-grow">
+                                            <p className="text-foreground font-semibold text-lg">{item.name}</p>
+                                            {item.description && (
+                                                <p className="text-sm text-muted-foreground mt-1">{item.description}</p>
+                                            )}
+                                        </div>
+                                        <div className="flex justify-between items-center mt-4">
+                                            <p className="font-bold text-xl text-primary">{item.price}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                              ))}
+                        </div>
+                        <div className="text-center">
+                            <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
+                                <Link href="/menu">Ver Cardápio Completo</Link>
+                            </Button>
+                        </div>
+                    </>
                 ) : (
                 <Tabs defaultValue={menuCategories[0].name} className="w-full">
                     <div className="flex justify-center">
