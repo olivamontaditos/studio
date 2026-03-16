@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Phone, MapPin, Mail } from "lucide-react";
+import { Phone, MapPin } from "lucide-react";
 
 export default function ReservationsSection() {
   const mapsUrl = "https://www.google.com/maps/search/?api=1&query=Avenida+Desembargador+Hugo+Simas+2010,+Bom+Retiro,+Curitiba+-+PR";
@@ -29,14 +29,10 @@ export default function ReservationsSection() {
                 <MapPin className="h-5 w-5 text-primary" />
                 <span>Avenida Desembargador Hugo Simas 2010, Bom Retiro, Curitiba - PR</span>
               </a>
-              <p className="flex items-center justify-center md:justify-start gap-3">
+              <a href="https://wa.me/5541991773334" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center md:justify-start gap-3 hover:text-primary transition-colors">
                 <Phone className="h-5 w-5 text-primary" />
-                <a href="tel:+5541991773334" className="hover:text-primary transition-colors">(41) 99177-3334</a>
-              </p>
-              <p className="flex items-center justify-center md:justify-start gap-3">
-                <Mail className="h-5 w-5 text-primary" />
-                <a href="mailto:olivamonataditos@gmail.com" className="hover:text-primary transition-colors">olivamonataditos@gmail.com</a>
-              </p>
+                <span>(41) 99177-3334</span>
+              </a>
             </div>
           </div>
           <div className="flex flex-col items-center text-center md:items-start md:text-left p-8 bg-background rounded-lg shadow-lg">
