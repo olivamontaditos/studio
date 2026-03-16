@@ -24,11 +24,10 @@ export default function HeroSection() {
       <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-white">
         <div className="container px-4">
           <h1 className="font-headline text-5xl font-bold tracking-tight text-primary-foreground md:text-7xl lg:text-8xl">
-            Faça sua Reserva
+            Faça sua Reserva OU REALIZE SEU EVENTO
           </h1>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-primary-foreground/80 md:text-xl">
-            Realizando a reserva com antecedência você garante seu lugar com
-            mais conforto e praticidade.
+            A MELHOR OPÇÃO
           </p>
           <div className="mt-8 flex justify-center">
             <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
