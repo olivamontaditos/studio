@@ -1,7 +1,6 @@
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import HeroSection from "@/components/sections/hero";
-import GastronomySection from "@/components/sections/gastronomy";
 import MenuSection from "@/components/sections/menu";
 import NewsletterSection from "@/components/sections/newsletter";
 import ReservationsSection from "@/components/sections/reservations";
@@ -13,7 +12,6 @@ export default function Home() {
       <Header />
       <main className="flex-1">
         <HeroSection />
-        <GastronomySection />
         <MenuSection />
         <ReservationsSection />
         <NewsletterSection />
