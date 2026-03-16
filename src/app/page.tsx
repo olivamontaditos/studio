@@ -6,6 +6,7 @@ import GallerySection from "@/components/sections/gallery";
 import NewsletterSection from "@/components/sections/newsletter";
 import ReservationsSection from "@/components/sections/reservations";
 import CookieBanner from "@/components/cookie-banner";
+import ReviewPopup from "@/components/review-popup";
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
       </main>
       <Footer />
       <CookieBanner />
+      <ReviewPopup />
     </div>
   );
 }
