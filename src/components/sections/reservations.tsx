@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Phone, MapPin, Mail } from "lucide-react";
 
 export default function ReservationsSection() {
+  const mapsUrl = "https://www.google.com/maps/search/?api=1&query=Avenida+Desembargador+Hugo+Simas+2010,+Bom+Retiro,+Curitiba+-+PR";
   return (
     <section id="reservas" className="bg-secondary py-20 md:py-32">
       <div className="container mx-auto px-6">
@@ -25,10 +26,10 @@ export default function ReservationsSection() {
               Entre em Contato
             </h4>
             <div className="mt-6 space-y-4 text-muted-foreground">
-              <p className="flex items-center justify-center md:justify-start gap-3">
+              <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center md:justify-start gap-3 hover:text-primary transition-colors">
                 <MapPin className="h-5 w-5 text-primary" />
                 <span>Avenida Desembargador Hugo Simas 2010, Bom Retiro, Curitiba - PR</span>
-              </p>
+              </a>
               <p className="flex items-center justify-center md:justify-start gap-3">
                 <Phone className="h-5 w-5 text-primary" />
                 <a href="tel:+5541991773334" className="hover:text-primary transition-colors">(41) 99177-3334</a>

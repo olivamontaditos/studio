@@ -31,6 +31,7 @@ export default function Footer() {
     { href: "/politica-de-privacidade", text: "Política de Privacidade" },
     { href: "/politica-de-cookies", text: "Política de Cookies" },
   ];
+  const mapsUrl = "https://www.google.com/maps/search/?api=1&query=Avenida+Desembargador+Hugo+Simas+2010,+Bom+Retiro,+Curitiba+-+PR";
 
   return (
     <footer className="bg-background border-t border-white/10">
@@ -112,11 +113,11 @@ export default function Footer() {
               </div>
               <div>
                  <h4 className="font-semibold text-foreground">Endereço</h4>
-                 <p className="mt-4 text-sm text-muted-foreground">
+                 <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className="mt-4 text-sm text-muted-foreground hover:text-primary transition-colors block">
                     Avenida Desembargador Hugo Simas 2010
                     <br />
                     Bom Retiro, Curitiba - PR
-                 </p>
+                 </a>
               </div>
             </div>
           </div>
