@@ -12,7 +12,7 @@ export default function ReservationsSection() {
             Garanta seu lugar
           </h2>
           <h3 className="mt-2 font-headline text-4xl font-bold text-foreground md:text-5xl" id="contato">
-            Reservas & Contato
+            Reservas & Eventos
           </h3>
           <p className="mt-4 max-w-2xl mx-auto text-muted-foreground">
             Estamos ansiosos para receber você. Entre em contato para fazer sua reserva ou planejar seu evento.
