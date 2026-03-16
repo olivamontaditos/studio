@@ -43,7 +43,7 @@ export default function MenuPage() {
           </Link>
         </Button>
       </div>
-      <MenuSection />
+      <MenuSection variant="full" />
       <footer className="w-full py-6 text-center text-sm text-muted-foreground">
         <div className="flex justify-center items-center space-x-6 mb-4">
           <a

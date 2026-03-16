@@ -1,6 +1,8 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -108,7 +110,9 @@ const iconMap: { [key: string]: React.ElementType } = {
     "COQUETELARIA (Para Viagem)": Wine,
 };
 
-export default function MenuSection() {
+export default function MenuSection({ variant = 'full' }: { variant?: 'full' | 'summary' }) {
+    const isSummary = variant === 'summary';
+    
     return (
         <section id="cardapio" className="bg-background py-20 md:py-32">
             <div className="w-full max-w-6xl mx-auto px-4">
@@ -124,6 +128,13 @@ export default function MenuSection() {
                     </p>
                 </header>
 
+                {isSummary ? (
+                    <div className="text-center">
+                        <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
+                            <Link href="/menu">Ver Cardápio Completo</Link>
+                        </Button>
+                    </div>
+                ) : (
                 <Tabs defaultValue={menuCategories[0].name} className="w-full">
                     <div className="flex justify-center">
                         <TabsList className="grid w-full grid-cols-2 h-auto sm:w-auto sm:grid-cols-4 lg:grid-cols-7">
@@ -194,6 +205,7 @@ export default function MenuSection() {
                         </TabsContent>
                     ))}
                 </Tabs>
+                )}
             </div>
         </section>
     );

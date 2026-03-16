@@ -14,7 +14,7 @@ export default function Home() {
       <Header />
       <main className="flex-1">
         <HeroSection />
-        <MenuSection />
+        <MenuSection variant="summary" />
         <GallerySection />
         <ReservationsSection />
         <NewsletterSection />
