@@ -24,12 +24,12 @@ export default function GallerySection() {
     <section id="nosso-espaco" className="bg-secondary py-20 md:py-32">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
-          <h2 className="text-sm font-bold uppercase tracking-wider text-primary">
+          <p className="text-sm font-bold uppercase tracking-wider text-primary">
             Conheça
-          </h2>
-          <h3 className="mt-2 font-headline text-4xl font-bold text-foreground md:text-5xl">
+          </p>
+          <h2 className="mt-2 font-headline text-4xl font-bold text-foreground md:text-5xl">
             Nosso Espaço
-          </h3>
+          </h2>
           <p className="mt-4 max-w-2xl mx-auto text-muted-foreground">
             Um ambiente acolhedor e charmoso para seus melhores momentos.
           </p>

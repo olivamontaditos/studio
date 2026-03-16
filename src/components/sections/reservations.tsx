@@ -5,17 +5,17 @@ import { Phone, MapPin } from "lucide-react";
 export default function ReservationsSection() {
   const mapsUrl = "https://share.google/fnyW3LtaK1bazQDRv";
   return (
-    <section id="reservas" className="bg-secondary py-20 md:py-32">
+    <section id="reservas" className="bg-background py-20 md:py-32">
       <div className="container mx-auto px-6">
         <div className="text-center">
-          <h2 className="text-sm font-bold uppercase tracking-wider text-primary">
+          <p className="text-sm font-bold uppercase tracking-wider text-primary">
             Garanta seu lugar
-          </h2>
-          <h3 className="mt-2 font-headline text-4xl font-bold text-foreground md:text-5xl" id="contato">
+          </p>
+          <h2 className="mt-2 font-headline text-4xl font-bold text-foreground md:text-5xl" id="contato">
             Eventos & Reservas
-          </h3>
+          </h2>
           <p className="mt-4 max-w-2xl mx-auto text-muted-foreground">
-            Estamos ansiosos para receber você. Entre em contato para fazer sua reserva ou planejar seu evento.
+            Estamos ansiosos para receber você. Entre em contato para planejar seu evento ou fazer sua reserva.
           </p>
         </div>
 
@@ -39,7 +39,7 @@ export default function ReservationsSection() {
               </a>
             </div>
           </div>
-          <div className="flex flex-col items-center text-center md:items-start md:text-left p-8 bg-background rounded-lg shadow-lg">
+          <div className="flex flex-col items-center text-center md:items-start md:text-left p-8 bg-card rounded-lg shadow-lg">
              <h4 className="font-headline text-2xl font-semibold text-foreground">
               Horário de Funcionamento
             </h4>

@@ -110,14 +110,17 @@ const iconMap: { [key: string]: React.ElementType } = {
 
 export default function MenuSection() {
     return (
-        <section id="cardapio" className="bg-secondary py-20 md:py-32">
+        <section id="cardapio" className="bg-background py-20 md:py-32">
             <div className="w-full max-w-6xl mx-auto px-4">
                 <header className="text-center mb-12">
-                    <h1 className="font-headline text-4xl md:text-5xl font-bold text-primary">
-                        Nosso Cardápio
-                    </h1>
-                    <p className="mt-2 text-lg text-muted-foreground">
-                        Explore nossas delícias artesanais.
+                    <p className="text-sm font-bold uppercase tracking-wider text-primary">
+                        Cardápio
+                    </p>
+                    <h2 className="mt-2 font-headline text-4xl font-bold text-foreground md:text-5xl">
+                        Nossas Delícias
+                    </h2>
+                    <p className="mt-4 max-w-2xl mx-auto text-muted-foreground">
+                        Explore nossas delícias artesanais, dos montaditos clássicos às sobremesas divinas.
                     </p>
                 </header>
 
