@@ -89,7 +89,15 @@ export default function Footer() {
                 <h4 className="font-semibold text-foreground">Selos de Confiança</h4>
                 <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
                   <li className="flex items-center gap-2">
-                    <Star className="h-4 w-4 text-accent" /> Excelente Avaliação
+                    <Star className="h-4 w-4 text-accent" />
+                    <a
+                      href="https://g.page/r/CeVf7luA8NjOEBM/review"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-primary transition-colors"
+                    >
+                      Excelente Avaliação
+                    </a>
                   </li>
                   <li className="flex items-center gap-2">
                     <ShieldCheck className="h-4 w-4 text-accent" /> Qualidade Reconhecida
