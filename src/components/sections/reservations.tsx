@@ -27,7 +27,11 @@ export default function ReservationsSection() {
             <div className="mt-6 space-y-4 text-muted-foreground">
               <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center md:justify-start gap-3 hover:text-primary transition-colors">
                 <MapPin className="h-5 w-5 text-primary" />
-                <span>Avenida Desembargador Hugo Simas 2010, Bom Retiro, Curitiba - PR</span>
+                <span>
+                  Avenida Desembargador Hugo Simas 2010
+                  <br />
+                  Bom Retiro, Curitiba - PR
+                </span>
               </a>
               <a href="https://wa.me/5541991773334" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center md:justify-start gap-3 hover:text-primary transition-colors">
                 <Phone className="h-5 w-5 text-primary" />
