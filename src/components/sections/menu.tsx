@@ -69,7 +69,7 @@ export const menuCategories = [
     ],
   },
   {
-    name: "A ARTE DO LEITE (LATTE & CIA)",
+    name: "CAFÉ COM LEITE (LATTE & CIA)",
     description: "Bebidas mais longas, cremosas e perfeitas para fotos.",
     items: [
       { name: "Caffè Latte Clássico", description: "Dose de expresso com leite vaporizado e uma fina camada de espuma.", price: "R$ 14,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
@@ -103,7 +103,7 @@ const iconMap: { [key: string]: React.ElementType } = {
     "SOBREMESAS & CROISSANTS DOCES": Cake,
     "TORRONES ARTESANAIS (Receita Original Espanhola)": Gift,
     "EXPRESSOS": Coffee,
-    "A ARTE DO LEITE (LATTE & CIA)": Coffee,
+    "CAFÉ COM LEITE (LATTE & CIA)": Coffee,
     "BEBIDAS & SODAS": CupSoda,
     "COQUETELARIA (Para Viagem)": Wine,
 };
