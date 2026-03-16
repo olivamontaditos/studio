@@ -21,8 +21,13 @@ import { errorEmitter } from "@/firebase/error-emitter";
 import { FirestorePermissionError } from "@/firebase/errors";
 
 const formSchema = z.object({
-  name: z.string().min(2, { message: "O nome deve ter pelo menos 2 caracteres." }),
-  email: z.string().email({ message: "Por favor, insira um email válido." }),
+    name: z.string().min(2, { message: "O nome deve ter pelo menos 2 caracteres." }),
+    email: z.string().email({ message: "Por favor, insira um email válido." }),
+    whatsapp: z.string()
+      .refine(val => !val || /^\d{10,11}$/.test(val), {
+          message: "O WhatsApp deve ter 10 ou 11 dígitos numéricos (DDD + número).",
+      })
+      .optional(),
 });
 
 export default function NewsletterSection() {
@@ -34,6 +39,7 @@ export default function NewsletterSection() {
     defaultValues: {
       name: "",
       email: "",
+      whatsapp: "",
     },
   });
 
@@ -47,23 +53,23 @@ export default function NewsletterSection() {
       return;
     }
 
-    const newsletterCollection = collection(firestore, 'newsletter_subscriptions');
+    const leadsCollection = collection(firestore, 'coming_soon_leads');
     const dataToSave = {
       ...values,
-      subscriptionDate: serverTimestamp(),
+      submissionDate: serverTimestamp(),
     };
 
-    return addDoc(newsletterCollection, dataToSave)
+    return addDoc(leadsCollection, dataToSave)
       .then(() => {
         toast({
           title: "Sucesso!",
-          description: "Obrigado por se inscrever!",
+          description: "Obrigado! Entraremos em contato em breve.",
         });
         form.reset();
       })
       .catch((e) => {
         const permissionError = new FirestorePermissionError({
-            path: newsletterCollection.path,
+            path: leadsCollection.path,
             operation: 'create',
             requestResourceData: dataToSave,
         });
@@ -72,7 +78,7 @@ export default function NewsletterSection() {
         toast({
           variant: "destructive",
           title: "Uh oh! Algo deu errado.",
-          description: "Não foi possível concluir sua inscrição. Tente novamente.",
+          description: "Não foi possível concluir seu cadastro. Tente novamente.",
         });
 
         // Re-throw to let react-hook-form know the submission failed.
@@ -89,48 +95,71 @@ export default function NewsletterSection() {
           Receba Nossas Novidades
         </h2>
         <p className="mt-4 max-w-2xl mx-auto text-muted-foreground">
-          Assine para receber novidades, novos pratos, promoções e eventos.
+          Deixe seus dados para receber novidades e um presente de inauguração.
         </p>
 
-        <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="mt-8 mx-auto max-w-lg"
-          >
-            <div className="flex flex-col gap-4 sm:flex-row">
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem className="flex-1">
-                    <FormLabel className="sr-only">Nome</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Nome completo" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem className="flex-1">
-                    <FormLabel className="sr-only">E-mail</FormLabel>
-                    <FormControl>
-                      <Input type="email" placeholder="Seu e-mail" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Button type="submit" disabled={isSubmitting} className="w-full sm:w-auto bg-accent text-accent-foreground hover:bg-accent/90">
-                {isSubmitting ? "Enviando..." : "OK"}
-              </Button>
-            </div>
-            
-          </form>
-        </Form>
+        <div className="mt-8 mx-auto max-w-md">
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-4"
+              >
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="sr-only">Nome</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Seu nome completo" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="sr-only">E-mail</FormLabel>
+                      <FormControl>
+                        <Input type="email" placeholder="Seu melhor e-mail" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="whatsapp"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="sr-only">WhatsApp (Opcional)</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="tel"
+                          maxLength={11}
+                          placeholder="Seu WhatsApp (Opcional)"
+                          {...field}
+                          onChange={(e) => {
+                            const { value } = e.target;
+                            if (/^\d*$/.test(value)) {
+                              field.onChange(value);
+                            }
+                          }}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <Button type="submit" disabled={isSubmitting} className="w-full bg-accent text-accent-foreground hover:bg-accent/90">
+                  {isSubmitting ? "Enviando..." : "Quero Novidades"}
+                </Button>
+              </form>
+            </Form>
+        </div>
       </div>
     </section>
   );

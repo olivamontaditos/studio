@@ -44,18 +44,17 @@ export default function ReservationsSection() {
               Horário de Funcionamento
             </h4>
             <div className="mt-4 text-muted-foreground space-y-2">
-                <p><strong>Terça a Sexta:</strong> 18:00 - 23:00</p>
-                <p><strong>Sábado:</strong> 12:00 - 23:30</p>
-                <p><strong>Domingo:</strong> 12:00 - 16:00</p>
-                <p><strong>Segunda:</strong> Fechado</p>
+                <p><strong>Segunda a Sexta:</strong> 11:00 - 00:00</p>
+                <p><strong>Sábado:</strong> 12:00 - 00:00</p>
+                <p><strong>Domingo:</strong> Fechado</p>
             </div>
             <Button asChild size="lg" className="mt-8 bg-accent text-accent-foreground hover:bg-accent/90">
-              <Link href="#" target="_blank" rel="noopener noreferrer">
+              <Link href="https://wa.me/5541991773334" target="_blank" rel="noopener noreferrer">
                 Reservar Mesa Online
               </Link>
             </Button>
             <p className="text-xs text-muted-foreground mt-2">
-              Você será redirecionado para nosso parceiro de reservas.
+              Você será redirecionado para o WhatsApp.
             </p>
           </div>
         </div>
