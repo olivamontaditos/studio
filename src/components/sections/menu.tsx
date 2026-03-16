@@ -17,7 +17,8 @@ import {
     Wine,
     Gift,
     Cake,
-    CupSoda
+    CupSoda,
+    Coffee
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -32,16 +33,16 @@ export const menuCategories = [
       { name: "M04. Germânico-Ibérico", description: "Salsicha artesanal, Vinagrete do William e maionese de alho.", price: "R$ 24,00", imageUrl: "https://64.media.tumblr.com/80862ce7c59ba9297564ba9c92271ccc/0729a521a5d6cff4-1a/s2048x3072/a63b54494b40a8beac1c6dd677a9fbfa3ec3a86a.jpg" },
       { name: "M05. Peito de Peru Light", description: "Peito de peru, búfala, tomate, alface e maionese de alho.", price: "R$ 22,00", imageUrl: "https://64.media.tumblr.com/b52567a2d00f84d7f3651c2444b5bb85/0729a521a5d6cff4-e3/s2048x3072/25b5ca0786e1e362f1a7f8ec67a42e1fe6e14434.jpg" },
       { name: "M06. Frango Cremoso Melt", description: "Frango ao cream cheese, muçarela e batata crocante.", price: "R$ 22,90", imageUrl: "https://64.media.tumblr.com/b9e96594fc6d22353cd3cf7c94edeb77/0729a521a5d6cff4-fd/s2048x3072/f3f206f1e6853ae1d967dfc738653dc4fd5489a6.jpg" },
-      { name: "M07. Frango Iscas Gourmet", description: "Iscas de frango, muçarela, maionese de alho e tomate cereja.", price: "R$ 22,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s2048x3072/fe029f0bdc887e374e6fa08049d636c4339c6bb8.jpg" },
+      { name: "M07. Frango Iscas Gourmet", description: "Iscas de frango, muçarela, maionese de alho e tomate cereja.", price: "R$ 22,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
       { name: "M08. Mignon Gruyère", description: "Mignon, queijo gruyère, cebola caramelizada e maionese de alho.", price: "R$ 31,00", imageUrl: "https://64.media.tumblr.com/9e260afe66273c0a6158761992ceb67d/0729a521a5d6cff4-2b/s2048x3072/2bb44eb1a215e7d3eb24b197bf77581526abaf24.jpg" },
       { name: "M09. Pastrami Oliva", description: "Pastrami, queijo derretido, Vinagrete do William e creme de queijo.", price: "R$ 34,00", imageUrl: "https://64.media.tumblr.com/acb78441e2b45ff3bb2ee86766693d57/0729a521a5d6cff4-ad/s2048x3072/5d7e4371e74beb499fc222df02db822b708f4265.jpg" },
-      { name: "M10. Presunto Real", description: "Queijo e presunto.", price: "R$ 18,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s2048x3072/fe029f0bdc887e374e6fa08049d636c4339c6bb8.jpg" },
+      { name: "M10. Presunto Real", description: "Queijo e presunto.", price: "R$ 18,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
     ],
   },
   {
     name: "SOBREMESAS & CROISSANTS DOCES",
     items: [
-        { name: "Torta Basca de San Sebastián", description: "A autêntica cheesecake espanhola cremosa. Adicional de Calda Artesanal: + R$ 8,00", price: "R$ 34,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s2048x3072/fe029f0bdc887e374e6fa08049d636c4339c6bb8.jpg" },
+        { name: "Torta Basca de San Sebastián", description: "A autêntica cheesecake espanhola cremosa. Adicional de Calda Artesanal: + R$ 8,00", price: "R$ 34,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
         { name: "Croissant Pistache Real", description: "Recheio de brigadeiro e ganache de pistache.", price: "R$ 41,00", imageUrl: "https://64.media.tumblr.com/0add055745496740cdac0ee959142a72/0729a521a5d6cff4-03/s2048x3072/11612a18f1c46df12f7d3274d3fedb0200c84372.jpg" },
         { name: "Croissant Nutella com Morangos", description: "Nutella original e morangos frescos.", price: "R$ 38,90", imageUrl: "https://64.media.tumblr.com/6c066210786fb0fe39f2cfa601994f94/3ff45e09a0c7dd34-ae/s2048x3072/7eed66c605a1a87e48ea908cfb53af3cfcc16037.jpg" },
         { name: "Croissant Chocolate Blend", description: "Chocolate ao leite premium.", price: "R$ 31,00", imageUrl: "https://64.media.tumblr.com/32d746d8e9cd9113ed6811ac3e7b91e2/0729a521a5d6cff4-e9/s2048x3072/8d98fc0f020c1d091ae10db68fda56c69d7ce1cc.jpg" },
@@ -52,25 +53,46 @@ export const menuCategories = [
     name: "TORRONES ARTESANAIS (Receita Original Espanhola)",
     description: "Sabores: Frutas Vermelhas, Pistache, Nozes com Limão ou Chocolate 70%.",
     items: [
-      { name: "Tamanho P (25g)", price: "R$ 12,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s2048x3072/fe029f0bdc887e374e6fa08049d636c4339c6bb8.jpg" },
-      { name: "Tamanho M (70g)", price: "R$ 35,90", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s2048x3072/fe029f0bdc887e374e6fa08049d636c4339c6bb8.jpg" },
-      { name: "Tamanho G (90g)", price: "R$ 42,90", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s2048x3072/fe029f0bdc887e374e6fa08049d636c4339c6bb8.jpg" },
+      { name: "Tamanho P (25g)", price: "R$ 12,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
+      { name: "Tamanho M (70g)", price: "R$ 35,90", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
+      { name: "Tamanho G (90g)", price: "R$ 42,90", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
+    ],
+  },
+  {
+    name: "EXPRESSOS",
+    description: "A base de tudo: café puro, intenso e aromático.",
+    items: [
+      { name: "Expresso Solo", description: "Curto, intenso e com crema aveludada.", price: "R$ 8,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
+      { name: "Expresso Doppio", description: "Dose dupla para quem precisa de energia extra.", price: "R$ 13,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
+      { name: "Expresso Macchiato", description: "O clássico manchado com uma nuvem de leite vaporizado.", price: "R$ 10,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
+      { name: "Espresso Panna", description: "Finalizado com uma generosa camada de chantilly artesanal.", price: "R$ 14,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
+    ],
+  },
+  {
+    name: "A ARTE DO LEITE (LATTE & CIA)",
+    description: "Bebidas mais longas, cremosas e perfeitas para fotos.",
+    items: [
+      { name: "Caffè Latte Clássico", description: "Dose de expresso com leite vaporizado e uma fina camada de espuma.", price: "R$ 14,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
+      { name: "Cappuccino Italiano", description: "Proporções iguais de expresso, leite e muita espuma (opção com canela ou cacau).", price: "R$ 15,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
+      { name: "Flat White", description: "Para os amantes de café; mais expresso, menos espuma, textura de seda.", price: "R$ 16,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
+      { name: "Vanilla Latte", description: "Nosso latte clássico com um toque de extrato natural de baunilha.", price: "R$ 18,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
+      { name: "Caramel Macchiato", description: "Camadas de leite, expresso e finalização com calda de caramelo salgado.", price: "R$ 20,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
     ],
   },
   {
     name: "BEBIDAS & SODAS",
     items: [
-      { name: "Sodas Espanholas (400ml)", description: "Maçã Verde, Framboesa, Limão Siciliano ou Pera.", price: "R$ 19,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s2048x3072/fe029f0bdc887e374e6fa08049d636c4339c6bb8.jpg" },
-      { name: "Suco Morango com Leite Ninho", description: "Ultra cremoso e batido na hora.", price: "R$ 22,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s2048x3072/fe029f0bdc887e374e6fa08049d636c4339c6bb8.jpg" },
-      { name: "Suco de Frutas Vermelhas", description: "Natural (Morango, mirtilo e amora).", price: "R$ 19,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s2048x3072/fe029f0bdc887e374e6fa08049d636c4339c6bb8.jpg" },
-      { name: "Chocolate Suíço Cremoso (Quente)", description: "Receita densa europeia.", price: "R$ 22,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s2048x3072/fe029f0bdc887e374e6fa08049d636c4339c6bb8.jpg" },
+      { name: "Sodas Espanholas (400ml)", description: "Maçã Verde, Framboesa, Limão Siciliano ou Pera.", price: "R$ 19,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
+      { name: "Suco Morango com Leite Ninho", description: "Ultra cremoso e batido na hora.", price: "R$ 22,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
+      { name: "Suco de Frutas Vermelhas", description: "Natural (Morango, mirtilo e amora).", price: "R$ 19,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
+      { name: "Chocolate Suíço Cremoso (Quente)", description: "Receita densa europeia.", price: "R$ 22,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
     ],
   },
   {
     name: "COQUETELARIA (Para Viagem)",
     items: [
-      { name: "Sangria Oliva (300ml)", description: "Nossa receita clássica em embalagem segura.", price: "R$ 31,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s2048x3072/fe029f0bdc887e374e6fa08049d636c4339c6bb8.jpg" },
-      { name: "Pear Sparkling", description: "Espumante brut com Monin de Pera.", price: "R$ 34,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s2048x3072/fe029f0bdc887e374e6fa08049d636c4339c6bb8.jpg" },
+      { name: "Sangria Oliva (300ml)", description: "Nossa receita clássica em embalagem segura.", price: "R$ 31,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
+      { name: "Pear Sparkling", description: "Espumante brut com Monin de Pera.", price: "R$ 34,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
     ],
   },
 ];
@@ -79,6 +101,8 @@ const iconMap: { [key: string]: React.ElementType } = {
     "MONTADITOS (No Pão de Coca Espanhol)": Sandwich,
     "SOBREMESAS & CROISSANTS DOCES": Cake,
     "TORRONES ARTESANAIS (Receita Original Espanhola)": Gift,
+    "EXPRESSOS": Coffee,
+    "A ARTE DO LEITE (LATTE & CIA)": Coffee,
     "BEBIDAS & SODAS": CupSoda,
     "COQUETELARIA (Para Viagem)": Wine,
 };
@@ -98,7 +122,7 @@ export default function MenuSection() {
 
                 <Tabs defaultValue={menuCategories[0].name} className="w-full">
                     <div className="flex justify-center">
-                        <TabsList className="grid w-full grid-cols-2 h-auto sm:w-auto sm:grid-cols-3 md:grid-cols-5">
+                        <TabsList className="grid w-full grid-cols-2 h-auto sm:w-auto sm:grid-cols-4 lg:grid-cols-7">
                             {menuCategories.map((category) => {
                                  const Icon = iconMap[category.name] || Sandwich;
                                  return (
