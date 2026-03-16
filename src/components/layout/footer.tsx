@@ -31,7 +31,7 @@ export default function Footer() {
     { href: "/politica-de-privacidade", text: "Política de Privacidade" },
     { href: "/politica-de-cookies", text: "Política de Cookies" },
   ];
-  const mapsUrl = "https://www.google.com/maps/search/?api=1&query=Avenida+Desembargador+Hugo+Simas+2010,+Bom+Retiro,+Curitiba+-+PR";
+  const mapsUrl = "https://share.google/fnyW3LtaK1bazQDRv";
 
   return (
     <footer className="bg-background border-t border-white/10">

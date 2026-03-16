@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Phone, MapPin } from "lucide-react";
 
 export default function ReservationsSection() {
-  const mapsUrl = "https://www.google.com/maps/search/?api=1&query=Avenida+Desembargador+Hugo+Simas+2010,+Bom+Retiro,+Curitiba+-+PR";
+  const mapsUrl = "https://share.google/fnyW3LtaK1bazQDRv";
   return (
     <section id="reservas" className="bg-secondary py-20 md:py-32">
       <div className="container mx-auto px-6">
