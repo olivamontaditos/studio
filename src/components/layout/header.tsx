@@ -10,7 +10,6 @@ const navItems = [
   { href: "#inicio", label: "Início" },
   { href: "#cardapio", label: "Cardápio" },
   { href: "#reservas", label: "Reservas" },
-  { href: "#nossa-historia", label: "Nossa História" },
   { href: "#contato", label: "Contato" },
 ];
 
