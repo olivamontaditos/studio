@@ -31,7 +31,7 @@ export default function HeroSection() {
           </p>
           <div className="mt-8 flex justify-center">
             <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
-              <Link href="https://wa.me/5541991773334" target="_blank" rel="noopener noreferrer">Reservar Mesa</Link>
+              <Link href="https://wa.me/5541991773334" target="_blank" rel="noopener noreferrer">Reservas & Eventos</Link>
             </Button>
           </div>
           <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-2">
