@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -20,7 +21,8 @@ import {
     Gift,
     Cake,
     CupSoda,
-    Coffee
+    Coffee,
+    Sparkles,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -56,9 +58,9 @@ export const menuCategories = [
     name: "TORRONES ARTESANAIS (Receita Original Espanhola)",
     description: "Sabores: Frutas Vermelhas, Pistache, Nozes com Limão ou Chocolate 70%.",
     items: [
-      { name: "Tamanho P (25g)", price: "R$ 12,00", imageUrl: "https://64.media.tumblr.com/c723f5e8386cd85099fe076723ce67e1/1b2a968c49ec28e1-a0/s2048x3072/0713dde2ad58824a48dfb1c09344ebefba9fd6f8.jpg" },
-      { name: "Tamanho M (70g)", price: "R$ 35,90", imageUrl: "https://64.media.tumblr.com/5ac751440f15a9b8b5412c15b80b412d/1b2a968c49ec28e1-6e/s2048x3072/70220b988e670fcca4c9b1da962ebc74e63572d3.jpg" },
-      { name: "Tamanho G (90g)", price: "R$ 42,90", imageUrl: "https://64.media.tumblr.com/e6f2c4f483f27a88d0deb1438030294c/1b2a968c49ec28e1-c0/s1280x1920/ffee0271c5f47377389b4dd3281a1d7e1b6e057e.jpg" },
+      { name: "Tamanho P (25g)", price: "R$ 12,00" },
+      { name: "Tamanho M (70g)", price: "R$ 35,90" },
+      { name: "Tamanho G (90g)", price: "R$ 42,90" },
     ],
   },
   {
@@ -112,11 +114,11 @@ const iconMap: { [key: string]: React.ElementType } = {
 };
 
 const textOnlyCategories = [
+    "TORRONES ARTESANAIS (Receita Original Espanhola)",
     "EXPRESSOS", 
     "CAFÉ COM LEITE (LATTE & CIA)", 
     "BEBIDAS & SODAS", 
     "COQUETELARIA (Para Viagem)",
-    "TORRONES ARTESANAIS (Receita Original Espanhola)",
 ];
 
 export default function MenuSection({ variant = 'full' }: { variant?: 'full' | 'summary' }) {
@@ -125,6 +127,62 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
       .flatMap(category => category.items)
       .filter(item => item.imageUrl)
       .slice(0, 6);
+
+    const [isHappyHour, setIsHappyHour] = useState(false);
+
+    useEffect(() => {
+        const checkHappyHour = () => {
+            const now = new Date();
+            const currentHour = now.getHours();
+            // Happy hour is from 18:00 (6 PM) to 20:59 (before 9 PM)
+            if (currentHour >= 18 && currentHour < 21) {
+                setIsHappyHour(true);
+            } else {
+                setIsHappyHour(false);
+            }
+        };
+
+        checkHappyHour();
+        // Check every minute to update the status without a page refresh
+        const interval = setInterval(checkHappyHour, 60000); 
+
+        return () => clearInterval(interval);
+    }, []);
+
+    const calculateDiscountedPrice = (priceStr: string) => {
+        if (!priceStr) return priceStr;
+        const numericPrice = parseFloat(priceStr.replace("R$ ", "").replace(",", "."));
+        if (isNaN(numericPrice)) return priceStr;
+        const discountedPrice = numericPrice * 0.9;
+        return `R$ ${discountedPrice.toFixed(2).replace(".", ",")}`;
+    };
+
+    let secretMenuCategory = null;
+    if (isHappyHour && !isSummary) {
+        const m05 = menuCategories.find(c => c.name.includes("MONTADITOS"))?.items.find(i => i.name.startsWith("M05"));
+        const m10 = menuCategories.find(c => c.name.includes("MONTADITOS"))?.items.find(i => i.name.startsWith("M10"));
+
+        const discountedM05 = m05 ? {
+            ...m05,
+            originalPrice: m05.price,
+            price: calculateDiscountedPrice(m05.price)
+        } : null;
+
+        const discountedM10 = m10 ? {
+            ...m10,
+            originalPrice: m10.price,
+            price: calculateDiscountedPrice(m10.price)
+        } : null;
+
+        secretMenuCategory = {
+            name: "Happy Hour Secreto",
+            description: "Disponível apenas das 18h às 21h. Aproveite!",
+            items: [
+                { name: "Double Chopp", description: "Peça um e ganhe outro. Chope Pilsen 300ml.", price: "R$ 15,00" },
+                ...([discountedM05, discountedM10].filter(Boolean) as any)
+            ]
+        };
+    }
     
     return (
         <section 
@@ -204,6 +262,42 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                     </>
                 ) : (
                 <Accordion type="multiple" className="w-full space-y-4">
+                    {secretMenuCategory && (
+                        <AccordionItem value={secretMenuCategory.name} key={secretMenuCategory.name} className="border-b-0 rounded-lg bg-card shadow-lg border-2 border-accent animate-pulse">
+                            <AccordionTrigger className="p-4 hover:no-underline rounded-lg">
+                                <div className="flex items-center gap-4 text-left">
+                                    <Sparkles className="h-6 w-6 text-accent flex-shrink-0" />
+                                    <div>
+                                        <h3 className="text-lg font-headline text-accent">{secretMenuCategory.name}</h3>
+                                        {secretMenuCategory.description && <p className="text-sm text-muted-foreground font-normal mt-1">{secretMenuCategory.description}</p>}
+                                    </div>
+                                </div>
+                            </AccordionTrigger>
+                            <AccordionContent className="p-4 pt-0">
+                                <div className="pt-4 border-t space-y-6">
+                                    {secretMenuCategory.items.map((item: any) => (
+                                        <div key={item.name} className="flex justify-between items-start">
+                                            <div>
+                                                <p className="text-foreground font-semibold text-lg">{item.name}</p>
+                                                {item.description && (
+                                                    <p className="text-sm text-muted-foreground mt-1 max-w-md">{item.description}</p>
+                                                )}
+                                            </div>
+                                            {item.originalPrice ? (
+                                                <div className="text-right pl-4 shrink-0">
+                                                    <p className="font-bold text-lg text-primary">{item.price}</p>
+                                                    <p className="text-sm text-muted-foreground line-through">{item.originalPrice}</p>
+                                                </div>
+                                            ) : (
+                                                <p className="font-bold text-lg text-primary text-right pl-4 shrink-0">{item.price}</p>
+                                            )}
+                                        </div>
+                                    ))}
+                                </div>
+                            </AccordionContent>
+                        </AccordionItem>
+                    )}
+
                     {menuCategories.map((category) => {
                         const Icon = iconMap[category.name] || Sandwich;
                         const isTextOnly = textOnlyCategories.includes(category.name);
