@@ -44,7 +44,7 @@ export const menuCategories = [
   {
     name: "SOBREMESAS & CROISSANTS DOCES",
     items: [
-        { name: "Torta Basca de San Sebastián", description: "A autêntica cheesecake espanhola cremosa. Adicional de Calda Artesanal: + R$ 6,00", price: "R$ 29,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
+        { name: "Torta Basca de San Sebastián", description: "A autêntica cheesecake espanhola cremosa. Adicional de Calda Artesanal: + R$ 6,00", price: "R$ 29,00", imageUrl: "https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/2324995/704c223903af8d37-76f6-4223-a783-abbf70ec91e2.png" },
         { name: "Croissant Pistache Real", description: "Recheio de brigadeiro e ganache de pistache.", price: "R$ 41,00", imageUrl: "https://64.media.tumblr.com/0add055745496740cdac0ee959142a72/0729a521a5d6cff4-03/s2048x3072/11612a18f1c46df12f7d3274d3fedb0200c84372.jpg" },
         { name: "Croissant Nutella com Morangos", description: "Nutella original e morangos frescos.", price: "R$ 38,90", imageUrl: "https://64.media.tumblr.com/6c066210786fb0fe39f2cfa601994f94/3ff45e09a0c7dd34-ae/s2048x3072/7eed66c605a1a87e48ea908cfb53af3cfcc16037.jpg" },
         { name: "Croissant Chocolate Blend", description: "Chocolate ao leite premium.", price: "R$ 31,00", imageUrl: "https://64.media.tumblr.com/32d746d8e9cd9113ed6811ac3e7b91e2/0729a521a5d6cff4-e9/s2048x3072/8d98fc0f020c1d091ae10db68fda56c69d7ce1cc.jpg" },
@@ -55,9 +55,9 @@ export const menuCategories = [
     name: "TORRONES ARTESANAIS (Receita Original Espanhola)",
     description: "Sabores: Frutas Vermelhas, Pistache, Nozes com Limão ou Chocolate 70%.",
     items: [
-      { name: "Tamanho P (25g)", price: "R$ 12,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
-      { name: "Tamanho M (70g)", price: "R$ 35,90", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
-      { name: "Tamanho G (90g)", price: "R$ 42,90", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
+      { name: "Tamanho P (25g)", price: "R$ 12,00", imageUrl: "https://64.media.tumblr.com/3c36a2faf3442e02bdd3413a8db17567/7c9be24b889bb4c1-ae/s640x960/fcbec95593b5c0d431848fea8d7c2a5c35332994.jpg" },
+      { name: "Tamanho M (70g)", price: "R$ 35,90", imageUrl: "https://64.media.tumblr.com/3c36a2faf3442e02bdd3413a8db17567/7c9be24b889bb4c1-ae/s640x960/fcbec95593b5c0d431848fea8d7c2a5c35332994.jpg" },
+      { name: "Tamanho G (90g)", price: "R$ 42,90", imageUrl: "https://64.media.tumblr.com/3c36a2faf3442e02bdd3413a8db17567/7c9be24b889bb4c1-ae/s640x960/fcbec95593b5c0d431848fea8d7c2a5c35332994.jpg" },
     ],
   },
   {
