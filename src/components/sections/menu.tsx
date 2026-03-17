@@ -39,6 +39,7 @@ export const menuCategories = [
       { name: "M08. Mignon Gruyère", description: "Mignon, queijo gruyère, cebola caramelizada e maionese de alho.", price: "R$ 31,00", imageUrl: "https://64.media.tumblr.com/9e260afe66273c0a6158761992ceb67d/0729a521a5d6cff4-2b/s2048x3072/2bb44eb1a215e7d3eb24b197bf77581526abaf24.jpg" },
       { name: "M09. Pastrami Oliva", description: "Pastrami, queijo derretido, Vinagrete do William e creme de queijo.", price: "R$ 34,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
       { name: "M10. Presunto Royale", description: "Queijo e presunto.", price: "R$ 18,00", imageUrl: "https://64.media.tumblr.com/b52567a2d00f84d7f3651c2444b5bb85/0729a521a5d6cff4-e3/s2048x3072/25b5ca0786e1e362f1a7f8ec67a42e1fe6e14434.jpg" },
+      { name: "M11. Clássico Madrileño", description: "Fatias finas de presunto cozido especial e muçarela derretida sobre uma base suculenta de tomate ralado fresco com um toque de alho e azeite de oliva servido no pão de coca crocante.", price: "R$ 15,90" },
     ],
   },
   {
