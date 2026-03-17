@@ -175,7 +175,7 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
         } : null;
 
         secretMenuCategory = {
-            name: "Happy Hour Secreto",
+            name: "Happy Hour",
             description: "Disponível apenas das 18h às 21h. Aproveite!",
             items: [
                 { name: "Double Chopp", description: "Peça um e ganhe outro. Chope Pilsen 300ml.", price: "R$ 15,00" },
@@ -274,25 +274,59 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                                 </div>
                             </AccordionTrigger>
                             <AccordionContent className="p-4 pt-0">
-                                <div className="pt-4 border-t space-y-6">
-                                    {secretMenuCategory.items.map((item: any) => (
-                                        <div key={item.name} className="flex justify-between items-start">
-                                            <div>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8 pt-4 border-t">
+                                {secretMenuCategory.items.map((item: any) => (
+                                    <div key={item.name} className="bg-background rounded-lg shadow-sm overflow-hidden flex flex-col">
+                                        {item.imageUrl ? (
+                                            <Dialog>
+                                                <DialogTrigger asChild>
+                                                    <div className="relative h-56 w-full cursor-pointer overflow-hidden">
+                                                    <Image
+                                                        src={item.imageUrl}
+                                                        alt={item.name}
+                                                        fill
+                                                        className="object-cover transition-transform duration-300 hover:scale-105"
+                                                        sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                                                    />
+                                                    </div>
+                                                </DialogTrigger>
+                                                <DialogContent className="p-0 border-0 max-w-2xl bg-transparent shadow-none">
+                                                    <div className="relative aspect-square w-full">
+                                                    <Image
+                                                        src={item.imageUrl}
+                                                        alt={item.name}
+                                                        fill
+                                                        className="object-contain rounded-lg"
+                                                        sizes="100vw"
+                                                    />
+                                                    </div>
+                                                </DialogContent>
+                                            </Dialog>
+                                        ) : (
+                                            <div className="relative h-56 w-full bg-secondary flex items-center justify-center">
+                                                <Wine className="h-16 w-16 text-muted-foreground/50" />
+                                            </div>
+                                        )}
+                                        <div className="p-4 flex flex-col flex-grow">
+                                            <div className="flex-grow">
                                                 <p className="text-foreground font-semibold text-lg">{item.name}</p>
                                                 {item.description && (
-                                                    <p className="text-sm text-muted-foreground mt-1 max-w-md">{item.description}</p>
+                                                    <p className="text-sm text-muted-foreground mt-1">{item.description}</p>
                                                 )}
                                             </div>
-                                            {item.originalPrice ? (
-                                                <div className="text-right pl-4 shrink-0">
-                                                    <p className="font-bold text-lg text-primary">{item.price}</p>
-                                                    <p className="text-sm text-muted-foreground line-through">{item.originalPrice}</p>
-                                                </div>
-                                            ) : (
-                                                <p className="font-bold text-lg text-primary text-right pl-4 shrink-0">{item.price}</p>
-                                            )}
+                                            <div className="flex justify-end items-center mt-4">
+                                                {item.originalPrice ? (
+                                                    <div className="text-right">
+                                                        <p className="font-bold text-lg text-primary">{item.price}</p>
+                                                        <p className="text-sm text-muted-foreground line-through">{item.originalPrice}</p>
+                                                    </div>
+                                                ) : (
+                                                    <p className="font-bold text-xl text-primary">{item.price}</p>
+                                                )}
+                                            </div>
                                         </div>
-                                    ))}
+                                    </div>
+                                ))}
                                 </div>
                             </AccordionContent>
                         </AccordionItem>
