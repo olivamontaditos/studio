@@ -38,7 +38,7 @@ export const menuCategories = [
       { name: "M06. Frango Cremoso Melt", description: "Frango ao cream cheese, muçarela e batata crocante.", price: "R$ 22,90", imageUrl: "https://64.media.tumblr.com/b9e96594fc6d22353cd3cf7c94edeb77/0729a521a5d6cff4-fd/s2048x3072/f3f206f1e6853ae1d967dfc738653dc4fd5489a6.jpg" },
       { name: "M07. Frango Iscas Gourmet", description: "Iscas de frango, muçarela, maionese de alho e tomate cereja.", price: "R$ 22,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
       { name: "M08. Mignon Gruyère", description: "Mignon, queijo gruyère, cebola caramelizada e maionese de alho.", price: "R$ 31,00", imageUrl: "https://64.media.tumblr.com/9e260afe66273c0a6158761992ceb67d/0729a521a5d6cff4-2b/s2048x3072/2bb44eb1a215e7d3eb24b197bf77581526abaf24.jpg" },
-      { name: "M09. Pastrami Oliva", description: "Pastrami, queijo derretido, Vinagrete do William e creme de queijo.", price: "R$ 34,00", imageUrl: "https://64.media.tumblr.com/acb78441e2b45ff3bb2ee86766693d57/0729a521a5d6cff4-ad/s2048x3072/5d7e4371e74beb499fc222df02db822b708f4265.jpg" },
+      { name: "M09. Pastrami Oliva", description: "Pastrami, queijo derretido, Vinagrete do William e creme de queijo.", price: "R$ 34,00", imageUrl: "https://images.unsplash.com/photo-1552332386-f8dd00dc2f85" },
       { name: "M10. Presunto Royale", description: "Queijo e presunto.", price: "R$ 18,00", imageUrl: "https://64.media.tumblr.com/b52567a2d00f84d7f3651c2444b5bb85/0729a521a5d6cff4-e3/s2048x3072/25b5ca0786e1e362f1a7f8ec67a42e1fe6e14434.jpg" },
     ],
   },
@@ -122,8 +122,8 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
         <section 
             id="cardapio" 
             className={cn(
-                "bg-background w-full",
-                isSummary ? "py-20 md:py-32" : "pt-12 pb-20 md:pb-32"
+                "w-full",
+                isSummary ? "bg-background py-20 md:py-32" : "bg-secondary pt-12 pb-20 md:pb-32"
             )}
         >
             <div className="w-full max-w-6xl mx-auto px-4">
@@ -196,7 +196,7 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                     </>
                 ) : (
                 <Tabs defaultValue={menuCategories[0].name} className="w-full">
-                    <div className="sticky top-16 z-30 w-full bg-background/95 backdrop-blur-sm">
+                    <div className="sticky top-16 z-30 w-full bg-secondary/95 backdrop-blur-sm">
                         <ScrollArea>
                             <div className="flex justify-start sm:justify-center border-b">
                                 <TabsList className="h-auto px-4">
