@@ -39,7 +39,7 @@ export const menuCategories = [
       { name: "M08. Mignon Gruyère", description: "Mignon, queijo gruyère, cebola caramelizada e maionese de alho.", price: "R$ 31,00", imageUrl: "https://64.media.tumblr.com/9e260afe66273c0a6158761992ceb67d/0729a521a5d6cff4-2b/s2048x3072/2bb44eb1a215e7d3eb24b197bf77581526abaf24.jpg" },
       { name: "M09. Pastrami Oliva", description: "Pastrami, queijo derretido, Vinagrete do William e creme de queijo.", price: "R$ 34,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
       { name: "M10. Presunto Royale", description: "Queijo e presunto.", price: "R$ 18,00", imageUrl: "https://64.media.tumblr.com/b52567a2d00f84d7f3651c2444b5bb85/0729a521a5d6cff4-e3/s2048x3072/25b5ca0786e1e362f1a7f8ec67a42e1fe6e14434.jpg" },
-      { name: "M11. Clássico Madrileño", description: "Fatias finas de presunto cozido especial e muçarela derretida sobre uma base suculenta de tomate ralado fresco com um toque de alho e azeite de oliva servido no pão de coca crocante.", price: "R$ 15,90" },
+      { name: "M11. Clássico Madrileño", description: "Fatias finas de presunto cozido especial e muçarela derretida sobre uma base suculenta de tomate ralado fresco com um toque de alho e azeite de oliva servido no pão de coca crocante.", price: "R$ 15,90", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
     ],
   },
   {
@@ -56,9 +56,9 @@ export const menuCategories = [
     name: "TORRONES ARTESANAIS (Receita Original Espanhola)",
     description: "Sabores: Frutas Vermelhas, Pistache, Nozes com Limão ou Chocolate 70%.",
     items: [
-      { name: "Tamanho P (25g)", price: "R$ 12,00" },
-      { name: "Tamanho M (70g)", price: "R$ 35,90" },
-      { name: "Tamanho G (90g)", price: "R$ 42,90" },
+      { name: "Tamanho P (25g)", price: "R$ 12,00", imageUrl: "https://64.media.tumblr.com/c723f5e8386cd85099fe076723ce67e1/1b2a968c49ec28e1-a0/s2048x3072/0713dde2ad58824a48dfb1c09344ebefba9fd6f8.jpg" },
+      { name: "Tamanho M (70g)", price: "R$ 35,90", imageUrl: "https://64.media.tumblr.com/5ac751440f15a9b8b5412c15b80b412d/1b2a968c49ec28e1-6e/s2048x3072/70220b988e670fcca4c9b1da962ebc74e63572d3.jpg" },
+      { name: "Tamanho G (90g)", price: "R$ 42,90", imageUrl: "https://64.media.tumblr.com/e6f2c4f483f27a88d0deb1438030294c/1b2a968c49ec28e1-c0/s1280x1920/ffee0271c5f47377389b4dd3281a1d7e1b6e057e.jpg" },
     ],
   },
   {
