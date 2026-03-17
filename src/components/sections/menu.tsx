@@ -55,9 +55,9 @@ export const menuCategories = [
     name: "TORRONES ARTESANAIS (Receita Original Espanhola)",
     description: "Sabores: Frutas Vermelhas, Pistache, Nozes com Limão ou Chocolate 70%.",
     items: [
-      { name: "Tamanho P (25g)", price: "R$ 12,00", imageUrl: "https://64.media.tumblr.com/3c36a2faf3442e02bdd3413a8db17567/7c9be24b889bb4c1-ae/s640x960/fcbec95593b5c0d431848fea8d7c2a5c35332994.jpg" },
-      { name: "Tamanho M (70g)", price: "R$ 35,90", imageUrl: "https://64.media.tumblr.com/3c36a2faf3442e02bdd3413a8db17567/7c9be24b889bb4c1-ae/s640x960/fcbec95593b5c0d431848fea8d7c2a5c35332994.jpg" },
-      { name: "Tamanho G (90g)", price: "R$ 42,90", imageUrl: "https://64.media.tumblr.com/3c36a2faf3442e02bdd3413a8db17567/7c9be24b889bb4c1-ae/s640x960/fcbec95593b5c0d431848fea8d7c2a5c35332994.jpg" },
+      { name: "Tamanho P (25g)", price: "R$ 12,00", imageUrl: "https://64.media.tumblr.com/c723f5e8386cd85099fe076723ce67e1/1b2a968c49ec28e1-a0/s2048x3072/0713dde2ad58824a48dfb1c09344ebefba9fd6f8.jpg" },
+      { name: "Tamanho M (70g)", price: "R$ 35,90", imageUrl: "https://64.media.tumblr.com/5ac751440f15a9b8b5412c15b80b412d/1b2a968c49ec28e1-6e/s2048x3072/70220b988e670fcca4c9b1da962ebc74e63572d3.jpg" },
+      { name: "Tamanho G (90g)", price: "R$ 42,90", imageUrl: "https://64.media.tumblr.com/e6f2c4f483f27a88d0deb1438030294c/1b2a968c49ec28e1-c0/s1280x1920/ffee0271c5f47377389b4dd3281a1d7e1b6e057e.jpg" },
     ],
   },
   {
