@@ -9,11 +9,11 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import {
-    Tabs,
-    TabsContent,
-    TabsList,
-    TabsTrigger,
-} from "@/components/ui/tabs";
+    Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
+} from "@/components/ui/accordion";
 import {
     Sandwich,
     Wine,
@@ -23,7 +23,6 @@ import {
     Coffee
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 
 export const menuCategories = [
   {
@@ -195,81 +194,73 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                         </div>
                     </>
                 ) : (
-                <Tabs defaultValue={menuCategories[0].name} className="w-full">
-                    <div className="sticky top-16 z-30 w-full bg-secondary/95 backdrop-blur-sm">
-                        <ScrollArea>
-                            <div className="flex justify-start sm:justify-center border-b">
-                                <TabsList className="h-auto px-4">
-                                    {menuCategories.map((category) => {
-                                        const Icon = iconMap[category.name] || Sandwich;
-                                        return (
-                                            <TabsTrigger value={category.name} key={category.name} className="flex-row items-center gap-2 py-3 px-4 h-full whitespace-nowrap">
-                                                <Icon className="h-5 w-5" />
-                                                <span className="text-sm">{category.name.split(' (')[0]}</span>
-                                            </TabsTrigger>
-                                        )
-                                    })}
-                                </TabsList>
-                            </div>
-                            <ScrollBar orientation="horizontal" />
-                        </ScrollArea>
-                    </div>
-                    {menuCategories.map((category) => (
-                        <TabsContent value={category.name} key={category.name} className="mt-8">
-                             <div className="text-left mb-6">
-                                <h3 className="text-2xl font-headline text-foreground">{category.name}</h3>
-                                {category.description && <p className="text-sm text-muted-foreground font-normal mt-1">{category.description}</p>}
-                            </div>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
-                              {category.items.map((item) => (
-                                <div key={item.name} className="bg-card rounded-lg shadow-sm overflow-hidden flex flex-col">
-                                    {item.imageUrl ? (
-                                        <Dialog>
-                                        <DialogTrigger asChild>
-                                            <div className="relative h-56 w-full cursor-pointer overflow-hidden">
-                                            <Image
-                                                src={item.imageUrl}
-                                                alt={item.name}
-                                                fill
-                                                className="object-cover transition-transform duration-300 hover:scale-105"
-                                                sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                                            />
-                                            </div>
-                                        </DialogTrigger>
-                                        <DialogContent className="p-0 border-0 max-w-2xl bg-transparent shadow-none">
-                                            <div className="relative aspect-square w-full">
-                                            <Image
-                                                src={item.imageUrl}
-                                                alt={item.name}
-                                                fill
-                                                className="object-contain rounded-lg"
-                                                sizes="100vw"
-                                            />
-                                            </div>
-                                        </DialogContent>
-                                        </Dialog>
-                                    ) : (
-                                        <div className="relative h-56 w-full bg-secondary flex items-center justify-center">
-                                            <Sandwich className="h-16 w-16 text-muted-foreground/50" />
-                                        </div>
-                                    )}
-                                    <div className="p-4 flex flex-col flex-grow">
-                                        <div className="flex-grow">
-                                            <p className="text-foreground font-semibold text-lg">{item.name}</p>
-                                            {item.description && (
-                                                <p className="text-sm text-muted-foreground mt-1">{item.description}</p>
-                                            )}
-                                        </div>
-                                        <div className="flex justify-between items-center mt-4">
-                                            <p className="font-bold text-xl text-primary">{item.price}</p>
-                                        </div>
+                <Accordion type="multiple" className="w-full space-y-4">
+                    {menuCategories.map((category) => {
+                        const Icon = iconMap[category.name] || Sandwich;
+                        return (
+                        <AccordionItem value={category.name} key={category.name} className="border-b-0 rounded-lg bg-card shadow-sm">
+                            <AccordionTrigger className="p-4 hover:no-underline rounded-lg">
+                                <div className="flex items-center gap-4 text-left">
+                                    <Icon className="h-6 w-6 text-primary flex-shrink-0" />
+                                    <div>
+                                        <h3 className="text-lg font-headline text-foreground">{category.name}</h3>
+                                        {category.description && <p className="text-sm text-muted-foreground font-normal mt-1">{category.description}</p>}
                                     </div>
                                 </div>
-                              ))}
-                            </div>
-                        </TabsContent>
-                    ))}
-                </Tabs>
+                            </AccordionTrigger>
+                            <AccordionContent className="p-4 pt-0">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8 pt-4 border-t">
+                                  {category.items.map((item) => (
+                                    <div key={item.name} className="bg-background rounded-lg shadow-sm overflow-hidden flex flex-col">
+                                        {item.imageUrl ? (
+                                            <Dialog>
+                                            <DialogTrigger asChild>
+                                                <div className="relative h-56 w-full cursor-pointer overflow-hidden">
+                                                <Image
+                                                    src={item.imageUrl}
+                                                    alt={item.name}
+                                                    fill
+                                                    className="object-cover transition-transform duration-300 hover:scale-105"
+                                                    sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                                                />
+                                                </div>
+                                            </DialogTrigger>
+                                            <DialogContent className="p-0 border-0 max-w-2xl bg-transparent shadow-none">
+                                                <div className="relative aspect-square w-full">
+                                                <Image
+                                                    src={item.imageUrl}
+                                                    alt={item.name}
+                                                    fill
+                                                    className="object-contain rounded-lg"
+                                                    sizes="100vw"
+                                                />
+                                                </div>
+                                            </DialogContent>
+                                            </Dialog>
+                                        ) : (
+                                            <div className="relative h-56 w-full bg-secondary flex items-center justify-center">
+                                                <Sandwich className="h-16 w-16 text-muted-foreground/50" />
+                                            </div>
+                                        )}
+                                        <div className="p-4 flex flex-col flex-grow">
+                                            <div className="flex-grow">
+                                                <p className="text-foreground font-semibold text-lg">{item.name}</p>
+                                                {item.description && (
+                                                    <p className="text-sm text-muted-foreground mt-1">{item.description}</p>
+                                                )}
+                                            </div>
+                                            <div className="flex justify-between items-center mt-4">
+                                                <p className="font-bold text-xl text-primary">{item.price}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                  ))}
+                                </div>
+                            </AccordionContent>
+                        </AccordionItem>
+                        );
+                    })}
+                </Accordion>
                 )}
             </div>
         </section>
