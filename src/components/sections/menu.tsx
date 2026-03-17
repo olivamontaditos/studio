@@ -118,7 +118,13 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
       .slice(0, 6);
     
     return (
-        <section id="cardapio" className="bg-background py-20 md:py-32">
+        <section 
+            id="cardapio" 
+            className={cn(
+                "bg-background w-full",
+                isSummary ? "py-20 md:py-32" : "pt-12 pb-20 md:pb-32"
+            )}
+        >
             <div className="w-full max-w-6xl mx-auto px-4">
                 <header className="text-center mb-12">
                     <p className="text-sm font-bold uppercase tracking-wider text-primary">
