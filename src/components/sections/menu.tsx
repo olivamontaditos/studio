@@ -59,9 +59,9 @@ export const menuCategories = [
     name: "TORRONES ARTESANAIS (Receita Original Espanhola)",
     description: "Sabores: Frutas Vermelhas, Pistache, Nozes com Limão ou Chocolate 70%.",
     items: [
-      { name: "Tamanho P (25g)", price: "R$ 12,00" },
-      { name: "Tamanho M (70g)", price: "R$ 35,90" },
-      { name: "Tamanho G (90g)", price: "R$ 42,90" },
+      { name: "Tamanho P (25g)", price: "R$ 12,00", imageUrl: "https://64.media.tumblr.com/c723f5e8386cd85099fe076723ce67e1/1b2a968c49ec28e1-a0/s2048x3072/0713dde2ad58824a48dfb1c09344ebefba9fd6f8.jpg" },
+      { name: "Tamanho M (70g)", price: "R$ 35,90", imageUrl: "https://64.media.tumblr.com/5ac751440f15a9b8b5412c15b80b412d/1b2a968c49ec28e1-6e/s2048x3072/70220b988e670fcca4c9b1da962ebc74e63572d3.jpg" },
+      { name: "Tamanho G (90g)", price: "R$ 42,90", imageUrl: "https://64.media.tumblr.com/e6f2c4f483f27a88d0deb1438030294c/1b2a968c49ec28e1-c0/s1280x1920/ffee0271c5f47377389b4dd3281a1d7e1b6e057e.jpg" },
     ],
   },
   {
@@ -115,7 +115,6 @@ const iconMap: { [key: string]: React.ElementType } = {
 };
 
 const textOnlyCategories = [
-    "TORRONES ARTESANAIS (Receita Original Espanhola)",
     "EXPRESSOS", 
     "CAFÉ COM LEITE (LATTE & CIA)", 
     "BEBIDAS & SODAS", 
@@ -194,7 +193,7 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
             name: "Happy Hour",
             description: "Disponível apenas das 18h às 21h. Aproveite!",
             items: [
-                { name: "Double Chopp", description: "Peça um e ganhe outro. Chope Pilsen 300ml.", price: "R$ 15,00", imageUrl: "https://64.media.tumblr.com/f0d702bcd612fa3f15e578b5bdb66828/390288e792d93a39-e9/s2048x3072/5937c5f7a5fb59c7f1a038b5cb2ca9aeccb92121.jpg" },
+                { name: "50% OFF em Qualquer Chopp", description: "Válido para todos os chopes da casa durante o Happy Hour.", price: "", imageUrl: "https://64.media.tumblr.com/f0d702bcd612fa3f15e578b5bdb66828/390288e792d93a39-e9/s2048x3072/5937c5f7a5fb59c7f1a038b5cb2ca9aeccb92121.jpg" },
                 ...([discountedM05, discountedM11].filter(Boolean) as any)
             ]
         };
