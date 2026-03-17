@@ -23,6 +23,7 @@ import {
     Coffee
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 
 export const menuCategories = [
   {
@@ -195,18 +196,23 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                     </>
                 ) : (
                 <Tabs defaultValue={menuCategories[0].name} className="w-full">
-                    <div className="flex justify-center">
-                        <TabsList className="grid w-full grid-cols-2 h-auto sm:w-auto sm:grid-cols-4 lg:grid-cols-7">
-                            {menuCategories.map((category) => {
-                                 const Icon = iconMap[category.name] || Sandwich;
-                                 return (
-                                    <TabsTrigger value={category.name} key={category.name} className="flex flex-col sm:flex-row items-center gap-2 py-3 px-4 h-full whitespace-normal">
-                                        <Icon className="h-5 w-5" />
-                                        <span className="text-xs sm:text-sm text-center sm:text-left">{category.name.split(' (')[0]}</span>
-                                    </TabsTrigger>
-                                 )
-                            })}
-                        </TabsList>
+                    <div className="sticky top-16 z-30 w-full bg-background/95 backdrop-blur-sm">
+                        <ScrollArea>
+                            <div className="flex justify-start sm:justify-center border-b">
+                                <TabsList className="h-auto px-4">
+                                    {menuCategories.map((category) => {
+                                        const Icon = iconMap[category.name] || Sandwich;
+                                        return (
+                                            <TabsTrigger value={category.name} key={category.name} className="flex-row items-center gap-2 py-3 px-4 h-full whitespace-nowrap">
+                                                <Icon className="h-5 w-5" />
+                                                <span className="text-sm">{category.name.split(' (')[0]}</span>
+                                            </TabsTrigger>
+                                        )
+                                    })}
+                                </TabsList>
+                            </div>
+                            <ScrollBar orientation="horizontal" />
+                        </ScrollArea>
                     </div>
                     {menuCategories.map((category) => (
                         <TabsContent value={category.name} key={category.name} className="mt-8">
