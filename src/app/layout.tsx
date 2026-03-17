@@ -4,6 +4,8 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toaster";
 import { FirebaseClientProvider } from "@/firebase/client-provider";
+import Header from "@/components/layout/header";
+import Footer from "@/components/layout/footer";
 
 const fontBody = Inter({
   subsets: ["latin"],
@@ -37,7 +39,11 @@ export default function RootLayout({
         )}
       >
         <FirebaseClientProvider>
-          {children}
+          <div className="flex flex-col min-h-screen">
+            <Header />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </div>
           <Toaster />
         </FirebaseClientProvider>
       </body>

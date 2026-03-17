@@ -1,5 +1,3 @@
-import Header from "@/components/layout/header";
-import Footer from "@/components/layout/footer";
 import HeroSection from "@/components/sections/hero";
 import MenuSection from "@/components/sections/menu";
 import GallerySection from "@/components/sections/gallery";
@@ -10,18 +8,14 @@ import ReviewPopup from "@/components/review-popup";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col">
-      <Header />
-      <main className="flex-1">
-        <HeroSection />
-        <MenuSection variant="summary" />
-        <GallerySection />
-        <ReservationsSection />
-        <NewsletterSection />
-      </main>
-      <Footer />
+    <>
+      <HeroSection />
+      <MenuSection variant="summary" />
+      <GallerySection />
+      <ReservationsSection />
+      <NewsletterSection />
       <CookieBanner />
       <ReviewPopup />
-    </div>
+    </>
   );
 }

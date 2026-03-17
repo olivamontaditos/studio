@@ -34,7 +34,7 @@ const FacebookIcon = (props: any) => (
 
 export default function MenuPage() {
   return (
-    <main className="min-h-screen bg-secondary flex flex-col items-center">
+    <div className="bg-secondary flex flex-col items-center">
       <div className="w-full max-w-6xl mx-auto px-4 pt-8">
         <Button asChild variant="outline">
           <Link href="/">
@@ -44,47 +44,6 @@ export default function MenuPage() {
         </Button>
       </div>
       <MenuSection variant="full" />
-      <footer className="w-full py-6 text-center text-sm text-muted-foreground">
-        <div className="flex justify-center items-center space-x-6 mb-4">
-          <a
-            href="https://www.instagram.com/olivamontaditos/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-muted-foreground transition-colors hover:text-primary"
-            aria-label="Instagram"
-          >
-            <Instagram className="h-6 w-6" />
-          </a>
-          <a
-            href="https://www.tiktok.com/@olivamontaditos"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-muted-foreground transition-colors hover:text-primary"
-            aria-label="TikTok"
-          >
-            <TikTokIcon className="h-6 w-6" />
-          </a>
-          <a
-            href="https://www.facebook.com/olivamontaditos/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-muted-foreground transition-colors hover:text-primary"
-            aria-label="Facebook"
-          >
-            <FacebookIcon className="h-6 w-6" />
-          </a>
-          <a
-            href="https://www.youtube.com/@OlivaMontaditos"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-muted-foreground transition-colors hover:text-primary"
-            aria-label="YouTube"
-          >
-            <Youtube className="h-6 w-6" />
-          </a>
-        </div>
-        <Copyright />
-      </footer>
-    </main>
+    </div>
   );
 }

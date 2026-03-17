@@ -7,10 +7,10 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 const navItems = [
-  { href: "#inicio", label: "Início" },
-  { href: "#cardapio", label: "Cardápio" },
-  { href: "#nosso-espaco", label: "Nosso Espaço" },
-  { href: "#reservas", label: "Eventos & Reservas" },
+  { href: "/#inicio", label: "Início" },
+  { href: "/#cardapio", label: "Cardápio" },
+  { href: "/#nosso-espaco", label: "Nosso Espaço" },
+  { href: "/#reservas", label: "Eventos & Reservas" },
 ];
 
 export default function Header() {
@@ -19,7 +19,7 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
-        <Link href="#inicio" className="font-headline text-2xl font-bold text-primary tracking-tight">
+        <Link href="/#inicio" className="font-headline text-2xl font-bold text-primary tracking-tight">
           OLIVA MONTADITOS
         </Link>
         <nav className="hidden md:flex md:items-center md:gap-6">
@@ -44,7 +44,7 @@ export default function Header() {
             <SheetContent side="left" className="w-[300px] sm:w-[400px]">
               <div className="flex h-full flex-col">
                 <div className="flex items-center justify-between border-b pb-4">
-                  <Link href="#inicio" className="font-headline text-xl font-bold text-primary" onClick={() => setIsOpen(false)}>
+                  <Link href="/#inicio" className="font-headline text-xl font-bold text-primary" onClick={() => setIsOpen(false)}>
                     OLIVA MONTADITOS
                   </Link>
                   <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)}>
