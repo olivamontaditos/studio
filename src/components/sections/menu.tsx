@@ -59,9 +59,9 @@ export const menuCategories = [
     name: "TORRONES ARTESANAIS (Receita Original Espanhola)",
     description: "Sabores: Frutas Vermelhas, Pistache, Nozes com Limão ou Chocolate 70%.",
     items: [
-      { name: "Tamanho P (25g)", price: "R$ 12,00", imageUrl: "https://64.media.tumblr.com/c723f5e8386cd85099fe076723ce67e1/1b2a968c49ec28e1-a0/s2048x3072/0713dde2ad58824a48dfb1c09344ebefba9fd6f8.jpg" },
-      { name: "Tamanho M (70g)", price: "R$ 35,90", imageUrl: "https://64.media.tumblr.com/5ac751440f15a9b8b5412c15b80b412d/1b2a968c49ec28e1-6e/s2048x3072/70220b988e670fcca4c9b1da962ebc74e63572d3.jpg" },
-      { name: "Tamanho G (90g)", price: "R$ 42,90", imageUrl: "https://64.media.tumblr.com/e6f2c4f483f27a88d0deb1438030294c/1b2a968c49ec28e1-c0/s1280x1920/ffee0271c5f47377389b4dd3281a1d7e1b6e057e.jpg" },
+      { name: "Tamanho P (25g)", price: "R$ 12,00" },
+      { name: "Tamanho M (70g)", price: "R$ 35,90" },
+      { name: "Tamanho G (90g)", price: "R$ 42,90" },
     ],
   },
   {
@@ -115,6 +115,7 @@ const iconMap: { [key: string]: React.ElementType } = {
 };
 
 const textOnlyCategories = [
+    "TORRONES ARTESANAIS (Receita Original Espanhola)",
     "EXPRESSOS", 
     "CAFÉ COM LEITE (LATTE & CIA)", 
     "BEBIDAS & SODAS", 
@@ -173,7 +174,7 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
     };
 
     let secretMenuCategory = null;
-    if (isHappyHour && !isSummary) {
+    if (isHappyHour) {
         const m05 = menuCategories.find(c => c.name.includes("MONTADITOS"))?.items.find(i => i.name.startsWith("M05"));
         const m11 = menuCategories.find(c => c.name.includes("MONTADITOS"))?.items.find(i => i.name.startsWith("M11"));
 
@@ -199,6 +200,91 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
         };
     }
     
+    const HappyHourAccordionItem = secretMenuCategory && (
+        <AccordionItem 
+            value={secretMenuCategory.name} 
+            key={secretMenuCategory.name} 
+            className={cn("border-b-0 rounded-lg bg-card shadow-lg transition-all", {
+                '[data-theme="sutil"] &,[data-theme="neon"] &': 'border-2 border-accent shadow-[0_0_15px_-3px_hsl(var(--accent))]',
+                '[data-theme="dinamico"] &': 'transform-gpu transition-transform will-change-transform hover:scale-[1.02]',
+            })}
+        >
+            <AccordionTrigger className="p-4 hover:no-underline rounded-lg">
+                <div className="flex items-center gap-4 text-left">
+                    <Sparkles className="h-6 w-6 text-accent flex-shrink-0" />
+                    <div>
+                        <h3 className="text-lg font-headline text-accent">{secretMenuCategory.name}</h3>
+                        {secretMenuCategory.description && <p className="text-sm text-muted-foreground font-normal mt-1">{secretMenuCategory.description}</p>}
+                    </div>
+                </div>
+            </AccordionTrigger>
+            <AccordionContent className="p-4 pt-0">
+                <div className={cn("pt-4 border-t", {
+                    '[data-theme="sutil"] &': 'border-accent/50',
+                    '[data-theme="neon"] &': 'border-accent',
+                })}>
+                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
+                {(secretMenuCategory.items as any[]).map((item: any, index: number) => (
+                    <div key={item.name} className={cn("bg-background rounded-lg shadow-sm overflow-hidden flex flex-col transition-all duration-300", {
+                        '[data-theme="dinamico"] &': 'opacity-0 animate-in fade-in slide-in-from-bottom-5',
+                        '[data-theme="sutil"] &': 'opacity-0 animate-in fade-in',
+                    })} style={{ animationDelay: `${index * 100}ms` }}>
+                        {item.imageUrl ? (
+                            <Dialog>
+                                <DialogTrigger asChild>
+                                    <div className="relative h-56 w-full cursor-pointer overflow-hidden">
+                                    <Image
+                                        src={item.imageUrl}
+                                        alt={item.name}
+                                        fill
+                                        className="object-cover transition-transform duration-300 hover:scale-105"
+                                        sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                                    />
+                                    </div>
+                                </DialogTrigger>
+                                <DialogContent className="p-0 border-0 max-w-2xl bg-transparent shadow-none">
+                                    <div className="relative aspect-square w-full">
+                                    <Image
+                                        src={item.imageUrl}
+                                        alt={item.name}
+                                        fill
+                                        className="object-contain rounded-lg"
+                                        sizes="100vw"
+                                    />
+                                    </div>
+                                </DialogContent>
+                            </Dialog>
+                        ) : (
+                            <div className="relative h-56 w-full bg-secondary flex items-center justify-center">
+                                <Wine className="h-16 w-16 text-muted-foreground/50" />
+                            </div>
+                        )}
+                        <div className="p-4 flex flex-col flex-grow">
+                            <div className="flex-grow">
+                                <p className="text-foreground font-semibold text-lg">{item.name}</p>
+                                {item.description && (
+                                    <p className="text-sm text-muted-foreground mt-1">{item.description}</p>
+                                )}
+                            </div>
+                            <div className="flex justify-end items-center mt-4">
+                                {item.originalPrice ? (
+                                    <div className="text-right">
+                                        <p className="font-bold text-lg text-primary">{item.price}</p>
+                                        <p className="text-sm text-muted-foreground line-through">{item.originalPrice}</p>
+                                    </div>
+                                ) : (
+                                    <p className="font-bold text-xl text-primary">{item.price}</p>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                ))}
+                </div>
+                </div>
+            </AccordionContent>
+        </AccordionItem>
+    );
+
     return (
         <section 
             id="cardapio" 
@@ -231,6 +317,11 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
 
                 {isSummary ? (
                     <>
+                        {secretMenuCategory && (
+                             <Accordion type="single" collapsible defaultValue="Happy Hour" className="w-full space-y-4 mb-12">
+                                {HappyHourAccordionItem}
+                             </Accordion>
+                        )}
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
                             {summaryItems.map((item) => (
                                 <div key={item.name} className="bg-card rounded-lg shadow-sm overflow-hidden flex flex-col">
@@ -287,90 +378,7 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                 ) : (
                 <>
                 <Accordion type="multiple" className="w-full space-y-4">
-                    {secretMenuCategory && (
-                        <AccordionItem 
-                            value={secretMenuCategory.name} 
-                            key={secretMenuCategory.name} 
-                            className={cn("border-b-0 rounded-lg bg-card shadow-lg transition-all", {
-                                '[data-theme="sutil"] &,[data-theme="neon"] &': 'border-2 border-accent shadow-[0_0_15px_-3px_hsl(var(--accent))]',
-                                '[data-theme="dinamico"] &': 'transform-gpu transition-transform will-change-transform hover:scale-[1.02]',
-                            })}
-                        >
-                            <AccordionTrigger className="p-4 hover:no-underline rounded-lg">
-                                <div className="flex items-center gap-4 text-left">
-                                    <Sparkles className="h-6 w-6 text-accent flex-shrink-0" />
-                                    <div>
-                                        <h3 className="text-lg font-headline text-accent">{secretMenuCategory.name}</h3>
-                                        {secretMenuCategory.description && <p className="text-sm text-muted-foreground font-normal mt-1">{secretMenuCategory.description}</p>}
-                                    </div>
-                                </div>
-                            </AccordionTrigger>
-                            <AccordionContent className="p-4 pt-0">
-                                <div className={cn("pt-4 border-t", {
-                                    '[data-theme="sutil"] &': 'border-accent/50',
-                                    '[data-theme="neon"] &': 'border-accent',
-                                })}>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
-                                {secretMenuCategory.items.map((item: any, index: number) => (
-                                    <div key={item.name} className={cn("bg-background rounded-lg shadow-sm overflow-hidden flex flex-col transition-all duration-300", {
-                                       '[data-theme="dinamico"] &': 'opacity-0 animate-in fade-in slide-in-from-bottom-5',
-                                       '[data-theme="sutil"] &': 'opacity-0 animate-in fade-in',
-                                    })} style={{ animationDelay: `${index * 100}ms` }}>
-                                        {item.imageUrl ? (
-                                            <Dialog>
-                                                <DialogTrigger asChild>
-                                                    <div className="relative h-56 w-full cursor-pointer overflow-hidden">
-                                                    <Image
-                                                        src={item.imageUrl}
-                                                        alt={item.name}
-                                                        fill
-                                                        className="object-cover transition-transform duration-300 hover:scale-105"
-                                                        sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                                                    />
-                                                    </div>
-                                                </DialogTrigger>
-                                                <DialogContent className="p-0 border-0 max-w-2xl bg-transparent shadow-none">
-                                                    <div className="relative aspect-square w-full">
-                                                    <Image
-                                                        src={item.imageUrl}
-                                                        alt={item.name}
-                                                        fill
-                                                        className="object-contain rounded-lg"
-                                                        sizes="100vw"
-                                                    />
-                                                    </div>
-                                                </DialogContent>
-                                            </Dialog>
-                                        ) : (
-                                            <div className="relative h-56 w-full bg-secondary flex items-center justify-center">
-                                                <Wine className="h-16 w-16 text-muted-foreground/50" />
-                                            </div>
-                                        )}
-                                        <div className="p-4 flex flex-col flex-grow">
-                                            <div className="flex-grow">
-                                                <p className="text-foreground font-semibold text-lg">{item.name}</p>
-                                                {item.description && (
-                                                    <p className="text-sm text-muted-foreground mt-1">{item.description}</p>
-                                                )}
-                                            </div>
-                                            <div className="flex justify-end items-center mt-4">
-                                                {item.originalPrice ? (
-                                                    <div className="text-right">
-                                                        <p className="font-bold text-lg text-primary">{item.price}</p>
-                                                        <p className="text-sm text-muted-foreground line-through">{item.originalPrice}</p>
-                                                    </div>
-                                                ) : (
-                                                    <p className="font-bold text-xl text-primary">{item.price}</p>
-                                                )}
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))}
-                                </div>
-                                </div>
-                            </AccordionContent>
-                        </AccordionItem>
-                    )}
+                    {secretMenuCategory && HappyHourAccordionItem}
 
                     {menuCategories.map((category) => {
                         const Icon = iconMap[category.name] || Sandwich;
@@ -475,7 +483,7 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                         );
                     })}
                 </Accordion>
-                <div className="fixed bottom-6 left-6 z-50">
+                {!isSummary && <div className="fixed bottom-6 left-6 z-50">
                     <Button
                         size="icon"
                         variant="outline"
@@ -485,7 +493,7 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                     >
                         <Palette className="h-5 w-5" />
                     </Button>
-                </div>
+                </div>}
                 </>
                 )}
             </div>
