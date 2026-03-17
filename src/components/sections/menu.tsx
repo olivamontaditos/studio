@@ -64,38 +64,38 @@ export const menuCategories = [
     name: "EXPRESSOS",
     description: "A base de tudo: café puro, intenso e aromático.",
     items: [
-      { name: "Expresso Solo", description: "Curto, intenso e com crema aveludada.", price: "R$ 8,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
-      { name: "Expresso Doppio", description: "Dose dupla para quem precisa de energia extra.", price: "R$ 13,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
-      { name: "Expresso Macchiato", description: "O clássico manchado com uma nuvem de leite vaporizado.", price: "R$ 10,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
-      { name: "Espresso Panna", description: "Finalizado com uma generosa camada de chantilly artesanal.", price: "R$ 14,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
+      { name: "Expresso Solo", description: "Curto, intenso e com crema aveludada.", price: "R$ 8,00" },
+      { name: "Expresso Doppio", description: "Dose dupla para quem precisa de energia extra.", price: "R$ 13,00" },
+      { name: "Expresso Macchiato", description: "O clássico manchado com uma nuvem de leite vaporizado.", price: "R$ 10,00" },
+      { name: "Espresso Panna", description: "Finalizado com uma generosa camada de chantilly artesanal.", price: "R$ 14,00" },
     ],
   },
   {
     name: "CAFÉ COM LEITE (LATTE & CIA)",
     description: "Bebidas mais longas, cremosas e perfeitas para fotos.",
     items: [
-      { name: "Caffè Latte Clássico", description: "Dose de expresso com leite vaporizado e uma fina camada de espuma.", price: "R$ 14,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
-      { name: "Cappuccino Italiano", description: "Proporções iguais de expresso, leite e muita espuma (opção com canela ou cacau).", price: "R$ 15,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
-      { name: "Flat White", description: "Para os amantes de café; mais expresso, menos espuma, textura de seda.", price: "R$ 16,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
-      { name: "Vanilla Latte", description: "Nosso latte clássico com um toque de extrato natural de baunilha.", price: "R$ 18,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
-      { name: "Caramel Macchiato", description: "Camadas de leite, expresso e finalização com calda de caramelo salgado.", price: "R$ 20,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
+      { name: "Caffè Latte Clássico", description: "Dose de expresso com leite vaporizado e uma fina camada de espuma.", price: "R$ 14,00" },
+      { name: "Cappuccino Italiano", description: "Proporções iguais de expresso, leite e muita espuma (opção com canela ou cacau).", price: "R$ 15,00" },
+      { name: "Flat White", description: "Para os amantes de café; mais expresso, menos espuma, textura de seda.", price: "R$ 16,00" },
+      { name: "Vanilla Latte", description: "Nosso latte clássico com um toque de extrato natural de baunilha.", price: "R$ 18,00" },
+      { name: "Caramel Macchiato", description: "Camadas de leite, expresso e finalização com calda de caramelo salgado.", price: "R$ 20,00" },
     ],
   },
   {
     name: "BEBIDAS & SODAS",
     items: [
-      { name: "Sodas Espanholas (400ml)", description: "Maçã Verde, Framboesa, Limão Siciliano ou Pera.", price: "R$ 19,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
-      { name: "Suco Morango com Leite Ninho", description: "Ultra cremoso e batido na hora.", price: "R$ 22,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
-      { name: "Suco de Frutas Vermelhas", description: "Natural (Morango, mirtilo e amora).", price: "R$ 19,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
-      { name: "Chocolate Suíço Cremoso (Quente)", description: "Receita densa europeia.", price: "R$ 22,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
+      { name: "Sodas Espanholas (400ml)", description: "Maçã Verde, Framboesa, Limão Siciliano ou Pera.", price: "R$ 19,00" },
+      { name: "Suco Morango com Leite Ninho", description: "Ultra cremoso e batido na hora.", price: "R$ 22,00" },
+      { name: "Suco de Frutas Vermelhas", description: "Natural (Morango, mirtilo e amora).", price: "R$ 19,00" },
+      { name: "Chocolate Suíço Cremoso (Quente)", description: "Receita densa europeia.", price: "R$ 22,00" },
     ],
   },
   {
     name: "COQUETELARIA (Para Viagem)",
     items: [
-      { name: "Sangria Oliva (300ml)", description: "Nossa receita clássica em embalagem segura.", price: "R$ 31,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
-      { name: "Pear Sparkling", description: "Espumante brut com Monin de Pera.", price: "R$ 34,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
-      { name: "Carajillo 43", description: "Licor 43 e café expresso premium batidos com gelo e monin de pera. Aveludado e icônico.", price: "R$39,00", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
+      { name: "Sangria Oliva (300ml)", description: "Nossa receita clássica em embalagem segura.", price: "R$ 31,00" },
+      { name: "Pear Sparkling", description: "Espumante brut com Monin de Pera.", price: "R$ 34,00" },
+      { name: "Carajillo 43", description: "Licor 43 e café expresso premium batidos com gelo e monin de pera. Aveludado e icônico.", price: "R$39,00" },
     ],
   },
 ];
@@ -109,6 +109,13 @@ const iconMap: { [key: string]: React.ElementType } = {
     "BEBIDAS & SODAS": CupSoda,
     "COQUETELARIA (Para Viagem)": Wine,
 };
+
+const textOnlyCategories = [
+    "EXPRESSOS", 
+    "CAFÉ COM LEITE (LATTE & CIA)", 
+    "BEBIDAS & SODAS", 
+    "COQUETELARIA (Para Viagem)"
+];
 
 export default function MenuSection({ variant = 'full' }: { variant?: 'full' | 'summary' }) {
     const isSummary = variant === 'summary';
@@ -197,6 +204,7 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                 <Accordion type="multiple" className="w-full space-y-4">
                     {menuCategories.map((category) => {
                         const Icon = iconMap[category.name] || Sandwich;
+                        const isTextOnly = textOnlyCategories.includes(category.name);
                         return (
                         <AccordionItem value={category.name} key={category.name} className="border-b-0 rounded-lg bg-card shadow-sm">
                             <AccordionTrigger className="p-4 hover:no-underline rounded-lg">
@@ -209,53 +217,69 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                                 </div>
                             </AccordionTrigger>
                             <AccordionContent className="p-4 pt-0">
-                                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8 pt-4 border-t">
-                                  {category.items.map((item) => (
-                                    <div key={item.name} className="bg-background rounded-lg shadow-sm overflow-hidden flex flex-col">
-                                        {item.imageUrl ? (
-                                            <Dialog>
-                                            <DialogTrigger asChild>
-                                                <div className="relative h-56 w-full cursor-pointer overflow-hidden">
-                                                <Image
-                                                    src={item.imageUrl}
-                                                    alt={item.name}
-                                                    fill
-                                                    className="object-cover transition-transform duration-300 hover:scale-105"
-                                                    sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                                                />
+                                {isTextOnly ? (
+                                    <div className="pt-4 border-t space-y-6">
+                                        {category.items.map((item) => (
+                                            <div key={item.name} className="flex justify-between items-start">
+                                                <div>
+                                                    <p className="text-foreground font-semibold text-lg">{item.name}</p>
+                                                    {item.description && (
+                                                        <p className="text-sm text-muted-foreground mt-1 max-w-md">{item.description}</p>
+                                                    )}
                                                 </div>
-                                            </DialogTrigger>
-                                            <DialogContent className="p-0 border-0 max-w-2xl bg-transparent shadow-none">
-                                                <div className="relative aspect-square w-full">
-                                                <Image
-                                                    src={item.imageUrl}
-                                                    alt={item.name}
-                                                    fill
-                                                    className="object-contain rounded-lg"
-                                                    sizes="100vw"
-                                                />
+                                                <p className="font-bold text-lg text-primary text-right pl-4 shrink-0">{item.price}</p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8 pt-4 border-t">
+                                    {category.items.map((item) => (
+                                        <div key={item.name} className="bg-background rounded-lg shadow-sm overflow-hidden flex flex-col">
+                                            {item.imageUrl ? (
+                                                <Dialog>
+                                                <DialogTrigger asChild>
+                                                    <div className="relative h-56 w-full cursor-pointer overflow-hidden">
+                                                    <Image
+                                                        src={item.imageUrl}
+                                                        alt={item.name}
+                                                        fill
+                                                        className="object-cover transition-transform duration-300 hover:scale-105"
+                                                        sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                                                    />
+                                                    </div>
+                                                </DialogTrigger>
+                                                <DialogContent className="p-0 border-0 max-w-2xl bg-transparent shadow-none">
+                                                    <div className="relative aspect-square w-full">
+                                                    <Image
+                                                        src={item.imageUrl}
+                                                        alt={item.name}
+                                                        fill
+                                                        className="object-contain rounded-lg"
+                                                        sizes="100vw"
+                                                    />
+                                                    </div>
+                                                </DialogContent>
+                                                </Dialog>
+                                            ) : (
+                                                <div className="relative h-56 w-full bg-secondary flex items-center justify-center">
+                                                    <Sandwich className="h-16 w-16 text-muted-foreground/50" />
                                                 </div>
-                                            </DialogContent>
-                                            </Dialog>
-                                        ) : (
-                                            <div className="relative h-56 w-full bg-secondary flex items-center justify-center">
-                                                <Sandwich className="h-16 w-16 text-muted-foreground/50" />
-                                            </div>
-                                        )}
-                                        <div className="p-4 flex flex-col flex-grow">
-                                            <div className="flex-grow">
-                                                <p className="text-foreground font-semibold text-lg">{item.name}</p>
-                                                {item.description && (
-                                                    <p className="text-sm text-muted-foreground mt-1">{item.description}</p>
-                                                )}
-                                            </div>
-                                            <div className="flex justify-between items-center mt-4">
-                                                <p className="font-bold text-xl text-primary">{item.price}</p>
+                                            )}
+                                            <div className="p-4 flex flex-col flex-grow">
+                                                <div className="flex-grow">
+                                                    <p className="text-foreground font-semibold text-lg">{item.name}</p>
+                                                    {item.description && (
+                                                        <p className="text-sm text-muted-foreground mt-1">{item.description}</p>
+                                                    )}
+                                                </div>
+                                                <div className="flex justify-between items-center mt-4">
+                                                    <p className="font-bold text-xl text-primary">{item.price}</p>
+                                                </div>
                                             </div>
                                         </div>
+                                    ))}
                                     </div>
-                                  ))}
-                                </div>
+                                )}
                             </AccordionContent>
                         </AccordionItem>
                         );
