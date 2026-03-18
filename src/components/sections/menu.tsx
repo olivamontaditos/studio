@@ -152,7 +152,7 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
         const checkHappyHour = () => {
             const now = new Date();
             const currentHour = now.getHours();
-            if (currentHour >= 18 && currentHour < 21) {
+            if (currentHour >= 18 && currentHour < 20) {
                 setIsHappyHour(true);
             } else {
                 setIsHappyHour(false);
@@ -192,7 +192,7 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
 
         secretMenuCategory = {
             name: "Happy Hour",
-            description: "Disponível apenas das 18h às 21h. Aproveite!",
+            description: "Disponível apenas das 18h às 20h. Aproveite!",
             items: [
                 { name: "50% OFF em Qualquer Chopp", description: "Válido para todos os chopes da casa durante o Happy Hour.", price: "", imageUrl: "https://64.media.tumblr.com/f0d702bcd612fa3f15e578b5bdb66828/390288e792d93a39-e9/s2048x3072/5937c5f7a5fb59c7f1a038b5cb2ca9aeccb92121.jpg" },
                 ...([discountedM05, discountedM11].filter(Boolean) as any)
