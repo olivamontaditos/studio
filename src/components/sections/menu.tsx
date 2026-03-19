@@ -52,7 +52,7 @@ export const menuCategories = [
       {
         name: 'Combo do Estudante (O "Clássico da Tarde")',
         description: "Montadito M11 - Clássico Madrileño + Batata Chips + Refrigerante (lata) ou Suco de Laranja.",
-        price: "R$ 24,00",
+        price: "R$ 27,00",
         imageUrl: "https://picsum.photos/seed/student-combo/800/600",
       }
     ]
@@ -85,7 +85,7 @@ export const menuCategories = [
       { name: "Expresso", description: "Intenso e com crema aveludada.", price: "R$ 8,00" },
       { name: "Ristreto", price: "R$ 8,00" },
       { name: "Coado", price: "R$ 9,90" },
-      { name: "Expresso Macchiato", description: "O clássico manchado com uma nuvem de leite vaporizado.", price: "R$ 9,90" },
+      { name: "Macchiato tradicional", description: "O clássico manchado com uma nuvem de leite vaporizado.", price: "R$ 9,90" },
     ],
   },
   {
@@ -106,6 +106,7 @@ export const menuCategories = [
   },
   {
       name: "CAFÉS GELADOS",
+      description: "ADICIONAIS: Deixe seu pedido ainda mais gostoso. Chantilly R$ 5,00",
       items: [
           { name: "Café Bombom Gelado", description: "Camada de leite condensado, gelo, leite batido e uma dose de expresso por cima.", price: "R$ 16,00" },
           { name: "Affogato Oliva", description: "Uma bola generosa de sorvete de baunilha, com uma dose de expresso quente despejada por cima na hora, finalizada com farofa de pistache.", price: "R$ 22,00" },
@@ -117,13 +118,6 @@ export const menuCategories = [
       items: [
           { name: "Chocolate Quente Tradicional", description: "Leite vaporizado, cacau em pó 50%, toque de açúcar e canela.", price: "R$ 15,90" },
           { name: "Chocolate Suíço Cremoso", description: "Leite vaporizado, chocolate em pó 50% e um toque de amido para dar cremosidade.", price: "R$ 20,00" },
-      ]
-  },
-  {
-      name: "ADICIONAIS",
-      description: "Deixe seu pedido ainda mais gostoso.",
-      items: [
-          { name: "Chantilly", price: "R$ 5,00" },
       ]
   },
   {
