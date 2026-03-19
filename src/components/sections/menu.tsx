@@ -59,9 +59,9 @@ export const menuCategories = [
     name: "TORRONES ARTESANAIS (Receita Original Espanhola)",
     description: "Sabores: Frutas Vermelhas, Pistache, Nozes com Limão ou Chocolate 70%.",
     items: [
-      { name: "Tamanho P (25g)", price: "R$ 12,00" },
-      { name: "Tamanho M (70g)", price: "R$ 35,90" },
-      { name: "Tamanho G (90g)", price: "R$ 42,90" },
+      { name: "Tamanho P", price: "R$ 9,90" },
+      { name: "Tamanho M", price: "R$ 29,90" },
+      { name: "Tamanho G", price: "R$ 35,90" },
     ],
   },
   {
