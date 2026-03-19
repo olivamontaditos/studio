@@ -315,6 +315,8 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                     </p>
                 </header>
 
+                <p className="text-center text-xs text-muted-foreground -mt-8 mb-8 italic">Imagens meramente ilustrativas</p>
+
                 {isSummary ? (
                     <>
                         {secretMenuCategory && (
@@ -500,5 +502,3 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
         </section>
     );
 }
-
-    
