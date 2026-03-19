@@ -138,8 +138,18 @@ export const menuCategories = [
     ],
   },
   {
+    name: "CHOPP",
+    items: [
+      { name: "Pilsen (300ml)", price: "R$ 12,00" },
+      { name: "Pilsen (500ml)", price: "R$ 18,00" },
+      { name: "APA (300ml)", price: "R$ 16,00" },
+      { name: "APA (500ml)", price: "R$ 22,00" },
+    ],
+  },
+  {
     name: "COQUETELARIA",
     items: [
+      { name: "Taça de vinho (Tinto ou Branco)", price: "R$ 29,90" },
       { name: "Sangria Oliva (300ml)", description: "Vinho tinto suave, mix de frutas e um toque de licor de laranja.", price: "R$ 31,00" },
       { name: "Oliva Sunset Gym", description: "Nossa criação exclusiva: gin premium combinado com o frescor do suco de laranja, toque aromático de licor de laranja, finalizado com dulçor e a cor intensa do Monin de framboesa.", price: "R$ 34,00" },
       { name: "Carajillo 43", description: "Licor 43 e café expresso premium batidos com gelo e monin de pera. Aveludado e icônico.", price: "R$39,00" },
@@ -159,8 +169,8 @@ const iconMap: { [key: string]: React.ElementType } = {
     "ESPECIAIS DO CAFÉ": Sparkles,
     "CAFÉS GELADOS": Coffee,
     "CHOCOLATES QUENTES": Coffee,
-    "ADICIONAIS": Sparkles,
     "BEBIDAS & SODAS": CupSoda,
+    "CHOPP": Wine,
     "COQUETELARIA": Wine,
 };
 
@@ -170,8 +180,8 @@ const textOnlyCategories = [
     "ESPECIAIS DO CAFÉ",
     "CAFÉS GELADOS",
     "CHOCOLATES QUENTES",
-    "ADICIONAIS",
     "BEBIDAS & SODAS", 
+    "CHOPP",
     "COQUETELARIA",
     "COMBOS",
 ];
