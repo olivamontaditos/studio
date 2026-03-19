@@ -65,6 +65,11 @@ export const menuCategories = [
         name: 'Combo do Estudante (O "Clássico da Tarde")',
         description: "Montadito M11 - Clássico Madrileño + Batata Chips + Refrigerante (lata) ou Suco de Laranja. Quer trocar o refrigerante pelo Suco de Morango com Ninho por apenas + R$ 8,00?",
         price: "R$ 27,00",
+      },
+      {
+        name: "Combo Refresh (Refrescância de Madrid)",
+        description: "Montadito M05: Madrid Fresh (Peru e Muçarela de Búfala no pão de coca crocante) + Soda Monin Batida (Sabor à escolha: Maçã Verde, Morango ou Framboesa).",
+        price: "R$ 35,00",
       }
     ]
   },
