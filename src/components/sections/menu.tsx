@@ -59,9 +59,9 @@ export const menuCategories = [
     name: "TORRONES ARTESANAIS (Receita Original Espanhola)",
     description: "Sabores: Frutas Vermelhas, Pistache, Nozes com Limão ou Chocolate 70%.",
     items: [
-      { name: "Tamanho P", price: "R$ 9,90" },
-      { name: "Tamanho M", price: "R$ 29,90" },
-      { name: "Tamanho G", price: "R$ 35,90" },
+      { name: "Tamanho P", price: "R$ 9,90", imageUrl: "https://64.media.tumblr.com/d41f05c45254f28886f93a71091c6bc1/0168b23b368f7428-a9/s1280x1920/b4e5a6d3dcf66b752045e7acdfb93499316466ad.jpg" },
+      { name: "Tamanho M", price: "R$ 29,90", imageUrl: "https://64.media.tumblr.com/867c6bd334f88f4e0ef6bf933ab8b83e/0168b23b368f7428-b1/s1280x1920/1a62c6f28db8d57f39ff8c0840df7ff015ad0b30.jpg" },
+      { name: "Tamanho G", price: "R$ 35,90", imageUrl: "https://64.media.tumblr.com/636821a5e7b8a228cab209859655dc91/0168b23b368f7428-e5/s1280x1920/667ad64a566ff175a9fde6f31930c41c281d1e7b.jpg" },
     ],
   },
   {
@@ -115,7 +115,6 @@ const iconMap: { [key: string]: React.ElementType } = {
 };
 
 const textOnlyCategories = [
-    "TORRONES ARTESANAIS (Receita Original Espanhola)",
     "EXPRESSOS", 
     "CAFÉ COM LEITE (LATTE & CIA)", 
     "BEBIDAS & SODAS", 
