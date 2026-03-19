@@ -70,18 +70,19 @@ export const menuCategories = [
     name: "EXPRESSOS",
     description: "Café gourmet moído na hora com aroma frutado.",
     items: [
-      { name: "Expresso", description: "Curto, intenso e com crema aveludada.", price: "R$ 8,00" },
+      { name: "Expresso", description: "Intenso e com crema aveludada.", price: "R$ 8,00" },
       { name: "Ristreto", price: "R$ 8,00" },
       { name: "Coado", price: "R$ 9,90" },
-      { name: "Expresso Macchiato", description: "O clássico manchado com uma nuvem de leite vaporizado.", price: "R$ 10,00" },
+      { name: "Expresso Macchiato", description: "O clássico manchado com uma nuvem de leite vaporizado.", price: "R$ 9,90" },
     ],
   },
   {
-    name: "CAFÉ COM LEITE (LATTE & CIA)",
+    name: "LATTE",
     description: "Expresso com leite vaporizado e uma fina camada de espuma.",
     items: [
       { name: "Caffè Latte Clássico", description: "Dose de expresso com leite vaporizado e uma fina camada de espuma.", price: "R$ 12,90" },
       { name: "Vanilla Latte", description: "Nosso latte clássico com um toque de extrato natural de baunilha.", price: "R$ 16,00" },
+      { name: "Caramel Macchiato", description: "Expresso, uma camada generosa de espuma de leite finalizada com calda de caramelo.", price: "R$ 12,90" },
     ],
   },
   {
@@ -141,7 +142,7 @@ const iconMap: { [key: string]: React.ElementType } = {
     "SOBREMESAS & CROISSANTS DOCES": Cake,
     "TORRONES ARTESANAIS (Receita Original Espanhola)": Gift,
     "EXPRESSOS": Coffee,
-    "CAFÉ COM LEITE (LATTE & CIA)": Coffee,
+    "LATTE": Coffee,
     "ESPECIAIS DO CAFÉ": Sparkles,
     "CAFÉS GELADOS": Coffee,
     "CHOCOLATES QUENTES": Coffee,
@@ -152,7 +153,7 @@ const iconMap: { [key: string]: React.ElementType } = {
 
 const textOnlyCategories = [
     "EXPRESSOS", 
-    "CAFÉ COM LEITE (LATTE & CIA)", 
+    "LATTE", 
     "ESPECIAIS DO CAFÉ",
     "CAFÉS GELADOS",
     "CHOCOLATES QUENTES",
@@ -191,6 +192,7 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
         const checkHappyHour = () => {
             const now = new Date();
             const currentHour = now.getHours();
+            // Horário de Happy Hour: 18h às 20h
             if (currentHour >= 18 && currentHour < 20) {
                 setIsHappyHour(true);
             } else {
