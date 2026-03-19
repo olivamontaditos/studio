@@ -24,6 +24,7 @@ import {
     Coffee,
     Sparkles,
     Palette,
+    GraduationCap,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -44,6 +45,17 @@ export const menuCategories = [
       { name: "M10. Queijo e presunto Royale", description: "Queijo e presunto.", price: "R$ 18,00", imageUrl: "https://64.media.tumblr.com/b52567a2d00f84d7f3651c2444b5bb85/0729a521a5d6cff4-e3/s2048x3072/25b5ca0786e1e362f1a7f8ec67a42e1fe6e14434.jpg" },
       { name: "M11. Clássico Madrileño", description: "Fatias finas de presunto cozido especial e muçarela derretida sobre uma base suculenta de tomate ralado fresco com um toque de alho e azeite de oliva servido no pão de coca crocante.", price: "R$ 15,90", imageUrl: "https://64.media.tumblr.com/8116c22f5cf7a8adb4976c25c86a48d6/d890e4f6673fd084-16/s1280x1920/764b8b6ebab26285d7a2569a2f7171e2da89fddb.jpg" },
     ],
+  },
+  {
+    name: "COMBOS",
+    items: [
+      {
+        name: 'Combo do Estudante (O "Clássico da Tarde")',
+        description: "Montadito M11 - Clássico Madrileño + Batata Chips + Refrigerante (lata) ou Suco de Laranja.",
+        price: "R$ 24,00",
+        imageUrl: "https://picsum.photos/seed/student-combo/800/600",
+      }
+    ]
   },
   {
     name: "SOBREMESAS & CROISSANTS DOCES",
@@ -139,6 +151,7 @@ export const menuCategories = [
 
 const iconMap: { [key: string]: React.ElementType } = {
     "MONTADITOS (No Pão de Coca Espanhol)": Sandwich,
+    "COMBOS": GraduationCap,
     "SOBREMESAS & CROISSANTS DOCES": Cake,
     "TORRONES ARTESANAIS (Receita Original Espanhola)": Gift,
     "EXPRESSOS": Coffee,
