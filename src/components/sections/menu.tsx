@@ -315,11 +315,11 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                     </p>
                 </header>
 
-                <p className="text-center text-xs text-muted-foreground -mt-8 mb-8 italic">Imagens meramente ilustrativas</p>
+                <p className="text-center text-xs text-primary/70 -mt-8 mb-8 italic">Imagens meramente ilustrativas</p>
 
                 {isSummary ? (
                     <>
-                        {secretMenuCategory && (
+                        {isHappyHour && secretMenuCategory && (
                              <Accordion type="single" collapsible defaultValue="Happy Hour" className="w-full space-y-4 mb-12">
                                 {HappyHourAccordionItem}
                              </Accordion>
