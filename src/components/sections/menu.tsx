@@ -47,17 +47,6 @@ export const menuCategories = [
     ],
   },
   {
-    name: "COMBOS",
-    items: [
-      {
-        name: 'Combo do Estudante (O "Clássico da Tarde")',
-        description: "Montadito M11 - Clássico Madrileño + Batata Chips + Refrigerante (lata) ou Suco de Laranja.",
-        price: "R$ 27,00",
-        imageUrl: "https://picsum.photos/seed/student-combo/800/600",
-      }
-    ]
-  },
-  {
     name: "SOBREMESAS & CROISSANTS DOCES",
     items: [
         { name: "Torta Basca de San Sebastián", description: "A autêntica cheesecake espanhola, cremosa por dentro e tostada por fora. Adicional de calda artesanal (frutas vermelhas, pistache e caramelo com flor de sal): + R$ 6,00. Adicional de sorvete artesanal da casa por bola (baunilha, pistache e morango): + R$ 10,00", price: "R$ 29,00", imageUrl: "https://64.media.tumblr.com/95f517167d957247e9f30c53696aff10/ceb08f5edd305fa6-c1/s2048x3072/0ee3f770fd647672b4ec8d01b749ab44dcc7c69e.jpg" },
@@ -68,6 +57,16 @@ export const menuCategories = [
         { name: "Croissant Doce de Leite com Nozes", description: "Doce de leite artesanal com nozes crocantes.", price: "R$ 26,00", imageUrl: "https://64.media.tumblr.com/637e23898d6edb025a548a8a7ba8a92d/0729a521a5d6cff4-24/s2048x3072/c644047e9495bdbbf9b225e4dfa1df70b4a664ac.jpg" },
         { name: "Brigadeiro Belga Gourmet", price: "R$ 5,90" },
     ],
+  },
+  {
+    name: "COMBOS",
+    items: [
+      {
+        name: 'Combo do Estudante (O "Clássico da Tarde")',
+        description: "Montadito M11 - Clássico Madrileño + Batata Chips + Refrigerante (lata) ou Suco de Laranja. Quer trocar o refrigerante pelo Suco de Morango com Ninho por apenas + R$ 8,00?",
+        price: "R$ 27,00",
+      }
+    ]
   },
   {
     name: "TORRONES ARTESANAIS (Receita Original Espanhola)",
@@ -85,7 +84,6 @@ export const menuCategories = [
       { name: "Expresso", description: "Intenso e com crema aveludada.", price: "R$ 8,00" },
       { name: "Ristreto", price: "R$ 8,00" },
       { name: "Coado", price: "R$ 9,90" },
-      { name: "Macchiato tradicional", description: "O clássico manchado com uma nuvem de leite vaporizado.", price: "R$ 9,90" },
     ],
   },
   {
@@ -94,6 +92,7 @@ export const menuCategories = [
     items: [
       { name: "Caffè Latte Clássico", description: "Dose de expresso com leite vaporizado e uma fina camada de espuma.", price: "R$ 12,90" },
       { name: "Vanilla Latte", description: "Nosso latte clássico com um toque de extrato natural de baunilha.", price: "R$ 16,00" },
+      { name: "Macchiato tradicional", description: "O clássico manchado com uma nuvem de leite vaporizado.", price: "R$ 9,90" },
       { name: "Caramel Macchiato", description: "Expresso, uma camada generosa de espuma de leite finalizada com calda de caramelo.", price: "R$ 12,90" },
     ],
   },
@@ -167,6 +166,7 @@ const textOnlyCategories = [
     "ADICIONAIS",
     "BEBIDAS & SODAS", 
     "COQUETELARIA",
+    "COMBOS",
 ];
 
 const themes = ["default", "sutil", "dinamico", "neon"];
