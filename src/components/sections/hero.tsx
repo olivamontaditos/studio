@@ -34,11 +34,6 @@ export default function HeroSection() {
               <Link href="https://wa.me/5541991773334" target="_blank" rel="noopener noreferrer">Eventos & Reservas</Link>
             </Button>
           </div>
-          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-2">
-            <span className="h-2 w-2 rounded-full bg-white"></span>
-            <span className="h-2 w-2 rounded-full bg-white/50"></span>
-            <span className="h-2 w-2 rounded-full bg-white/50"></span>
-          </div>
         </div>
       </div>
     </section>
