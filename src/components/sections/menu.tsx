@@ -134,6 +134,7 @@ export const menuCategories = [
       { name: "Suco de frutas vermelhas", description: "Natural (Morango, mirtilo e amora).", price: "R$ 18,00" },
       { name: "Água com ou sem gás", price: "R$ 6,00" },
       { name: "Refrigerante", price: "R$ 8,00" },
+      { name: "Red Bull", description: "250ml", price: "R$ 15,00" },
       { name: "Schweppes", price: "R$ 9,00" },
     ],
   },
