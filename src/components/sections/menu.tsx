@@ -25,6 +25,7 @@ import {
     Sparkles,
     Palette,
     GraduationCap,
+    IceCream2,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -56,6 +57,15 @@ export const menuCategories = [
         { name: "Croissant Chocolate Blend", description: "Chocolate ao leite premium.", price: "R$ 31,00", imageUrl: "https://64.media.tumblr.com/32d746d8e9cd9113ed6811ac3e7b91e2/0729a521a5d6cff4-e9/s2048x3072/8d98fc0f020c1d091ae10db68fda56c69d7ce1cc.jpg" },
         { name: "Croissant Doce de Leite com Nozes", description: "Doce de leite artesanal com nozes crocantes.", price: "R$ 26,00", imageUrl: "https://64.media.tumblr.com/637e23898d6edb025a548a8a7ba8a92d/0729a521a5d6cff4-24/s2048x3072/c644047e9495bdbbf9b225e4dfa1df70b4a664ac.jpg" },
         { name: "Brigadeiro Belga Gourmet", price: "R$ 5,90", imageUrl: "https://64.media.tumblr.com/2bbb9e07855577494da0b913ee01c044/91d77c439aeace01-f5/s2048x3072/2e5971b1207bc6f4f7f0c18ed79194b8b948da83.jpg" },
+    ],
+  },
+  {
+    name: "SORVETES ARTESANAIS (PRODUÇÃO PRÓPRIA)",
+    description: "Textura ultra cremosa, feitos diariamente aqui na Oliva. Servido na taça com 1 bola de 120g. Dica da Chef: Peça uma bola de sorvete de Baunilha para acompanhar sua fatia de Torta Matilda quente!",
+    items: [
+      { name: "Baunilha Bourbon", description: "O clássico com favas naturais, perfeito para acompanhar nossas tortas.", price: "R$ 18,00" },
+      { name: "Morango com Nutella", description: "Sorvete de morango natural com uma generosa camada de Nutella legítima por cima.", price: "R$ 24,00" },
+      { name: "Pistache Premium", description: "Elaborado com pistaches selecionados para um sabor intenso.", price: "R$ 28,00" },
     ],
   },
   {
@@ -164,6 +174,7 @@ const iconMap: { [key: string]: React.ElementType } = {
     "MONTADITOS (No Pão de Coca Espanhol)": Sandwich,
     "COMBOS": GraduationCap,
     "SOBREMESAS & CROISSANTS DOCES": Cake,
+    "SORVETES ARTESANAIS (PRODUÇÃO PRÓPRIA)": IceCream2,
     "TORRONES ARTESANAIS (Receita Original Espanhola)": Gift,
     "EXPRESSOS": Coffee,
     "LATTE": Coffee,
@@ -176,6 +187,7 @@ const iconMap: { [key: string]: React.ElementType } = {
 };
 
 const textOnlyCategories = [
+    "SORVETES ARTESANAIS (PRODUÇÃO PRÓPRIA)",
     "EXPRESSOS", 
     "LATTE", 
     "ESPECIAIS DO CAFÉ",
