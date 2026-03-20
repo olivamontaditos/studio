@@ -155,7 +155,7 @@ export const menuCategories = [
       { name: "Oliva Sunset Gym", description: "Nossa criação exclusiva: gin premium combinado com o frescor do suco de laranja, toque aromático de licor de laranja, finalizado com dulçor e a cor intensa do Monin de framboesa.", price: "R$ 34,00" },
       { name: "Carajillo 43", description: "Licor 43 e café expresso premium batidos com gelo e monin de pera. Aveludado e icônico.", price: "R$39,00" },
       { name: "Jägermeister", description: "Licor Fino de Ervas (dose 50ml).", price: "R$ 40,00" },
-      { name: "Jägerbomb", description: "Jägermeister com Red Bull.", price: "R$ 50,00" },
+      { name: "Jägerbomb", description: "Jägermeister (50ml) com Red Bull (250ml).", price: "R$ 50,00" },
     ],
   },
 ];
