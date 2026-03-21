@@ -162,6 +162,7 @@ export const menuCategories = [
     items: [
       { name: "Taça de vinho (Tinto ou Branco)", price: "R$ 29,90" },
       { name: "Sangria Oliva (300ml)", description: "Vinho tinto suave, mix de frutas e um toque de licor de laranja.", price: "R$ 31,00" },
+      { name: "Jarra de Sangria", description: "Nossa sangria especial em uma jarra de 1L, perfeita para compartilhar.", price: "R$ 99,00" },
       { name: "Oliva Sunset Gym", description: "Nossa criação exclusiva: gin premium combinado com o frescor do suco de laranja, toque aromático de licor de laranja, finalizado com dulçor e a cor intensa do Monin de framboesa.", price: "R$ 34,00" },
       { name: "Carajillo 43", description: "Licor 43 e café expresso premium batidos com gelo e monin de pera. Aveludado e icônico.", price: "R$39,00" },
       { name: "Jägermeister", description: "Licor Fino de Ervas (dose 50ml).", price: "R$ 35,00" },
