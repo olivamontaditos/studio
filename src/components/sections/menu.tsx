@@ -23,7 +23,6 @@ import {
     CupSoda,
     Coffee,
     Sparkles,
-    Palette,
     GraduationCap,
     IceCream2,
 } from "lucide-react";
@@ -200,8 +199,6 @@ const textOnlyCategories = [
     "COMBOS",
 ];
 
-const themes = ["default", "sutil", "dinamico", "neon"];
-
 export default function MenuSection({ variant = 'full' }: { variant?: 'full' | 'summary' }) {
     const isSummary = variant === 'summary';
     const summaryItems = menuCategories
@@ -210,21 +207,6 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
       .slice(0, 6);
 
     const [isHappyHour, setIsHappyHour] = useState(false);
-    const [currentTheme, setCurrentTheme] = useState(0);
-
-    const cycleTheme = () => {
-        setCurrentTheme((prevTheme) => (prevTheme + 1) % themes.length);
-    };
-
-    useEffect(() => {
-        const handleKeyDown = (event: KeyboardEvent) => {
-            if (event.key === 't' || event.key === 'T') {
-                cycleTheme();
-            }
-        };
-        window.addEventListener('keydown', handleKeyDown);
-        return () => window.removeEventListener('keydown', handleKeyDown);
-    }, []);
 
     useEffect(() => {
         const checkHappyHour = () => {
@@ -288,10 +270,7 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
         <AccordionItem 
             value={secretMenuCategory.name} 
             key={secretMenuCategory.name} 
-            className={cn("border-b-0 rounded-lg bg-card shadow-lg transition-all", {
-                '[data-theme="sutil"] &,[data-theme="neon"] &': 'border-2 border-accent shadow-[0_0_15px_-3px_hsl(var(--accent))]',
-                '[data-theme="dinamico"] &': 'transform-gpu transition-transform will-change-transform hover:scale-[1.02]',
-            })}
+            className="border-b-0 rounded-lg bg-card shadow-lg transition-all"
         >
             <AccordionTrigger className="p-4 hover:no-underline rounded-lg">
                 <div className="flex items-center gap-4 text-left">
@@ -303,16 +282,10 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                 </div>
             </AccordionTrigger>
             <AccordionContent className="p-4 pt-0">
-                <div className={cn("pt-4 border-t", {
-                    '[data-theme="sutil"] &': 'border-accent/50',
-                    '[data-theme="neon"] &': 'border-accent',
-                })}>
+                <div className="pt-4 border-t">
                 <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
                 {(secretMenuCategory.items as any[]).map((item: any, index: number) => (
-                    <div key={item.name} className={cn("bg-background rounded-lg shadow-sm overflow-hidden flex flex-col transition-all duration-300", {
-                        '[data-theme="dinamico"] &': 'opacity-0 animate-in fade-in slide-in-from-bottom-5',
-                        '[data-theme="sutil"] &': 'opacity-0 animate-in fade-in',
-                    })} style={{ animationDelay: `${index * 100}ms` }}>
+                    <div key={item.name} className="bg-background rounded-lg shadow-sm overflow-hidden flex flex-col transition-all duration-300">
                         {item.imageUrl ? (
                             <Dialog>
                                 <DialogTrigger asChild>
@@ -371,27 +344,18 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
 
     return (
         <section 
-            id="cardapio" 
-            data-theme={themes[currentTheme]}
+            id="cardapio"
             className={cn(
-                "w-full transition-colors duration-500",
-                isSummary ? "bg-background py-20 md:py-32" : "bg-secondary pt-12 pb-20 md:pb-32",
-                {
-                  '[&_[data-theme="neon"]]:bg-gray-950': themes[currentTheme] === 'neon'
-                }
+                "w-full",
+                isSummary ? "bg-background py-20 md:py-32" : "bg-secondary pt-12 pb-20 md:pb-32"
             )}
         >
             <div className="w-full max-w-6xl mx-auto px-4">
                 <header className="text-center mb-12">
-                    <p className={cn("text-sm font-bold uppercase tracking-wider text-primary transition-all", {
-                        '[data-theme="sutil"] &,[data-theme="neon"] &': 'text-accent drop-shadow-[0_0_8px_hsl(var(--accent))]',
-                    })}>
+                    <p className="text-sm font-bold uppercase tracking-wider text-primary">
                         Cardápio
                     </p>
-                    <h2 className={cn("mt-2 font-headline text-4xl font-bold text-foreground md:text-5xl transition-all", {
-                       '[data-theme="sutil"] &,[data-theme="neon"] &': 'text-primary-foreground drop-shadow-[0_0_10px_hsl(var(--primary))]',
-                       '[data-theme="neon"] &': 'animate-pulse'
-                    })}>
+                    <h2 className="mt-2 font-headline text-4xl font-bold text-foreground md:text-5xl">
                         Nossas Delícias
                     </h2>
                     <p className="mt-4 max-w-2xl mx-auto text-muted-foreground">
@@ -473,16 +437,11 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                         <AccordionItem 
                             value={category.name} 
                             key={category.name} 
-                            className={cn("border-b-0 rounded-lg bg-card shadow-sm transition-all", {
-                                '[data-theme="sutil"] &,[data-theme="neon"] &': 'hover:border-accent/50 hover:shadow-[0_0_15px_-5px_hsl(var(--accent))]',
-                                '[data-theme="dinamico"] &': 'transform-gpu transition-transform will-change-transform hover:scale-[1.01]',
-                            })}
+                            className="border-b-0 rounded-lg bg-card shadow-sm transition-all"
                         >
                             <AccordionTrigger className="p-4 hover:no-underline rounded-lg">
                                 <div className="flex items-center gap-4 text-left">
-                                    <Icon className={cn("h-6 w-6 text-primary flex-shrink-0 transition-colors", {
-                                        '[data-theme="dinamico"] &': 'group-hover:animate-bounce',
-                                    })} />
+                                    <Icon className="h-6 w-6 text-primary flex-shrink-0 transition-colors" />
                                     <div>
                                         <h3 className="text-lg font-headline text-foreground">{category.name}</h3>
                                         {category.description && <p className="text-sm text-muted-foreground font-normal mt-1">{category.description}</p>}
@@ -490,17 +449,11 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                                 </div>
                             </AccordionTrigger>
                             <AccordionContent className="p-4 pt-0">
-                                <div className={cn("pt-4 border-t", {
-                                    '[data-theme="sutil"] &': 'border-accent/30',
-                                    '[data-theme="neon"] &': 'border-accent/70',
-                                })}>
+                                <div className="pt-4 border-t">
                                 {isTextOnly ? (
                                     <div className="space-y-6">
                                         {category.items.map((item, index) => (
-                                            <div key={item.name} className={cn("flex justify-between items-start", {
-                                                '[data-theme="dinamico"] &': 'opacity-0 animate-in fade-in slide-in-from-left-4',
-                                                '[data-theme="sutil"] &': 'opacity-0 animate-in fade-in',
-                                            })} style={{ animationDelay: `${index * 75}ms` }}>
+                                            <div key={item.name} className="flex justify-between items-start">
                                                 <div>
                                                     <p className="text-foreground font-semibold text-lg">{item.name}</p>
                                                     {item.description && (
@@ -514,10 +467,7 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                                 ) : (
                                     <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
                                     {category.items.map((item, index) => (
-                                        <div key={item.name} className={cn("bg-background rounded-lg shadow-sm overflow-hidden flex flex-col transition-all duration-300", {
-                                            '[data-theme="dinamico"] &': 'opacity-0 animate-in fade-in slide-in-from-bottom-5',
-                                            '[data-theme="sutil"] &': 'opacity-0 animate-in fade-in',
-                                        })} style={{ animationDelay: `${index * 100}ms` }}>
+                                        <div key={item.name} className="bg-background rounded-lg shadow-sm overflow-hidden flex flex-col transition-all duration-300">
                                             {item.imageUrl ? (
                                                 <Dialog>
                                                 <DialogTrigger asChild>
@@ -569,17 +519,6 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                         );
                     })}
                 </Accordion>
-                {!isSummary && <div className="fixed bottom-6 left-6 z-50">
-                    <Button
-                        size="icon"
-                        variant="outline"
-                        className="rounded-full shadow-lg backdrop-blur-sm bg-background/50"
-                        onClick={cycleTheme}
-                        aria-label="Mudar tema do menu"
-                    >
-                        <Palette className="h-5 w-5" />
-                    </Button>
-                </div>}
                 </>
                 )}
             </div>
