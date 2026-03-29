@@ -45,7 +45,7 @@ export default function ReservationsSection() {
             </h4>
             <div className="mt-4 text-muted-foreground space-y-2">
                 <p><strong>Segunda a Sábado:</strong> 10:00 - 22:00</p>
-                <p><strong>Domingo:</strong> Fechado</p>
+                <p><strong>Domingo:</strong> 15:00 - 20:00</p>
             </div>
             <Button asChild size="lg" className="mt-8 bg-accent text-accent-foreground hover:bg-accent/90">
               <Link href="https://wa.me/5541991773334" target="_blank" rel="noopener noreferrer">
