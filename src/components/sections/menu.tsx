@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -22,7 +21,6 @@ import {
     Cake,
     CupSoda,
     Coffee,
-    Sparkles,
     GraduationCap,
     IceCream2,
 } from "lucide-react";
@@ -52,7 +50,7 @@ export const menuCategories = [
         { name: "Torta Basca de San Sebastián", description: "A autêntica cheesecake espanhola, cremosa por dentro e tostada por fora. Disponível também inteira (sob encomenda): 15cm - R$ 159,00 | 17,5cm - R$ 199,00 | 20cm - R$ 239,00. Adicional de calda artesanal (frutas vermelhas, pistache e caramelo com flor de sal): + R$ 6,00. Adicional de sorvete artesanal da casa por bola (baunilha, pistache e morango): + R$ 10,00.", price: "R$ 29,00 (a fatia)", imageUrl: "https://64.media.tumblr.com/95f517167d957247e9f30c53696aff10/ceb08f5edd305fa6-c1/s2048x3072/0ee3f770fd647672b4ec8d01b749ab44dcc7c69e.jpg" },
         { name: "Bolo Matilda", description: "Direto de um clássico para sua mesa: chocolate nobre, brilho intenso e muita cremosidade. Disponível também inteiro (sob consulta). Adicional de calda extra de chocolate: R$ 5,00.", price: "R$ 22,00 (a fatia)", imageUrl: "https://64.media.tumblr.com/f4a8e4a014dc6412f75a640dc7b101e9/3a06fb4d61c7f58f-d2/s2048x3072/e683ca0ca8be44cac2caf34aeb5244cac3884e2d.jpg" },
         { name: "Croissant Pistache Real", description: "Recheio de brigadeiro e ganache de pistache.", price: "R$ 39,00", imageUrl: "https://64.media.tumblr.com/0add055745496740cdac0ee959142a72/0729a521a5d6cff4-03/s2048x3072/11612a18f1c46df12f7d3274d3fedb0200c84372.jpg" },
-        { name: "Croissant Nutella com Morangos", description: "Nutella original e morangos frescos.", price: "R$ 38,90", imageUrl: "https://64.media.tumblr.com/6c066210786fb0fe39f2cfa601994f94/3ff45e09a0c7dd34-ae/s2048x3072/7eed66c605a1a87e48ea908cfb53af3cfcc16037.jpg" },
+        { name: "Croissant Nutella com Morangos", description: "Nutella original e morangos frescos.", price: "R$ 38,90", imageUrl: "https://64.media.tumblr.com/6c06621078fb0fe39f2cfa601994f94/3ff45e09a0c7dd34-ae/s2048x3072/7eed66c605a1a87e48ea908cfb53af3cfcc16037.jpg" },
         { name: "Croissant Chocolate Blend", description: "Chocolate ao leite premium.", price: "R$ 31,00", imageUrl: "https://64.media.tumblr.com/32d746d8e9cd9113ed6811ac3e7b91e2/0729a521a5d6cff4-e9/s2048x3072/8d98fc0f020c1d091ae10db68fda56c69d7ce1cc.jpg" },
         { name: "Croissant Doce de Leite com Nozes", description: "Doce de leite artesanal com nozes crocantes.", price: "R$ 26,00", imageUrl: "https://64.media.tumblr.com/637e23898d6edb025a548a8a7ba8a92d/0729a521a5d6cff4-24/s2048x3072/c644047e9495bdbbf9b225e4dfa1df70b4a664ac.jpg" },
         { name: "Brigadeiro Belga Gourmet", price: "R$ 5,90", imageUrl: "https://64.media.tumblr.com/2bbb9e07855577494da0b913ee01c044/91d77c439aeace01-f5/s2048x3072/2e5971b1207bc6f4f7f0c18ed79194b8b948da83.jpg" },
@@ -178,7 +176,7 @@ const iconMap: { [key: string]: React.ElementType } = {
     "TORRONES ARTESANAIS (Receita Original Espanhola)": Gift,
     "EXPRESSOS": Coffee,
     "LATTE": Coffee,
-    "ESPECIAIS DO CAFÉ": Sparkles,
+    "ESPECIAIS DO CAFÉ": Coffee,
     "CAFÉS GELADOS": Coffee,
     "CHOCOLATES QUENTES": Coffee,
     "BEBIDAS & SODAS": CupSoda,
@@ -206,142 +204,6 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
       .filter(item => item.imageUrl)
       .slice(0, 6);
 
-    const [isHappyHour, setIsHappyHour] = useState(false);
-
-    useEffect(() => {
-        const checkHappyHour = () => {
-            const now = new Date();
-            const currentDay = now.getDay(); // 0 = Domingo, 1 = Segunda, ..., 6 = Sábado
-            const currentHour = now.getHours();
-
-            // Happy Hour: Segunda a Quinta (1 a 4), das 18h às 20h (18:00 - 19:59)
-            const isDayForHappyHour = currentDay >= 1 && currentDay <= 4;
-            const isTimeForHappyHour = currentHour >= 18 && currentHour < 20;
-
-            if (isDayForHappyHour && isTimeForHappyHour) {
-                setIsHappyHour(true);
-            } else {
-                setIsHappyHour(false);
-            }
-        };
-
-        checkHappyHour();
-        const interval = setInterval(checkHappyHour, 60000); // Verifica a cada minuto
-
-        return () => clearInterval(interval);
-    }, []);
-
-    const calculateDiscountedPrice = (priceStr: string) => {
-        if (!priceStr) return priceStr;
-        const numericPrice = parseFloat(priceStr.replace("R$ ", "").replace(",", "."));
-        if (isNaN(numericPrice)) return priceStr;
-        const discountedPrice = numericPrice * 0.9;
-        return `R$ ${discountedPrice.toFixed(2).replace(".", ",")}`;
-    };
-
-    let secretMenuCategory = null;
-    if (isHappyHour) {
-        const m05 = menuCategories.find(c => c.name.includes("MONTADITOS"))?.items.find(i => i.name.startsWith("M05"));
-        const m11 = menuCategories.find(c => c.name.includes("MONTADITOS"))?.items.find(i => i.name.startsWith("M11"));
-
-        const discountedM05 = m05 ? {
-            ...m05,
-            originalPrice: m05.price,
-            price: calculateDiscountedPrice(m05.price)
-        } : null;
-
-        const discountedM11 = m11 ? {
-            ...m11,
-            originalPrice: m11.price,
-            price: calculateDiscountedPrice(m11.price)
-        } : null;
-
-        secretMenuCategory = {
-            name: "Happy Hour",
-            description: "Disponível de Segunda a Quinta, das 18h às 20h. Aproveite!",
-            items: [
-                { name: "50% OFF em Qualquer Chopp", description: "Válido para todos os chopes da casa durante o Happy Hour.", price: "", imageUrl: "https://64.media.tumblr.com/f0d702bcd612fa3f15e578b5bdb66828/390288e792d93a39-e9/s2048x3072/5937c5f7a5fb59c7f1a038b5cb2ca9aeccb92121.jpg" },
-                ...([discountedM05, discountedM11].filter(Boolean) as any)
-            ]
-        };
-    }
-    
-    const HappyHourAccordionItem = secretMenuCategory && (
-        <AccordionItem 
-            value={secretMenuCategory.name} 
-            key={secretMenuCategory.name} 
-            className="border-b-0 rounded-lg bg-card shadow-lg transition-all"
-        >
-            <AccordionTrigger className="p-4 hover:no-underline rounded-lg">
-                <div className="flex items-center gap-4 text-left">
-                    <Sparkles className="h-6 w-6 text-accent flex-shrink-0" />
-                    <div>
-                        <h3 className="text-lg font-headline text-accent">{secretMenuCategory.name}</h3>
-                        {secretMenuCategory.description && <p className="text-sm text-muted-foreground font-normal mt-1">{secretMenuCategory.description}</p>}
-                    </div>
-                </div>
-            </AccordionTrigger>
-            <AccordionContent className="p-4 pt-0">
-                <div className="pt-4 border-t">
-                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
-                {(secretMenuCategory.items as any[]).map((item: any, index: number) => (
-                    <div key={item.name} className="bg-background rounded-lg shadow-sm overflow-hidden flex flex-col transition-all duration-300">
-                        {item.imageUrl ? (
-                            <Dialog>
-                                <DialogTrigger asChild>
-                                    <div className="relative h-56 w-full cursor-pointer overflow-hidden">
-                                    <Image
-                                        src={item.imageUrl}
-                                        alt={item.name}
-                                        fill
-                                        className="object-cover transition-transform duration-300 hover:scale-105"
-                                        sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                                    />
-                                    </div>
-                                </DialogTrigger>
-                                <DialogContent className="p-0 border-0 max-w-2xl bg-transparent shadow-none">
-                                    <div className="relative aspect-square w-full">
-                                    <Image
-                                        src={item.imageUrl}
-                                        alt={item.name}
-                                        fill
-                                        className="object-contain rounded-lg"
-                                        sizes="100vw"
-                                    />
-                                    </div>
-                                </DialogContent>
-                            </Dialog>
-                        ) : (
-                            <div className="relative h-56 w-full bg-secondary flex items-center justify-center">
-                                <Wine className="h-16 w-16 text-muted-foreground/50" />
-                            </div>
-                        )}
-                        <div className="p-4 flex flex-col flex-grow">
-                            <div className="flex-grow">
-                                <p className="text-foreground font-semibold text-lg">{item.name}</p>
-                                {item.description && (
-                                    <p className="text-sm text-muted-foreground mt-1">{item.description}</p>
-                                )}
-                            </div>
-                            <div className="flex justify-end items-center mt-4">
-                                {item.originalPrice ? (
-                                    <div className="text-right">
-                                        <p className="font-bold text-lg text-primary">{item.price}</p>
-                                        <p className="text-sm text-muted-foreground line-through">{item.originalPrice}</p>
-                                    </div>
-                                ) : (
-                                    <p className="font-bold text-xl text-primary">{item.price}</p>
-                                )}
-                            </div>
-                        </div>
-                    </div>
-                ))}
-                </div>
-                </div>
-            </AccordionContent>
-        </AccordionItem>
-    );
-
     return (
         <section 
             id="cardapio"
@@ -367,11 +229,6 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
 
                 {isSummary ? (
                     <>
-                        {isHappyHour && secretMenuCategory && (
-                             <Accordion type="single" collapsible defaultValue="Happy Hour" className="w-full space-y-4 mb-12">
-                                {HappyHourAccordionItem}
-                             </Accordion>
-                        )}
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
                             {summaryItems.map((item) => (
                                 <div key={item.name} className="bg-card rounded-lg shadow-sm overflow-hidden flex flex-col">
@@ -428,8 +285,6 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                 ) : (
                 <>
                 <Accordion type="multiple" className="w-full space-y-4">
-                    {secretMenuCategory && HappyHourAccordionItem}
-
                     {menuCategories.map((category) => {
                         const Icon = iconMap[category.name] || Sandwich;
                         const isTextOnly = textOnlyCategories.includes(category.name);
