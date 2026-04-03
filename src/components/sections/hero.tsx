@@ -21,9 +21,9 @@ export default function HeroSection() {
         />
       )}
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
-      <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-white">
+      <div className="relative z-10 flex h-full flex-col items-center justify-center pb-24 text-center text-white">
         <div className="container px-4">
-          <h1 className="font-headline text-5xl font-bold tracking-tight text-primary-foreground md:text-6xl">
+          <h1 className="font-headline text-6xl font-bold tracking-tight text-primary-foreground md:text-8xl">
             Faça sua reserva
             <br />
             Realize seu evento
