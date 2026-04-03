@@ -29,7 +29,9 @@ export default function HeroSection() {
             Realize seu evento
           </h1>
           <p className="mt-6 max-w-3xl mx-auto text-xl text-primary-foreground/90 md:text-2xl">
-            Celebre momentos, crie memórias e desfrute de uma experiência gastronômica única.
+            Celebre momentos, crie memórias e desfrute de uma
+            <br />
+            experiência gastronômica única.
           </p>
           <div className="mt-8 flex justify-center">
             <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
