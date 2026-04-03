@@ -24,10 +24,10 @@ export default function HeroSection() {
       <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-white">
         <div className="container px-4">
           <h1 className="font-headline text-5xl font-bold tracking-tight text-primary-foreground md:text-7xl lg:text-8xl">
-            Celebre momentos,<br /> crie memórias
+            Faça sua reserva ou Realize seu evento
           </h1>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-primary-foreground/80 md:text-xl">
-            Realize seu evento ou faça sua reserva conosco e desfrute de uma experiência gastronômica única.
+            Celebre momentos, crie memórias e desfrute de uma experiência gastronômica única.
           </p>
           <div className="mt-8 flex justify-center">
             <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
