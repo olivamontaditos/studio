@@ -24,7 +24,9 @@ export default function HeroSection() {
       <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-white">
         <div className="container px-4">
           <h1 className="font-headline text-5xl font-bold tracking-tight text-primary-foreground md:text-6xl">
-            Faça sua reserva ou Realize seu evento
+            Faça sua reserva
+            <br />
+            Realize seu evento
           </h1>
           <p className="mt-6 max-w-3xl mx-auto text-xl text-primary-foreground/90 md:text-2xl">
             Celebre momentos, crie memórias e desfrute de uma experiência gastronômica única.
