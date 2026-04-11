@@ -33,9 +33,9 @@ export default function ReservationsSection() {
                   Bom Retiro, Curitiba - PR
                 </span>
               </a>
-              <a href="https://wa.me/5541991773334" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center md:justify-start gap-3 hover:text-primary transition-colors">
+              <a href="https://wa.me/5541988483621" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center md:justify-start gap-3 hover:text-primary transition-colors">
                 <Phone className="h-5 w-5 text-primary" />
-                <span>(41) 99177-3334</span>
+                <span>(41) 98848-3621</span>
               </a>
             </div>
           </div>
@@ -48,7 +48,7 @@ export default function ReservationsSection() {
                 <p><strong>Domingo:</strong> 15:00 - 20:00</p>
             </div>
             <Button asChild size="lg" className="mt-8 bg-accent text-accent-foreground hover:bg-accent/90">
-              <Link href="https://wa.me/5541991773334" target="_blank" rel="noopener noreferrer">
+              <Link href="https://wa.me/5541988483621" target="_blank" rel="noopener noreferrer">
                 Eventos & Reservas
               </Link>
             </Button>
