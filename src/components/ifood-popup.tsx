@@ -26,8 +26,14 @@ export default function IfoodPopup() {
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   const [wasDragged, setWasDragged] = useState(false);
 
-  // Check session storage on initial mount to decide the starting state
+  // Decide initial state based on path and session storage
   useEffect(() => {
+    if (pathname === '/') {
+      setPopupState('initial');
+      return;
+    }
+
+    // For other allowed pages like /menu/, respect the session storage
     try {
       const hasSeenInitial = sessionStorage.getItem(IFOOD_INITIAL_POPUP_SEEN_KEY);
       if (hasSeenInitial) {
@@ -36,10 +42,10 @@ export default function IfoodPopup() {
         setPopupState('initial');
       }
     } catch (e) {
-      // If session storage is unavailable, default to initial
+      // If session storage is unavailable, default to initial for other pages too
       setPopupState('initial');
     }
-  }, []);
+  }, [pathname]);
 
   const handleCloseInitial = () => {
     try {
