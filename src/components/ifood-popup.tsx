@@ -63,7 +63,7 @@ export default function IfoodPopup() {
   if (popupState === 'minimized') {
     return (
       <div
-        className="fixed top-4 right-4 z-50 cursor-pointer rounded-full bg-card p-2 shadow-lg animate-in fade-in-0 zoom-in-95 duration-300 hover:scale-105 transition-transform"
+        className="fixed top-1/2 right-4 -translate-y-1/2 z-50 cursor-pointer rounded-full bg-card p-2 shadow-lg animate-in fade-in-0 zoom-in-95 duration-300 hover:scale-105 transition-transform"
         onClick={handleMaximize}
         title="Peça no iFood"
       >
