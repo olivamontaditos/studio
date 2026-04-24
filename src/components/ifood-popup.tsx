@@ -44,8 +44,8 @@ export default function IfoodPopup() {
         const menuSection = document.getElementById('cardapio');
         if (menuSection) {
           const rect = menuSection.getBoundingClientRect();
-          // Show when the top of the menu section enters the viewport
-          if (rect.top < window.innerHeight && rect.bottom >= 0) {
+          // Show when the bottom of the menu section enters the viewport
+          if (rect.bottom < window.innerHeight) {
             setPopupState('initial');
             initialPopupTriggered.current = true;
           }
