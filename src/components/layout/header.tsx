@@ -11,6 +11,7 @@ const navItems = [
   { href: "/#cardapio", label: "Cardápio" },
   { href: "/#nosso-espaco", label: "Nosso Espaço" },
   { href: "/#reservas", label: "Eventos & Reservas" },
+  { href: "https://www.ifood.com.br/delivery/curitiba-pr/oliva-montaditos-bom-retiro/2b88f26f-a586-4600-ab74-19d3852d4ddd?UTM_Medium=share", label: "iFood", external: true },
 ];
 
 export default function Header() {
@@ -25,9 +26,11 @@ export default function Header() {
         <nav className="hidden md:flex md:items-center md:gap-6">
           {navItems.map((item) => (
             <Link
-              key={item.href}
+              key={item.label}
               href={item.href}
               className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              target={item.external ? "_blank" : undefined}
+              rel={item.external ? "noopener noreferrer" : undefined}
             >
               {item.label}
             </Link>
@@ -55,10 +58,12 @@ export default function Header() {
                 <nav className="mt-8 flex flex-col gap-6">
                   {navItems.map((item) => (
                     <Link
-                      key={item.href}
+                      key={item.label}
                       href={item.href}
                       className="text-lg font-medium text-foreground transition-colors hover:text-primary"
                       onClick={() => setIsOpen(false)}
+                      target={item.external ? "_blank" : undefined}
+                      rel={item.external ? "noopener noreferrer" : undefined}
                     >
                       {item.label}
                     </Link>
