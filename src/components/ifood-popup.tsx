@@ -11,46 +11,53 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 
 
 type PopupState = 'initial' | 'floating' | 'closed';
-const IFOOD_INITIAL_POPUP_SEEN_KEY = 'ifood_initial_popup_seen';
 
 export default function IfoodPopup() {
-  const [popupState, setPopupState] = useState<PopupState | null>(null);
+  const [popupState, setPopupState] = useState<PopupState>('closed');
   const pathname = usePathname();
   const ifoodUrl = "https://www.ifood.com.br/delivery/curitiba-pr/oliva-montaditos-bom-retiro/2b88f26f-a586-4600-ab74-19d3852d4ddd?UTM_Medium=share";
   
   const allowedPaths = ['/', '/menu/'];
 
   const popupRef = useRef<HTMLDivElement>(null);
+  const initialPopupTriggered = useRef(false);
   const [position, setPosition] = useState({ x: -9999, y: -9999 }); // Start offscreen
   const [isDragging, setIsDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   const [wasDragged, setWasDragged] = useState(false);
 
-  // Decide initial state based on path and session storage
+  // Effect to handle scroll-based trigger on home and direct trigger on menu
   useEffect(() => {
-    if (pathname === '/') {
-      setPopupState('initial');
+    initialPopupTriggered.current = false;
+    setPopupState('closed');
+
+    if (pathname === '/menu/') {
+      setPopupState('floating');
       return;
     }
 
-    // For other allowed pages like /menu/, respect the session storage
-    try {
-      const hasSeenInitial = sessionStorage.getItem(IFOOD_INITIAL_POPUP_SEEN_KEY);
-      if (hasSeenInitial) {
-        setPopupState('floating');
-      } else {
-        setPopupState('initial');
-      }
-    } catch (e) {
-      // If session storage is unavailable, default to initial for other pages too
-      setPopupState('initial');
+    if (pathname === '/') {
+      const handleScroll = () => {
+        if (initialPopupTriggered.current) {
+          return;
+        }
+        const menuSection = document.getElementById('cardapio');
+        if (menuSection) {
+          const rect = menuSection.getBoundingClientRect();
+          // Show when the top of the menu section enters the viewport
+          if (rect.top < window.innerHeight && rect.bottom >= 0) {
+            setPopupState('initial');
+            initialPopupTriggered.current = true;
+          }
+        }
+      };
+      window.addEventListener('scroll', handleScroll);
+      handleScroll(); // Initial check
+      return () => window.removeEventListener('scroll', handleScroll);
     }
   }, [pathname]);
 
   const handleCloseInitial = () => {
-    try {
-        sessionStorage.setItem(IFOOD_INITIAL_POPUP_SEEN_KEY, 'true');
-    } catch (e) {}
     setPopupState('floating');
   };
 
@@ -61,7 +68,7 @@ export default function IfoodPopup() {
   // Set initial position for floating icon when it appears
   useEffect(() => {
     if (popupState === 'floating' && popupRef.current) {
-        const popupWidth = popupRef.current.offsetWidth || 72; // Approx width of the icon
+        const popupWidth = popupRef.current.offsetWidth || 72;
         const popupHeight = popupRef.current.offsetHeight || 72;
         setPosition({
             x: window.innerWidth - popupWidth - 16,
@@ -121,7 +128,7 @@ export default function IfoodPopup() {
   // --- End of drag and drop logic ---
 
 
-  if (popupState === 'closed' || popupState === null || !allowedPaths.includes(pathname)) {
+  if (popupState === 'closed' || !allowedPaths.includes(pathname)) {
     return null;
   }
 
