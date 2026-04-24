@@ -5,10 +5,12 @@ import NewsletterSection from "@/components/sections/newsletter";
 import ReservationsSection from "@/components/sections/reservations";
 import CookieBanner from "@/components/cookie-banner";
 import ReviewPopup from "@/components/review-popup";
+import IfoodPopup from "@/components/ifood-popup";
 
 export default function Home() {
   return (
     <>
+      <IfoodPopup />
       <HeroSection />
       <MenuSection variant="summary" />
       <GallerySection />
