@@ -87,10 +87,9 @@ export const menuCategories = [
         imageUrl: "https://64.media.tumblr.com/fb5479c4df91056aa58fb94de08f5ab9/c86b546fc7a1ad02-d0/s2048x3072/e0735eb06afe83a0512493e7c3e4a01bd5ed261b.jpg" 
       },
       { 
-        name: "M10. Queijo e presunto Royale", 
-        description: "Um clássico elevado à realeza: a combinação atemporal de presunto Royale selecionado e muçarela derretida sobre a base suculenta de tomate ralado e azeite extra virgem.", 
-        price: "R$ 18,00", 
-        imageUrl: "https://64.media.tumblr.com/b52567a2d00f84d7f3651c2444b5bb85/0729a521a5d6cff4-e3/s2048x3072/25b5ca0786e1e362f1a7f8ec67a42e1fe6e14434.jpg" 
+        name: "M10. Croissant Caprese", 
+        description: "Muçarela de búfala fresca e tomate cereja confitado no croissant amanteigado.", 
+        price: "R$ 28,00", 
       },
       { 
         name: "M11. Clássico Madrileño", 
@@ -107,6 +106,7 @@ export const menuCategories = [
         { name: "Torta Basca de San Sebastián", description: "A autêntica cheesecake espanhola, cremosa por dentro e tostada por fora. Disponível também inteira (sob encomenda): 15cm - R$ 159,00 | 17,5cm - R$ 199,00 | 20cm - R$ 239,00. Adicional de calda artesanal (frutas vermelhas, pistache e caramelo com flor de sal): + R$ 6,00. Adicional de sorvete artesanal da casa por bola (baunilha, pistache e morango): + R$ 10,00.", price: "R$ 29,00 (a fatia)", imageUrl: "https://64.media.tumblr.com/95f517167d957247e9f30c53696aff10/ceb08f5edd305fa6-c1/s2048x3072/0ee3f770fd647672b4ec8d01b749ab44dcc7c69e.jpg" },
         { name: "Bolo Matilda", description: "Direto de um clássico para sua mesa: chocolate nobre, brilho intenso e muita cremosidade. Disponível também inteiro (sob consulta). Adicional de calda extra de chocolate: R$ 5,00.", price: "R$ 22,00 (a fatia)", imageUrl: "https://64.media.tumblr.com/f4a8e4a014dc6412f75a640dc7b101e9/3a06fb4d61c7f58f-d2/s2048x3072/e683ca0ca8be44cac2caf34aeb5244cac3884e2d.jpg" },
         { name: "Sensação Berry", description: "Doce de leite artesanal, calda de amoras e creme aveludado de leite ninho.", price: "R$ 23,90 (a fatia)", imageUrl: "https://64.media.tumblr.com/57c9ab311429fc6fb627881fb2f549e7/0695e7378c4b0476-ef/s2048x3072/0f25addf91e9a9f731ab0377007a0259a5cb876d.jpg" },
+        { name: "Torta de Santiago", description: "Autêntica torta espanhola feita com farinha de amêndoas.", price: "R$ 17,90" },
         { name: "El Montadito de Banoffi", description: "Bolacha amanteigada, doce de leite artesanal, banana prata selecionadas, creme secreto da casa, calda de caramelo e uma pitada de canela.", price: "R$ 19,90" },
         { name: "Montadito Pistache Real", description: "No Pan de Coca. Recheio de brigadeiro e ganache de pistache.", price: "R$ 39,00", imageUrl: "https://64.media.tumblr.com/0add055745496740cdac0ee959142a72/0729a521a5d6cff4-03/s2048x3072/11612a18f1c46df12f7d3274d3fedb0200c84372.jpg" },
         { name: "Montadito Nutella com Morangos", description: "No Pan de Coca. Nutella original e morangos frescos.", price: "R$ 38,90", imageUrl: "https://64.media.tumblr.com/6c066210786fb0fe39f2cfa601994f94/3ff45e09a0c7dd34-ae/s2048x3072/7eed66c605a1a87e48ea908cfb53af3cfcc16037.jpg" },
@@ -136,7 +136,7 @@ export const menuCategories = [
   },
   {
     name: "SORVETES ARTESANAIS (PRODUÇÃO PRÓPRIA)",
-    description: "Textura ultra cremosa, feitos diariamente aqui na Oliva. Servido na taça com 1 bola de 120g. Dica da Chef: Peça uma bola de sorvete de Baunilha para acompanhar sua fatia de Torta Matilda quente!",
+    description: "Textura ultra cremosa aqui na Oliva. Servido na taça com 1 bola de 120g. Dica da Chef: Peça uma bola de sorvete de Baunilha para acompanhar sua fatia de Torta Matilda quente!",
     items: [
       { name: "Baunilha Bourbon", description: "O clássico com favas naturais, perfeito para acompanhar nossas tortas.", price: "R$ 18,00" },
       { name: "Morango com Nutella", description: "Sorvete de morango natural com uma generosa camada de Nutella legítima por cima.", price: "R$ 24,00" },
