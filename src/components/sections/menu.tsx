@@ -124,7 +124,7 @@ export const menuCategories = [
     ],
   },
   {
-    name: "Especiais",
+    name: "ESPECIAIS",
     description: "Pratos autênticos e porções para compartilhar.",
     items: [
       {
@@ -239,7 +239,7 @@ export const menuCategories = [
 ];
 
 const iconMap: { [key: string]: React.ElementType } = {
-    "Especiais": UtensilsCrossed,
+    "ESPECIAIS": UtensilsCrossed,
     "MONTADITOS (No Pan de Coca Espanhol)": Sandwich,
     "SOBREMESAS & MONTADITOS DOCES": Cake,
     "TORRONES ARTESANAIS (Receita Original Espanhola)": Gift,
