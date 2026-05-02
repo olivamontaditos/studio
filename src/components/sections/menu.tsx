@@ -63,7 +63,7 @@ export const menuCategories = [
       },
       { 
         name: "M06. Frango Cremoso Melt", 
-        description: "Frango desfiado suculento envolvido em um creme de queijo irresistível, com cobertura de muçarela derretida e o contraste crocante da batata palha sobre o pão artesanal.", 
+        description: "Frango em tiras grelhada na hora suculento envolvido em um creme de queijo irresistível, com cobertura de muçarela derretida e o contraste crocante da batata palha sobre o pão artesanal.", 
         price: "R$ 22,90", 
         imageUrl: "https://64.media.tumblr.com/5bca88fd3ae950b2a16db082dcf707ef/60a8116118a48c16-50/s2048x3072/7041b887ac6a1325a5bebb8fdc3585be10714ed5.pnj" 
       },
