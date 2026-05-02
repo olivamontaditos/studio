@@ -108,7 +108,7 @@ export const menuCategories = [
         { name: "Sensação Berry", description: "Doce de leite artesanal, calda de amoras e creme aveludado de leite ninho.", price: "R$ 23,90 (a fatia)", imageUrl: "https://64.media.tumblr.com/57c9ab311429fc6fb627881fb2f549e7/0695e7378c4b0476-ef/s2048x3072/0f25addf91e9a9f731ab0377007a0259a5cb876d.jpg" },
         { name: "Torta de Santiago", description: "Autêntica torta espanhola feita com farinha de amêndoas.", price: "R$ 17,90" },
         { name: "El Montadito de Banoffi", description: "Bolacha amanteigada, doce de leite artesanal, banana prata selecionadas, creme secreto da casa, calda de caramelo e uma pitada de canela.", price: "R$ 19,90" },
-        { name: "Montadito Pistache Real", description: "No Pan de Coca. Recheio de brigadeiro e ganache de pistache.", price: "R$ 39,00", imageUrl: "https://64.media.tumblr.com/0add055745496740cdac0ee959142a72/0729a521a5d6cff4-03/s2048x3072/11612a18f1c46df12f7d3274d3fedb0200c84372.jpg" },
+        { name: "Montadito Pistache Real", description: "No Pan de Coca. Recheio de ganache de pistache.", price: "R$ 39,00", imageUrl: "https://64.media.tumblr.com/0add055745496740cdac0ee959142a72/0729a521a5d6cff4-03/s2048x3072/11612a18f1c46df12f7d3274d3fedb0200c84372.jpg" },
         { name: "Montadito Nutella com Morangos", description: "No Pan de Coca. Nutella original e morangos frescos.", price: "R$ 38,90", imageUrl: "https://64.media.tumblr.com/6c066210786fb0fe39f2cfa601994f94/3ff45e09a0c7dd34-ae/s2048x3072/7eed66c605a1a87e48ea908cfb53af3cfcc16037.jpg" },
         { name: "Montadito Chocolate Blend", description: "No Pan de Coca. Chocolate ao leite premium.", price: "R$ 31,00", imageUrl: "https://64.media.tumblr.com/32d746d8e9cd9113ed6811ac3e7b91e2/0729a521a5d6cff4-e9/s2048x3072/8d98fc0f020c1d091ae10db68fda56c69d7ce1cc.jpg" },
         { name: "Montadito Doce de Leite com Nozes", description: "No Pan de Coca. Doce de leite artesanal com nozes crocantes.", price: "R$ 26,00", imageUrl: "https://64.media.tumblr.com/637e23898d6edb025a548a8a7ba8a92d/0729a521a5d6cff4-24/s2048x3072/c644047e9495bdbbf9b225e4dfa1df70b4a664ac.jpg" },
@@ -118,7 +118,7 @@ export const menuCategories = [
     name: "TORRONES ARTESANAIS (Receita Original Espanhola)",
     description: "Receita original espanhola feita com mel e amêndoas torradas. Sabores: frutas vermelhas, pistache, nozes com limão siciliano ou chocolate 70%.",
     items: [
-      { name: "Tamanho P", price: "R$ 9,90", imageUrl: "https://64.media.tumblr.com/d41f05c45254f28886f93a71091c6bc1/0168b23b368f7428-a9/s1280x1920/b4e5a63d3dcf66b752045e7acdfb93499316466ad.jpg" },
+      { name: "Tamanho P", price: "R$ 9,90", imageUrl: "https://64.media.tumblr.com/d41f05c45254f28886f93a71091c6bc1/0168b23b368f7428-a9/s2048x3072/c78762ee05bfbdc4f68e1ab0e1a6dcef42c11278.jpg" },
       { name: "Tamanho M", price: "R$ 29,90", imageUrl: "https://64.media.tumblr.com/867c6bd334f88f4e0ef6bf933ab8b83e/0168b23b368f7428-b1/s1280x1920/1a62c6f28db8d57f39ff8c0840df7ff015ad0b30.jpg" },
       { name: "Tamanho G", price: "R$ 35,90", imageUrl: "https://64.media.tumblr.com/636821a5e7b8a228cab209859655dc91/0168b23b368f7428-e5/s1280x1920/667ad64a566ff175a9fde6f31930c41c281d1e7b.jpg" },
     ],
@@ -129,7 +129,7 @@ export const menuCategories = [
     items: [
       {
         name: "Tortilha de Batatas com Salada Especial",
-        description: "A clássica tortilha espanhola (batata e ovos) servida com nossa salada especial da casa. Opcional: Adicione Mignon ou Jamón Serrano por + R$ 20,00.",
+        description: "A clássica tortilha espanhola (batata e ovos) servida with nossa salada especial da casa. Opcional: Adicione Mignon ou Jamón Serrano por + R$ 20,00.",
         price: "R$ 39,90",
       }
     ]
