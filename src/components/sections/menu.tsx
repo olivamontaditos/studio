@@ -87,9 +87,9 @@ export const menuCategories = [
         imageUrl: "https://64.media.tumblr.com/fb5479c4df91056aa58fb94de08f5ab9/c86b546fc7a1ad02-d0/s2048x3072/e0735eb06afe83a0512493e7c3e4a01bd5ed261b.jpg" 
       },
       { 
-        name: "M10. Croissant Caprese", 
-        description: "Muçarela de búfala fresca e tomate cereja confitado no croissant amanteigado.", 
-        price: "R$ 28,00", 
+        name: "M10. Caprese", 
+        description: "A leveza de um clássico: Pan de Coca artesanal, muçarela de búfala fresca e tomates tostados no azeite de oliva extra virgem.", 
+        price: "R$ 25,00", 
       },
       { 
         name: "M11. Clássico Madrileño", 
