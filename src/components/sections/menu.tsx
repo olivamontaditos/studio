@@ -23,10 +23,22 @@ import {
     Coffee,
     GraduationCap,
     IceCream2,
+    UtensilsCrossed,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export const menuCategories = [
+  {
+    name: "TAPAS & ESPECIAIS",
+    description: "Pratos autênticos e porções para compartilhar.",
+    items: [
+      {
+        name: "Tortilha de Batatas com Salada Especial",
+        description: "A clássica tortilha espanhola (batata e ovos) servida com nossa salada especial da casa. Opcional: Adicione Mignon ou Jamón Serrano por + R$ 20,00.",
+        price: "R$ 39,90",
+      }
+    ]
+  },
   {
     name: "MONTADITOS (No Pão de Coca Espanhol)",
     description: "Base: Emulsão de tomate, alho e azeite. Dica: Troque o pão por Croissant Amanteigado por + R$ 5,00.",
@@ -100,16 +112,17 @@ export const menuCategories = [
     ],
   },
   {
-    name: "SOBREMESAS & CROISSANTS DOCES",
+    name: "SOBREMESAS & MONTADITOS DOCES",
+    description: "Nossos doces irresistíveis, agora servidos no autêntico Pão de Coca Espanhol.",
     items: [
         { name: "Torta Basca de San Sebastián", description: "A autêntica cheesecake espanhola, cremosa por dentro e tostada por fora. Disponível também inteira (sob encomenda): 15cm - R$ 159,00 | 17,5cm - R$ 199,00 | 20cm - R$ 239,00. Adicional de calda artesanal (frutas vermelhas, pistache e caramelo com flor de sal): + R$ 6,00. Adicional de sorvete artesanal da casa por bola (baunilha, pistache e morango): + R$ 10,00.", price: "R$ 29,00 (a fatia)", imageUrl: "https://64.media.tumblr.com/95f517167d957247e9f30c53696aff10/ceb08f5edd305fa6-c1/s2048x3072/0ee3f770fd647672b4ec8d01b749ab44dcc7c69e.jpg" },
         { name: "Bolo Matilda", description: "Direto de um clássico para sua mesa: chocolate nobre, brilho intenso e muita cremosidade. Disponível também inteiro (sob consulta). Adicional de calda extra de chocolate: R$ 5,00.", price: "R$ 22,00 (a fatia)", imageUrl: "https://64.media.tumblr.com/f4a8e4a014dc6412f75a640dc7b101e9/3a06fb4d61c7f58f-d2/s2048x3072/e683ca0ca8be44cac2caf34aeb5244cac3884e2d.jpg" },
         { name: "Sensação Berry", description: "Doce de leite artesanal, calda de amoras e creme aveludado de leite ninho.", price: "R$ 23,90 (a fatia)", imageUrl: "https://64.media.tumblr.com/57c9ab311429fc6fb627881fb2f549e7/0695e7378c4b0476-ef/s2048x3072/0f25addf91e9a9f731ab0377007a0259a5cb876d.jpg" },
         { name: "El Montadito de Banoffi", description: "Bolacha amanteigada, doce de leite artesanal, banana prata selecionadas, creme secreto da casa, calda de caramelo e uma pitada de canela.", price: "R$ 19,90" },
-        { name: "Croissant Pistache Real", description: "Recheio de brigadeiro e ganache de pistache.", price: "R$ 39,00", imageUrl: "https://64.media.tumblr.com/0add055745496740cdac0ee959142a72/0729a521a5d6cff4-03/s2048x3072/11612a18f1c46df12f7d3274d3fedb0200c84372.jpg" },
-        { name: "Croissant Nutella com Morangos", description: "Nutella original e morangos frescos.", price: "R$ 38,90", imageUrl: "https://64.media.tumblr.com/6c066210786fb0fe39f2cfa601994f94/3ff45e09a0c7dd34-ae/s2048x3072/7eed66c605a1a87e48ea908cfb53af3cfcc16037.jpg" },
-        { name: "Croissant Chocolate Blend", description: "Chocolate ao leite premium.", price: "R$ 31,00", imageUrl: "https://64.media.tumblr.com/32d746d8e9cd9113ed6811ac3e7b91e2/0729a521a5d6cff4-e9/s2048x3072/8d98fc0f020c1d091ae10db68fda56c69d7ce1cc.jpg" },
-        { name: "Croissant Doce de Leite com Nozes", description: "Doce de leite artesanal com nozes crocantes.", price: "R$ 26,00", imageUrl: "https://64.media.tumblr.com/637e23898d6edb025a548a8a7ba8a92d/0729a521a5d6cff4-24/s2048x3072/c644047e9495bdbbf9b225e4dfa1df70b4a664ac.jpg" },
+        { name: "Montadito Pistache Real", description: "No Pão de Coca. Recheio de brigadeiro e ganache de pistache.", price: "R$ 39,00", imageUrl: "https://64.media.tumblr.com/0add055745496740cdac0ee959142a72/0729a521a5d6cff4-03/s2048x3072/11612a18f1c46df12f7d3274d3fedb0200c84372.jpg" },
+        { name: "Montadito Nutella com Morangos", description: "No Pão de Coca. Nutella original e morangos frescos.", price: "R$ 38,90", imageUrl: "https://64.media.tumblr.com/6c066210786fb0fe39f2cfa601994f94/3ff45e09a0c7dd34-ae/s2048x3072/7eed66c605a1a87e48ea908cfb53af3cfcc16037.jpg" },
+        { name: "Montadito Chocolate Blend", description: "No Pão de Coca. Chocolate ao leite premium.", price: "R$ 31,00", imageUrl: "https://64.media.tumblr.com/32d746d8e9cd9113ed6811ac3e7b91e2/0729a521a5d6cff4-e9/s2048x3072/8d98fc0f020c1d091ae10db68fda56c69d7ce1cc.jpg" },
+        { name: "Montadito Doce de Leite com Nozes", description: "No Pão de Coca. Doce de leite artesanal com nozes crocantes.", price: "R$ 26,00", imageUrl: "https://64.media.tumblr.com/637e23898d6edb025a548a8a7ba8a92d/0729a521a5d6cff4-24/s2048x3072/c644047e9495bdbbf9b225e4dfa1df70b4a664ac.jpg" },
     ],
   },
   {
@@ -226,8 +239,9 @@ export const menuCategories = [
 ];
 
 const iconMap: { [key: string]: React.ElementType } = {
+    "TAPAS & ESPECIAIS": UtensilsCrossed,
     "MONTADITOS (No Pão de Coca Espanhol)": Sandwich,
-    "SOBREMESAS & CROISSANTS DOCES": Cake,
+    "SOBREMESAS & MONTADITOS DOCES": Cake,
     "TORRONES ARTESANAIS (Receita Original Espanhola)": Gift,
     "COMBOS": GraduationCap,
     "SORVETES ARTESANAIS (PRODUÇÃO PRÓPRIA)": IceCream2,
