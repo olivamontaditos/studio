@@ -196,7 +196,7 @@ export const menuCategories = [
       { name: "Suco de frutas vermelhas", description: "Natural (Morango, mirtilo e amora).", price: "R$ 18,00" },
       { name: "Água com ou sem gás", price: "R$ 6,00" },
       { name: "Refrigerante", price: "R$ 8,00" },
-      { name: "Red Bull", description: "250ml", price: "R$ 15,00" },
+      { name: "Monster", description: "473ml", price: "R$ 15,00" },
       { name: "Schweppes", price: "R$ 9,00" },
     ],
   },
@@ -218,7 +218,7 @@ export const menuCategories = [
       { name: "Oliva Sunset Gym", description: "Nossa criação exclusiva: gin premium combinado com o frescor do suco de laranja, toque aromático de licor de laranja, finalizado com dulçor e a cor intensa do Monin de framboesa.", price: "R$ 34,00" },
       { name: "Carajillo 43", description: "Licor 43 e café expresso premium batidos com gelo e monin de pera. Aveludado e icônico.", price: "R$39,00" },
       { name: "Jägermeister", description: "Licor Fino de Ervas (dose 50ml).", price: "R$ 35,00" },
-      { name: "Jägerbomb", description: "Jägermeister (50ml) com Red Bull (250ml).", price: "R$ 55,00" },
+      { name: "Jägerbomb", description: "Jägermeister (50ml) com Monster (473ml).", price: "R$ 55,00" },
     ],
   },
 ];
