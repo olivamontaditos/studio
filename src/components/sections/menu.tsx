@@ -30,17 +30,17 @@ import { cn } from "@/lib/utils";
 export const menuCategories = [
   {
     name: "MONTADITOS (No Pan de Coca Espanhol)",
-    description: "Base: Emulsão de tomate, alho e azeite. Dica: Troque o pão por Croissant Amanteigado por + R$ 5,00.",
+    description: "Base: Emulsão de tomate, alho e azeite. Dica: Troque o Pan de Coca por Croissant Amanteigado por + R$ 5,00.",
     items: [
       { 
         name: "M01. El Clásico", 
-        description: "A essência da culinária espanhola em cada mordida. Nosso pão artesanal, tostado na medida certa, abraça uma emulsão vibrante de tomate fresco, alho confitado e azeite extra virgem, coroado por uma generosa camada de muçarela derretida e orégano aromático.", 
+        description: "A essência da culinária espanhola em cada mordida. Nosso Pan de Coca artesanal, tostado na medida certa, abraça uma emulsão vibrante de tomate fresco, alho confitado e azeite extra virgem, coroado por uma generosa camada de muçarela derretida e orégano aromático.", 
         price: "R$ 14,00", 
         imageUrl: "https://64.media.tumblr.com/5d1bcf7ceba0e04ed8ce2e2412a3c4da/0729a521a5d6cff4-01/s2048x3072/11c42de505012a851baefc2ba66ad487dc7d3134.jpg" 
       },
       { 
         name: "M02. Salame & Cherry", 
-        description: "O sabor intenso do salame italiano encontra o frescor do tomate cereja e a cremosidade da maionese de alho caseira, tudo envolto em muçarela derretida sobre nosso pão artesanal.", 
+        description: "O sabor intenso do salame italiano encontra o frescor do tomate cereja e a cremosidade da maionese de alho caseira, tudo envolto em muçarela derretida sobre nosso Pan de Coca artesanal.", 
         price: "R$ 25,00", 
         imageUrl: "https://64.media.tumblr.com/c438395e5096bd86e4c1fa290d489651/0729a521a5d6cff4-6b/s2048x3072/9b6910ba0895e79ed1954503aef0992c0b003e4b.jpg" 
       },
@@ -64,7 +64,7 @@ export const menuCategories = [
       },
       { 
         name: "M06. Frango Cremoso Melt", 
-        description: "Frango em tiras grelhada na hora suculento envolvido em um creme de queijo irresistível, com cobertura de muçarela derretida e o contraste crocante da batata palha sobre o pão artesanal.", 
+        description: "Frango em tiras grelhada na hora suculento envolvido em um creme de queijo irresistível, com cobertura de muçarela derretida e o contraste crocante da batata palha sobre o Pan de Coca artesanal.", 
         price: "R$ 22,90", 
         imageUrl: "https://64.media.tumblr.com/5bca88fd3ae950b2a16db082dcf707ef/60a8116118a48c16-50/s2048x3072/7041b887ac6a1325a5bebb8fdc3585be10714ed5.pnj" 
       },
@@ -93,7 +93,7 @@ export const menuCategories = [
       },
       { 
         name: "M11. Clássico Madrileño", 
-        description: "A tradição das ruas de Madri em Curitiba. Presunto cozido especial e muçarela derretida sobre tomate ralado fresco, alho e azeite de oliva no pão artesanal crocante.", 
+        description: "A tradição das ruas de Madri em Curitiba. Presunto cozido especial e muçarela derretida sobre tomate ralado fresco, alho e azeite de oliva no Pan de Coca artesanal crocante.", 
         price: "R$ 15,90", 
         imageUrl: "https://64.media.tumblr.com/41f9c00fe2df78e627106ecdd5981753/7674f98079392f13-9f/s2048x3072/a14f089ed5f234a683d5eaf62db4bd4732c3ef7f.jpg" 
       },
@@ -129,7 +129,7 @@ export const menuCategories = [
     items: [
       {
         name: "Tortilha de Batatas com Salada Especial",
-        description: "A clássica tortilha espanhola (batata e ovos) servida with nossa salada especial da casa. Opcional: Adicione Mignon ou Jamón Serrano por + R$ 20,00.",
+        description: "A clássica tortilha espanhola (batata e ovos) servida com nossa salada especial da casa. Opcional: Adicione Mignon ou Jamón Serrano por + R$ 20,00.",
         price: "R$ 39,90",
       }
     ]
@@ -172,16 +172,16 @@ export const menuCategories = [
     description: "Expresso com leite vaporizado e uma fina camada de espuma.",
     items: [
       { name: "Caffè Latte Clássico", description: "Dose de expresso com leite vaporizado e uma fina camada de espuma.", price: "R$ 12,90" },
-      { name: "Vanilla Latte", description: "Nosso latte clássico com um toque de extrato natural de baunilha.", price: "R$ 16,00" },
-      { name: "Macchiato tradicional", description: "O clássico manchado com uma nuvem de leite vaporizado.", price: "R$ 9,90" },
-      { name: "Caramel Macchiato", description: "Expresso, uma camada generosa de espuma de leite finalizada com calda de caramelo.", price: "R$ 12,90" },
+      { name: "Vanilla Latte", description: "Nosso latte clássico with um toque de extrato natural de baunilha.", price: "R$ 16,00" },
+      { name: "Macchiato tradicional", description: "O clássico manchado with uma nuvem de leite vaporizado.", price: "R$ 9,90" },
+      { name: "Caramel Macchiato", description: "Expresso, uma camada generosa de espuma de leite finalizada with calda de caramelo.", price: "R$ 12,90" },
     ],
   },
   {
       name: "ESPECIAIS DO CAFÉ",
       items: [
-        { name: "Expresso Pistache Imperial", description: "Xícara banhada em ganache e farofa crocante de pistache, expresso finalizado com nuvem de chantilly e pistache tostado por cima.", price: "R$ 26,00" },
-        { name: "Cappuccino Clássico", description: "Expresso com leite vaporizado, finalizado com ganache de chocolate e canela em pó.", price: "R$ 16,90" },
+        { name: "Expresso Pistache Imperial", description: "Xícara banhada em ganache e farofa crocante de pistache, expresso finalizado with nuvem de chantilly e pistache tostado por cima.", price: "R$ 26,00" },
+        { name: "Cappuccino Clássico", description: "Expresso with leite vaporizado, finalizado with ganache de chocolate e canela em pó.", price: "R$ 16,90" },
       ]
   },
   {
@@ -189,8 +189,8 @@ export const menuCategories = [
       description: "ADICIONAIS: Deixe seu pedido ainda mais gostoso. Chantilly R$ 5,00",
       items: [
           { name: "Café Bombom Gelado", description: "Camada de leite condensado, gelo, leite batido e uma dose de expresso por cima.", price: "R$ 16,00" },
-          { name: "Affogato Oliva", description: "Uma bola generosa de sorvete de baunilha, com uma dose de expresso quente despejada por cima na hora, finalizada com farofa de pistache.", price: "R$ 22,00" },
-          { name: "Ice Pistache", description: "Ganache de pistache nas paredes do copo, gelo, leite batido e expresso. Finalizado com chantilly e farofa de pistache.", price: "R$ 26,00" },
+          { name: "Affogato Oliva", description: "Uma bola generosa de sorvete de baunilha, with uma dose de expresso quente despejada por cima na hora, finalizada with farofa de pistache.", price: "R$ 22,00" },
+          { name: "Ice Pistache", description: "Ganache de pistache nas paredes do copo, gelo, leite batido e expresso. Finalizado with chantilly e farofa de pistache.", price: "R$ 26,00" },
       ]
   },
   {
@@ -230,10 +230,10 @@ export const menuCategories = [
       { name: "Taça de vinho (Tinto ou Branco)", price: "R$ 29,90" },
       { name: "Sangria Oliva (300ml)", description: "Vinho tinto suave, mix de frutas e um toque de licor de laranja.", price: "R$ 31,00" },
       { name: "Jarra de Sangria", description: "Nossa sangria especial em uma jarra de 1L, perfeita para compartilhar.", price: "R$ 99,00" },
-      { name: "Oliva Sunset Gym", description: "Nossa criação exclusiva: gin premium combinado com o frescor do suco de laranja, toque aromático de licor de laranja, finalizado com dulçor e a cor intensa do Monin de framboesa.", price: "R$ 34,00" },
-      { name: "Carajillo 43", description: "Licor 43 e café expresso premium batidos com gelo e monin de pera. Aveludado e icônico.", price: "R$39,00" },
+      { name: "Oliva Sunset Gym", description: "Nossa criação exclusiva: gin premium combinado with o frescor do suco de laranja, toque aromático de licor de laranja, finalizado with dulçor e a cor intensa do Monin de framboesa.", price: "R$ 34,00" },
+      { name: "Carajillo 43", description: "Licor 43 e café expresso premium batidos with gelo e monin de pera. Aveludado e icônico.", price: "R$39,00" },
       { name: "Jägermeister", description: "Licor Fino de Ervas (dose 50ml).", price: "R$ 35,00" },
-      { name: "Jägerbomb", description: "Jägermeister (50ml) com Monster (473ml).", price: "R$ 55,00" },
+      { name: "Jägerbomb", description: "Jägermeister (50ml) with Monster (473ml).", price: "R$ 55,00" },
     ],
   },
 ];
