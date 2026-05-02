@@ -172,16 +172,16 @@ export const menuCategories = [
     description: "Expresso com leite vaporizado e uma fina camada de espuma.",
     items: [
       { name: "Caffè Latte Clássico", description: "Dose de expresso com leite vaporizado e uma fina camada de espuma.", price: "R$ 12,90" },
-      { name: "Vanilla Latte", description: "Nosso latte clássico with um toque de extrato natural de baunilha.", price: "R$ 16,00" },
-      { name: "Macchiato tradicional", description: "O clássico manchado with uma nuvem de leite vaporizado.", price: "R$ 9,90" },
-      { name: "Caramel Macchiato", description: "Expresso, uma camada generosa de espuma de leite finalizada with calda de caramelo.", price: "R$ 12,90" },
+      { name: "Vanilla Latte", description: "Nosso latte clássico com um toque de extrato natural de baunilha.", price: "R$ 16,00" },
+      { name: "Macchiato tradicional", description: "O clássico manchado com uma nuvem de leite vaporizado.", price: "R$ 9,90" },
+      { name: "Caramel Macchiato", description: "Expresso, uma camada generosa de espuma de leite finalizada com calda de caramelo.", price: "R$ 12,90" },
     ],
   },
   {
       name: "ESPECIAIS DO CAFÉ",
       items: [
-        { name: "Expresso Pistache Imperial", description: "Xícara banhada em ganache e farofa crocante de pistache, expresso finalizado with nuvem de chantilly e pistache tostado por cima.", price: "R$ 26,00" },
-        { name: "Cappuccino Clássico", description: "Expresso with leite vaporizado, finalizado with ganache de chocolate e canela em pó.", price: "R$ 16,90" },
+        { name: "Expresso Pistache Imperial", description: "Xícara banhada em ganache e farofa crocante de pistache, expresso finalizado com nuvem de chantilly e pistache tostado por cima.", price: "R$ 26,00" },
+        { name: "Cappuccino Clássico", description: "Expresso com leite vaporizado, finalizado com ganache de chocolate e canela em pó.", price: "R$ 16,90" },
       ]
   },
   {
@@ -189,8 +189,8 @@ export const menuCategories = [
       description: "ADICIONAIS: Deixe seu pedido ainda mais gostoso. Chantilly R$ 5,00",
       items: [
           { name: "Café Bombom Gelado", description: "Camada de leite condensado, gelo, leite batido e uma dose de expresso por cima.", price: "R$ 16,00" },
-          { name: "Affogato Oliva", description: "Uma bola generosa de sorvete de baunilha, with uma dose de expresso quente despejada por cima na hora, finalizada with farofa de pistache.", price: "R$ 22,00" },
-          { name: "Ice Pistache", description: "Ganache de pistache nas paredes do copo, gelo, leite batido e expresso. Finalizado with chantilly e farofa de pistache.", price: "R$ 26,00" },
+          { name: "Affogato Oliva", description: "Uma bola generosa de sorvete de baunilha, com uma dose de expresso quente despejada por cima na hora, finalizada com farofa de pistache.", price: "R$ 22,00" },
+          { name: "Ice Pistache", description: "Ganache de pistache nas paredes do copo, gelo, leite batido e expresso. Finalizado com chantilly e farofa de pistache.", price: "R$ 26,00" },
       ]
   },
   {
@@ -230,10 +230,10 @@ export const menuCategories = [
       { name: "Taça de vinho (Tinto ou Branco)", price: "R$ 29,90" },
       { name: "Sangria Oliva (300ml)", description: "Vinho tinto suave, mix de frutas e um toque de licor de laranja.", price: "R$ 31,00" },
       { name: "Jarra de Sangria", description: "Nossa sangria especial em uma jarra de 1L, perfeita para compartilhar.", price: "R$ 99,00" },
-      { name: "Oliva Sunset Gym", description: "Nossa criação exclusiva: gin premium combinado with o frescor do suco de laranja, toque aromático de licor de laranja, finalizado with dulçor e a cor intensa do Monin de framboesa.", price: "R$ 34,00" },
-      { name: "Carajillo 43", description: "Licor 43 e café expresso premium batidos with gelo e monin de pera. Aveludado e icônico.", price: "R$39,00" },
+      { name: "Oliva Sunset Gym", description: "Nossa criação exclusiva: gin premium combinado com o frescor do suco de laranja, toque aromático de licor de laranja, finalizado com dulçor e a cor intensa do Monin de framboesa.", price: "R$ 34,00" },
+      { name: "Carajillo 43", description: "Licor 43 e café expresso premium batidos com gelo e monin de pera. Aveludado e icônico.", price: "R$39,00" },
       { name: "Jägermeister", description: "Licor Fino de Ervas (dose 50ml).", price: "R$ 35,00" },
-      { name: "Jägerbomb", description: "Jägermeister (50ml) with Monster (473ml).", price: "R$ 55,00" },
+      { name: "Jägerbomb", description: "Jägermeister (50ml) com Monster (473ml).", price: "R$ 55,00" },
     ],
   },
 ];
@@ -303,7 +303,7 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
                             {summaryItems.map((item) => (
                                 <div key={item.name} className="bg-card rounded-lg shadow-sm overflow-hidden flex flex-col">
-                                    {item.imageUrl ? (
+                                    {item.imageUrl && (
                                         <Dialog>
                                         <DialogTrigger asChild>
                                             <div className="relative h-56 w-full cursor-pointer overflow-hidden">
@@ -328,10 +328,6 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                                             </div>
                                         </DialogContent>
                                         </Dialog>
-                                    ) : (
-                                        <div className="relative h-56 w-full bg-secondary flex items-center justify-center">
-                                            <Sandwich className="h-16 w-16 text-muted-foreground/50" />
-                                        </div>
                                     )}
                                     <div className="p-4 flex flex-col flex-grow">
                                         <div className="flex-grow">
@@ -394,7 +390,7 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                                     <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
                                     {category.items.map((item, index) => (
                                         <div key={item.name} className="bg-background rounded-lg shadow-sm overflow-hidden flex flex-col transition-all duration-300">
-                                            {item.imageUrl ? (
+                                            {item.imageUrl && (
                                                 <Dialog>
                                                 <DialogTrigger asChild>
                                                     <div className="relative h-56 w-full cursor-pointer overflow-hidden">
@@ -419,10 +415,6 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                                                     </div>
                                                 </DialogContent>
                                                 </Dialog>
-                                            ) : (
-                                                <div className="relative h-56 w-full bg-secondary flex items-center justify-center">
-                                                    <Sandwich className="h-16 w-16 text-muted-foreground/50" />
-                                                </div>
                                             )}
                                             <div className="p-4 flex flex-col flex-grow">
                                                 <div className="flex-grow">
