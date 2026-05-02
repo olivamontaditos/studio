@@ -198,6 +198,7 @@ export const menuCategories = [
       { name: "Refrigerante", price: "R$ 8,00" },
       { name: "Monster", description: "473ml", price: "R$ 15,00" },
       { name: "Schweppes", price: "R$ 9,00" },
+      { name: "Heineken (330ml)", price: "R$ 18,90" },
     ],
   },
   {
