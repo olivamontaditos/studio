@@ -31,17 +31,72 @@ export const menuCategories = [
     name: "MONTADITOS (No Pão de Coca Espanhol)",
     description: "Base: Emulsão de tomate, alho e azeite. Dica: Troque o pão por Croissant Amanteigado por + R$ 5,00.",
     items: [
-      { name: "M01. El Clásico", description: "Base: Emulsão de tomate, alho e azeite. Muçarela derretida e orégano no pão artesanal.", price: "R$ 14,00", imageUrl: "https://64.media.tumblr.com/5d1bcf7ceba0e04ed8ce2e2412a3c4da/0729a521a5d6cff4-01/s2048x3072/11c42de505012a851baefc2ba66ad487dc7d3134.jpg" },
-      { name: "M02. Salame & Cherry", description: "Base: Emulsão de tomate, alho e azeite. Salame italiano, tomate cereja, muçarela e maionese de alho.", price: "R$ 25,00", imageUrl: "https://64.media.tumblr.com/c438395e5096bd86e4c1fa290d489651/0729a521a5d6cff4-6b/s2048x3072/9b6910ba0895e79ed1954503aef0992c0b003e4b.jpg" },
-      { name: "M03. Jamón Serrano Supremo", description: "Base: Emulsão de tomate, alho e azeite. Presunto cru espanhol, búfala, rúcula e pimentão no azeite.", price: "R$ 32,00", imageUrl: "https://64.media.tumblr.com/7fcab6e70efc0fce1fa7a286d2b2b316/0729a521a5d6cff4-cb/s2048x3072/bd1a81a520067e76c288a701d8889d820dd2ec19.jpg" },
-      { name: "M04. Germânico-Ibérico", description: "Base: Emulsão de tomate, alho e azeite. Salsicha artesanal, Vinagrete do William e maionese de alho.", price: "R$ 24,00", imageUrl: "https://64.media.tumblr.com/80862ce7c59ba9297564ba9c92271ccc/0729a521a5d6cff4-1a/s2048x3072/a63b54494b40a8beac1c6dd677a9fbfa3ec3a86a.jpg" },
-      { name: "M05. Peito de Peru Light", description: "Base: Emulsão de tomate, alho e azeite. Peito de peru, búfala, tomate, alface e maionese de alho.", price: "R$ 24,90", imageUrl: "https://64.media.tumblr.com/acb78441e2b45ff3bb2ee86766693d57/0729a521a5d6cff4-ad/s2048x3072/5d7e4371e74beb499fc222df02db822b708f4265.jpg" },
-      { name: "M06. Frango Cremoso Melt", description: "Base: Emulsão de tomate, alho e azeite. Frango ao creme de queijo, muçarela e batata crocante.", price: "R$ 22,90", imageUrl: "https://64.media.tumblr.com/5bca88fd3ae950b2a16db082dcf707ef/60a8116118a48c16-50/s2048x3072/7041b887ac6a1325a5bebb8fdc3585be10714ed5.pnj" },
-      { name: "M07. Frango Iscas Gourmet", description: "Base: Emulsão de tomate, alho e azeite. Iscas de frango, muçarela, maionese de alho e tomate cereja.", price: "R$ 22,00", imageUrl: "https://64.media.tumblr.com/1780edbad6756f637032ef2521f195af/7674f98079392f13-26/s2048x3072/6032e340b7e2fa34f787f6100785cf7da117d21a.jpg" },
-      { name: "M08. Mignon Gruyère", description: "Base: Emulsão de tomate, alho e azeite. Mignon, queijo gruyère, cebola caramelizada e maionese de alho.", price: "R$ 38,90", imageUrl: "https://64.media.tumblr.com/9e260afe66273c0a6158761992ceb67d/0729a521a5d6cff4-2b/s2048x3072/2bb44eb1a215e7d3eb24b197bf77581526abaf24.jpg" },
-      { name: "M09. Pastrami Oliva", description: "Base: Emulsão de tomate, alho e azeite. Pastrami, queijo derretido, Vinagrete do William e creme de queijo.", price: "R$ 32,00", imageUrl: "https://64.media.tumblr.com/fb5479c4df91056aa58fb94de08f5ab9/c86b546fc7a1ad02-d0/s2048x3072/e0735eb06afe83a0512493e7c3e4a01bd5ed261b.jpg" },
-      { name: "M10. Queijo e presunto Royale", description: "Base: Emulsão de tomate, alho e azeite. Queijo e presunto.", price: "R$ 18,00", imageUrl: "https://64.media.tumblr.com/b52567a2d00f84d7f3651c2444b5bb85/0729a521a5d6cff4-e3/s2048x3072/25b5ca0786e1e362f1a7f8ec67a42e1fe6e14434.jpg" },
-      { name: "M11. Clássico Madrileño", description: "Base: Emulsão de tomate, alho e azeite. Fatias finas de presunto cozido especial e muçarela derretida sobre uma base suculenta de tomate ralado fresco com um toque de alho e azeite de oliva servido no pão de coca crocante.", price: "R$ 15,90", imageUrl: "https://64.media.tumblr.com/41f9c00fe2df78e627106ecdd5981753/7674f98079392f13-9f/s2048x3072/a14f089ed5f234a683d5eaf62db4bd4732c3ef7f.jpg" },
+      { 
+        name: "M01. El Clásico", 
+        description: "A essência da culinária espanhola em cada mordida. Nosso pão artesanal, tostado na medida certa, abraça uma emulsão vibrante de tomate fresco, alho confitado e azeite extra virgem, coroado por uma generosa camada de muçarela derretida e orégano aromático.", 
+        price: "R$ 14,00", 
+        imageUrl: "https://64.media.tumblr.com/5d1bcf7ceba0e04ed8ce2e2412a3c4da/0729a521a5d6cff4-01/s2048x3072/11c42de505012a851baefc2ba66ad487dc7d3134.jpg" 
+      },
+      { 
+        name: "M02. Salame & Cherry", 
+        description: "O sabor intenso do salame italiano encontra o frescor do tomate cereja e a cremosidade da maionese de alho caseira, tudo envolto em muçarela derretida sobre nosso pão artesanal.", 
+        price: "R$ 25,00", 
+        imageUrl: "https://64.media.tumblr.com/c438395e5096bd86e4c1fa290d489651/0729a521a5d6cff4-6b/s2048x3072/9b6910ba0895e79ed1954503aef0992c0b003e4b.jpg" 
+      },
+      { 
+        name: "M03. Jamón Serrano Supremo", 
+        description: "Uma viagem à Espanha: o autêntico presunto cru serrano harmonizado com muçarela de búfala fresca, rúcula crocante e o toque especial de pimentões marinados no azeite de oliva.", 
+        price: "R$ 32,00", 
+        imageUrl: "https://64.media.tumblr.com/7fcab6e70efc0fce1fa7a286d2b2b316/0729a521a5d6cff4-cb/s2048x3072/bd1a81a520067e76c288a701d8889d820dd2ec19.jpg" 
+      },
+      { 
+        name: "M04. Germânico-Ibérico", 
+        description: "A união perfeita de tradições. Nossa salsicha artesanal premium é acompanhada pelo clássico Vinagrete do William e um toque generoso de maionese de alho no pão de coca crocante.", 
+        price: "R$ 24,00", 
+        imageUrl: "https://64.media.tumblr.com/80862ce7c59ba9297564ba9c92271ccc/0729a521a5d6cff4-1a/s2048x3072/a63b54494b40a8beac1c6dd677a9fbfa3ec3a86a.jpg" 
+      },
+      { 
+        name: "M05. Peito de Peru Light", 
+        description: "Leveza e frescor em perfeita harmonia. Finas fatias de peito de peru, muçarela de búfala derretida, tomate fresco e alface crocante, finalizados com nossa maionese de alho especial.", 
+        price: "R$ 24,90", 
+        imageUrl: "https://64.media.tumblr.com/acb78441e2b45ff3bb2ee86766693d57/0729a521a5d6cff4-ad/s2048x3072/5d7e4371e74beb499fc222df02db822b708f4265.jpg" 
+      },
+      { 
+        name: "M06. Frango Cremoso Melt", 
+        description: "Frango desfiado suculento envolvido em um creme de queijo irresistível, com cobertura de muçarela derretida e o contraste crocante da batata palha sobre o pão artesanal.", 
+        price: "R$ 22,90", 
+        imageUrl: "https://64.media.tumblr.com/5bca88fd3ae950b2a16db082dcf707ef/60a8116118a48c16-50/s2048x3072/7041b887ac6a1325a5bebb8fdc3585be10714ed5.pnj" 
+      },
+      { 
+        name: "M07. Frango Iscas Gourmet", 
+        description: "Iscas de frango grelhadas na hora, muçarela derretida e tomates cereja suculentos, tudo realçado pelo sabor único da nossa maionese de alho artesanal no pão de coca.", 
+        price: "R$ 22,00", 
+        imageUrl: "https://64.media.tumblr.com/1780edbad6756f637032ef2521f195af/7674f98079392f13-26/s2048x3072/6032e340b7e2fa34f787f6100785cf7da117d21a.jpg" 
+      },
+      { 
+        name: "M08. Mignon Gruyère", 
+        description: "O ápice do sabor: tiras suculentas de mignon grelhado, a sofisticação do queijo Gruyère derretido e a doçura da cebola caramelizada artesanal no nosso pão de coca crocante.", 
+        price: "R$ 38,90", 
+        imageUrl: "https://64.media.tumblr.com/9e260afe66273c0a6158761992ceb67d/0729a521a5d6cff4-2b/s2048x3072/2bb44eb1a215e7d3eb24b197bf77581526abaf24.jpg" 
+      },
+      { 
+        name: "M09. Pastrami Oliva", 
+        description: "Pastrami defumado artesanal de alta qualidade, queijo derretido, o toque refrescante do Vinagrete do William e a cremosidade do nosso creme de queijo exclusivo.", 
+        price: "R$ 32,00", 
+        imageUrl: "https://64.media.tumblr.com/fb5479c4df91056aa58fb94de08f5ab9/c86b546fc7a1ad02-d0/s2048x3072/e0735eb06afe83a0512493e7c3e4a01bd5ed261b.jpg" 
+      },
+      { 
+        name: "M10. Queijo e presunto Royale", 
+        description: "Um clássico elevado à realeza: a combinação atemporal de presunto Royale selecionado e muçarela derretida sobre a base suculenta de tomate ralado e azeite extra virgem.", 
+        price: "R$ 18,00", 
+        imageUrl: "https://64.media.tumblr.com/b52567a2d00f84d7f3651c2444b5bb85/0729a521a5d6cff4-e3/s2048x3072/25b5ca0786e1e362f1a7f8ec67a42e1fe6e14434.jpg" 
+      },
+      { 
+        name: "M11. Clássico Madrileño", 
+        description: "A tradição das ruas de Madri em Curitiba. Presunto cozido especial e muçarela derretida sobre tomate ralado fresco, alho e azeite de oliva no pão artesanal crocante.", 
+        price: "R$ 15,90", 
+        imageUrl: "https://64.media.tumblr.com/41f9c00fe2df78e627106ecdd5981753/7674f98079392f13-9f/s2048x3072/a14f089ed5f234a683d5eaf62db4bd4732c3ef7f.jpg" 
+      },
     ],
   },
   {
