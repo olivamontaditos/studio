@@ -90,6 +90,7 @@ export const menuCategories = [
         name: "M10. Caprese", 
         description: "A leveza de um clássico: Pan de Coca artesanal, muçarela de búfala fresca e tomates tostados no azeite de oliva extra virgem.", 
         price: "R$ 24,00", 
+        imageUrl: "https://64.media.tumblr.com/ba5f86c600e449dafba0667c2c2d1070/93565b85b6fa09f9-2f/s2048x3072/3f3eb87c1b18f6ad44bff3c0f59c4b90eb32b5db.jpg"
       },
       { 
         name: "M11. Clássico Madrileño", 
