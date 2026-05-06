@@ -19,7 +19,7 @@ export default function PromoPopup() {
   const whatsappUrl = "https://wa.me/5541988483621?text=Olá! Gostaria de encomendar uma cesta de Dia das Mães.";
   
   // Imagem oficial fornecida para o Dia das Mães
-  const promoImageUrl = "https://64.media.tumblr.com/9f4ffbc161e50daa1be0a3a65b1ba575/d3c2ef299d50d24c-6b/s400x600/357483851df83d9faa3bff8fcab4c646439cf5a2.jpg";
+  const promoImageUrl = "https://64.media.tumblr.com/fad519b744233667a898e31653a0ef6f/6ac289b10acbc18b-99/s1280x1920/d23b1f1701999e9738bfe7cb1c4e1f89ccd6be11.pnj";
 
   useEffect(() => {
     const allowedPaths = ["/", "/menu/"];
