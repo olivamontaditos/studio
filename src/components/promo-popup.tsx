@@ -18,53 +18,49 @@ export default function PromoPopup() {
   const pathname = usePathname();
   const whatsappUrl = "https://wa.me/5541988483621?text=Olá! Gostaria de encomendar uma cesta de Dia das Mães.";
   
-  // A imagem deve ser a que você forneceu. Como sou um assistente, 
-  // usei um placeholder abaixo. Substitua pela URL final da sua imagem.
-  const promoImageUrl = "https://images.unsplash.com/photo-1525286335722-c30c6b5df541?q=80&w=600&h=1000&fit=crop";
+  // Imagem oficial fornecida para o Dia das Mães
+  const promoImageUrl = "https://64.media.tumblr.com/9f4ffbc161e50daa1be0a3a65b1ba575/d3c2ef299d50d24c-6b/s400x600/357483851df83d9faa3bff8fcab4c646439cf5a2.jpg";
 
   useEffect(() => {
     const allowedPaths = ["/", "/menu/"];
     if (allowedPaths.includes(pathname)) {
-      // Pequeno delay para garantir que o usuário veja o carregamento da página primeiro
+      // Exibe o popup toda vez que o componente for montado nestas rotas
       const timer = setTimeout(() => {
         setIsOpen(true);
-      }, 1000);
+      }, 800);
       return () => clearTimeout(timer);
     }
   }, [pathname]);
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="max-w-[90vw] sm:max-w-[400px] p-0 overflow-hidden border-none bg-transparent shadow-2xl">
+      <DialogContent className="max-w-[90vw] sm:max-w-[400px] p-0 overflow-hidden border-none bg-transparent shadow-2xl outline-none">
         <DialogTitle className="sr-only">Promoção Dia das Mães</DialogTitle>
         <DialogDescription className="sr-only">
-          Cestas personalizadas para o Dia das Mães a partir de R$ 99,90.
+          Cestas personalizadas para o Dia das Mães. Encomende agora pelo WhatsApp.
         </DialogDescription>
         <div className="relative group">
           <button
             onClick={() => setIsOpen(false)}
-            className="absolute right-2 top-2 z-50 rounded-full bg-black/50 p-1 text-white backdrop-blur-sm transition-colors hover:bg-black/70"
+            className="absolute right-3 top-3 z-50 rounded-full bg-black/40 p-1.5 text-white backdrop-blur-md transition-colors hover:bg-black/60"
           >
             <X className="h-5 w-5" />
           </button>
           
-          <div className="relative aspect-[9/16] w-full overflow-hidden rounded-lg">
-            {/* 
-              IMPORTANTE: Substitua o 'src' abaixo pela URL da imagem de Dia das Mães 
-              que você enviou (após hospedá-la no seu servidor ou serviço de imagens).
-            */}
+          <div className="relative aspect-[2/3] w-full overflow-hidden rounded-xl">
             <Image
               src={promoImageUrl}
               alt="Promoção Cestas de Dia das Mães Oliva Montaditos"
               fill
               className="object-cover"
               priority
+              sizes="(max-width: 768px) 90vw, 400px"
             />
             
-            <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
+            <div className="absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-black/90 via-black/40 to-transparent">
               <Button 
                 asChild 
-                className="w-full bg-accent text-accent-foreground hover:bg-accent/90 text-lg font-bold py-6 shadow-lg uppercase tracking-wider"
+                className="w-full bg-accent text-accent-foreground hover:bg-accent/90 text-lg font-bold py-7 shadow-xl uppercase tracking-widest transition-transform hover:scale-105"
                 onClick={() => setIsOpen(false)}
               >
                 <Link href={whatsappUrl} target="_blank" rel="noopener noreferrer">
