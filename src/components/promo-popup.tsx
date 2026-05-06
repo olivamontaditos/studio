@@ -24,7 +24,6 @@ export default function PromoPopup() {
   useEffect(() => {
     const allowedPaths = ["/", "/menu/"];
     if (allowedPaths.includes(pathname)) {
-      // Exibe o popup toda vez que o componente for montado nestas rotas
       const timer = setTimeout(() => {
         setIsOpen(true);
       }, 800);
@@ -34,12 +33,12 @@ export default function PromoPopup() {
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="max-w-[90vw] sm:max-w-[400px] p-0 overflow-hidden border-none bg-transparent shadow-2xl outline-none">
+      <DialogContent className="max-w-[90vw] sm:max-w-[400px] p-0 overflow-hidden border-none bg-card shadow-2xl outline-none rounded-xl">
         <DialogTitle className="sr-only">Promoção Dia das Mães</DialogTitle>
         <DialogDescription className="sr-only">
           Cestas personalizadas para o Dia das Mães. Encomende agora pelo WhatsApp.
         </DialogDescription>
-        <div className="relative group">
+        <div className="relative flex flex-col">
           <button
             onClick={() => setIsOpen(false)}
             className="absolute right-3 top-3 z-50 rounded-full bg-black/40 p-1.5 text-white backdrop-blur-md transition-colors hover:bg-black/60"
@@ -47,7 +46,7 @@ export default function PromoPopup() {
             <X className="h-5 w-5" />
           </button>
           
-          <div className="relative aspect-[2/3] w-full overflow-hidden rounded-xl">
+          <div className="relative aspect-[2/3] w-full overflow-hidden">
             <Image
               src={promoImageUrl}
               alt="Promoção Cestas de Dia das Mães Oliva Montaditos"
@@ -56,18 +55,18 @@ export default function PromoPopup() {
               priority
               sizes="(max-width: 768px) 90vw, 400px"
             />
-            
-            <div className="absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-black/90 via-black/40 to-transparent">
-              <Button 
-                asChild 
-                className="w-full bg-accent text-accent-foreground hover:bg-accent/90 text-lg font-bold py-7 shadow-xl uppercase tracking-widest transition-transform hover:scale-105"
-                onClick={() => setIsOpen(false)}
-              >
-                <Link href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-                  ENCOMENDAR
-                </Link>
-              </Button>
-            </div>
+          </div>
+          
+          <div className="p-4 bg-card">
+            <Button 
+              asChild 
+              className="w-full bg-accent text-accent-foreground hover:bg-accent/90 text-lg font-bold py-7 shadow-lg uppercase tracking-widest transition-transform hover:scale-[1.02]"
+              onClick={() => setIsOpen(false)}
+            >
+              <Link href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+                ENCOMENDAR AGORA
+              </Link>
+            </Button>
           </div>
         </div>
       </DialogContent>
