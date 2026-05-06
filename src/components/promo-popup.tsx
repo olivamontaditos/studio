@@ -33,12 +33,13 @@ export default function PromoPopup() {
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="max-w-[90vw] sm:max-w-[400px] p-0 overflow-hidden border-none bg-card shadow-2xl outline-none rounded-xl">
+      <DialogContent className="max-w-[85vw] sm:max-w-[360px] max-h-[90vh] p-0 overflow-hidden border-none bg-card shadow-2xl outline-none rounded-xl flex flex-col">
         <DialogTitle className="sr-only">Promoção Dia das Mães</DialogTitle>
         <DialogDescription className="sr-only">
           Cestas personalizadas para o Dia das Mães. Encomende agora pelo WhatsApp.
         </DialogDescription>
-        <div className="relative flex flex-col">
+        
+        <div className="relative flex flex-col h-full">
           <button
             onClick={() => setIsOpen(false)}
             className="absolute right-3 top-3 z-50 rounded-full bg-black/40 p-1.5 text-white backdrop-blur-md transition-colors hover:bg-black/60"
@@ -46,21 +47,21 @@ export default function PromoPopup() {
             <X className="h-5 w-5" />
           </button>
           
-          <div className="relative aspect-[2/3] w-full overflow-hidden">
+          <div className="relative flex-1 min-h-[300px] w-full overflow-hidden">
             <Image
               src={promoImageUrl}
               alt="Promoção Cestas de Dia das Mães Oliva Montaditos"
               fill
               className="object-cover"
               priority
-              sizes="(max-width: 768px) 90vw, 400px"
+              sizes="(max-width: 768px) 85vw, 360px"
             />
           </div>
           
-          <div className="p-4 bg-card">
+          <div className="p-4 bg-card shrink-0">
             <Button 
               asChild 
-              className="w-full bg-accent text-accent-foreground hover:bg-accent/90 text-lg font-bold py-7 shadow-lg uppercase tracking-widest transition-transform hover:scale-[1.02]"
+              className="w-full bg-accent text-accent-foreground hover:bg-accent/90 text-base font-bold py-6 shadow-lg uppercase tracking-wider transition-transform hover:scale-[1.02]"
               onClick={() => setIsOpen(false)}
             >
               <Link href={whatsappUrl} target="_blank" rel="noopener noreferrer">
