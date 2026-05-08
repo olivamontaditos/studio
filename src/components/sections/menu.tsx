@@ -173,7 +173,7 @@ export const menuCategories = [
     description: "Expresso com leite vaporizado e uma fina camada de espuma.",
     items: [
       { name: "Caffè Latte Clássico", description: "Dose de expresso com leite vaporizado e uma fina camada de espuma.", price: "R$ 12,90" },
-      { name: "Vanilla Latte", description: "Nosso latte clássico com um toque de extrato natural de baunilha.", price: "R$ 16,00" },
+      { name: "Vanilla Latte", description: "Nosso latte clássico with um toque de extrato natural de baunilha.", price: "R$ 16,00" },
       { name: "Macchiato tradicional", description: "O clássico manchado com uma nuvem de leite vaporizado.", price: "R$ 9,90" },
       { name: "Caramel Macchiato", description: "Expresso, uma camada generosa de espuma de leite finalizada com calda de caramelo.", price: "R$ 12,90" },
     ],
@@ -221,8 +221,6 @@ export const menuCategories = [
     items: [
       { name: "Pilsen (300ml)", price: "R$ 12,00" },
       { name: "Pilsen (500ml)", price: "R$ 18,00" },
-      { name: "APA (300ml)", price: "R$ 16,00" },
-      { name: "APA (500ml)", price: "R$ 22,00" },
     ],
   },
   {
@@ -234,7 +232,7 @@ export const menuCategories = [
       { name: "Oliva Sunset Gym", description: "Nossa criação exclusiva: gin premium combinado com o frescor do suco de laranja, toque aromático de licor de laranja, finalizado com dulçor e a cor intensa do Monin de framboesa.", price: "R$ 34,00" },
       { name: "Carajillo 43", description: "Licor 43 e café expresso premium batidos com gelo e monin de pera. Aveludado e icônico.", price: "R$39,00" },
       { name: "Jägermeister", description: "Licor Fino de Ervas (dose 50ml).", price: "R$ 35,00" },
-      { name: "Jägerbomb", description: "Jägermeister (50ml) com Monster (473ml).", price: "R$ 55,00" },
+      { name: "Jägerbomb", description: "Jägermeister (50ml) with Monster (473ml).", price: "R$ 55,00" },
     ],
   },
 ];
