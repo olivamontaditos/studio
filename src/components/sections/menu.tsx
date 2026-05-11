@@ -125,6 +125,23 @@ export const menuCategories = [
     ],
   },
   {
+    name: "COMBOS",
+    items: [
+      {
+        name: 'Combo do Estudante (O "Clássico da Tarde")',
+        description: "Montadito M11 - Clássico Madrileño + Batata Chips + Refrigerante (lata) ou Suco de Laranja. Quer trocar o refrigerante pelo Suco de Morango com Ninho por apenas + R$ 8,00?",
+        price: "R$ 27,00",
+        imageUrl: "https://64.media.tumblr.com/122bb499e0d332197eb0fc8b7fbcb01e/ef8bd0d492ebf856-a7/s2048x3072/9926e92285eca69d42d5ce6b3104778b25ffbf57.jpg"
+      },
+      {
+        name: "Combo Refresh (Refrescância de Madrid)",
+        description: "Montadito M05: Madrid Fresh (Peru e Muçarela de Búfala no Pan de Coca crocante) + Soda Monin Batida (Sabor à escolha: Maçã Verde, Morango ou Framboesa).",
+        price: "R$ 35,00",
+        imageUrl: "https://64.media.tumblr.com/55b653be62959a66e2c6af8fcf1700c5/53f8a4be3e21104f-24/s2048x3072/a36cbb662cb027dc8e3555109de063d564b90c5f.jpg"
+      }
+    ]
+  },
+  {
     name: "ESPECIAIS",
     description: "Pratos autênticos e porções para compartilhar.",
     items: [
@@ -143,21 +160,6 @@ export const menuCategories = [
       { name: "Morango com Nutella", description: "Sorvete de morango natural com uma generosa camada de Nutella legítima por cima.", price: "R$ 24,00" },
       { name: "Pistache Premium", description: "Elaborado com pistaches selecionados para um sabor intenso.", price: "R$ 28,00" },
     ],
-  },
-  {
-    name: "COMBOS",
-    items: [
-      {
-        name: 'Combo do Estudante (O "Clássico da Tarde")',
-        description: "Montadito M11 - Clássico Madrileño + Batata Chips + Refrigerante (lata) ou Suco de Laranja. Quer trocar o refrigerante pelo Suco de Morango com Ninho por apenas + R$ 8,00?",
-        price: "R$ 27,00",
-      },
-      {
-        name: "Combo Refresh (Refrescância de Madrid)",
-        description: "Montadito M05: Madrid Fresh (Peru e Muçarela de Búfala no Pan de Coca crocante) + Soda Monin Batida (Sabor à escolha: Maçã Verde, Morango ou Framboesa).",
-        price: "R$ 35,00",
-      }
-    ]
   },
   {
     name: "EXPRESSOS",
@@ -264,7 +266,6 @@ const textOnlyCategories = [
     "BEBIDAS & SODAS", 
     "CHOPP",
     "COQUETELARIA",
-    "COMBOS",
 ];
 
 export default function MenuSection({ variant = 'full' }: { variant?: 'full' | 'summary' }) {
