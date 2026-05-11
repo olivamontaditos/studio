@@ -7,7 +7,6 @@ import { FirebaseClientProvider } from "@/firebase/client-provider";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import IfoodPopup from "@/components/ifood-popup";
-import PromoPopup from "@/components/promo-popup";
 
 const fontBody = Inter({
   subsets: ["latin"],
@@ -42,7 +41,6 @@ export default function RootLayout({
       >
         <FirebaseClientProvider>
           <IfoodPopup />
-          <PromoPopup />
           <div className="flex flex-col min-h-screen">
             <Header />
             <main className="flex-1">{children}</main>
