@@ -301,7 +301,7 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                     <>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
                             {summaryItems.map((item) => (
-                                <div key={item.name} className="bg-card rounded-lg shadow-sm overflow-hidden flex flex-col">
+                                <div key={item.name} className="bg-card rounded-lg shadow-sm overflow-hidden flex flex-col transition-all duration-300 hover:shadow-md animate-in fade-in slide-in-from-bottom-4">
                                     {item.imageUrl && (
                                         <Dialog>
                                         <DialogTrigger asChild>
@@ -310,7 +310,7 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                                                 src={item.imageUrl}
                                                 alt={item.name}
                                                 fill
-                                                className="object-cover transition-transform duration-300 hover:scale-105"
+                                                className="object-cover transition-transform duration-500 hover:scale-110"
                                                 sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
                                             />
                                             </div>
@@ -343,7 +343,7 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                               ))}
                         </div>
                         <div className="text-center">
-                            <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
+                            <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 animate-pulse-slow">
                                 <Link href="/menu">Ver Cardápio Completo</Link>
                             </Button>
                         </div>
@@ -358,13 +358,13 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                         <AccordionItem 
                             value={category.name} 
                             key={category.name} 
-                            className="border-b-0 rounded-lg bg-card shadow-sm transition-all"
+                            className="border-b-0 rounded-lg bg-card shadow-sm transition-all overflow-hidden"
                         >
-                            <AccordionTrigger className="p-4 hover:no-underline rounded-lg">
+                            <AccordionTrigger className="p-4 hover:no-underline rounded-lg group">
                                 <div className="flex items-center gap-4 text-left">
-                                    <Icon className="h-6 w-6 text-primary flex-shrink-0 transition-colors" />
+                                    <Icon className="h-6 w-6 text-primary flex-shrink-0 transition-all duration-300 group-hover:scale-125 group-hover:rotate-12" />
                                     <div>
-                                        <h3 className="text-lg font-headline text-foreground">{category.name}</h3>
+                                        <h3 className="text-lg font-headline text-foreground transition-colors group-hover:text-primary">{category.name}</h3>
                                         {category.description && <p className="text-sm text-muted-foreground font-normal mt-1">{category.description}</p>}
                                     </div>
                                 </div>
@@ -374,7 +374,7 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                                 {isTextOnly ? (
                                     <div className="space-y-6">
                                         {category.items.map((item, index) => (
-                                            <div key={item.name} className="flex justify-between items-start">
+                                            <div key={item.name} className="flex justify-between items-start animate-in fade-in slide-in-from-left-2 duration-300">
                                                 <div>
                                                     <p className="text-foreground font-semibold text-lg">{item.name}</p>
                                                     {item.description && (
@@ -388,7 +388,7 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                                 ) : (
                                     <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
                                     {category.items.map((item, index) => (
-                                        <div key={item.name} className="bg-background rounded-lg shadow-sm overflow-hidden flex flex-col transition-all duration-300">
+                                        <div key={item.name} className="bg-background rounded-lg shadow-sm overflow-hidden flex flex-col transition-all duration-300 hover:shadow-md animate-in fade-in zoom-in-95 duration-300">
                                             {item.imageUrl && (
                                                 <Dialog>
                                                 <DialogTrigger asChild>
@@ -397,7 +397,7 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                                                         src={item.imageUrl}
                                                         alt={item.name}
                                                         fill
-                                                        className="object-cover transition-transform duration-300 hover:scale-105"
+                                                        className="object-cover transition-transform duration-500 hover:scale-110"
                                                         sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
                                                     />
                                                     </div>
