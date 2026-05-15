@@ -63,6 +63,12 @@ export const menuCategories = [
         price: "38,90", 
         imageUrl: "https://64.media.tumblr.com/9e260afe66273c0a6158761992ceb67d/0729a521a5d6cff4-2b/s2048x3072/2bb44eb1a215e7d3eb24b197bf77581526abaf24.jpg" 
       },
+      { 
+        name: "M09. Pastrami Oliva (EUA)", 
+        description: "Pastrami defumado artesanal de alta qualidade, queijo derretido, o toque refrescante do Vinagrete do William e a cremosidade do nosso creme de queijo exclusivo.", 
+        price: "32,00", 
+        imageUrl: "https://64.media.tumblr.com/fb5479c4df91056aa58fb94de08f5ab9/c86b546fc7a1ad02-d0/s2048x3072/e0735eb06afe83a0512493e7c3e4a01bd5ed261b.jpg" 
+      },
     ],
   },
   {
