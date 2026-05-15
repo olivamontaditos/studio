@@ -34,31 +34,31 @@ export const menuCategories = [
     description: "Uma seleção de montaditos exclusivos inspirados nas maiores seleções do mundo. Um novo lançamento a cada dia!",
     items: [
       { 
-        name: "Montadito Entrecot", 
+        name: "Montadito Entrecot (Argentina)", 
         description: "Pão de coca, queijo muçarela, tiras de entrecot suculentas, vinagrete artesanal, chimichurri e molho de tomate e alho.", 
         price: "35,90", 
         imageUrl: "https://64.media.tumblr.com/a4330071a86ebeee091a1370c742cdd3/9891cbcf8be8e474-e3/s2048x3072/3797d7dc4a26dbbee1a480588598a9d567ba3933.jpg" 
       },
       { 
-        name: "M03. Jamón Serrano Supremo", 
+        name: "M03. Jamón Serrano Supremo (Espanha)", 
         description: "Uma viagem à Espanha: o autêntico presunto cru serrano harmonizado com muçarela de búfala fresca, rúcula crocante e o toque especial de pimentões marinados no azeite de oliva.", 
         price: "32,00", 
         imageUrl: "https://64.media.tumblr.com/7fcab6e70efc0fce1fa7a286d2b2b316/0729a521a5d6cff4-cb/s2048x3072/bd1a81a520067e76c288a701d8889d820dd2ec19.jpg" 
       },
       { 
-        name: "M04. Germânico-Ibérico", 
+        name: "M04. Germânico-Ibérico (Alemanha)", 
         description: "A união perfeita de tradições. Nossa salsicha artesanal premium é acompanhada pelo clássico Vinagrete do William e um toque generoso de maionese de alho no Pan de Coca crocante.", 
         price: "24,00", 
         imageUrl: "https://64.media.tumblr.com/80862ce7c59ba9297564ba9c92271ccc/0729a521a5d6cff4-1a/s2048x3072/a63b54494b40a8beac1c6dd677a9fbfa3ec3a86a.jpg" 
       },
       { 
-        name: "M06. Frango Cremoso Melt", 
+        name: "M06. Frango Cremoso Melt (México)", 
         description: "Frango em tiras grelhada na hora suculento envolvido em um creme de queijo irresistível, com cobertura de muçarela derretida e o contraste crocante da batata palha sobre o Pan de Coca artesanal.", 
         price: "22,90", 
         imageUrl: "https://64.media.tumblr.com/5bca88fd3ae950b2a16db082dcf707ef/60a8116118a48c16-50/s2048x3072/7041b887ac6a1325a5bebb8fdc3585be10714ed5.pnj" 
       },
       { 
-        name: "M08. Mignon Gruyère", 
+        name: "M08. Mignon Gruyère (França)", 
         description: "O ápice do sabor: tiras suculentas de mignon grelhado, a sofisticação do queijo Gruyère derretido e a doçura da cebola caramelizada artesanal no nosso Pan de Coca crocante.", 
         price: "38,90", 
         imageUrl: "https://64.media.tumblr.com/9e260afe66273c0a6158761992ceb67d/0729a521a5d6cff4-2b/s2048x3072/2bb44eb1a215e7d3eb24b197bf77581526abaf24.jpg" 
