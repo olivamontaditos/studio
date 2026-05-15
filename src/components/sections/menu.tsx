@@ -1,3 +1,4 @@
+
 'use client';
 
 import Image from 'next/image';
@@ -24,10 +25,23 @@ import {
     GraduationCap,
     IceCream2,
     UtensilsCrossed,
+    Trophy,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export const menuCategories = [
+  {
+    name: "ESPECIAIS COPA DO MUNDO 🏆",
+    description: "Uma seleção de montaditos exclusivos inspirados nas maiores seleções do mundo. Um novo lançamento a cada dia!",
+    items: [
+      { 
+        name: "Argentina", 
+        description: "Carne frita na hora, queijo muçarela derretido e o clássico vinagrete da casa no nosso Pan de Coca artesanal.", 
+        price: "28,90", 
+        imageUrl: "https://images.unsplash.com/photo-1550506391-422204481005?q=80&w=1000" 
+      },
+    ],
+  },
   {
     name: "MONTADITOS (No Pan de Coca Espanhol)",
     description: "Base: Emulsão de tomate, alho e azeite. Dica: Troque o Pan de Coca por Croissant Amanteigado por + 5,00.",
@@ -175,7 +189,7 @@ export const menuCategories = [
     description: "Expresso com leite vaporizado e uma fina camada de espuma.",
     items: [
       { name: "Caffè Latte Clássico", description: "Dose de expresso com leite vaporizado e uma fina camada de espuma.", price: "12,90" },
-      { name: "Vanilla Latte", description: "Nosso latte clássico with um toque de extrato natural de baunilha.", price: "16,00" },
+      { name: "Vanilla Latte", description: "Nosso latte clássico com um toque de extrato natural de baunilha.", price: "16,00" },
       { name: "Macchiato tradicional", description: "O clássico manchado com uma nuvem de leite vaporizado.", price: "9,90" },
       { name: "Caramel Macchiato", description: "Expresso, uma camada generosa de espuma de leite finalizada com calda de caramelo.", price: "12,90" },
     ],
@@ -240,6 +254,7 @@ export const menuCategories = [
 ];
 
 const iconMap: { [key: string]: React.ElementType } = {
+    "ESPECIAIS COPA DO MUNDO 🏆": Trophy,
     "ESPECIAIS": UtensilsCrossed,
     "MONTADITOS (No Pan de Coca Espanhol)": Sandwich,
     "SOBREMESAS & MONTADITOS DOCES": Cake,
@@ -351,7 +366,7 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                     </>
                 ) : (
                 <>
-                <Accordion type="multiple" className="w-full space-y-4">
+                <Accordion type="multiple" defaultValue={["ESPECIAIS COPA DO MUNDO 🏆"]} className="w-full space-y-4">
                     {menuCategories.map((category) => {
                         const Icon = iconMap[category.name] || Sandwich;
                         const isTextOnly = textOnlyCategories.includes(category.name);
