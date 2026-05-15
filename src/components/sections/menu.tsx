@@ -35,7 +35,7 @@ export const menuCategories = [
     items: [
       { 
         name: "Montadito Entrecot (Argentina)", 
-        description: "Pão de coca, queijo muçarela, tiras de entrecot suculentas, vinagrete artesanal, chimichurri e molho de tomate e alho.", 
+        description: "Pão de coca, queijo muçarela, tiras de entrecot suculentas, vinagrete artesanal, chimichurri, maionese de alho e molho de tomate e alho.", 
         price: "35,90", 
         imageUrl: "https://64.media.tumblr.com/a4330071a86ebeee091a1370c742cdd3/9891cbcf8be8e474-e3/s2048x3072/3797d7dc4a26dbbee1a480588598a9d567ba3933.jpg" 
       },
@@ -53,7 +53,7 @@ export const menuCategories = [
       },
       { 
         name: "M06. Frango Cremoso Melt (México)", 
-        description: "Frango em tiras grelhada na hora suculento envolvido em um creme de queijo irresistível, com cobertura de muçarela derretida e o contraste crocante da batata palha sobre o Pan de Coca artesanal.", 
+        description: "Frango em tiras grelhado na hora suculento, envolvido em um creme de queijo apimentado com chilli, com cobertura de muçarela derretida e o contraste crocante da batata palha sobre o Pan de Coca artesanal.", 
         price: "22,90", 
         imageUrl: "https://64.media.tumblr.com/5bca88fd3ae950b2a16db082dcf707ef/60a8116118a48c16-50/s2048x3072/7041b887ac6a1325a5bebb8fdc3585be10714ed5.pnj" 
       },
@@ -101,7 +101,7 @@ export const menuCategories = [
       },
       { 
         name: "M06. Frango Cremoso Melt", 
-        description: "Frango em tiras grelhada na hora suculento envolvido em um creme de queijo irresistível, com cobertura de muçarela derretida e o contraste crocante da batata palha sobre o Pan de Coca artesanal.", 
+        description: "Frango em tiras grelhado na hora suculento, envolvido em um creme de queijo apimentado com chilli, com cobertura de muçarela derretida e o contraste crocante da batata palha sobre o Pan de Coca artesanal.", 
         price: "22,90", 
         imageUrl: "https://64.media.tumblr.com/5bca88fd3ae950b2a16db082dcf707ef/60a8116118a48c16-50/s2048x3072/7041b887ac6a1325a5bebb8fdc3585be10714ed5.pnj" 
       },
