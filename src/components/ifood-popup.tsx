@@ -65,6 +65,27 @@ export default function IfoodPopup() {
     setPopupState('closed');
   };
 
+  // Close with ESC key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        if (popupState === 'initial') {
+          handleCloseInitial();
+        } else if (popupState === 'floating') {
+          handleCloseFloating();
+        }
+      }
+    };
+
+    if (popupState !== 'closed') {
+      window.addEventListener('keydown', handleKeyDown);
+    }
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [popupState]);
+
   // Set initial position for floating icon when it appears
   useEffect(() => {
     if (popupState === 'floating' && popupRef.current) {
