@@ -1,4 +1,3 @@
-
 'use client';
 
 import Image from 'next/image';
@@ -38,7 +37,7 @@ export const menuCategories = [
         name: "Argentina", 
         description: "Carne frita na hora, queijo muçarela derretido e o clássico vinagrete da casa no nosso Pan de Coca artesanal.", 
         price: "28,90", 
-        imageUrl: "https://images.unsplash.com/photo-1550506391-422204481005?q=80&w=1000" 
+        imageUrl: "https://64.media.tumblr.com/a4330071a86ebeee091a1370c742cdd3/9891cbcf8be8e474-e3/s2048x3072/3797d7dc4a26dbbee1a480588598a9d567ba3933.jpg" 
       },
     ],
   },
