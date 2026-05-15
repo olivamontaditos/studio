@@ -34,8 +34,8 @@ export const menuCategories = [
     description: "Uma seleção de montaditos exclusivos inspirados nas maiores seleções do mundo. Um novo lançamento a cada dia!",
     items: [
       { 
-        name: "Argentina", 
-        description: "Pan de Coca artesanal, queijo muçarela derretido, tiras de entrecot suculentas, vinagrete artesanal, chimichurri e molho de tomate e alho.", 
+        name: "Montadito Entrecot", 
+        description: "Pão de coca, queijo muçarela, tiras de entrecot suculentas, vinagrete artesanal, chimichurri e molho de tomate e alho.", 
         price: "35,90", 
         imageUrl: "https://64.media.tumblr.com/a4330071a86ebeee091a1370c742cdd3/9891cbcf8be8e474-e3/s2048x3072/3797d7dc4a26dbbee1a480588598a9d567ba3933.jpg" 
       },
