@@ -142,7 +142,7 @@ export const menuCategories = [
         imageUrl: "https://64.media.tumblr.com/41f9c00fe2df78e627106ecdd5981753/7674f98079392f13-9f/s2048x3072/a14f089ed5f234a683d5eaf62db4bd4732c3ef7f.jpg" 
       },
       { 
-        name: "M12. Montadito Entrecot", 
+        name: "m12. Montadito Entrecot", 
         description: "Pão de coca, queijo muçarela, tiras de entrecot suculentas, vinagrete artesanal, chimichurri, maionese de alho e molho de tomate e alho.", 
         price: "35,90", 
         imageUrl: "https://64.media.tumblr.com/a4330071a86ebeee091a1370c742cdd3/9891cbcf8be8e474-e3/s2048x3072/3797d7dc4a26dbbee1a480588598a9d567ba3933.jpg" 
@@ -320,10 +320,15 @@ const textOnlyCategories = [
 
 export default function MenuSection({ variant = 'full' }: { variant?: 'full' | 'summary' }) {
     const isSummary = variant === 'summary';
-    const summaryItems = menuCategories
-      .flatMap(category => category.items)
-      .filter(item => item.imageUrl)
-      .slice(0, 6);
+    
+    // Na Home (summary), priorizamos exibir apenas os itens da Copa do Mundo
+    const copaCategory = menuCategories.find(c => c.name.includes("COPA DO MUNDO"));
+    const summaryItems = isSummary && copaCategory 
+      ? copaCategory.items 
+      : menuCategories
+          .flatMap(category => category.items)
+          .filter(item => item.imageUrl)
+          .slice(0, 6);
 
     return (
         <section 
@@ -336,13 +341,15 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
             <div className="w-full max-w-6xl mx-auto px-4">
                 <header className="text-center mb-12">
                     <p className="text-sm font-bold uppercase tracking-wider text-primary">
-                        Cardápio
+                        {isSummary ? "Destaque" : "Cardápio"}
                     </p>
                     <h2 className="mt-2 font-headline text-4xl font-bold text-foreground md:text-5xl">
-                        Nossas Delícias
+                        {isSummary ? "Especiais Copa do Mundo 🏆" : "Nossas Delícias"}
                     </h2>
                     <p className="mt-4 max-w-2xl mx-auto text-muted-foreground">
-                        Explore nossas delícias artesanais, dos montaditos clássicos às sobremesas divinas.
+                        {isSummary 
+                          ? "Experimente nossa seleção exclusiva inspirada nas maiores seleções do mundo."
+                          : "Explore nossas delícias artesanais, dos montaditos clássicos às sobremesas divinas."}
                     </p>
                 </header>
 
@@ -383,7 +390,7 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                                         <div className="flex-grow">
                                             <p className="text-foreground font-semibold text-lg">{item.name}</p>
                                             {item.description && (
-                                                <p className="text-sm text-muted-foreground mt-1">{item.description}</p>
+                                                <p className="text-sm text-muted-foreground mt-1 line-clamp-2">{item.description}</p>
                                             )}
                                         </div>
                                         <div className="flex justify-between items-center mt-4">
