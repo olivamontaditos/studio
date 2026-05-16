@@ -141,6 +141,12 @@ export const menuCategories = [
         price: "15,90", 
         imageUrl: "https://64.media.tumblr.com/41f9c00fe2df78e627106ecdd5981753/7674f98079392f13-9f/s2048x3072/a14f089ed5f234a683d5eaf62db4bd4732c3ef7f.jpg" 
       },
+      { 
+        name: "M12. Montadito Entrecot", 
+        description: "Pão de coca, queijo muçarela, tiras de entrecot suculentas, vinagrete artesanal, chimichurri, maionese de alho e molho de tomate e alho.", 
+        price: "35,90", 
+        imageUrl: "https://64.media.tumblr.com/a4330071a86ebeee091a1370c742cdd3/9891cbcf8be8e474-e3/s2048x3072/3797d7dc4a26dbbee1a480588598a9d567ba3933.jpg" 
+      },
     ],
   },
   {
