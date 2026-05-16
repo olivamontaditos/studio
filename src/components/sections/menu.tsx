@@ -34,7 +34,7 @@ export const menuCategories = [
     description: "Uma seleção de montaditos exclusivos inspirados nas maiores seleções do mundo. Um novo lançamento a cada dia!",
     items: [
       { 
-        name: "Montadito Entrecot (Argentina)", 
+        name: "M12. Montadito Entrecot (Argentina)", 
         description: "Pão de coca, queijo muçarela, tiras de entrecot suculentas, vinagrete artesanal, chimichurri, maionese de alho e molho de tomate e alho.", 
         price: "35,90", 
         imageUrl: "https://64.media.tumblr.com/a4330071a86ebeee091a1370c742cdd3/9891cbcf8be8e474-e3/s2048x3072/3797d7dc4a26dbbee1a480588598a9d567ba3933.jpg" 
@@ -142,7 +142,7 @@ export const menuCategories = [
         imageUrl: "https://64.media.tumblr.com/41f9c00fe2df78e627106ecdd5981753/7674f98079392f13-9f/s2048x3072/a14f089ed5f234a683d5eaf62db4bd4732c3ef7f.jpg" 
       },
       { 
-        name: "m12. Montadito Entrecot", 
+        name: "M12. Montadito Entrecot", 
         description: "Pão de coca, queijo muçarela, tiras de entrecot suculentas, vinagrete artesanal, chimichurri, maionese de alho e molho de tomate e alho.", 
         price: "35,90", 
         imageUrl: "https://64.media.tumblr.com/a4330071a86ebeee091a1370c742cdd3/9891cbcf8be8e474-e3/s2048x3072/3797d7dc4a26dbbee1a480588598a9d567ba3933.jpg" 
@@ -412,6 +412,8 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                     {menuCategories.map((category) => {
                         const Icon = iconMap[category.name] || Sandwich;
                         const isTextOnly = textOnlyCategories.includes(category.name);
+                        const isCopaCategory = category.name === "ESPECIAIS COPA DO MUNDO 🏆";
+                        
                         return (
                         <AccordionItem 
                             value={category.name} 
@@ -445,47 +447,54 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                                     </div>
                                 ) : (
                                     <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
-                                    {category.items.map((item, index) => (
-                                        <div key={item.name} className="bg-background rounded-lg shadow-sm overflow-hidden flex flex-col transition-all duration-300 hover:shadow-md animate-in fade-in zoom-in-95 duration-300">
-                                            {item.imageUrl && (
-                                                <Dialog>
-                                                <DialogTrigger asChild>
-                                                    <div className="relative h-56 w-full cursor-pointer overflow-hidden">
-                                                    <Image
-                                                        src={item.imageUrl}
-                                                        alt={item.name}
-                                                        fill
-                                                        className="object-cover transition-transform duration-500 hover:scale-110"
-                                                        sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                                                    />
+                                    {category.items.map((item, index) => {
+                                        // Na página /menu, removemos o prefixo "MXX. " apenas para a categoria Copa
+                                        const displayName = (!isSummary && isCopaCategory) 
+                                            ? item.name.replace(/^M\d+\.\s*/i, '') 
+                                            : item.name;
+
+                                        return (
+                                            <div key={item.name} className="bg-background rounded-lg shadow-sm overflow-hidden flex flex-col transition-all duration-300 hover:shadow-md animate-in fade-in zoom-in-95 duration-300">
+                                                {item.imageUrl && (
+                                                    <Dialog>
+                                                    <DialogTrigger asChild>
+                                                        <div className="relative h-56 w-full cursor-pointer overflow-hidden">
+                                                        <Image
+                                                            src={item.imageUrl}
+                                                            alt={item.name}
+                                                            fill
+                                                            className="object-cover transition-transform duration-500 hover:scale-110"
+                                                            sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                                                        />
+                                                        </div>
+                                                    </DialogTrigger>
+                                                    <DialogContent className="p-0 border-0 max-w-2xl bg-transparent shadow-none">
+                                                        <div className="relative aspect-square w-full">
+                                                        <Image
+                                                            src={item.imageUrl}
+                                                            alt={item.name}
+                                                            fill
+                                                            className="object-contain rounded-lg"
+                                                            sizes="100vw"
+                                                        />
+                                                        </div>
+                                                    </DialogContent>
+                                                    </Dialog>
+                                                )}
+                                                <div className="p-4 flex flex-col flex-grow">
+                                                    <div className="flex-grow">
+                                                        <p className="text-foreground font-semibold text-lg">{displayName}</p>
+                                                        {item.description && (
+                                                            <p className="text-sm text-muted-foreground mt-1">{item.description}</p>
+                                                        )}
                                                     </div>
-                                                </DialogTrigger>
-                                                <DialogContent className="p-0 border-0 max-w-2xl bg-transparent shadow-none">
-                                                    <div className="relative aspect-square w-full">
-                                                    <Image
-                                                        src={item.imageUrl}
-                                                        alt={item.name}
-                                                        fill
-                                                        className="object-contain rounded-lg"
-                                                        sizes="100vw"
-                                                    />
+                                                    <div className="flex justify-between items-center mt-4">
+                                                        <p className="font-bold text-xl text-primary">{item.price}</p>
                                                     </div>
-                                                </DialogContent>
-                                                </Dialog>
-                                            )}
-                                            <div className="p-4 flex flex-col flex-grow">
-                                                <div className="flex-grow">
-                                                    <p className="text-foreground font-semibold text-lg">{item.name}</p>
-                                                    {item.description && (
-                                                        <p className="text-sm text-muted-foreground mt-1">{item.description}</p>
-                                                    )}
-                                                </div>
-                                                <div className="flex justify-between items-center mt-4">
-                                                    <p className="font-bold text-xl text-primary">{item.price}</p>
                                                 </div>
                                             </div>
-                                        </div>
-                                    ))}
+                                        );
+                                    })}
                                     </div>
                                 )}
                                 </div>
