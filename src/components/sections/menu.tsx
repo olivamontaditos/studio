@@ -31,17 +31,6 @@ import { cn } from "@/lib/utils";
 
 export const menuCategories = [
   {
-    name: "ALMOÇO",
-    description: "Servido de Segunda a Sábado. A combinação perfeita para o seu meio-dia.",
-    items: [
-      {
-        name: "Strogonoff de Frango Premium",
-        description: "Clássico e irresistível! Pedaços macios de peito de frango envoltos em um molho super cremoso e perfeitamente temperado. Acompanha arroz branco bem soltinho e crocantes batatas chips douradas na medida certa. Para completar, uma refrescante salada da casa com mix de verdes, tomates-cereja e rabanete.",
-        price: "39,90 (+ 20,00 se for de Mignon)",
-      }
-    ]
-  },
-  {
     name: "ESPECIAIS COPA DO MUNDO 🏆",
     description: "Uma seleção de montaditos exclusivos inspirados nas maiores seleções do mundo. Um novo lançamento a cada dia!",
     items: [
@@ -82,6 +71,17 @@ export const menuCategories = [
         imageUrl: "https://64.media.tumblr.com/fb5479c4df91056aa58fb94de08f5ab9/c86b546fc7a1ad02-d0/s2048x3072/e0735eb06afe83a0512493e7c3e4a01bd5ed261b.jpg" 
       },
     ],
+  },
+  {
+    name: "ALMOÇO",
+    description: "Servido de Segunda a Sábado. A combinação perfeita para o seu meio-dia.",
+    items: [
+      {
+        name: "Strogonoff de Frango Premium",
+        description: "Clássico e irresistível! Pedaços macios de peito de frango envoltos em um molho super cremoso e perfeitamente temperado. Acompanha arroz branco bem soltinho e crocantes batatas chips douradas na medida certa. Para completar, uma refrescante salada da casa com mix de verdes, tomates-cereja e rabanete.",
+        price: "39,90 (+ 20,00 se for de Mignon)",
+      }
+    ]
   },
   {
     name: "MONTADITOS (No Pan de Coca Espanhol)",
@@ -422,11 +422,11 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                     </>
                 ) : (
                 <>
-                <Accordion type="multiple" defaultValue={["ALMOÇO", "ESPECIAIS COPA DO MUNDO 🏆"]} className="w-full space-y-4">
+                <Accordion type="multiple" className="w-full space-y-4">
                     {menuCategories.map((category) => {
                         const Icon = iconMap[category.name] || Sandwich;
                         const isTextOnly = textOnlyCategories.includes(category.name);
-                        const isCopaCategory = category.name === "ESPECIAIS COPA DO MUNDO 🏆";
+                        const isCopaCategory = category.name.includes("COPA DO MUNDO");
                         
                         return (
                         <AccordionItem 
