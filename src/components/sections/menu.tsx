@@ -25,10 +25,22 @@ import {
     IceCream2,
     UtensilsCrossed,
     Trophy,
+    Sun,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export const menuCategories = [
+  {
+    name: "ALMOÇO",
+    description: "Servido de Segunda a Sábado. A combinação perfeita para o seu meio-dia.",
+    items: [
+      {
+        name: "Strogonoff de Frango Premium",
+        description: "Clássico e irresistível! Pedaços macios de peito de frango envoltos em um molho super cremoso e perfeitamente temperado. Acompanha arroz branco bem soltinho e crocantes batatas chips douradas na medida certa. Para completar, uma refrescante salada da casa com mix de verdes, tomates-cereja e rabanete.",
+        price: "39,90 (+ 20,00 se for de Mignon)",
+      }
+    ]
+  },
   {
     name: "ESPECIAIS COPA DO MUNDO 🏆",
     description: "Uma seleção de montaditos exclusivos inspirados nas maiores seleções do mundo. Um novo lançamento a cada dia!",
@@ -289,6 +301,7 @@ export const menuCategories = [
 ];
 
 const iconMap: { [key: string]: React.ElementType } = {
+    "ALMOÇO": Sun,
     "ESPECIAIS COPA DO MUNDO 🏆": Trophy,
     "ESPECIAIS": UtensilsCrossed,
     "MONTADITOS (No Pan de Coca Espanhol)": Sandwich,
@@ -307,6 +320,7 @@ const iconMap: { [key: string]: React.ElementType } = {
 };
 
 const textOnlyCategories = [
+    "ALMOÇO",
     "SORVETES ARTESANAIS (PRODUÇÃO PRÓPRIA)",
     "EXPRESSOS", 
     "LATTE", 
@@ -349,7 +363,7 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                     <p className="mt-4 max-w-2xl mx-auto text-muted-foreground">
                         {isSummary 
                           ? "Experimente nossa seleção exclusiva inspirada nas maiores seleções do mundo."
-                          : "Explore nossas delícias artesanais, dos montaditos clássicos às sobremesas divinas."}
+                          : "Explore nossas delícias artesanais, do almoço especial aos montaditos clássicos."}
                     </p>
                 </header>
 
@@ -408,7 +422,7 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                     </>
                 ) : (
                 <>
-                <Accordion type="multiple" defaultValue={["ESPECIAIS COPA DO MUNDO 🏆"]} className="w-full space-y-4">
+                <Accordion type="multiple" defaultValue={["ALMOÇO", "ESPECIAIS COPA DO MUNDO 🏆"]} className="w-full space-y-4">
                     {menuCategories.map((category) => {
                         const Icon = iconMap[category.name] || Sandwich;
                         const isTextOnly = textOnlyCategories.includes(category.name);
