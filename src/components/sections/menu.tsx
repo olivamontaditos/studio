@@ -77,6 +77,11 @@ export const menuCategories = [
     description: "Servido de Segunda a Sábado. A combinação perfeita para o seu meio-dia.",
     items: [
       {
+        name: "Entrecôte Especial",
+        description: "Corte nobre de Entrecôte grelhado no ponto perfeito, acompanhado de arroz branco soltinho e batatas chips artesanais super crocantes. Harmonizado com nosso autêntico chimichurri e vinagrete da casa. Inclui uma refrescante salada especial de entrada.",
+        price: "49,90",
+      },
+      {
         name: "Strogonoff de Frango Premium",
         description: "Clássico e irresistível! Pedaços macios de peito de frango envoltos em um molho super cremoso e perfeitamente temperado. Acompanha arroz branco bem soltinho e crocantes batatas chips douradas na medida certa. Para completar, uma refrescante salada da casa com mix de verdes, tomates-cereja e rabanete.",
         price: "39,90 (+ 20,00 se for de Mignon)",
