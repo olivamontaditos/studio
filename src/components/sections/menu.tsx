@@ -80,6 +80,11 @@ export const menuCategories = [
         name: "Strogonoff de Frango Premium",
         description: "Clássico e irresistível! Pedaços macios de peito de frango envoltos em um molho super cremoso e perfeitamente temperado. Acompanha arroz branco bem soltinho e crocantes batatas chips douradas na medida certa. Para completar, uma refrescante salada da casa com mix de verdes, tomates-cereja e rabanete.",
         price: "39,90 (+ 20,00 se for de Mignon)",
+      },
+      {
+        name: "Tortilha de Batatas com Salada Especial",
+        description: "A clássica tortilha espanhola (batata e ovos) servida com nossa salada especial da casa. Opcional: Adicione Mignon ou Jamón Serrano por + 20,00.",
+        price: "39,90",
       }
     ]
   },
@@ -203,17 +208,6 @@ export const menuCategories = [
     ]
   },
   {
-    name: "ESPECIAIS",
-    description: "Pratos autênticos e porções para compartilhar.",
-    items: [
-      {
-        name: "Tortilha de Batatas com Salada Especial",
-        description: "A clássica tortilha espanhola (batata e ovos) servida com nossa salada especial da casa. Opcional: Adicione Mignon ou Jamón Serrano por + 20,00.",
-        price: "39,90",
-      }
-    ]
-  },
-  {
     name: "SORVETES ARTESANAIS (PRODUÇÃO PRÓPRIA)",
     description: "Textura ultra cremosa aqui na Oliva. Servido na taça com 1 bola de 120g. Dica da Chef: Peça uma bola de sorvete de Baunilha para acompanhar sua fatia de Torta Matilda quente!",
     items: [
@@ -233,7 +227,7 @@ export const menuCategories = [
   },
   {
     name: "LATTE",
-    description: "Expresso com leite vaporizado e uma fina camada de espuma.",
+    description: "Expresso with milk vaporized and a fine layer of foam.",
     items: [
       { name: "Caffè Latte Clássico", description: "Dose de expresso com leite vaporizado e uma fina camada de espuma.", price: "12,90" },
       { name: "Vanilla Latte", description: "Nosso latte clássico com um toque de extrato natural de baunilha.", price: "16,00" },
@@ -303,7 +297,6 @@ export const menuCategories = [
 const iconMap: { [key: string]: React.ElementType } = {
     "ALMOÇO": Sun,
     "ESPECIAIS COPA DO MUNDO 🏆": Trophy,
-    "ESPECIAIS": UtensilsCrossed,
     "MONTADITOS (No Pan de Coca Espanhol)": Sandwich,
     "SOBREMESAS & MONTADITOS DOCES": Cake,
     "TORRONES ARTESANAIS (Receita Original Espanhola)": Gift,
