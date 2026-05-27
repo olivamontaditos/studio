@@ -1,4 +1,5 @@
-import type { Metadata } from "next";
+
+import type { Metadata } from "metadata";
 import { Inter, Alegreya } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
@@ -7,6 +8,7 @@ import { FirebaseClientProvider } from "@/firebase/client-provider";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import IfoodPopup from "@/components/ifood-popup";
+import WhatsappButton from "@/components/whatsapp-button";
 
 const fontBody = Inter({
   subsets: ["latin"],
@@ -41,6 +43,7 @@ export default function RootLayout({
       >
         <FirebaseClientProvider>
           <IfoodPopup />
+          <WhatsappButton />
           <div className="flex flex-col min-h-screen">
             <Header />
             <main className="flex-1">{children}</main>
