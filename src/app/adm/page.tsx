@@ -1,6 +1,7 @@
+
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { useCollection, useMemoFirebase, useFirestore } from '@/firebase';
 import { collection, query, orderBy } from 'firebase/firestore';
 import { Button } from '@/components/ui/button';
@@ -9,17 +10,26 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import { LogOut, Users, Mail, Phone, Lock } from 'lucide-react';
+import { LogOut, Users, Mail, Phone, Lock, ArrowUpDown, ChevronUp, ChevronDown, Bell } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
+
+type SortField = 'submissionDate' | 'name' | 'email' | 'whatsapp';
+type SortOrder = 'asc' | 'desc';
 
 export default function AdminPage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-
+  const [sortField, setSortField] = useState<SortField>('submissionDate');
+  const [sortOrder, setSortOrder] = useState<SortOrder>('desc');
+  
+  const { toast } = useToast();
   const firestore = useFirestore();
+  const initialLoadTime = useRef(new Date());
+  const prevLeadsCount = useRef<number | null>(null);
 
-  // Memoize a query para evitar re-renders infinitos
+  // Memoize a query base para buscar todos os leads
   const leadsQuery = useMemoFirebase(() => {
     if (!firestore || !isLoggedIn) return null;
     return query(collection(firestore, 'coming_soon_leads'), orderBy('submissionDate', 'desc'));
@@ -27,11 +37,55 @@ export default function AdminPage() {
 
   const { data: leads, isLoading } = useCollection(leadsQuery);
 
+  // Lógica de notificação para novos leads
+  useEffect(() => {
+    if (leads && isLoggedIn) {
+      if (prevLeadsCount.current !== null && leads.length > prevLeadsCount.current) {
+        toast({
+          title: "Novo contato recebido!",
+          description: "Um novo interessado acaba de preencher o formulário.",
+          action: <Bell className="h-4 w-4 text-primary" />,
+        });
+      }
+      prevLeadsCount.current = leads.length;
+    }
+  }, [leads, isLoggedIn, toast]);
+
+  // Ordenação dos dados no cliente para flexibilidade imediata
+  const sortedLeads = useMemo(() => {
+    if (!leads) return [];
+    
+    return [...leads].sort((a, b) => {
+      let valA = a[sortField];
+      let valB = b[sortField];
+
+      // Tratamento especial para datas do Firestore
+      if (sortField === 'submissionDate') {
+        valA = a.submissionDate?.toDate?.() || new Date(0);
+        valB = b.submissionDate?.toDate?.() || new Date(0);
+      }
+
+      if (valA < valB) return sortOrder === 'asc' ? -1 : 1;
+      if (valA > valB) return sortOrder === 'asc' ? 1 : -1;
+      return 0;
+    });
+  }, [leads, sortField, sortOrder]);
+
+  const handleSort = (field: SortField) => {
+    if (sortField === field) {
+      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortField(field);
+      setSortOrder('asc');
+    }
+  };
+
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     if (login === 'om' && password === '2010') {
       setIsLoggedIn(true);
       setError('');
+      initialLoadTime.current = new Date(); // Reset do tempo de carga para destacar novos
     } else {
       setError('Credenciais inválidas.');
     }
@@ -41,6 +95,12 @@ export default function AdminPage() {
     setIsLoggedIn(false);
     setLogin('');
     setPassword('');
+    prevLeadsCount.current = null;
+  };
+
+  const SortIcon = ({ field }: { field: SortField }) => {
+    if (sortField !== field) return <ArrowUpDown className="ml-2 h-4 w-4 opacity-50" />;
+    return sortOrder === 'asc' ? <ChevronUp className="ml-2 h-4 w-4 text-primary" /> : <ChevronDown className="ml-2 h-4 w-4 text-primary" />;
   };
 
   if (!isLoggedIn) {
@@ -91,7 +151,7 @@ export default function AdminPage() {
       <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-12">
         <div>
           <h1 className="font-headline text-4xl font-bold text-primary">Painel de Interessados</h1>
-          <p className="text-muted-foreground mt-2">Acompanhe as pessoas que entraram em contato através do site.</p>
+          <p className="text-muted-foreground mt-2">Gerencie e organize os leads capturados no site em tempo real.</p>
         </div>
         <Button variant="outline" onClick={handleLogout} className="group gap-2 border-destructive/20 text-destructive hover:bg-destructive hover:text-white transition-all">
           <LogOut className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
@@ -128,44 +188,65 @@ export default function AdminPage() {
               <div className="h-10 w-10 border-4 border-primary border-t-transparent rounded-full animate-spin" />
               <p className="text-muted-foreground font-medium">Carregando dados...</p>
             </div>
-          ) : leads && leads.length > 0 ? (
+          ) : sortedLeads.length > 0 ? (
             <div className="overflow-x-auto">
               <Table>
                 <TableHeader className="bg-muted/50">
                   <TableRow>
-                    <TableHead className="w-[180px]">Data e Hora</TableHead>
-                    <TableHead>Nome</TableHead>
-                    <TableHead>E-mail</TableHead>
-                    <TableHead>WhatsApp</TableHead>
+                    <TableHead className="w-[200px] cursor-pointer hover:bg-muted transition-colors" onClick={() => handleSort('submissionDate')}>
+                      <div className="flex items-center">Data e Hora <SortIcon field="submissionDate" /></div>
+                    </TableHead>
+                    <TableHead className="cursor-pointer hover:bg-muted transition-colors" onClick={() => handleSort('name')}>
+                      <div className="flex items-center">Nome <SortIcon field="name" /></div>
+                    </TableHead>
+                    <TableHead className="cursor-pointer hover:bg-muted transition-colors" onClick={() => handleSort('email')}>
+                      <div className="flex items-center">E-mail <SortIcon field="email" /></div>
+                    </TableHead>
+                    <TableHead className="cursor-pointer hover:bg-muted transition-colors" onClick={() => handleSort('whatsapp')}>
+                      <div className="flex items-center">WhatsApp <SortIcon field="whatsapp" /></div>
+                    </TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {leads.map((lead: any) => (
-                    <TableRow key={lead.id} className="hover:bg-primary/5 transition-colors">
-                      <TableCell className="text-muted-foreground whitespace-nowrap text-xs">
-                        {lead.submissionDate?.toDate ? 
-                          format(lead.submissionDate.toDate(), "dd/MM/yyyy 'às' HH:mm", { locale: ptBR }) : 
-                          'Agora'}
-                      </TableCell>
-                      <TableCell className="font-semibold text-foreground">{lead.name}</TableCell>
-                      <TableCell>
-                        <a href={`mailto:${lead.email}`} className="flex items-center gap-2 text-primary hover:underline text-sm">
-                          <Mail className="h-3 w-3" />
-                          {lead.email}
-                        </a>
-                      </TableCell>
-                      <TableCell>
-                        {lead.whatsapp ? (
-                          <a href={`https://wa.me/55${lead.whatsapp}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-green-500 hover:underline text-sm font-medium">
-                            <Phone className="h-3 w-3" />
-                            {lead.whatsapp}
-                          </a>
-                        ) : (
-                          <span className="text-muted-foreground italic text-xs">Não informado</span>
+                  {sortedLeads.map((lead: any) => {
+                    // Verifica se o lead é "novo" (chegou após a abertura da página)
+                    const submissionDate = lead.submissionDate?.toDate?.() || new Date();
+                    const isNew = submissionDate > initialLoadTime.current;
+                    
+                    return (
+                      <TableRow 
+                        key={lead.id} 
+                        className={cn(
+                          "transition-all duration-500",
+                          isNew ? "bg-primary/10 animate-pulse-slow border-l-4 border-l-primary" : "hover:bg-primary/5"
                         )}
-                      </TableCell>
-                    </TableRow>
-                  ))}
+                      >
+                        <TableCell className="text-muted-foreground whitespace-nowrap text-xs">
+                          {lead.submissionDate?.toDate ? 
+                            format(lead.submissionDate.toDate(), "dd/MM/yyyy 'às' HH:mm", { locale: ptBR }) : 
+                            'Agora'}
+                          {isNew && <span className="ml-2 inline-flex items-center rounded-full bg-primary px-2 py-0.5 text-[10px] font-medium text-primary-foreground">Novo</span>}
+                        </TableCell>
+                        <TableCell className="font-semibold text-foreground">{lead.name}</TableCell>
+                        <TableCell>
+                          <a href={`mailto:${lead.email}`} className="flex items-center gap-2 text-primary hover:underline text-sm">
+                            <Mail className="h-3 w-3" />
+                            {lead.email}
+                          </a>
+                        </TableCell>
+                        <TableCell>
+                          {lead.whatsapp ? (
+                            <a href={`https://wa.me/55${lead.whatsapp}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-green-500 hover:underline text-sm font-medium">
+                              <Phone className="h-3 w-3" />
+                              {lead.whatsapp}
+                            </a>
+                          ) : (
+                            <span className="text-muted-foreground italic text-xs">Não informado</span>
+                          )}
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
                 </TableBody>
               </Table>
             </div>
