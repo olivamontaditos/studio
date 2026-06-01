@@ -147,7 +147,9 @@ export default function AdminPage() {
             onMouseLeave={() => setHoverRating(0)}
             onClick={(e) => {
                 e.stopPropagation();
-                handleRateLead(leadId, s);
+                // Se clicar na estrela que já é a atual, reseta para 0
+                const finalRating = rating === s ? 0 : s;
+                handleRateLead(leadId, finalRating);
             }}
           >
             <Star 
