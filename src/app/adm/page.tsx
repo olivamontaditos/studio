@@ -323,8 +323,8 @@ export default function AdminPage() {
                     <TableHead className="w-[140px] cursor-pointer" onClick={() => handleSort('submissionDate')}>Data <SortIcon field="submissionDate" /></TableHead>
                     <TableHead className="w-[120px] cursor-pointer" onClick={() => handleSort('rating')}>Status <SortIcon field="rating" /></TableHead>
                     <TableHead className="cursor-pointer" onClick={() => handleSort('name')}>Nome <SortIcon field="name" /></TableHead>
-                    <TableHead className="w-[200px]">E-mail</TableHead>
-                    <TableHead className="w-[150px]">WhatsApp</TableHead>
+                    <TableHead className="w-[200px] cursor-pointer" onClick={() => handleSort('email')}>E-mail <SortIcon field="email" /></TableHead>
+                    <TableHead className="w-[150px] cursor-pointer" onClick={() => handleSort('whatsapp')}>WhatsApp <SortIcon field="whatsapp" /></TableHead>
                     <TableHead className="w-[250px]"><div className="flex items-center gap-2"><MessageSquare className="h-4 w-4 text-primary" />Notas</div></TableHead>
                   </TableRow>
                 </TableHeader>
