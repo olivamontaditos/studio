@@ -1,13 +1,10 @@
-
 "use client";
 
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useFirestore } from "@/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { Star } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -22,7 +19,6 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { errorEmitter } from "@/firebase/error-emitter";
 import { FirestorePermissionError } from "@/firebase/errors";
-import { cn } from "@/lib/utils";
 
 const formSchema = z.object({
     name: z.string().min(2, { message: "O nome deve ter pelo menos 2 caracteres." }),
@@ -32,13 +28,11 @@ const formSchema = z.object({
           message: "O WhatsApp deve ter 10 ou 11 dígitos numéricos (DDD + número).",
       })
       .optional(),
-    rating: z.number().min(1).max(5).default(5),
 });
 
 export default function NewsletterSection() {
   const { toast } = useToast();
   const firestore = useFirestore();
-  const [hoverRating, setHoverRating] = useState(0);
   
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -46,7 +40,6 @@ export default function NewsletterSection() {
       name: "",
       email: "",
       whatsapp: "",
-      rating: 5,
     },
   });
 
@@ -64,13 +57,14 @@ export default function NewsletterSection() {
     const dataToSave = {
       ...values,
       submissionDate: serverTimestamp(),
+      rating: 0, // Default rating is 0, to be set by ADM
     };
 
     return addDoc(leadsCollection, dataToSave)
       .then(() => {
         toast({
           title: "Sucesso!",
-          description: "Obrigado! Recebemos sua classificação e seus dados.",
+          description: "Obrigado! Seus dados foram cadastrados com sucesso.",
         });
         form.reset();
       })
@@ -98,10 +92,10 @@ export default function NewsletterSection() {
     <section className="bg-secondary py-20 md:py-24">
       <div className="container mx-auto px-6 text-center">
         <h2 className="font-headline text-3xl font-bold text-foreground md:text-4xl">
-          Sua Opinião é Importante
+          Fique por dentro das novidades
         </h2>
         <p className="mt-4 max-w-2xl mx-auto text-muted-foreground">
-          Como você avalia sua expectativa para nossas novidades? Deixe sua nota e seus dados para um presente especial.
+          Cadastre-se para receber convites exclusivos para nossos eventos e atualizações do cardápio.
         </p>
 
         <div className="mt-8 mx-auto max-w-md">
@@ -110,40 +104,6 @@ export default function NewsletterSection() {
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="space-y-6"
               >
-                <FormField
-                  control={form.control}
-                  name="rating"
-                  render={({ field }) => (
-                    <FormItem className="space-y-3">
-                      <FormLabel className="text-sm font-medium">Sua nota:</FormLabel>
-                      <FormControl>
-                        <div className="flex justify-center gap-2">
-                          {[1, 2, 3, 4, 5].map((star) => (
-                            <button
-                              key={star}
-                              type="button"
-                              className="focus:outline-none transition-transform hover:scale-125"
-                              onMouseEnter={() => setHoverRating(star)}
-                              onMouseLeave={() => setHoverRating(0)}
-                              onClick={() => field.onChange(star)}
-                            >
-                              <Star
-                                className={cn(
-                                  "h-8 w-8 transition-colors",
-                                  (hoverRating || field.value) >= star
-                                    ? "fill-accent text-accent"
-                                    : "text-muted-foreground"
-                                )}
-                              />
-                            </button>
-                          ))}
-                        </div>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
                 <div className="space-y-4">
                   <FormField
                     control={form.control}
@@ -199,7 +159,7 @@ export default function NewsletterSection() {
                 </div>
                 
                 <Button type="submit" disabled={isSubmitting} className="w-full bg-accent text-accent-foreground hover:bg-accent/90 py-6 text-lg font-bold">
-                  {isSubmitting ? "Enviando..." : "Enviar Avaliação & Cadastrar"}
+                  {isSubmitting ? "Enviando..." : "Quero receber novidades"}
                 </Button>
               </form>
             </Form>

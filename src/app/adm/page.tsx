@@ -1,9 +1,8 @@
-
 "use client";
 
 import { useState, useEffect, useMemo, useRef } from 'react';
 import { useCollection, useMemoFirebase, useFirestore } from '@/firebase';
-import { collection, query, orderBy } from 'firebase/firestore';
+import { collection, query, orderBy, doc, updateDoc } from 'firebase/firestore';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -13,6 +12,8 @@ import { ptBR } from 'date-fns/locale';
 import { LogOut, Users, Mail, Phone, Lock, ArrowUpDown, ChevronUp, ChevronDown, Bell, Search, Star } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
+import { errorEmitter } from '@/firebase/error-emitter';
+import { FirestorePermissionError } from '@/firebase/errors';
 
 type SortField = 'submissionDate' | 'name' | 'email' | 'whatsapp' | 'rating';
 type SortOrder = 'asc' | 'desc';
@@ -73,6 +74,9 @@ export default function AdminPage() {
       } else if (sortField === 'rating') {
         valA = a.rating || 0;
         valB = b.rating || 0;
+      } else {
+        valA = String(valA || '').toLowerCase();
+        valB = String(valB || '').toLowerCase();
       }
 
       if (valA < valB) return sortOrder === 'asc' ? -1 : 1;
@@ -88,6 +92,21 @@ export default function AdminPage() {
       setSortField(field);
       setSortOrder('desc');
     }
+  };
+
+  const handleRateLead = (leadId: string, newRating: number) => {
+    if (!firestore) return;
+    
+    const leadRef = doc(firestore, 'coming_soon_leads', leadId);
+    updateDoc(leadRef, { rating: newRating })
+      .catch((err) => {
+        const permissionError = new FirestorePermissionError({
+          path: leadRef.path,
+          operation: 'update',
+          requestResourceData: { rating: newRating },
+        });
+        errorEmitter.emit('permission-error', permissionError);
+      });
   };
 
   const handleLogin = (e: React.FormEvent) => {
@@ -114,17 +133,30 @@ export default function AdminPage() {
     return sortOrder === 'asc' ? <ChevronUp className="ml-2 h-4 w-4 text-primary" /> : <ChevronDown className="ml-2 h-4 w-4 text-primary" />;
   };
 
-  const StarRating = ({ rating }: { rating: number }) => {
+  const StarRating = ({ rating, leadId }: { rating: number, leadId: string }) => {
+    const [hoverRating, setHoverRating] = useState(0);
+
     return (
       <div className="flex items-center gap-0.5">
         {[1, 2, 3, 4, 5].map((s) => (
-          <Star 
-            key={s} 
-            className={cn(
-              "h-3.5 w-3.5",
-              s <= (rating || 0) ? "fill-accent text-accent" : "text-muted-foreground/30"
-            )} 
-          />
+          <button
+            key={s}
+            type="button"
+            className="focus:outline-none transition-transform hover:scale-125"
+            onMouseEnter={() => setHoverRating(s)}
+            onMouseLeave={() => setHoverRating(0)}
+            onClick={(e) => {
+                e.stopPropagation();
+                handleRateLead(leadId, s);
+            }}
+          >
+            <Star 
+              className={cn(
+                "h-4 w-4",
+                s <= (hoverRating || rating || 0) ? "fill-accent text-accent" : "text-muted-foreground/30"
+              )} 
+            />
+          </button>
         ))}
       </div>
     );
@@ -177,8 +209,8 @@ export default function AdminPage() {
     <div className="container mx-auto py-12 px-6 animate-in fade-in duration-500">
       <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-12">
         <div>
-          <h1 className="font-headline text-4xl font-bold text-primary">Painel de Interessados</h1>
-          <p className="text-muted-foreground mt-2">Gerencie os leads e visualize as avaliações recebidas.</p>
+          <h1 className="font-headline text-4xl font-bold text-primary">Painel de Leads</h1>
+          <p className="text-muted-foreground mt-2">Qualifique os contatos para identificar os melhores clientes.</p>
         </div>
         <Button variant="outline" onClick={handleLogout} className="group gap-2 border-destructive/20 text-destructive hover:bg-destructive hover:text-white transition-all">
           <LogOut className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
@@ -194,7 +226,7 @@ export default function AdminPage() {
                 <Users className="h-6 w-6 text-primary" />
               </div>
               <div>
-                <p className="text-sm font-medium text-muted-foreground">Total de Leads</p>
+                <p className="text-sm font-medium text-muted-foreground">Total de Interessados</p>
                 <p className="text-2xl font-bold text-primary">{leads?.length || 0}</p>
               </div>
             </div>
@@ -206,7 +238,7 @@ export default function AdminPage() {
         <CardHeader className="bg-primary/5 border-b border-primary/10 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <CardTitle className="text-xl flex items-center gap-2">
             <Mail className="h-5 w-5 text-primary" />
-            Contatos & Avaliações
+            Contatos Recebidos
           </CardTitle>
           <div className="relative w-full md:w-72">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -232,8 +264,8 @@ export default function AdminPage() {
                     <TableHead className="w-[180px] cursor-pointer hover:bg-muted transition-colors" onClick={() => handleSort('submissionDate')}>
                       <div className="flex items-center">Data <SortIcon field="submissionDate" /></div>
                     </TableHead>
-                    <TableHead className="w-[120px] cursor-pointer hover:bg-muted transition-colors" onClick={() => handleSort('rating')}>
-                      <div className="flex items-center">Nota <SortIcon field="rating" /></div>
+                    <TableHead className="w-[140px] cursor-pointer hover:bg-muted transition-colors" onClick={() => handleSort('rating')}>
+                      <div className="flex items-center">Qualificação <SortIcon field="rating" /></div>
                     </TableHead>
                     <TableHead className="cursor-pointer hover:bg-muted transition-colors" onClick={() => handleSort('name')}>
                       <div className="flex items-center">Nome <SortIcon field="name" /></div>
@@ -266,7 +298,7 @@ export default function AdminPage() {
                           {isNew && <span className="ml-2 inline-flex items-center rounded-full bg-primary px-2 py-0.5 text-[10px] font-medium text-primary-foreground">Novo</span>}
                         </TableCell>
                         <TableCell>
-                          <StarRating rating={lead.rating} />
+                          <StarRating rating={lead.rating} leadId={lead.id} />
                         </TableCell>
                         <TableCell className="font-semibold text-foreground">{lead.name}</TableCell>
                         <TableCell>
