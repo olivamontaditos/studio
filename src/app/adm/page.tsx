@@ -10,7 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import { LogOut, Users, Mail, Phone, Lock, ArrowUpDown, ChevronUp, ChevronDown, Bell, Search, Star, TrendingUp, Filter, MessageSquare, MousePointerClick, Eye, ShoppingBag } from 'lucide-react';
+import { LogOut, Users, Mail, Phone, Lock, ArrowUpDown, ChevronUp, ChevronDown, Bell, Search, Star, TrendingUp, Filter, MessageSquare, MousePointerClick, Eye, ShoppingBag, Copy } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
 import {
@@ -147,6 +147,14 @@ export default function AdminPage() {
     if (!firestore) return;
     const leadRef = doc(firestore, 'coming_soon_leads', leadId);
     updateDoc(leadRef, { notes }).catch(() => {});
+  };
+
+  const handleCopyEmail = (email: string) => {
+    navigator.clipboard.writeText(email);
+    toast({
+      title: "E-mail copiado!",
+      description: `O endereço ${email} foi copiado para sua área de transferência.`,
+    });
   };
 
   const handleLogin = (e: React.FormEvent) => {
@@ -337,7 +345,16 @@ export default function AdminPage() {
                         <TableCell className="text-muted-foreground text-xs">{lead.submissionDate?.toDate ? format(lead.submissionDate.toDate(), "dd/MM/yy HH:mm", { locale: ptBR }) : 'Agora'}</TableCell>
                         <TableCell><StarRating rating={lead.rating} leadId={lead.id} /></TableCell>
                         <TableCell className="font-semibold text-foreground">{lead.name}</TableCell>
-                        <TableCell><a href={`mailto:${lead.email}`} className="text-primary hover:underline text-xs block truncate max-w-[180px]">{lead.email}</a></TableCell>
+                        <TableCell>
+                          <button 
+                            onClick={() => handleCopyEmail(lead.email)}
+                            className="text-primary hover:underline text-xs flex items-center gap-2 group/email text-left transition-all"
+                            title="Clique para copiar e-mail"
+                          >
+                            <span className="truncate max-w-[160px]">{lead.email}</span>
+                            <Copy className="h-3 w-3 opacity-0 group-hover/email:opacity-100 transition-opacity" />
+                          </button>
+                        </TableCell>
                         <TableCell>{lead.whatsapp ? <a href={`https://wa.me/55${lead.whatsapp}`} target="_blank" rel="noopener noreferrer" className="text-green-500 hover:underline text-xs font-medium flex items-center gap-1"><Phone className="h-3 w-3"/>{lead.whatsapp}</a> : '-'}</TableCell>
                         <TableCell><Input defaultValue={lead.notes || ''} placeholder="Nota..." className="bg-transparent border-none text-xs h-8" onBlur={(e) => handleUpdateNote(lead.id, e.target.value)} /></TableCell>
                       </TableRow>
