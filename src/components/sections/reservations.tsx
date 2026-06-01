@@ -1,3 +1,4 @@
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Phone, MapPin } from "lucide-react";
@@ -5,17 +6,17 @@ import { Phone, MapPin } from "lucide-react";
 export default function ReservationsSection() {
   const mapsUrl = "https://share.google/fnyW3LtaK1bazQDRv";
   return (
-    <section id="reservas" className="bg-background py-20 md:py-32">
+    <section id="encomendas" className="bg-background py-20 md:py-32">
       <div className="container mx-auto px-6">
         <div className="text-center">
           <p className="text-sm font-bold uppercase tracking-wider text-primary">
-            Garanta seu lugar
+            Garanta sua experiência
           </p>
           <h2 className="mt-2 font-headline text-4xl font-bold text-foreground md:text-5xl" id="contato">
-            Eventos & Reservas
+            Eventos & Encomendas
           </h2>
           <p className="mt-4 max-w-2xl mx-auto text-muted-foreground">
-            Estamos ansiosos para receber você. Entre em contato para planejar seu evento ou fazer sua reserva.
+            Estamos ansiosos para atender você. Entre em contato para planejar seu evento ou fazer sua encomenda especial.
           </p>
         </div>
 
@@ -49,7 +50,7 @@ export default function ReservationsSection() {
             </div>
             <Button asChild size="lg" className="mt-8 bg-accent text-accent-foreground hover:bg-accent/90">
               <Link href="https://wa.me/5541988483621" target="_blank" rel="noopener noreferrer">
-                Eventos & Reservas
+                Eventos & Encomendas
               </Link>
             </Button>
             <p className="text-xs text-muted-foreground mt-2">

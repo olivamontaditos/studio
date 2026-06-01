@@ -1,5 +1,5 @@
 
-import type { Metadata } from "metadata";
+import type { Metadata } from "next";
 import { Inter, Alegreya } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
@@ -22,9 +22,9 @@ const fontHeadline = Alegreya({
 });
 
 export const metadata: Metadata = {
-  title: "OLIVA MONTADITOS – Eventos, Reservas & Experiência Gastronômica",
+  title: "OLIVA MONTADITOS – Eventos, Encomendas & Experiência Gastronômica",
   description:
-    "Explore a gastronomia artesanal no OLIVA MONTADITOS. Realize seu evento ou faça sua reserva para uma experiência única com ingredientes autênticos e momentos inesquecíveis.",
+    "Explore a gastronomia artesanal no OLIVA MONTADITOS. Realize seu evento ou faça sua encomenda para uma experiência única com ingredientes autênticos e momentos inesquecíveis.",
 };
 
 export default function RootLayout({

@@ -1,3 +1,4 @@
+
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -24,7 +25,7 @@ export default function HeroSection() {
       <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-white pb-12">
         <div className="container px-4">
           <h1 className="font-headline text-6xl font-bold tracking-tight text-primary-foreground md:text-8xl">
-            Faça sua reserva
+            Faça sua encomenda
             <br />
             Realize seu evento
           </h1>
@@ -35,7 +36,7 @@ export default function HeroSection() {
           </p>
           <div className="mt-8 flex justify-center">
             <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
-              <Link href="https://wa.me/5541988483621" target="_blank" rel="noopener noreferrer">Eventos & Reservas</Link>
+              <Link href="https://wa.me/5541988483621" target="_blank" rel="noopener noreferrer">Eventos & Encomendas</Link>
             </Button>
           </div>
         </div>
