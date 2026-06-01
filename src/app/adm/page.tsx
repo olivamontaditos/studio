@@ -61,7 +61,7 @@ export default function AdminPage() {
                 <Input 
                   value={login} 
                   onChange={(e) => setLogin(e.target.value)} 
-                  placeholder="om" 
+                  placeholder="Usuário" 
                   className="bg-background/50 h-12"
                 />
               </div>
