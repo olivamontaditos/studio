@@ -1,10 +1,13 @@
+
 "use client";
 
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useFirestore } from "@/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { Star } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -19,6 +22,7 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { errorEmitter } from "@/firebase/error-emitter";
 import { FirestorePermissionError } from "@/firebase/errors";
+import { cn } from "@/lib/utils";
 
 const formSchema = z.object({
     name: z.string().min(2, { message: "O nome deve ter pelo menos 2 caracteres." }),
@@ -28,11 +32,13 @@ const formSchema = z.object({
           message: "O WhatsApp deve ter 10 ou 11 dígitos numéricos (DDD + número).",
       })
       .optional(),
+    rating: z.number().min(1).max(5).default(5),
 });
 
 export default function NewsletterSection() {
   const { toast } = useToast();
   const firestore = useFirestore();
+  const [hoverRating, setHoverRating] = useState(0);
   
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -40,6 +46,7 @@ export default function NewsletterSection() {
       name: "",
       email: "",
       whatsapp: "",
+      rating: 5,
     },
   });
 
@@ -63,7 +70,7 @@ export default function NewsletterSection() {
       .then(() => {
         toast({
           title: "Sucesso!",
-          description: "Obrigado! Entraremos em contato em breve.",
+          description: "Obrigado! Recebemos sua classificação e seus dados.",
         });
         form.reset();
       })
@@ -81,7 +88,6 @@ export default function NewsletterSection() {
           description: "Não foi possível concluir seu cadastro. Tente novamente.",
         });
 
-        // Re-throw to let react-hook-form know the submission failed.
         throw e;
       });
   }
@@ -92,70 +98,108 @@ export default function NewsletterSection() {
     <section className="bg-secondary py-20 md:py-24">
       <div className="container mx-auto px-6 text-center">
         <h2 className="font-headline text-3xl font-bold text-foreground md:text-4xl">
-          Receba Nossas Novidades
+          Sua Opinião é Importante
         </h2>
         <p className="mt-4 max-w-2xl mx-auto text-muted-foreground">
-          Deixe seus dados para receber novidades e um presente de inauguração.
+          Como você avalia sua expectativa para nossas novidades? Deixe sua nota e seus dados para um presente especial.
         </p>
 
         <div className="mt-8 mx-auto max-w-md">
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-4"
+                className="space-y-6"
               >
                 <FormField
                   control={form.control}
-                  name="name"
+                  name="rating"
                   render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="sr-only">Nome</FormLabel>
+                    <FormItem className="space-y-3">
+                      <FormLabel className="text-sm font-medium">Sua nota:</FormLabel>
                       <FormControl>
-                        <Input placeholder="Seu nome completo" {...field} />
+                        <div className="flex justify-center gap-2">
+                          {[1, 2, 3, 4, 5].map((star) => (
+                            <button
+                              key={star}
+                              type="button"
+                              className="focus:outline-none transition-transform hover:scale-125"
+                              onMouseEnter={() => setHoverRating(star)}
+                              onMouseLeave={() => setHoverRating(0)}
+                              onClick={() => field.onChange(star)}
+                            >
+                              <Star
+                                className={cn(
+                                  "h-8 w-8 transition-colors",
+                                  (hoverRating || field.value) >= star
+                                    ? "fill-accent text-accent"
+                                    : "text-muted-foreground"
+                                )}
+                              />
+                            </button>
+                          ))}
+                        </div>
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="sr-only">E-mail</FormLabel>
-                      <FormControl>
-                        <Input type="email" placeholder="Seu melhor e-mail" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="whatsapp"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="sr-only">WhatsApp (Opcional)</FormLabel>
-                      <FormControl>
-                        <Input
-                          type="tel"
-                          maxLength={11}
-                          placeholder="Seu WhatsApp (Opcional)"
-                          {...field}
-                          onChange={(e) => {
-                            const { value } = e.target;
-                            if (/^\d*$/.test(value)) {
-                              field.onChange(value);
-                            }
-                          }}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <Button type="submit" disabled={isSubmitting} className="w-full bg-accent text-accent-foreground hover:bg-accent/90">
-                  {isSubmitting ? "Enviando..." : "Quero Novidades"}
+
+                <div className="space-y-4">
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="sr-only">Nome</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Seu nome completo" {...field} className="bg-background" />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="sr-only">E-mail</FormLabel>
+                        <FormControl>
+                          <Input type="email" placeholder="Seu melhor e-mail" {...field} className="bg-background" />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="whatsapp"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="sr-only">WhatsApp (Opcional)</FormLabel>
+                        <FormControl>
+                          <Input
+                            type="tel"
+                            maxLength={11}
+                            placeholder="Seu WhatsApp (Opcional)"
+                            {...field}
+                            className="bg-background"
+                            onChange={(e) => {
+                              const { value } = e.target;
+                              if (/^\d*$/.test(value)) {
+                                field.onChange(value);
+                              }
+                            }}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                
+                <Button type="submit" disabled={isSubmitting} className="w-full bg-accent text-accent-foreground hover:bg-accent/90 py-6 text-lg font-bold">
+                  {isSubmitting ? "Enviando..." : "Enviar Avaliação & Cadastrar"}
                 </Button>
               </form>
             </Form>

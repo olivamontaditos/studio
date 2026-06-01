@@ -10,11 +10,11 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import { LogOut, Users, Mail, Phone, Lock, ArrowUpDown, ChevronUp, ChevronDown, Bell, Search } from 'lucide-react';
+import { LogOut, Users, Mail, Phone, Lock, ArrowUpDown, ChevronUp, ChevronDown, Bell, Search, Star } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
 
-type SortField = 'submissionDate' | 'name' | 'email' | 'whatsapp';
+type SortField = 'submissionDate' | 'name' | 'email' | 'whatsapp' | 'rating';
 type SortOrder = 'asc' | 'desc';
 
 export default function AdminPage() {
@@ -31,7 +31,6 @@ export default function AdminPage() {
   const initialLoadTime = useRef(new Date());
   const prevLeadsCount = useRef<number | null>(null);
 
-  // Memoize a query base para buscar todos os leads
   const leadsQuery = useMemoFirebase(() => {
     if (!firestore || !isLoggedIn) return null;
     return query(collection(firestore, 'coming_soon_leads'), orderBy('submissionDate', 'desc'));
@@ -39,7 +38,6 @@ export default function AdminPage() {
 
   const { data: leads, isLoading } = useCollection(leadsQuery);
 
-  // Lógica de notificação para novos leads
   useEffect(() => {
     if (leads && isLoggedIn) {
       if (prevLeadsCount.current !== null && leads.length > prevLeadsCount.current) {
@@ -53,11 +51,9 @@ export default function AdminPage() {
     }
   }, [leads, isLoggedIn, toast]);
 
-  // Filtragem e Ordenação dos dados no cliente
   const filteredAndSortedLeads = useMemo(() => {
     if (!leads) return [];
     
-    // Primeiro filtra
     const filtered = leads.filter(lead => {
       const search = searchTerm.toLowerCase();
       return (
@@ -67,7 +63,6 @@ export default function AdminPage() {
       );
     });
 
-    // Depois ordena
     return [...filtered].sort((a, b) => {
       let valA = a[sortField];
       let valB = b[sortField];
@@ -75,6 +70,9 @@ export default function AdminPage() {
       if (sortField === 'submissionDate') {
         valA = a.submissionDate?.toDate?.() || new Date(0);
         valB = b.submissionDate?.toDate?.() || new Date(0);
+      } else if (sortField === 'rating') {
+        valA = a.rating || 0;
+        valB = b.rating || 0;
       }
 
       if (valA < valB) return sortOrder === 'asc' ? -1 : 1;
@@ -88,7 +86,7 @@ export default function AdminPage() {
       setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
     } else {
       setSortField(field);
-      setSortOrder('asc');
+      setSortOrder('desc');
     }
   };
 
@@ -114,6 +112,22 @@ export default function AdminPage() {
   const SortIcon = ({ field }: { field: SortField }) => {
     if (sortField !== field) return <ArrowUpDown className="ml-2 h-4 w-4 opacity-50" />;
     return sortOrder === 'asc' ? <ChevronUp className="ml-2 h-4 w-4 text-primary" /> : <ChevronDown className="ml-2 h-4 w-4 text-primary" />;
+  };
+
+  const StarRating = ({ rating }: { rating: number }) => {
+    return (
+      <div className="flex items-center gap-0.5">
+        {[1, 2, 3, 4, 5].map((s) => (
+          <Star 
+            key={s} 
+            className={cn(
+              "h-3.5 w-3.5",
+              s <= (rating || 0) ? "fill-accent text-accent" : "text-muted-foreground/30"
+            )} 
+          />
+        ))}
+      </div>
+    );
   };
 
   if (!isLoggedIn) {
@@ -164,7 +178,7 @@ export default function AdminPage() {
       <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-12">
         <div>
           <h1 className="font-headline text-4xl font-bold text-primary">Painel de Interessados</h1>
-          <p className="text-muted-foreground mt-2">Gerencie e organize os leads capturados no site em tempo real.</p>
+          <p className="text-muted-foreground mt-2">Gerencie os leads e visualize as avaliações recebidas.</p>
         </div>
         <Button variant="outline" onClick={handleLogout} className="group gap-2 border-destructive/20 text-destructive hover:bg-destructive hover:text-white transition-all">
           <LogOut className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
@@ -192,7 +206,7 @@ export default function AdminPage() {
         <CardHeader className="bg-primary/5 border-b border-primary/10 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <CardTitle className="text-xl flex items-center gap-2">
             <Mail className="h-5 w-5 text-primary" />
-            Contatos Recebidos
+            Contatos & Avaliações
           </CardTitle>
           <div className="relative w-full md:w-72">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -215,8 +229,11 @@ export default function AdminPage() {
               <Table>
                 <TableHeader className="bg-muted/50">
                   <TableRow>
-                    <TableHead className="w-[200px] cursor-pointer hover:bg-muted transition-colors" onClick={() => handleSort('submissionDate')}>
-                      <div className="flex items-center">Data e Hora <SortIcon field="submissionDate" /></div>
+                    <TableHead className="w-[180px] cursor-pointer hover:bg-muted transition-colors" onClick={() => handleSort('submissionDate')}>
+                      <div className="flex items-center">Data <SortIcon field="submissionDate" /></div>
+                    </TableHead>
+                    <TableHead className="w-[120px] cursor-pointer hover:bg-muted transition-colors" onClick={() => handleSort('rating')}>
+                      <div className="flex items-center">Nota <SortIcon field="rating" /></div>
                     </TableHead>
                     <TableHead className="cursor-pointer hover:bg-muted transition-colors" onClick={() => handleSort('name')}>
                       <div className="flex items-center">Nome <SortIcon field="name" /></div>
@@ -244,9 +261,12 @@ export default function AdminPage() {
                       >
                         <TableCell className="text-muted-foreground whitespace-nowrap text-xs">
                           {lead.submissionDate?.toDate ? 
-                            format(lead.submissionDate.toDate(), "dd/MM/yyyy 'às' HH:mm", { locale: ptBR }) : 
+                            format(lead.submissionDate.toDate(), "dd/MM/yy HH:mm", { locale: ptBR }) : 
                             'Agora'}
                           {isNew && <span className="ml-2 inline-flex items-center rounded-full bg-primary px-2 py-0.5 text-[10px] font-medium text-primary-foreground">Novo</span>}
+                        </TableCell>
+                        <TableCell>
+                          <StarRating rating={lead.rating} />
                         </TableCell>
                         <TableCell className="font-semibold text-foreground">{lead.name}</TableCell>
                         <TableCell>
@@ -277,14 +297,12 @@ export default function AdminPage() {
                 <>
                   <Search className="h-12 w-12 text-muted-foreground/30 mb-4" />
                   <p className="text-xl font-headline text-muted-foreground">Nenhum resultado encontrado.</p>
-                  <p className="text-sm text-muted-foreground/60 max-w-xs mt-2">Tente buscar por outro termo ou limpe a busca.</p>
                   <Button variant="link" onClick={() => setSearchTerm('')} className="mt-4 text-primary">Limpar busca</Button>
                 </>
               ) : (
                 <>
                   <Users className="h-12 w-12 text-muted-foreground/30 mb-4" />
                   <p className="text-xl font-headline text-muted-foreground">Nenhum interessado ainda.</p>
-                  <p className="text-sm text-muted-foreground/60 max-w-xs mt-2">Os leads aparecerão aqui assim que preencherem o formulário no site.</p>
                 </>
               )}
             </div>
