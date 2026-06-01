@@ -10,7 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import { LogOut, Users, Mail, Phone, Lock, ArrowUpDown, ChevronUp, ChevronDown, Bell } from 'lucide-react';
+import { LogOut, Users, Mail, Phone, Lock, ArrowUpDown, ChevronUp, ChevronDown, Bell, Search } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
 
@@ -24,6 +24,7 @@ export default function AdminPage() {
   const [error, setError] = useState('');
   const [sortField, setSortField] = useState<SortField>('submissionDate');
   const [sortOrder, setSortOrder] = useState<SortOrder>('desc');
+  const [searchTerm, setSearchTerm] = useState('');
   
   const { toast } = useToast();
   const firestore = useFirestore();
@@ -52,15 +53,25 @@ export default function AdminPage() {
     }
   }, [leads, isLoggedIn, toast]);
 
-  // Ordenação dos dados no cliente para flexibilidade imediata
-  const sortedLeads = useMemo(() => {
+  // Filtragem e Ordenação dos dados no cliente
+  const filteredAndSortedLeads = useMemo(() => {
     if (!leads) return [];
     
-    return [...leads].sort((a, b) => {
+    // Primeiro filtra
+    const filtered = leads.filter(lead => {
+      const search = searchTerm.toLowerCase();
+      return (
+        lead.name?.toLowerCase().includes(search) ||
+        lead.email?.toLowerCase().includes(search) ||
+        lead.whatsapp?.toLowerCase().includes(search)
+      );
+    });
+
+    // Depois ordena
+    return [...filtered].sort((a, b) => {
       let valA = a[sortField];
       let valB = b[sortField];
 
-      // Tratamento especial para datas do Firestore
       if (sortField === 'submissionDate') {
         valA = a.submissionDate?.toDate?.() || new Date(0);
         valB = b.submissionDate?.toDate?.() || new Date(0);
@@ -70,7 +81,7 @@ export default function AdminPage() {
       if (valA > valB) return sortOrder === 'asc' ? 1 : -1;
       return 0;
     });
-  }, [leads, sortField, sortOrder]);
+  }, [leads, sortField, sortOrder, searchTerm]);
 
   const handleSort = (field: SortField) => {
     if (sortField === field) {
@@ -86,7 +97,7 @@ export default function AdminPage() {
     if (login === 'om' && password === '2010') {
       setIsLoggedIn(true);
       setError('');
-      initialLoadTime.current = new Date(); // Reset do tempo de carga para destacar novos
+      initialLoadTime.current = new Date();
     } else {
       setError('Credenciais inválidas.');
     }
@@ -96,6 +107,7 @@ export default function AdminPage() {
     setIsLoggedIn(false);
     setLogin('');
     setPassword('');
+    setSearchTerm('');
     prevLeadsCount.current = null;
   };
 
@@ -177,11 +189,20 @@ export default function AdminPage() {
       </div>
 
       <Card className="border-primary/10 bg-card/30 backdrop-blur-sm overflow-hidden">
-        <CardHeader className="bg-primary/5 border-b border-primary/10">
+        <CardHeader className="bg-primary/5 border-b border-primary/10 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <CardTitle className="text-xl flex items-center gap-2">
             <Mail className="h-5 w-5 text-primary" />
             Contatos Recebidos
           </CardTitle>
+          <div className="relative w-full md:w-72">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Input 
+              placeholder="Buscar por nome, email..." 
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="pl-10 bg-background/50 h-10"
+            />
+          </div>
         </CardHeader>
         <CardContent className="p-0">
           {isLoading ? (
@@ -189,7 +210,7 @@ export default function AdminPage() {
               <div className="h-10 w-10 border-4 border-primary border-t-transparent rounded-full animate-spin" />
               <p className="text-muted-foreground font-medium">Carregando dados...</p>
             </div>
-          ) : sortedLeads.length > 0 ? (
+          ) : filteredAndSortedLeads.length > 0 ? (
             <div className="overflow-x-auto">
               <Table>
                 <TableHeader className="bg-muted/50">
@@ -209,8 +230,7 @@ export default function AdminPage() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {sortedLeads.map((lead: any) => {
-                    // Verifica se o lead é "novo" (chegou após a abertura da página)
+                  {filteredAndSortedLeads.map((lead: any) => {
                     const submissionDate = lead.submissionDate?.toDate?.() || new Date();
                     const isNew = submissionDate > initialLoadTime.current;
                     
@@ -253,9 +273,20 @@ export default function AdminPage() {
             </div>
           ) : (
             <div className="flex flex-col items-center justify-center py-20 text-center">
-              <Users className="h-12 w-12 text-muted-foreground/30 mb-4" />
-              <p className="text-xl font-headline text-muted-foreground">Nenhum interessado ainda.</p>
-              <p className="text-sm text-muted-foreground/60 max-w-xs mt-2">Os leads aparecerão aqui assim que preencherem o formulário no site.</p>
+              {searchTerm ? (
+                <>
+                  <Search className="h-12 w-12 text-muted-foreground/30 mb-4" />
+                  <p className="text-xl font-headline text-muted-foreground">Nenhum resultado encontrado.</p>
+                  <p className="text-sm text-muted-foreground/60 max-w-xs mt-2">Tente buscar por outro termo ou limpe a busca.</p>
+                  <Button variant="link" onClick={() => setSearchTerm('')} className="mt-4 text-primary">Limpar busca</Button>
+                </>
+              ) : (
+                <>
+                  <Users className="h-12 w-12 text-muted-foreground/30 mb-4" />
+                  <p className="text-xl font-headline text-muted-foreground">Nenhum interessado ainda.</p>
+                  <p className="text-sm text-muted-foreground/60 max-w-xs mt-2">Os leads aparecerão aqui assim que preencherem o formulário no site.</p>
+                </>
+              )}
             </div>
           )}
         </CardContent>
