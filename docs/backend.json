@@ -5,112 +5,61 @@
       "$schema": "http://json-schema.org/draft-07/schema#",
       "title": "NewsletterSubscription",
       "type": "object",
-      "description": "Represents a user's subscription to the restaurant's newsletter, capturing their contact information for updates and promotions.",
+      "description": "Represents a user's subscription to the restaurant's newsletter.",
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "The full name of the user subscribing to the newsletter."
-        },
-        "email": {
-          "type": "string",
-          "description": "The email address of the user subscribing to the newsletter.",
-          "format": "email"
-        },
-        "subscriptionDate": {
-          "type": "string",
-          "description": "The date and time when the user subscribed to the newsletter.",
-          "format": "date-time"
-        }
+        "name": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "subscriptionDate": { "type": "string", "format": "date-time" }
       },
-      "required": [
-        "name",
-        "email",
-        "subscriptionDate"
-      ]
+      "required": ["name", "email", "subscriptionDate"]
     },
     "ComingSoonLead": {
       "$schema": "http://json-schema.org/draft-07/schema#",
       "title": "ComingSoonLead",
       "type": "object",
-      "description": "Represents a lead captured from the site, including qualification and admin notes.",
+      "description": "Represents a lead captured from the site.",
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "The full name of the interested lead."
-        },
-        "email": {
-          "type": "string",
-          "description": "The email address of the lead.",
-          "format": "email"
-        },
-        "whatsapp": {
-          "type": "string",
-          "description": "The WhatsApp number of the lead."
-        },
-        "rating": {
-          "type": "number",
-          "description": "A rating from 1 to 5 stars indicating the user's interest or experience.",
-          "minimum": 0,
-          "maximum": 5
-        },
-        "notes": {
-          "type": "string",
-          "description": "Private administrative notes about this lead."
-        },
-        "submissionDate": {
-          "type": "string",
-          "description": "The date and time when the lead was submitted.",
-          "format": "date-time"
-        }
+        "name": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "whatsapp": { "type": "string" },
+        "rating": { "type": "number", "minimum": 0, "maximum": 5 },
+        "notes": { "type": "string" },
+        "submissionDate": { "type": "string", "format": "date-time" }
       },
-      "required": [
-        "name",
-        "email",
-        "submissionDate"
-      ]
+      "required": ["name", "email", "submissionDate"]
+    },
+    "AnalyticsEvent": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "AnalyticsEvent",
+      "type": "object",
+      "description": "Logs user interactions like page views and button clicks.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["page_view", "whatsapp_click", "ifood_click", "newsletter_submit"]
+        },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["type", "timestamp"]
     }
   },
   "auth": {
-    "providers": [
-      "password",
-      "anonymous"
-    ]
+    "providers": ["password", "anonymous"]
   },
   "firestore": {
     "structure": [
       {
         "path": "/newsletter_subscriptions/{subscriptionId}",
-        "definition": {
-          "entityName": "NewsletterSubscription",
-          "schema": {
-            "$ref": "#/backend/entities/NewsletterSubscription"
-          },
-          "description": "Stores individual newsletter subscriptions.",
-          "params": [
-            {
-              "name": "subscriptionId",
-              "description": "The unique identifier for a specific newsletter subscription document."
-            }
-          ]
-        }
+        "definition": { "entityName": "NewsletterSubscription" }
       },
       {
         "path": "/coming_soon_leads/{leadId}",
-        "definition": {
-          "entityName": "ComingSoonLead",
-          "schema": {
-            "$ref": "#/backend/entities/ComingSoonLead"
-          },
-          "description": "Stores leads captured from the site with optional rating and notes.",
-          "params": [
-            {
-              "name": "leadId",
-              "description": "The unique identifier for a specific lead document."
-            }
-          ]
-        }
+        "definition": { "entityName": "ComingSoonLead" }
+      },
+      {
+        "path": "/analytics_events/{eventId}",
+        "definition": { "entityName": "AnalyticsEvent" }
       }
-    ],
-    "reasoning": "Estrutura para captura de leads com suporte a classificação e anotações internas do administrador."
+    ]
   }
 }
