@@ -32,7 +32,7 @@
       "$schema": "http://json-schema.org/draft-07/schema#",
       "title": "ComingSoonLead",
       "type": "object",
-      "description": "Represents a lead captured from the 'Coming Soon' page, including their name, email, WhatsApp, and interest rating.",
+      "description": "Represents a lead captured from the site, including qualification and admin notes.",
       "properties": {
         "name": {
           "type": "string",
@@ -50,8 +50,12 @@
         "rating": {
           "type": "number",
           "description": "A rating from 1 to 5 stars indicating the user's interest or experience.",
-          "minimum": 1,
+          "minimum": 0,
           "maximum": 5
+        },
+        "notes": {
+          "type": "string",
+          "description": "Private administrative notes about this lead."
         },
         "submissionDate": {
           "type": "string",
@@ -97,7 +101,7 @@
           "schema": {
             "$ref": "#/backend/entities/ComingSoonLead"
           },
-          "description": "Stores leads captured from the site with optional rating.",
+          "description": "Stores leads captured from the site with optional rating and notes.",
           "params": [
             {
               "name": "leadId",
@@ -107,6 +111,6 @@
         }
       }
     ],
-    "reasoning": "Estrutura simplificada para captura de leads e assinaturas de newsletter com suporte a classificação."
+    "reasoning": "Estrutura para captura de leads com suporte a classificação e anotações internas do administrador."
   }
 }

@@ -6,15 +6,26 @@ import { useCollection, useMemoFirebase, useFirestore } from '@/firebase';
 import { collection, query, orderBy, doc, updateDoc } from 'firebase/firestore';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { format } from 'date-fns';
+import { format, startOfDay } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import { LogOut, Users, Mail, Phone, Lock, ArrowUpDown, ChevronUp, ChevronDown, Bell, Search, Star } from 'lucide-react';
+import { LogOut, Users, Mail, Phone, Lock, ArrowUpDown, ChevronUp, ChevronDown, Bell, Search, Star, TrendingUp, Filter, MessageSquare } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
 import { errorEmitter } from '@/firebase/error-emitter';
 import { FirestorePermissionError } from '@/firebase/errors';
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  AreaChart,
+  Area,
+} from 'recharts';
 
 type SortField = 'submissionDate' | 'name' | 'email' | 'whatsapp' | 'rating';
 type SortOrder = 'asc' | 'desc';
@@ -52,6 +63,30 @@ export default function AdminPage() {
       prevLeadsCount.current = leads.length;
     }
   }, [leads, isLoggedIn, toast]);
+
+  const stats = useMemo(() => {
+    if (!leads) return { total: 0, qualified: 0, pending: 0, chartData: [] };
+    
+    const total = leads.length;
+    const qualified = leads.filter(l => (l.rating || 0) >= 4).length;
+    const pending = leads.filter(l => (l.rating || 0) === 0).length;
+
+    // Process leads for chart (last 7 days)
+    const dailyCounts: { [key: string]: number } = {};
+    leads.forEach(lead => {
+      const date = lead.submissionDate?.toDate ? 
+        format(lead.submissionDate.toDate(), 'dd/MM') : 
+        format(new Date(), 'dd/MM');
+      dailyCounts[date] = (dailyCounts[date] || 0) + 1;
+    });
+
+    const chartData = Object.entries(dailyCounts)
+      .map(([date, count]) => ({ date, count }))
+      .reverse()
+      .slice(-7);
+
+    return { total, qualified, pending, chartData };
+  }, [leads]);
 
   const filteredAndSortedLeads = useMemo(() => {
     if (!leads) return [];
@@ -97,17 +132,14 @@ export default function AdminPage() {
 
   const handleRateLead = (leadId: string, newRating: number) => {
     if (!firestore) return;
-    
     const leadRef = doc(firestore, 'coming_soon_leads', leadId);
-    updateDoc(leadRef, { rating: newRating })
-      .catch((err) => {
-        const permissionError = new FirestorePermissionError({
-          path: leadRef.path,
-          operation: 'update',
-          requestResourceData: { rating: newRating },
-        });
-        errorEmitter.emit('permission-error', permissionError);
-      });
+    updateDoc(leadRef, { rating: newRating }).catch(() => {});
+  };
+
+  const handleUpdateNote = (leadId: string, notes: string) => {
+    if (!firestore) return;
+    const leadRef = doc(firestore, 'coming_soon_leads', leadId);
+    updateDoc(leadRef, { notes }).catch(() => {});
   };
 
   const handleLogin = (e: React.FormEvent) => {
@@ -211,8 +243,8 @@ export default function AdminPage() {
     <div className="container mx-auto py-12 px-6 animate-in fade-in duration-500">
       <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-12">
         <div>
-          <h1 className="font-headline text-4xl font-bold text-primary">Painel de Leads</h1>
-          <p className="text-muted-foreground mt-2">Qualifique os contatos para identificar os melhores clientes.</p>
+          <h1 className="font-headline text-4xl font-bold text-primary">Painel Oliva</h1>
+          <p className="text-muted-foreground mt-2">Gerencie e qualifique seus contatos estratégicos.</p>
         </div>
         <Button variant="outline" onClick={handleLogout} className="group gap-2 border-destructive/20 text-destructive hover:bg-destructive hover:text-white transition-all">
           <LogOut className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
@@ -220,18 +252,89 @@ export default function AdminPage() {
         </Button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <Card className="bg-primary/5 border-primary/10">
-          <CardContent className="pt-6">
-            <div className="flex items-center gap-4">
-              <div className="p-3 bg-primary/10 rounded-full">
-                <Users className="h-6 w-6 text-primary" />
+      {/* DASHBOARD CARDS & CHART */}
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-10">
+        <div className="lg:col-span-1 space-y-6">
+          <Card className="bg-primary/5 border-primary/10">
+            <CardContent className="pt-6">
+              <div className="flex items-center gap-4">
+                <div className="p-3 bg-primary/10 rounded-full">
+                  <Users className="h-6 w-6 text-primary" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-muted-foreground">Total Leads</p>
+                  <p className="text-2xl font-bold text-primary">{stats.total}</p>
+                </div>
               </div>
-              <div>
-                <p className="text-sm font-medium text-muted-foreground">Total de Interessados</p>
-                <p className="text-2xl font-bold text-primary">{leads?.length || 0}</p>
+            </CardContent>
+          </Card>
+          <Card className="bg-accent/5 border-accent/10">
+            <CardContent className="pt-6">
+              <div className="flex items-center gap-4">
+                <div className="p-3 bg-accent/10 rounded-full">
+                  <Star className="h-6 w-6 text-accent" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-muted-foreground">Qualificados (4+★)</p>
+                  <p className="text-2xl font-bold text-accent">{stats.qualified}</p>
+                </div>
               </div>
-            </div>
+            </CardContent>
+          </Card>
+          <Card className="bg-muted/30 border-muted">
+            <CardContent className="pt-6">
+              <div className="flex items-center gap-4">
+                <div className="p-3 bg-muted rounded-full">
+                  <Filter className="h-6 w-6 text-muted-foreground" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-muted-foreground">Ainda não avaliados</p>
+                  <p className="text-2xl font-bold text-foreground">{stats.pending}</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        <Card className="lg:col-span-3 border-primary/10 bg-card/50">
+          <CardHeader>
+            <CardTitle className="text-lg flex items-center gap-2">
+              <TrendingUp className="h-5 w-5 text-primary" />
+              Crescimento de Contatos
+            </CardTitle>
+            <CardDescription>Volume de leads capturados recentemente</CardDescription>
+          </CardHeader>
+          <CardContent className="h-[200px]">
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart data={stats.chartData}>
+                <defs>
+                  <linearGradient id="colorCount" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.3}/>
+                    <stop offset="95%" stopColor="hsl(var(--primary))" stopOpacity={0}/>
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(255,255,255,0.05)" />
+                <XAxis 
+                  dataKey="date" 
+                  axisLine={false} 
+                  tickLine={false} 
+                  tick={{fill: 'hsl(var(--muted-foreground))', fontSize: 12}} 
+                />
+                <YAxis hide />
+                <Tooltip 
+                  contentStyle={{backgroundColor: 'hsl(var(--card))', borderRadius: '8px', border: '1px solid hsl(var(--border))'}}
+                  itemStyle={{color: 'hsl(var(--primary))'}}
+                />
+                <Area 
+                  type="monotone" 
+                  dataKey="count" 
+                  stroke="hsl(var(--primary))" 
+                  fillOpacity={1} 
+                  fill="url(#colorCount)" 
+                  strokeWidth={2}
+                />
+              </AreaChart>
+            </ResponsiveContainer>
           </CardContent>
         </Card>
       </div>
@@ -263,20 +366,23 @@ export default function AdminPage() {
               <Table>
                 <TableHeader className="bg-muted/50">
                   <TableRow>
-                    <TableHead className="w-[180px] cursor-pointer hover:bg-muted transition-colors" onClick={() => handleSort('submissionDate')}>
+                    <TableHead className="w-[150px] cursor-pointer hover:bg-muted transition-colors" onClick={() => handleSort('submissionDate')}>
                       <div className="flex items-center">Data <SortIcon field="submissionDate" /></div>
                     </TableHead>
-                    <TableHead className="w-[140px] cursor-pointer hover:bg-muted transition-colors" onClick={() => handleSort('rating')}>
-                      <div className="flex items-center">Qualificação <SortIcon field="rating" /></div>
+                    <TableHead className="w-[130px] cursor-pointer hover:bg-muted transition-colors" onClick={() => handleSort('rating')}>
+                      <div className="flex items-center">Qualificar <SortIcon field="rating" /></div>
                     </TableHead>
                     <TableHead className="cursor-pointer hover:bg-muted transition-colors" onClick={() => handleSort('name')}>
                       <div className="flex items-center">Nome <SortIcon field="name" /></div>
                     </TableHead>
-                    <TableHead className="cursor-pointer hover:bg-muted transition-colors" onClick={() => handleSort('email')}>
-                      <div className="flex items-center">E-mail <SortIcon field="email" /></div>
+                    <TableHead className="w-[250px]">
+                       <div className="flex items-center gap-2">
+                         <MessageSquare className="h-4 w-4 text-primary" />
+                         Observações
+                       </div>
                     </TableHead>
-                    <TableHead className="cursor-pointer hover:bg-muted transition-colors" onClick={() => handleSort('whatsapp')}>
-                      <div className="flex items-center">WhatsApp <SortIcon field="whatsapp" /></div>
+                    <TableHead className="cursor-pointer hover:bg-muted transition-colors" onClick={() => handleSort('email')}>
+                      <div className="flex items-center">Contato <SortIcon field="email" /></div>
                     </TableHead>
                   </TableRow>
                 </TableHeader>
@@ -304,20 +410,26 @@ export default function AdminPage() {
                         </TableCell>
                         <TableCell className="font-semibold text-foreground">{lead.name}</TableCell>
                         <TableCell>
-                          <a href={`mailto:${lead.email}`} className="flex items-center gap-2 text-primary hover:underline text-sm">
-                            <Mail className="h-3 w-3" />
-                            {lead.email}
-                          </a>
+                          <Input 
+                            defaultValue={lead.notes || ''} 
+                            placeholder="Adicionar nota..." 
+                            className="bg-transparent border-none focus-visible:ring-1 focus-visible:ring-primary/50 text-xs h-8"
+                            onBlur={(e) => handleUpdateNote(lead.id, e.target.value)}
+                          />
                         </TableCell>
                         <TableCell>
-                          {lead.whatsapp ? (
-                            <a href={`https://wa.me/55${lead.whatsapp}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-green-500 hover:underline text-sm font-medium">
-                              <Phone className="h-3 w-3" />
-                              {lead.whatsapp}
+                          <div className="flex flex-col gap-1">
+                            <a href={`mailto:${lead.email}`} className="flex items-center gap-2 text-primary hover:underline text-xs">
+                              <Mail className="h-3 w-3" />
+                              {lead.email}
                             </a>
-                          ) : (
-                            <span className="text-muted-foreground italic text-xs">Não informado</span>
-                          )}
+                            {lead.whatsapp && (
+                              <a href={`https://wa.me/55${lead.whatsapp}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-green-500 hover:underline text-xs font-medium">
+                                <Phone className="h-3 w-3" />
+                                {lead.whatsapp}
+                              </a>
+                            )}
+                          </div>
                         </TableCell>
                       </TableRow>
                     );
