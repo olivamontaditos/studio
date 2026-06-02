@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -5,12 +6,14 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Star, X } from "lucide-react";
+import { useAnalytics } from "@/hooks/use-analytics";
 
 const REVIEW_POPUP_KEY = "oliva_review_popup_seen";
 
 export default function ReviewPopup() {
   const [isVisible, setIsVisible] = useState(false);
   const [hasBeenSeen, setHasBeenSeen] = useState(true); // Default to true to avoid flash of content on server
+  const { trackEvent } = useAnalytics();
 
   useEffect(() => {
     try {
@@ -67,7 +70,7 @@ export default function ReviewPopup() {
           </Button>
         </CardHeader>
         <CardContent className="p-4 pt-0">
-          <Button asChild className="w-full bg-accent text-accent-foreground hover:bg-accent/90">
+          <Button asChild className="w-full bg-accent text-accent-foreground hover:bg-accent/90" onClick={() => trackEvent('review_click')}>
             <Link href="https://g.page/r/CeVf7luA8NjOEBM/review" target="_blank" rel="noopener noreferrer">
               Deixar uma Avaliação
             </Link>

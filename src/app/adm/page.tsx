@@ -10,7 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import { LogOut, Users, Mail, Phone, Lock, ArrowUpDown, ChevronUp, ChevronDown, Bell, Search, Star, MessageSquare, Eye, ShoppingBag, Copy, MapPin, Instagram, Youtube, ExternalLink, Download } from 'lucide-react';
+import { LogOut, Users, Mail, Phone, Lock, ArrowUpDown, ChevronUp, ChevronDown, Bell, Search, Star, MessageSquare, Eye, ShoppingBag, Copy, MapPin, Instagram, Youtube, Download } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
 
@@ -49,7 +49,8 @@ export default function AdminPage() {
     instagram: "https://www.instagram.com/olivamontaditos/",
     tiktok: "https://www.tiktok.com/@olivamontaditos",
     youtube: "https://www.youtube.com/@OlivaMontaditos",
-    maps: "https://share.google/fnyW3LtaK1bazQDRv"
+    maps: "https://share.google/fnyW3LtaK1bazQDRv",
+    review: "https://www.google.com/maps/place/Oliva+Montaditos/@-25.4017127,-49.2859022,1027m/data=!3m2!1e3!4b1!4m6!3m5!1s0x94dce7b94e3b9a4d:0xced8f0805bee5fe5!8m2!3d-25.4017127!4d-49.2833273!16s%2Fg%2F11n9htw6j1?entry=ttu&g_ep=EgoyMDI2MDUyNy4wIKXMDSoASAFQAw%3D%3D"
   };
 
   // Queries
@@ -80,7 +81,7 @@ export default function AdminPage() {
   }, [leads, isLoggedIn, toast]);
 
   const analyticsStats = useMemo(() => {
-    if (!analytics) return { pageViews: 0, whatsappClicks: 0, ifoodClicks: 0, addressClicks: 0, instagramClicks: 0, tiktokClicks: 0, youtubeClicks: 0 };
+    if (!analytics) return { pageViews: 0, whatsappClicks: 0, ifoodClicks: 0, addressClicks: 0, instagramClicks: 0, tiktokClicks: 0, youtubeClicks: 0, reviewClicks: 0 };
     return {
       pageViews: analytics.filter(e => e.type === 'page_view').length,
       whatsappClicks: analytics.filter(e => e.type === 'whatsapp_click').length,
@@ -89,6 +90,7 @@ export default function AdminPage() {
       instagramClicks: analytics.filter(e => e.type === 'instagram_click').length,
       tiktokClicks: analytics.filter(e => e.type === 'tiktok_click').length,
       youtubeClicks: analytics.filter(e => e.type === 'youtube_click').length,
+      reviewClicks: analytics.filter(e => e.type === 'review_click').length,
     };
   }, [analytics]);
 
@@ -280,7 +282,7 @@ export default function AdminPage() {
         </Button>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4 mb-10">
+      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-9 gap-4 mb-10">
         <Card className="bg-primary/5 border-primary/10 p-4">
           <div className="flex flex-col items-center text-center gap-2">
             <Eye className="h-5 w-5 text-primary" />
@@ -338,6 +340,15 @@ export default function AdminPage() {
             <div className="flex flex-col items-center text-center gap-2">
               <Youtube className="h-5 w-5 text-red-600" />
               <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">YouTube</p><p className="text-xl font-bold text-red-600">{analyticsStats.youtubeClicks}</p></div>
+            </div>
+          </Card>
+        </a>
+
+        <a href={urls.review} target="_blank" rel="noopener noreferrer" className="block transition-transform hover:scale-105">
+          <Card className="bg-accent/5 border-accent/10 p-4 cursor-pointer hover:bg-accent/10 h-full">
+            <div className="flex flex-col items-center text-center gap-2">
+              <Star className="h-5 w-5 text-accent" />
+              <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">Avaliações</p><p className="text-xl font-bold text-accent">{analyticsStats.reviewClicks}</p></div>
             </div>
           </Card>
         </a>
