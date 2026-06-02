@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useForm } from "react-hook-form";
@@ -28,6 +29,7 @@ const formSchema = z.object({
           message: "O WhatsApp deve ter 10 ou 11 dígitos numéricos (DDD + número).",
       })
       .optional(),
+    birthDate: z.string().optional(),
 });
 
 export default function NewsletterSection() {
@@ -40,6 +42,7 @@ export default function NewsletterSection() {
       name: "",
       email: "",
       whatsapp: "",
+      birthDate: "",
     },
   });
 
@@ -57,7 +60,7 @@ export default function NewsletterSection() {
     const dataToSave = {
       ...values,
       submissionDate: serverTimestamp(),
-      rating: 0, // Default rating is 0, to be set by ADM
+      rating: 0, 
     };
 
     return addDoc(leadsCollection, dataToSave)
@@ -118,19 +121,34 @@ export default function NewsletterSection() {
                       </FormItem>
                     )}
                   />
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="sr-only">E-mail</FormLabel>
-                        <FormControl>
-                          <Input type="email" placeholder="Seu melhor e-mail" {...field} className="bg-background" />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="sr-only">E-mail</FormLabel>
+                          <FormControl>
+                            <Input type="email" placeholder="Seu e-mail" {...field} className="bg-background" />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="birthDate"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="sr-only">Data de Nascimento</FormLabel>
+                          <FormControl>
+                            <Input type="date" {...field} className="bg-background" title="Data de Nascimento" />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
                   <FormField
                     control={form.control}
                     name="whatsapp"

@@ -15,7 +15,7 @@ import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/
 import { Bar, BarChart, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts';
 import { format, startOfDay, subDays, isSameDay, subMinutes } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import { LogOut, Users, Mail, Phone, Lock, ArrowUpDown, ChevronUp, ChevronDown, Bell, Search, Star, MessageSquare, Eye, ShoppingBag, Copy, MapPin, Instagram, Youtube, Download, CalendarCheck, Check, Trash2, Calendar as CalendarIcon, RefreshCcw, Activity } from 'lucide-react';
+import { LogOut, Users, Mail, Phone, Lock, ArrowUpDown, ChevronUp, ChevronDown, Bell, Search, Star, MessageSquare, Eye, ShoppingBag, Copy, MapPin, Instagram, Youtube, Download, CalendarCheck, Check, Trash2, Calendar as CalendarIcon, RefreshCcw, Gift } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
 
@@ -32,7 +32,7 @@ const TikTokIcon = (props: any) => (
   </svg>
 );
 
-type SortField = 'submissionDate' | 'name' | 'email' | 'whatsapp' | 'rating';
+type SortField = 'submissionDate' | 'name' | 'email' | 'whatsapp' | 'rating' | 'birthDate';
 type SortOrder = 'asc' | 'desc';
 
 export default function AdminPage() {
@@ -72,7 +72,6 @@ export default function AdminPage() {
     }
   }, []);
 
-  // Atualiza o tempo da janela de presença a cada 30 segundos
   useEffect(() => {
     if (!isLoggedIn) return;
     const interval = setInterval(() => {
@@ -93,7 +92,6 @@ export default function AdminPage() {
 
   const activeUsersQuery = useMemoFirebase(() => {
     if (!firestore || !isLoggedIn) return null;
-    // O uso de presenceWindow aqui garante que a query seja atualizada no banco
     return query(collection(firestore, 'presence'), where('lastSeen', '>=', presenceWindow));
   }, [firestore, isLoggedIn, presenceWindow]);
 
@@ -263,15 +261,17 @@ export default function AdminPage() {
   const handleExportCSV = () => {
     if (filteredAndSortedLeads.length === 0) return;
 
-    const headers = ['Data', 'Status (Estrelas)', 'Nome', 'E-mail', 'WhatsApp', 'Notas'];
+    const headers = ['Data Envio', 'Status (Estrelas)', 'Nome', 'E-mail', 'WhatsApp', 'Aniversário', 'Notas'];
     const rows = filteredAndSortedLeads.map(lead => {
       const date = lead.submissionDate?.toDate ? format(lead.submissionDate.toDate(), "dd/MM/yyyy HH:mm") : '-';
+      const birth = lead.birthDate ? format(new Date(lead.birthDate + 'T00:00:00'), "dd/MM/yyyy") : '-';
       return [
         date,
         lead.rating || 0,
         lead.name || '',
         lead.email || '',
         lead.whatsapp || '',
+        birth,
         `"${(lead.notes || '').replace(/"/g, '""')}"`
       ];
     });
@@ -558,17 +558,19 @@ export default function AdminPage() {
                 <TableHeader className="bg-muted/50">
                   <TableRow>
                     <TableHead className="w-[140px] cursor-pointer" onClick={() => handleSort('submissionDate')}>Data <SortIcon field="submissionDate" /></TableHead>
-                    <TableHead className="w-[120px] cursor-pointer" onClick={() => handleSort('rating')}>Status <SortIcon field="rating" /></TableHead>
+                    <TableHead className="w-[100px] cursor-pointer" onClick={() => handleSort('rating')}>Status <SortIcon field="rating" /></TableHead>
                     <TableHead className="cursor-pointer" onClick={() => handleSort('name')}>Nome <SortIcon field="name" /></TableHead>
-                    <TableHead className="w-[200px] cursor-pointer" onClick={() => handleSort('email')}>E-mail <SortIcon field="email" /></TableHead>
-                    <TableHead className="w-[150px] cursor-pointer" onClick={() => handleSort('whatsapp')}>WhatsApp <SortIcon field="whatsapp" /></TableHead>
-                    <TableHead className="w-[250px]"><div className="flex items-center gap-2"><MessageSquare className="h-4 w-4 text-primary" />Notas</div></TableHead>
+                    <TableHead className="w-[180px] cursor-pointer" onClick={() => handleSort('email')}>E-mail <SortIcon field="email" /></TableHead>
+                    <TableHead className="w-[130px] cursor-pointer" onClick={() => handleSort('whatsapp')}>WhatsApp <SortIcon field="whatsapp" /></TableHead>
+                    <TableHead className="w-[110px] cursor-pointer" onClick={() => handleSort('birthDate')}>Niver <SortIcon field="birthDate" /></TableHead>
+                    <TableHead className="w-[200px]"><div className="flex items-center gap-2"><MessageSquare className="h-4 w-4 text-primary" />Notas</div></TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {filteredAndSortedLeads.map((lead: any) => {
                     const submissionDate = lead.submissionDate?.toDate?.() || new Date();
                     const isNew = submissionDate > initialLoadTime.current;
+                    const birthDate = lead.birthDate ? format(new Date(lead.birthDate + 'T00:00:00'), "dd/MM") : '-';
                     return (
                       <TableRow key={lead.id} className={cn("transition-all", isNew ? "bg-primary/10 animate-pulse-slow border-l-4 border-l-primary" : "hover:bg-primary/5")}>
                         <TableCell className="text-muted-foreground text-xs">{lead.submissionDate?.toDate ? format(lead.submissionDate.toDate(), "dd/MM/yy HH:mm", { locale: ptBR }) : 'Agora'}</TableCell>
@@ -589,11 +591,19 @@ export default function AdminPage() {
                         <TableCell className="font-semibold text-foreground">{lead.name}</TableCell>
                         <TableCell>
                           <button onClick={() => { navigator.clipboard.writeText(lead.email); toast({ title: "E-mail copiado!" }); }} className="text-primary hover:underline text-xs flex items-center gap-2 group/email text-left transition-all">
-                            <span className="truncate max-w-[160px]">{lead.email}</span>
+                            <span className="truncate max-w-[140px]">{lead.email}</span>
                             <Copy className="h-3 w-3 opacity-0 group-hover/email:opacity-100" />
                           </button>
                         </TableCell>
                         <TableCell>{lead.whatsapp ? <a href={`https://wa.me/55${lead.whatsapp}`} target="_blank" rel="noopener noreferrer" className="text-green-500 hover:underline text-xs font-medium flex items-center gap-1"><Phone className="h-3 w-3"/>{lead.whatsapp}</a> : '-'}</TableCell>
+                        <TableCell className="text-xs font-medium">
+                          {lead.birthDate ? (
+                            <div className="flex items-center gap-1.5 text-accent">
+                              <Gift className="h-3 w-3" />
+                              {birthDate}
+                            </div>
+                          ) : '-'}
+                        </TableCell>
                         <TableCell><Input defaultValue={lead.notes || ''} placeholder="Nota..." className="bg-transparent border-none text-xs h-8" onBlur={(e) => handleUpdateNote(lead.id, e.target.value)} /></TableCell>
                       </TableRow>
                     );
