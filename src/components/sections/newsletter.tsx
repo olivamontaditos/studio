@@ -92,7 +92,7 @@ export default function NewsletterSection() {
   const { isSubmitting } = form.formState;
 
   return (
-    <section className="bg-secondary py-20 md:py-24">
+    <section id="cadastro" className="bg-secondary py-20 md:py-24">
       <div className="container mx-auto px-6 text-center">
         <h2 className="font-headline text-3xl font-bold text-foreground md:text-4xl">
           Fique por dentro das novidades

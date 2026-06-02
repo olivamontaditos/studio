@@ -12,6 +12,7 @@ const navItems = [
   { href: "/#cardapio", label: "Cardápio" },
   { href: "/#nosso-espaco", label: "Nosso Espaço" },
   { href: "/#encomendas", label: "Eventos & Encomendas" },
+  { href: "/#cadastro", label: "Cadastro" },
   { href: "https://www.ifood.com.br/delivery/curitiba-pr/oliva-montaditos-bom-retiro/2b88f26f-a586-4600-ab74-19d3852d4ddd?UTM_Medium=share", label: "iFood", external: true },
 ];
 
