@@ -159,10 +159,14 @@ export default function AdminPage() {
   };
 
   const handleCopyLink = (url: string, label: string) => {
+    // Copia para a área de transferência
     navigator.clipboard.writeText(url);
+    // Abre em uma nova aba
+    window.open(url, '_blank');
+    
     toast({
-      title: "Link copiado!",
-      description: `O link do ${label} foi copiado com sucesso.`,
+      title: "Link Aberto e Copiado!",
+      description: `O link do ${label} foi copiado para sua área de transferência e aberto em uma nova aba.`,
       action: <Check className="h-4 w-4 text-green-500" />
     });
   };
