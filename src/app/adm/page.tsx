@@ -10,9 +10,11 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import { LogOut, Users, Mail, Phone, Lock, ArrowUpDown, ChevronUp, ChevronDown, Bell, Search, Star, MessageSquare, Eye, ShoppingBag, Copy, MapPin, Instagram, Youtube, Download, CalendarCheck } from 'lucide-react';
+import { LogOut, Users, Mail, Phone, Lock, ArrowUpDown, ChevronUp, ChevronDown, Bell, Search, Star, MessageSquare, Eye, ShoppingBag, Copy, MapPin, Instagram, Youtube, Download, CalendarCheck, Check } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
+
+const ADM_AUTH_KEY = "oliva_adm_session";
 
 const TikTokIcon = (props: any) => (
   <svg
@@ -52,6 +54,15 @@ export default function AdminPage() {
     maps: "https://share.google/fnyW3LtaK1bazQDRv",
     review: "https://www.google.com/maps/place/Oliva+Montaditos/@-25.4017127,-49.2859022,1027m/data=!3m2!1e3!4b1!4m6!3m5!1s0x94dce7b94e3b9a4d:0xced8f0805bee5fe5!8m2!3d-25.4017127!4d-49.2833273!16s%2Fg%2F11n9htw6j1?entry=ttu&g_ep=EgoyMDI2MDUyNy4wIKXMDSoASAFQAw%3D%3D"
   };
+
+  // Check persistent session on mount
+  useEffect(() => {
+    const session = localStorage.getItem(ADM_AUTH_KEY);
+    if (session === "active") {
+      setIsLoggedIn(true);
+      initialLoadTime.current = new Date();
+    }
+  }, []);
 
   // Queries
   const leadsQuery = useMemoFirebase(() => {
@@ -147,6 +158,15 @@ export default function AdminPage() {
     updateDoc(leadRef, { notes }).catch(() => {});
   };
 
+  const handleCopyLink = (url: string, label: string) => {
+    navigator.clipboard.writeText(url);
+    toast({
+      title: "Link copiado!",
+      description: `O link do ${label} foi copiado com sucesso.`,
+      action: <Check className="h-4 w-4 text-green-500" />
+    });
+  };
+
   const handleCopyEmail = (email: string) => {
     navigator.clipboard.writeText(email);
     toast({
@@ -196,6 +216,7 @@ export default function AdminPage() {
     if (login === 'om' && password === '2010') {
       setIsLoggedIn(true);
       setError('');
+      localStorage.setItem(ADM_AUTH_KEY, "active");
       initialLoadTime.current = new Date();
     } else {
       setError('Credenciais inválidas.');
@@ -207,6 +228,7 @@ export default function AdminPage() {
     setLogin('');
     setPassword('');
     setSearchTerm('');
+    localStorage.removeItem(ADM_AUTH_KEY);
     prevLeadsCount.current = null;
   };
 
@@ -298,77 +320,85 @@ export default function AdminPage() {
           </div>
         </Card>
         
-        <a href={urls.whatsapp} target="_blank" rel="noopener noreferrer" className="block transition-transform hover:scale-105">
-          <Card className="bg-green-500/5 border-green-500/10 p-4 cursor-pointer hover:bg-green-500/10 h-full">
-            <div className="flex flex-col items-center text-center gap-2">
+        <div onClick={() => handleCopyLink(urls.whatsapp, "WhatsApp")} className="block transition-transform hover:scale-105 cursor-pointer">
+          <Card className="bg-green-500/5 border-green-500/10 p-4 hover:bg-green-500/10 h-full group">
+            <div className="flex flex-col items-center text-center gap-2 relative">
               <Phone className="h-5 w-5 text-green-500" />
               <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">WhatsApp</p><p className="text-xl font-bold text-green-500">{analyticsStats.whatsappClicks}</p></div>
+              <Copy className="h-3 w-3 absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground" />
             </div>
           </Card>
-        </a>
+        </div>
 
-        <a href={urls.whatsapp} target="_blank" rel="noopener noreferrer" className="block transition-transform hover:scale-105">
-          <Card className="bg-orange-500/5 border-orange-500/10 p-4 cursor-pointer hover:bg-orange-500/10 h-full">
-            <div className="flex flex-col items-center text-center gap-2">
+        <div onClick={() => handleCopyLink(urls.whatsapp, "Eventos")} className="block transition-transform hover:scale-105 cursor-pointer">
+          <Card className="bg-orange-500/5 border-orange-500/10 p-4 hover:bg-orange-500/10 h-full group">
+            <div className="flex flex-col items-center text-center gap-2 relative">
               <CalendarCheck className="h-5 w-5 text-orange-500" />
               <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">Eventos</p><p className="text-xl font-bold text-orange-500">{analyticsStats.eventsClicks}</p></div>
+              <Copy className="h-3 w-3 absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground" />
             </div>
           </Card>
-        </a>
+        </div>
 
-        <a href={urls.ifood} target="_blank" rel="noopener noreferrer" className="block transition-transform hover:scale-105">
-          <Card className="bg-red-500/5 border-red-500/10 p-4 cursor-pointer hover:bg-red-500/10 h-full">
-            <div className="flex flex-col items-center text-center gap-2">
+        <div onClick={() => handleCopyLink(urls.ifood, "iFood")} className="block transition-transform hover:scale-105 cursor-pointer">
+          <Card className="bg-red-500/5 border-red-500/10 p-4 hover:bg-red-500/10 h-full group">
+            <div className="flex flex-col items-center text-center gap-2 relative">
               <ShoppingBag className="h-5 w-5 text-red-500" />
               <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">iFood</p><p className="text-xl font-bold text-red-500">{analyticsStats.ifoodClicks}</p></div>
+              <Copy className="h-3 w-3 absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground" />
             </div>
           </Card>
-        </a>
+        </div>
 
-        <a href={urls.review} target="_blank" rel="noopener noreferrer" className="block transition-transform hover:scale-105">
-          <Card className="bg-accent/5 border-accent/10 p-4 cursor-pointer hover:bg-accent/10 h-full">
-            <div className="flex flex-col items-center text-center gap-2">
+        <div onClick={() => handleCopyLink(urls.review, "Avaliação")} className="block transition-transform hover:scale-105 cursor-pointer">
+          <Card className="bg-accent/5 border-accent/10 p-4 hover:bg-accent/10 h-full group">
+            <div className="flex flex-col items-center text-center gap-2 relative">
               <Star className="h-5 w-5 text-accent" />
               <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">Avaliação</p><p className="text-xl font-bold text-accent">{analyticsStats.reviewClicks}</p></div>
+              <Copy className="h-3 w-3 absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground" />
             </div>
           </Card>
-        </a>
+        </div>
 
-        <a href={urls.maps} target="_blank" rel="noopener noreferrer" className="block transition-transform hover:scale-105">
-          <Card className="bg-blue-500/5 border-blue-500/10 p-4 cursor-pointer hover:bg-blue-500/10 h-full">
-            <div className="flex flex-col items-center text-center gap-2">
+        <div onClick={() => handleCopyLink(urls.maps, "Endereço")} className="block transition-transform hover:scale-105 cursor-pointer">
+          <Card className="bg-blue-500/5 border-blue-500/10 p-4 hover:bg-blue-500/10 h-full group">
+            <div className="flex flex-col items-center text-center gap-2 relative">
               <MapPin className="h-5 w-5 text-blue-500" />
               <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">Endereço</p><p className="text-xl font-bold text-blue-500">{analyticsStats.addressClicks}</p></div>
+              <Copy className="h-3 w-3 absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground" />
             </div>
           </Card>
-        </a>
+        </div>
 
-        <a href={urls.instagram} target="_blank" rel="noopener noreferrer" className="block transition-transform hover:scale-105">
-          <Card className="bg-pink-500/5 border-pink-500/10 p-4 cursor-pointer hover:bg-pink-500/10 h-full">
-            <div className="flex flex-col items-center text-center gap-2">
+        <div onClick={() => handleCopyLink(urls.instagram, "Instagram")} className="block transition-transform hover:scale-105 cursor-pointer">
+          <Card className="bg-pink-500/5 border-pink-500/10 p-4 hover:bg-pink-500/10 h-full group">
+            <div className="flex flex-col items-center text-center gap-2 relative">
               <Instagram className="h-5 w-5 text-pink-500" />
               <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">Instagram</p><p className="text-xl font-bold text-pink-500">{analyticsStats.instagramClicks}</p></div>
+              <Copy className="h-3 w-3 absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground" />
             </div>
           </Card>
-        </a>
+        </div>
 
-        <a href={urls.tiktok} target="_blank" rel="noopener noreferrer" className="block transition-transform hover:scale-105">
-          <Card className="bg-foreground/5 border-foreground/10 p-4 cursor-pointer hover:bg-foreground/10 h-full">
-            <div className="flex flex-col items-center text-center gap-2">
+        <div onClick={() => handleCopyLink(urls.tiktok, "TikTok")} className="block transition-transform hover:scale-105 cursor-pointer">
+          <Card className="bg-foreground/5 border-foreground/10 p-4 hover:bg-foreground/10 h-full group">
+            <div className="flex flex-col items-center text-center gap-2 relative">
               <TikTokIcon className="h-5 w-5 text-foreground" />
               <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">TikTok</p><p className="text-xl font-bold text-foreground">{analyticsStats.tiktokClicks}</p></div>
+              <Copy className="h-3 w-3 absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground" />
             </div>
           </Card>
-        </a>
+        </div>
 
-        <a href={urls.youtube} target="_blank" rel="noopener noreferrer" className="block transition-transform hover:scale-105">
-          <Card className="bg-red-600/5 border-red-600/10 p-4 cursor-pointer hover:bg-red-600/10 h-full">
-            <div className="flex flex-col items-center text-center gap-2">
+        <div onClick={() => handleCopyLink(urls.youtube, "YouTube")} className="block transition-transform hover:scale-105 cursor-pointer">
+          <Card className="bg-red-600/5 border-red-600/10 p-4 hover:bg-red-600/10 h-full group">
+            <div className="flex flex-col items-center text-center gap-2 relative">
               <Youtube className="h-5 w-5 text-red-600" />
               <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">YouTube</p><p className="text-xl font-bold text-red-600">{analyticsStats.youtubeClicks}</p></div>
+              <Copy className="h-3 w-3 absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground" />
             </div>
           </Card>
-        </a>
+        </div>
       </div>
 
       <Card className="border-primary/10 bg-card/30 backdrop-blur-sm overflow-hidden">
