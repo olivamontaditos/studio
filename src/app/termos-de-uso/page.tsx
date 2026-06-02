@@ -37,7 +37,7 @@ export default function TermsOfUsePage() {
 
         <h2>3. Isenção de responsabilidade</h2>
         <p>Os materiais no site da OLIVA MONTADITOS são fornecidos ‘como estão’. OLIVA MONTADITOS não oferece garantias, expressas ou implícitas, e, por este meio, isenta e nega todas as outras garantias, incluindo, sem limitação, garantias implícitas ou condições de comercialização, adequação a um fim específico ou não violação de propriedade intelectual ou outra violação de direitos.</p>
-        <p>Além disso, o OLIVA MONTADITOS не garante ou faz qualquer representação relativa à precisão, aos resultados prováveis ou à confiabilidade do uso dos materiais em seu site ou de outra forma relacionado a esses materiais ou em sites vinculados a este site.</p>
+        <p>Além disso, o OLIVA MONTADITOS não garante ou faz qualquer representação relativa à precisão, aos resultados prováveis ou à confiabilidade do uso dos materiais em seu site ou de outra forma relacionado a esses materiais ou em sites vinculados a este site.</p>
 
         <h2>4. Limitações</h2>
         <p>
@@ -45,10 +45,10 @@ export default function TermsOfUsePage() {
         </p>
         
         <h2>5. Precisão dos materiais</h2>
-        <p>Os materiais exibidos no site da OLIVA MONTADITOS podem incluir erros técnicos, tipográficos ou fotográficos. OLIVA MONTADITOS не garante que qualquer material em seu site seja preciso, completo ou atual. OLIVA MONTADITOS pode fazer alterações nos materiais contidos em seu site a qualquer momento, sem aviso prévio. No entanto, OLIVA MONTADITOS não se compromete a atualizar os materiais.</p>
+        <p>Os materiais exibidos no site da OLIVA MONTADITOS podem incluir erros técnicos, tipográficos ou fotográficos. OLIVA MONTADITOS não garante que qualquer material em seu site seja preciso, completo ou atual. OLIVA MONTADITOS pode fazer alterações nos materiais contidos em seu site a qualquer momento, sem aviso prévio. No entanto, OLIVA MONTADITOS não se compromete a atualizar os materiais.</p>
 
         <h2>6. Links</h2>
-        <p>A OLIVA MONTADITOS не analisou todos os sites vinculados ao seu site e não é responsável pelo conteúdo de nenhum site vinculado. A inclusão de qualquer link não implica endosso por OLIVA MONTADITOS do site. O uso de qualquer site vinculado é por conta e risco do usuário.</p>
+        <p>A OLIVA MONTADITOS não analisou todos os sites vinculados ao seu site e não é responsável pelo conteúdo de nenhum site vinculado. A inclusão de qualquer link não implica endosso por OLIVA MONTADITOS do site. O uso de qualquer site vinculado é por conta e risco do usuário.</p>
 
         <h2>Modificações</h2>
         <p>A OLIVA MONTADITOS pode revisar estes termos de serviço do site a qualquer momento, sem aviso prévio. Ao usar este site, você concorda em ficar vinculado à versão atual desses termos de serviço.</p>
