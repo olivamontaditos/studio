@@ -43,6 +43,7 @@ export default function AdminPage() {
   const firestore = useFirestore();
   const initialLoadTime = useRef(new Date());
   const prevLeadsCount = useRef<number | null>(null);
+  const clickTimerRef = useRef<{ [key: string]: NodeJS.Timeout | null }>({});
 
   // URLs
   const urls = {
@@ -158,17 +159,36 @@ export default function AdminPage() {
     updateDoc(leadRef, { notes }).catch(() => {});
   };
 
-  const handleCopyLink = (url: string, label: string) => {
-    // Copia para a área de transferência
-    navigator.clipboard.writeText(url);
-    // Abre em uma nova aba
-    window.open(url, '_blank');
-    
-    toast({
-      title: "Link Aberto e Copiado!",
-      description: `O link do ${label} foi copiado para sua área de transferência e aberto em uma nova aba.`,
-      action: <Check className="h-4 w-4 text-green-500" />
-    });
+  const handleMetricAction = (url: string, label: string) => {
+    if (clickTimerRef.current[label]) {
+      // É um clique duplo
+      clearTimeout(clickTimerRef.current[label]!);
+      clickTimerRef.current[label] = null;
+      
+      // Ação: Copia e Abre
+      navigator.clipboard.writeText(url);
+      window.open(url, '_blank');
+      
+      toast({
+        title: "Link Aberto e Copiado!",
+        description: `O link do ${label} foi copiado e aberto em uma nova aba.`,
+        action: <Check className="h-4 w-4 text-green-500" />
+      });
+    } else {
+      // Primeiro clique
+      clickTimerRef.current[label] = setTimeout(() => {
+        // Foi um clique simples
+        clickTimerRef.current[label] = null;
+        
+        // Ação: Apenas Copia
+        navigator.clipboard.writeText(url);
+        toast({
+          title: "Link Copiado!",
+          description: `O link do ${label} foi copiado para sua área de transferência. Clique duas vezes para abrir.`,
+          action: <Check className="h-4 w-4 text-blue-500" />
+        });
+      }, 300);
+    }
   };
 
   const handleCopyEmail = (email: string) => {
@@ -324,7 +344,7 @@ export default function AdminPage() {
           </div>
         </Card>
         
-        <div onClick={() => handleCopyLink(urls.whatsapp, "WhatsApp")} className="block transition-transform hover:scale-105 cursor-pointer">
+        <div onClick={() => handleMetricAction(urls.whatsapp, "WhatsApp")} className="block transition-transform hover:scale-105 cursor-pointer select-none">
           <Card className="bg-green-500/5 border-green-500/10 p-4 hover:bg-green-500/10 h-full group">
             <div className="flex flex-col items-center text-center gap-2 relative">
               <Phone className="h-5 w-5 text-green-500" />
@@ -334,7 +354,7 @@ export default function AdminPage() {
           </Card>
         </div>
 
-        <div onClick={() => handleCopyLink(urls.whatsapp, "Eventos")} className="block transition-transform hover:scale-105 cursor-pointer">
+        <div onClick={() => handleMetricAction(urls.whatsapp, "Eventos")} className="block transition-transform hover:scale-105 cursor-pointer select-none">
           <Card className="bg-orange-500/5 border-orange-500/10 p-4 hover:bg-orange-500/10 h-full group">
             <div className="flex flex-col items-center text-center gap-2 relative">
               <CalendarCheck className="h-5 w-5 text-orange-500" />
@@ -344,7 +364,7 @@ export default function AdminPage() {
           </Card>
         </div>
 
-        <div onClick={() => handleCopyLink(urls.ifood, "iFood")} className="block transition-transform hover:scale-105 cursor-pointer">
+        <div onClick={() => handleMetricAction(urls.ifood, "iFood")} className="block transition-transform hover:scale-105 cursor-pointer select-none">
           <Card className="bg-red-500/5 border-red-500/10 p-4 hover:bg-red-500/10 h-full group">
             <div className="flex flex-col items-center text-center gap-2 relative">
               <ShoppingBag className="h-5 w-5 text-red-500" />
@@ -354,7 +374,7 @@ export default function AdminPage() {
           </Card>
         </div>
 
-        <div onClick={() => handleCopyLink(urls.review, "Avaliação")} className="block transition-transform hover:scale-105 cursor-pointer">
+        <div onClick={() => handleMetricAction(urls.review, "Avaliação")} className="block transition-transform hover:scale-105 cursor-pointer select-none">
           <Card className="bg-accent/5 border-accent/10 p-4 hover:bg-accent/10 h-full group">
             <div className="flex flex-col items-center text-center gap-2 relative">
               <Star className="h-5 w-5 text-accent" />
@@ -364,7 +384,7 @@ export default function AdminPage() {
           </Card>
         </div>
 
-        <div onClick={() => handleCopyLink(urls.maps, "Endereço")} className="block transition-transform hover:scale-105 cursor-pointer">
+        <div onClick={() => handleMetricAction(urls.maps, "Endereço")} className="block transition-transform hover:scale-105 cursor-pointer select-none">
           <Card className="bg-blue-500/5 border-blue-500/10 p-4 hover:bg-blue-500/10 h-full group">
             <div className="flex flex-col items-center text-center gap-2 relative">
               <MapPin className="h-5 w-5 text-blue-500" />
@@ -374,7 +394,7 @@ export default function AdminPage() {
           </Card>
         </div>
 
-        <div onClick={() => handleCopyLink(urls.instagram, "Instagram")} className="block transition-transform hover:scale-105 cursor-pointer">
+        <div onClick={() => handleMetricAction(urls.instagram, "Instagram")} className="block transition-transform hover:scale-105 cursor-pointer select-none">
           <Card className="bg-pink-500/5 border-pink-500/10 p-4 hover:bg-pink-500/10 h-full group">
             <div className="flex flex-col items-center text-center gap-2 relative">
               <Instagram className="h-5 w-5 text-pink-500" />
@@ -384,7 +404,7 @@ export default function AdminPage() {
           </Card>
         </div>
 
-        <div onClick={() => handleCopyLink(urls.tiktok, "TikTok")} className="block transition-transform hover:scale-105 cursor-pointer">
+        <div onClick={() => handleMetricAction(urls.tiktok, "TikTok")} className="block transition-transform hover:scale-105 cursor-pointer select-none">
           <Card className="bg-foreground/5 border-foreground/10 p-4 hover:bg-foreground/10 h-full group">
             <div className="flex flex-col items-center text-center gap-2 relative">
               <TikTokIcon className="h-5 w-5 text-foreground" />
@@ -394,7 +414,7 @@ export default function AdminPage() {
           </Card>
         </div>
 
-        <div onClick={() => handleCopyLink(urls.youtube, "YouTube")} className="block transition-transform hover:scale-105 cursor-pointer">
+        <div onClick={() => handleMetricAction(urls.youtube, "YouTube")} className="block transition-transform hover:scale-105 cursor-pointer select-none">
           <Card className="bg-red-600/5 border-red-600/10 p-4 hover:bg-red-600/10 h-full group">
             <div className="flex flex-col items-center text-center gap-2 relative">
               <Youtube className="h-5 w-5 text-red-600" />
