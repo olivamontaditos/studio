@@ -42,6 +42,16 @@ export default function AdminPage() {
   const initialLoadTime = useRef(new Date());
   const prevLeadsCount = useRef<number | null>(null);
 
+  // URLs
+  const urls = {
+    whatsapp: "https://wa.me/5541988483621",
+    ifood: "https://www.ifood.com.br/delivery/curitiba-pr/oliva-montaditos-bom-retiro/2b88f26f-a586-4600-ab74-19d3852d4ddd?UTM_Medium=share",
+    instagram: "https://www.instagram.com/olivamontaditos/",
+    tiktok: "https://www.tiktok.com/@olivamontaditos",
+    youtube: "https://www.youtube.com/@OlivaMontaditos",
+    maps: "https://share.google/fnyW3LtaK1bazQDRv"
+  };
+
   // Queries
   const leadsQuery = useMemoFirebase(() => {
     if (!firestore || !isLoggedIn) return null;
@@ -277,42 +287,61 @@ export default function AdminPage() {
             <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">Acessos</p><p className="text-xl font-bold text-primary">{analyticsStats.pageViews}</p></div>
           </div>
         </Card>
-        <Card className="bg-green-500/5 border-green-500/10 p-4">
-          <div className="flex flex-col items-center text-center gap-2">
-            <Phone className="h-5 w-5 text-green-500" />
-            <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">WhatsApp</p><p className="text-xl font-bold text-green-500">{analyticsStats.whatsappClicks}</p></div>
-          </div>
-        </Card>
-        <Card className="bg-red-500/5 border-red-500/10 p-4">
-          <div className="flex flex-col items-center text-center gap-2">
-            <ShoppingBag className="h-5 w-5 text-red-500" />
-            <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">iFood</p><p className="text-xl font-bold text-red-500">{analyticsStats.ifoodClicks}</p></div>
-          </div>
-        </Card>
-        <Card className="bg-blue-500/5 border-blue-500/10 p-4">
-          <div className="flex flex-col items-center text-center gap-2">
-            <MapPin className="h-5 w-5 text-blue-500" />
-            <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">Endereço</p><p className="text-xl font-bold text-blue-500">{analyticsStats.addressClicks}</p></div>
-          </div>
-        </Card>
-        <Card className="bg-pink-500/5 border-pink-500/10 p-4">
-          <div className="flex flex-col items-center text-center gap-2">
-            <Instagram className="h-5 w-5 text-pink-500" />
-            <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">Instagram</p><p className="text-xl font-bold text-pink-500">{analyticsStats.instagramClicks}</p></div>
-          </div>
-        </Card>
-        <Card className="bg-foreground/5 border-foreground/10 p-4">
-          <div className="flex flex-col items-center text-center gap-2">
-            <TikTokIcon className="h-5 w-5 text-foreground" />
-            <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">TikTok</p><p className="text-xl font-bold text-foreground">{analyticsStats.tiktokClicks}</p></div>
-          </div>
-        </Card>
-        <Card className="bg-red-600/5 border-red-600/10 p-4">
-          <div className="flex flex-col items-center text-center gap-2">
-            <Youtube className="h-5 w-5 text-red-600" />
-            <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">YouTube</p><p className="text-xl font-bold text-red-600">{analyticsStats.youtubeClicks}</p></div>
-          </div>
-        </Card>
+        
+        <a href={urls.whatsapp} target="_blank" rel="noopener noreferrer" className="block transition-transform hover:scale-105">
+          <Card className="bg-green-500/5 border-green-500/10 p-4 cursor-pointer hover:bg-green-500/10 h-full">
+            <div className="flex flex-col items-center text-center gap-2">
+              <Phone className="h-5 w-5 text-green-500" />
+              <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">WhatsApp</p><p className="text-xl font-bold text-green-500">{analyticsStats.whatsappClicks}</p></div>
+            </div>
+          </Card>
+        </a>
+
+        <a href={urls.ifood} target="_blank" rel="noopener noreferrer" className="block transition-transform hover:scale-105">
+          <Card className="bg-red-500/5 border-red-500/10 p-4 cursor-pointer hover:bg-red-500/10 h-full">
+            <div className="flex flex-col items-center text-center gap-2">
+              <ShoppingBag className="h-5 w-5 text-red-500" />
+              <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">iFood</p><p className="text-xl font-bold text-red-500">{analyticsStats.ifoodClicks}</p></div>
+            </div>
+          </Card>
+        </a>
+
+        <a href={urls.maps} target="_blank" rel="noopener noreferrer" className="block transition-transform hover:scale-105">
+          <Card className="bg-blue-500/5 border-blue-500/10 p-4 cursor-pointer hover:bg-blue-500/10 h-full">
+            <div className="flex flex-col items-center text-center gap-2">
+              <MapPin className="h-5 w-5 text-blue-500" />
+              <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">Endereço</p><p className="text-xl font-bold text-blue-500">{analyticsStats.addressClicks}</p></div>
+            </div>
+          </Card>
+        </a>
+
+        <a href={urls.instagram} target="_blank" rel="noopener noreferrer" className="block transition-transform hover:scale-105">
+          <Card className="bg-pink-500/5 border-pink-500/10 p-4 cursor-pointer hover:bg-pink-500/10 h-full">
+            <div className="flex flex-col items-center text-center gap-2">
+              <Instagram className="h-5 w-5 text-pink-500" />
+              <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">Instagram</p><p className="text-xl font-bold text-pink-500">{analyticsStats.instagramClicks}</p></div>
+            </div>
+          </Card>
+        </a>
+
+        <a href={urls.tiktok} target="_blank" rel="noopener noreferrer" className="block transition-transform hover:scale-105">
+          <Card className="bg-foreground/5 border-foreground/10 p-4 cursor-pointer hover:bg-foreground/10 h-full">
+            <div className="flex flex-col items-center text-center gap-2">
+              <TikTokIcon className="h-5 w-5 text-foreground" />
+              <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">TikTok</p><p className="text-xl font-bold text-foreground">{analyticsStats.tiktokClicks}</p></div>
+            </div>
+          </Card>
+        </a>
+
+        <a href={urls.youtube} target="_blank" rel="noopener noreferrer" className="block transition-transform hover:scale-105">
+          <Card className="bg-red-600/5 border-red-600/10 p-4 cursor-pointer hover:bg-red-600/10 h-full">
+            <div className="flex flex-col items-center text-center gap-2">
+              <Youtube className="h-5 w-5 text-red-600" />
+              <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">YouTube</p><p className="text-xl font-bold text-red-600">{analyticsStats.youtubeClicks}</p></div>
+            </div>
+          </Card>
+        </a>
+
         <Card className="bg-accent/5 border-accent/10 p-4">
           <div className="flex flex-col items-center text-center gap-2">
             <Users className="h-5 w-5 text-accent" />
