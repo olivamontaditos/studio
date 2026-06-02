@@ -340,31 +340,10 @@ export default function AdminPage() {
 
   return (
     <div className="container mx-auto py-12 px-6 animate-in fade-in duration-500 relative">
-      {/* Floating Live Indicator */}
-      <div className="fixed top-24 right-8 z-40 hidden lg:block">
-        <div className="bg-background/80 backdrop-blur-md border border-green-500/20 px-4 py-2 rounded-2xl shadow-2xl flex items-center gap-3 animate-in slide-in-from-right-10 duration-500">
-          <div className="relative flex h-3 w-3">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-[10px] font-bold text-green-600 uppercase tracking-widest leading-none mb-0.5">Live</span>
-            <span className="text-lg font-black leading-none">{activeUsersCount} <span className="text-[10px] font-medium text-muted-foreground lowercase">online</span></span>
-          </div>
-        </div>
-      </div>
-
       <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-12">
         <div className="space-y-1">
           <div className="flex items-center gap-3">
             <h1 className="font-headline text-4xl font-bold text-primary">Painel Oliva</h1>
-            {/* Mobile Live Indicator */}
-            <div className="lg:hidden bg-green-500/10 border border-green-500/20 px-3 py-1 rounded-full flex items-center gap-2 animate-pulse">
-              <div className="h-2 w-2 bg-green-500 rounded-full" />
-              <span className="text-[10px] font-bold text-green-600 uppercase tracking-tighter">
-                {activeUsersCount} Online
-              </span>
-            </div>
           </div>
           <p className="text-muted-foreground">Gestão estratégica e dados em tempo real.</p>
         </div>
@@ -398,7 +377,7 @@ export default function AdminPage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-10 gap-4 mb-10">
+      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-11 gap-4 mb-10">
         <Dialog>
           <DialogTrigger asChild>
             <Card className="bg-primary/5 border-primary/10 p-4 cursor-pointer hover:bg-primary/10 transition-colors group">
@@ -513,6 +492,19 @@ export default function AdminPage() {
             </div>
           </Card>
         </div>
+
+        <Card className="bg-green-500/5 border-green-500/10 p-4 group">
+          <div className="flex flex-col items-center text-center gap-2 relative">
+            <div className="relative flex h-3 w-3 mb-1">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+            </div>
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">Online</p>
+              <p className="text-xl font-bold text-green-500">{activeUsersCount}</p>
+            </div>
+          </div>
+        </Card>
       </div>
 
       <Card className="border-primary/10 bg-card/30 backdrop-blur-sm overflow-hidden">
