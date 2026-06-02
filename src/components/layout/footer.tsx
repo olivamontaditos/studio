@@ -2,7 +2,7 @@
 'use client';
 
 import Link from "next/link";
-import { ShieldCheck, Star, Instagram, Youtube, MapPin } from "lucide-react";
+import { ShieldCheck, Star, Instagram, Youtube, MapPin, MessageCircle } from "lucide-react";
 import Copyright from "./copyright";
 import { useAnalytics } from "@/hooks/use-analytics";
 
@@ -25,6 +25,7 @@ export default function Footer() {
     { href: "/politica-de-cookies", text: "Política de Cookies" },
   ];
   const mapsUrl = "https://share.google/fnyW3LtaK1bazQDRv";
+  const whatsappUrl = "https://wa.me/5541988483621";
 
   return (
     <footer className="bg-background border-t border-white/10">
@@ -38,6 +39,16 @@ export default function Footer() {
               Experiência gastronômica artesanal.
             </p>
             <div className="mt-4 flex items-center space-x-4">
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground transition-colors hover:text-primary"
+                aria-label="WhatsApp"
+                onClick={() => trackEvent('whatsapp_click')}
+              >
+                <MessageCircle className="h-6 w-6" />
+              </a>
               <a
                 href="https://www.instagram.com/olivamontaditos/"
                 target="_blank"

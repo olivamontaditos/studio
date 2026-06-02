@@ -10,7 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import { LogOut, Users, Mail, Phone, Lock, ArrowUpDown, ChevronUp, ChevronDown, Bell, Search, Star, MessageSquare, Eye, ShoppingBag, Copy, MapPin, Instagram, Youtube, Download } from 'lucide-react';
+import { LogOut, Users, Mail, Phone, Lock, ArrowUpDown, ChevronUp, ChevronDown, Bell, Search, Star, MessageSquare, Eye, ShoppingBag, Copy, MapPin, Instagram, Youtube, Download, CalendarCheck } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
 
@@ -81,7 +81,7 @@ export default function AdminPage() {
   }, [leads, isLoggedIn, toast]);
 
   const analyticsStats = useMemo(() => {
-    if (!analytics) return { pageViews: 0, whatsappClicks: 0, ifoodClicks: 0, addressClicks: 0, instagramClicks: 0, tiktokClicks: 0, youtubeClicks: 0, reviewClicks: 0 };
+    if (!analytics) return { pageViews: 0, whatsappClicks: 0, ifoodClicks: 0, addressClicks: 0, instagramClicks: 0, tiktokClicks: 0, youtubeClicks: 0, reviewClicks: 0, eventsClicks: 0 };
     return {
       pageViews: analytics.filter(e => e.type === 'page_view').length,
       whatsappClicks: analytics.filter(e => e.type === 'whatsapp_click').length,
@@ -91,6 +91,7 @@ export default function AdminPage() {
       tiktokClicks: analytics.filter(e => e.type === 'tiktok_click').length,
       youtubeClicks: analytics.filter(e => e.type === 'youtube_click').length,
       reviewClicks: analytics.filter(e => e.type === 'review_click').length,
+      eventsClicks: analytics.filter(e => e.type === 'events_click').length,
     };
   }, [analytics]);
 
@@ -282,7 +283,7 @@ export default function AdminPage() {
         </Button>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-9 gap-4 mb-10">
+      <div className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-10 gap-4 mb-10">
         <Card className="bg-primary/5 border-primary/10 p-4">
           <div className="flex flex-col items-center text-center gap-2">
             <Eye className="h-5 w-5 text-primary" />
@@ -302,6 +303,15 @@ export default function AdminPage() {
             <div className="flex flex-col items-center text-center gap-2">
               <Phone className="h-5 w-5 text-green-500" />
               <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">WhatsApp</p><p className="text-xl font-bold text-green-500">{analyticsStats.whatsappClicks}</p></div>
+            </div>
+          </Card>
+        </a>
+
+        <a href={urls.whatsapp} target="_blank" rel="noopener noreferrer" className="block transition-transform hover:scale-105">
+          <Card className="bg-orange-500/5 border-orange-500/10 p-4 cursor-pointer hover:bg-orange-500/10 h-full">
+            <div className="flex flex-col items-center text-center gap-2">
+              <CalendarCheck className="h-5 w-5 text-orange-500" />
+              <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">Eventos</p><p className="text-xl font-bold text-orange-500">{analyticsStats.eventsClicks}</p></div>
             </div>
           </Card>
         </a>

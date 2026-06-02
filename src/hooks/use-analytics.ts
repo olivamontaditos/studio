@@ -13,7 +13,8 @@ export type EventType =
   | 'instagram_click'
   | 'tiktok_click'
   | 'youtube_click'
-  | 'review_click';
+  | 'review_click'
+  | 'events_click';
 
 export function useAnalytics() {
   const firestore = useFirestore();

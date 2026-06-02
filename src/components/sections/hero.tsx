@@ -3,8 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
+import { useAnalytics } from "@/hooks/use-analytics";
 
 export default function HeroSection() {
+  const { trackEvent } = useAnalytics();
   const heroImage = PlaceHolderImages.find(
     (img) => img.id === "hero-background"
   );
@@ -35,7 +37,7 @@ export default function HeroSection() {
             experiência gastronômica única.
           </p>
           <div className="mt-8 flex justify-center">
-            <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
+            <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90" onClick={() => trackEvent('events_click')}>
               <Link href="https://wa.me/5541988483621" target="_blank" rel="noopener noreferrer">Eventos & Encomendas</Link>
             </Button>
           </div>

@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from "next/link";
@@ -64,7 +65,7 @@ export default function ReservationsSection() {
                 <p><strong>Domingo:</strong> Fechado</p>
             </div>
             <Button asChild size="lg" className="mt-8 bg-accent text-accent-foreground hover:bg-accent/90">
-              <Link href="https://wa.me/5541988483621" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('whatsapp_click')}>
+              <Link href="https://wa.me/5541988483621" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('events_click')}>
                 Eventos & Encomendas
               </Link>
             </Button>
