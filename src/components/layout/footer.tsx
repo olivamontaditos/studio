@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from "next/link";
@@ -43,6 +44,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="text-muted-foreground transition-colors hover:text-primary"
                 aria-label="Instagram"
+                onClick={() => trackEvent('instagram_click')}
               >
                 <Instagram className="h-6 w-6" />
               </a>
@@ -52,6 +54,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="text-muted-foreground transition-colors hover:text-primary"
                 aria-label="TikTok"
+                onClick={() => trackEvent('tiktok_click')}
               >
                 <TikTokIcon className="h-6 w-6" />
               </a>
@@ -61,6 +64,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="text-muted-foreground transition-colors hover:text-primary"
                 aria-label="YouTube"
+                onClick={() => trackEvent('youtube_click')}
               >
                 <Youtube className="h-6 w-6" />
               </a>

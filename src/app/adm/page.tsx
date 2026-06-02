@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect, useMemo, useRef } from 'react';
@@ -9,9 +10,20 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import { LogOut, Users, Mail, Phone, Lock, ArrowUpDown, ChevronUp, ChevronDown, Bell, Search, Star, MessageSquare, Eye, ShoppingBag, Copy, MapPin } from 'lucide-react';
+import { LogOut, Users, Mail, Phone, Lock, ArrowUpDown, ChevronUp, ChevronDown, Bell, Search, Star, MessageSquare, Eye, ShoppingBag, Copy, MapPin, Instagram, Youtube } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
+
+const TikTokIcon = (props: any) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    {...props}
+  >
+    <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z" />
+  </svg>
+);
 
 type SortField = 'submissionDate' | 'name' | 'email' | 'whatsapp' | 'rating';
 type SortOrder = 'asc' | 'desc';
@@ -57,23 +69,16 @@ export default function AdminPage() {
     }
   }, [leads, isLoggedIn, toast]);
 
-  const stats = useMemo(() => {
-    if (!leads) return { total: 0, qualified: 0, pending: 0 };
-    
-    const total = leads.length;
-    const qualified = leads.filter(l => (l.rating || 0) >= 4).length;
-    const pending = leads.filter(l => (l.rating || 0) === 0).length;
-
-    return { total, qualified, pending };
-  }, [leads]);
-
   const analyticsStats = useMemo(() => {
-    if (!analytics) return { pageViews: 0, whatsappClicks: 0, ifoodClicks: 0, addressClicks: 0 };
+    if (!analytics) return { pageViews: 0, whatsappClicks: 0, ifoodClicks: 0, addressClicks: 0, instagramClicks: 0, tiktokClicks: 0, youtubeClicks: 0 };
     return {
       pageViews: analytics.filter(e => e.type === 'page_view').length,
       whatsappClicks: analytics.filter(e => e.type === 'whatsapp_click').length,
       ifoodClicks: analytics.filter(e => e.type === 'ifood_click').length,
       addressClicks: analytics.filter(e => e.type === 'address_click').length,
+      instagramClicks: analytics.filter(e => e.type === 'instagram_click').length,
+      tiktokClicks: analytics.filter(e => e.type === 'tiktok_click').length,
+      youtubeClicks: analytics.filter(e => e.type === 'youtube_click').length,
     };
   }, [analytics]);
 
@@ -229,46 +234,54 @@ export default function AdminPage() {
         </Button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-10">
-        <Card className="bg-primary/5 border-primary/10">
-          <CardContent className="pt-6">
-            <div className="flex items-center gap-4">
-              <div className="p-3 bg-primary/10 rounded-full"><Eye className="h-6 w-6 text-primary" /></div>
-              <div><p className="text-sm font-medium text-muted-foreground">Total de Acessos</p><p className="text-2xl font-bold text-primary">{analyticsStats.pageViews}</p></div>
-            </div>
-          </CardContent>
+      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4 mb-10">
+        <Card className="bg-primary/5 border-primary/10 p-4">
+          <div className="flex flex-col items-center text-center gap-2">
+            <Eye className="h-5 w-5 text-primary" />
+            <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">Acessos</p><p className="text-xl font-bold text-primary">{analyticsStats.pageViews}</p></div>
+          </div>
         </Card>
-        <Card className="bg-green-500/5 border-green-500/10">
-          <CardContent className="pt-6">
-            <div className="flex items-center gap-4">
-              <div className="p-3 bg-green-500/10 rounded-full"><Phone className="h-6 w-6 text-green-500" /></div>
-              <div><p className="text-sm font-medium text-muted-foreground">Cliques WhatsApp</p><p className="text-2xl font-bold text-green-500">{analyticsStats.whatsappClicks}</p></div>
-            </div>
-          </CardContent>
+        <Card className="bg-green-500/5 border-green-500/10 p-4">
+          <div className="flex flex-col items-center text-center gap-2">
+            <Phone className="h-5 w-5 text-green-500" />
+            <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">WhatsApp</p><p className="text-xl font-bold text-green-500">{analyticsStats.whatsappClicks}</p></div>
+          </div>
         </Card>
-        <Card className="bg-red-500/5 border-red-500/10">
-          <CardContent className="pt-6">
-            <div className="flex items-center gap-4">
-              <div className="p-3 bg-red-500/10 rounded-full"><ShoppingBag className="h-6 w-6 text-red-500" /></div>
-              <div><p className="text-sm font-medium text-muted-foreground">Cliques iFood</p><p className="text-2xl font-bold text-red-500">{analyticsStats.ifoodClicks}</p></div>
-            </div>
-          </CardContent>
+        <Card className="bg-red-500/5 border-red-500/10 p-4">
+          <div className="flex flex-col items-center text-center gap-2">
+            <ShoppingBag className="h-5 w-5 text-red-500" />
+            <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">iFood</p><p className="text-xl font-bold text-red-500">{analyticsStats.ifoodClicks}</p></div>
+          </div>
         </Card>
-        <Card className="bg-blue-500/5 border-blue-500/10">
-          <CardContent className="pt-6">
-            <div className="flex items-center gap-4">
-              <div className="p-3 bg-blue-500/10 rounded-full"><MapPin className="h-6 w-6 text-blue-500" /></div>
-              <div><p className="text-sm font-medium text-muted-foreground">Cliques Endereço</p><p className="text-2xl font-bold text-blue-500">{analyticsStats.addressClicks}</p></div>
-            </div>
-          </CardContent>
+        <Card className="bg-blue-500/5 border-blue-500/10 p-4">
+          <div className="flex flex-col items-center text-center gap-2">
+            <MapPin className="h-5 w-5 text-blue-500" />
+            <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">Endereço</p><p className="text-xl font-bold text-blue-500">{analyticsStats.addressClicks}</p></div>
+          </div>
         </Card>
-        <Card className="bg-accent/5 border-accent/10">
-          <CardContent className="pt-6">
-            <div className="flex items-center gap-4">
-              <div className="p-3 bg-accent/10 rounded-full"><Users className="h-6 w-6 text-accent" /></div>
-              <div><p className="text-sm font-medium text-muted-foreground">Leads Capturados</p><p className="text-2xl font-bold text-accent">{stats.total}</p></div>
-            </div>
-          </CardContent>
+        <Card className="bg-pink-500/5 border-pink-500/10 p-4">
+          <div className="flex flex-col items-center text-center gap-2">
+            <Instagram className="h-5 w-5 text-pink-500" />
+            <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">Instagram</p><p className="text-xl font-bold text-pink-500">{analyticsStats.instagramClicks}</p></div>
+          </div>
+        </Card>
+        <Card className="bg-foreground/5 border-foreground/10 p-4">
+          <div className="flex flex-col items-center text-center gap-2">
+            <TikTokIcon className="h-5 w-5 text-foreground" />
+            <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">TikTok</p><p className="text-xl font-bold text-foreground">{analyticsStats.tiktokClicks}</p></div>
+          </div>
+        </Card>
+        <Card className="bg-red-600/5 border-red-600/10 p-4">
+          <div className="flex flex-col items-center text-center gap-2">
+            <Youtube className="h-5 w-5 text-red-600" />
+            <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">YouTube</p><p className="text-xl font-bold text-red-600">{analyticsStats.youtubeClicks}</p></div>
+          </div>
+        </Card>
+        <Card className="bg-accent/5 border-accent/10 p-4">
+          <div className="flex flex-col items-center text-center gap-2">
+            <Users className="h-5 w-5 text-accent" />
+            <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">Leads</p><p className="text-xl font-bold text-accent">{filteredAndSortedLeads.length}</p></div>
+          </div>
         </Card>
       </div>
 

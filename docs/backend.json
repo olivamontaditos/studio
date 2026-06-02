@@ -36,7 +36,7 @@
       "properties": {
         "type": {
           "type": "string",
-          "enum": ["page_view", "whatsapp_click", "ifood_click", "newsletter_submit"]
+          "enum": ["page_view", "whatsapp_click", "ifood_click", "newsletter_submit", "address_click", "instagram_click", "tiktok_click", "youtube_click"]
         },
         "timestamp": { "type": "string", "format": "date-time" }
       },
