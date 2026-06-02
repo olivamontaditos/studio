@@ -45,6 +45,7 @@ export default function AdminPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
   const [isResetDialogOpen, setIsResetDialogOpen] = useState(false);
+  const [presenceWindow, setPresenceWindow] = useState(subMinutes(new Date(), 1));
   
   const { toast } = useToast();
   const firestore = useFirestore();
@@ -71,6 +72,15 @@ export default function AdminPage() {
     }
   }, []);
 
+  // Atualiza o tempo da janela de presença a cada 30 segundos
+  useEffect(() => {
+    if (!isLoggedIn) return;
+    const interval = setInterval(() => {
+      setPresenceWindow(subMinutes(new Date(), 1));
+    }, 30000);
+    return () => clearInterval(interval);
+  }, [isLoggedIn]);
+
   const leadsQuery = useMemoFirebase(() => {
     if (!firestore || !isLoggedIn) return null;
     return query(collection(firestore, 'coming_soon_leads'), orderBy('submissionDate', 'desc'));
@@ -83,9 +93,9 @@ export default function AdminPage() {
 
   const activeUsersQuery = useMemoFirebase(() => {
     if (!firestore || !isLoggedIn) return null;
-    const sixtySecondsAgo = subMinutes(new Date(), 1);
-    return query(collection(firestore, 'presence'), where('lastSeen', '>=', sixtySecondsAgo));
-  }, [firestore, isLoggedIn]);
+    // O uso de presenceWindow aqui garante que a query seja atualizada no banco
+    return query(collection(firestore, 'presence'), where('lastSeen', '>=', presenceWindow));
+  }, [firestore, isLoggedIn, presenceWindow]);
 
   const { data: leads, isLoading: leadsLoading } = useCollection(leadsQuery);
   const { data: analytics } = useCollection(analyticsQuery);
