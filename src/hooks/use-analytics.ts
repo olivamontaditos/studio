@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useFirestore } from '@/firebase';
@@ -16,18 +15,28 @@ export type EventType =
   | 'review_click'
   | 'events_click';
 
+const ADM_AUTH_KEY = "oliva_adm_session";
+
 export function useAnalytics() {
   const firestore = useFirestore();
 
   const trackEvent = async (type: EventType) => {
     if (!firestore) return;
+    
     try {
+      // Verifica se o usuário é um administrador logado
+      // Se estiver ativo no localStorage, ignoramos o rastreamento para não sujar os dados
+      const isAdmin = localStorage.getItem(ADM_AUTH_KEY) === "active";
+      if (isAdmin) {
+        return;
+      }
+
       addDoc(collection(firestore, 'analytics_events'), {
         type,
         timestamp: serverTimestamp(),
       }).catch(() => {}); // Silent catch as analytics shouldn't block UI
     } catch (error) {
-      // ignore
+      // ignore errors (like localStorage being blocked or Firestore write failing)
     }
   };
 
