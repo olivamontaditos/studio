@@ -10,7 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import { LogOut, Users, Mail, Phone, Lock, ArrowUpDown, ChevronUp, ChevronDown, Bell, Search, Star, MessageSquare, Eye, ShoppingBag, Copy, MapPin, Instagram, Youtube, ExternalLink } from 'lucide-react';
+import { LogOut, Users, Mail, Phone, Lock, ArrowUpDown, ChevronUp, ChevronDown, Bell, Search, Star, MessageSquare, Eye, ShoppingBag, Copy, MapPin, Instagram, Youtube, ExternalLink, Download } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
 
@@ -139,6 +139,42 @@ export default function AdminPage() {
     toast({
       title: "E-mail copiado!",
       description: `O endereço ${email} foi copiado para sua área de transferência.`,
+    });
+  };
+
+  const handleExportCSV = () => {
+    if (filteredAndSortedLeads.length === 0) return;
+
+    const headers = ['Data', 'Status (Estrelas)', 'Nome', 'E-mail', 'WhatsApp', 'Notas'];
+    const rows = filteredAndSortedLeads.map(lead => {
+      const date = lead.submissionDate?.toDate ? format(lead.submissionDate.toDate(), "dd/MM/yyyy HH:mm") : '-';
+      return [
+        date,
+        lead.rating || 0,
+        lead.name || '',
+        lead.email || '',
+        lead.whatsapp || '',
+        `"${(lead.notes || '').replace(/"/g, '""')}"`
+      ];
+    });
+
+    const csvContent = [
+      headers.join(','),
+      ...rows.map(row => row.join(','))
+    ].join('\n');
+
+    const blob = new Blob(['\ufeff' + csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', `leads_oliva_${format(new Date(), 'dd-MM-yyyy')}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    toast({
+      title: "Exportação concluída!",
+      description: "O arquivo CSV foi baixado com sucesso.",
     });
   };
 
@@ -287,7 +323,13 @@ export default function AdminPage() {
 
       <Card className="border-primary/10 bg-card/30 backdrop-blur-sm overflow-hidden">
         <CardHeader className="bg-primary/5 border-b border-primary/10 flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <CardTitle className="text-xl flex items-center gap-2"><Mail className="h-5 w-5 text-primary" />Contatos Detalhados</CardTitle>
+          <div className="flex items-center justify-between w-full md:w-auto gap-4">
+            <CardTitle className="text-xl flex items-center gap-2"><Mail className="h-5 w-5 text-primary" />Contatos Detalhados</CardTitle>
+            <Button variant="outline" size="sm" onClick={handleExportCSV} disabled={filteredAndSortedLeads.length === 0} className="gap-2 text-xs md:text-sm">
+              <Download className="h-4 w-4" />
+              Exportar CSV
+            </Button>
+          </div>
           <div className="relative w-full md:w-72">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" /><Input placeholder="Buscar por nome, email..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="pl-10 bg-background/50 h-10" />
           </div>
