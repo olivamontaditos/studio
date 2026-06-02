@@ -10,18 +10,9 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import { LogOut, Users, Mail, Phone, Lock, ArrowUpDown, ChevronUp, ChevronDown, Bell, Search, Star, TrendingUp, Filter, MessageSquare, MousePointerClick, Eye, ShoppingBag, Copy } from 'lucide-react';
+import { LogOut, Users, Mail, Phone, Lock, ArrowUpDown, ChevronUp, ChevronDown, Bell, Search, Star, MessageSquare, Eye, ShoppingBag, Copy } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
-import {
-  AreaChart,
-  Area,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-} from 'recharts';
 
 type SortField = 'submissionDate' | 'name' | 'email' | 'whatsapp' | 'rating';
 type SortOrder = 'asc' | 'desc';
@@ -68,24 +59,13 @@ export default function AdminPage() {
   }, [leads, isLoggedIn, toast]);
 
   const stats = useMemo(() => {
-    if (!leads) return { total: 0, qualified: 0, pending: 0, chartData: [] };
+    if (!leads) return { total: 0, qualified: 0, pending: 0 };
     
     const total = leads.length;
     const qualified = leads.filter(l => (l.rating || 0) >= 4).length;
     const pending = leads.filter(l => (l.rating || 0) === 0).length;
 
-    const dailyCounts: { [key: string]: number } = {};
-    leads.forEach(lead => {
-      const date = lead.submissionDate?.toDate ? format(lead.submissionDate.toDate(), 'dd/MM') : format(new Date(), 'dd/MM');
-      dailyCounts[date] = (dailyCounts[date] || 0) + 1;
-    });
-
-    const chartData = Object.entries(dailyCounts)
-      .map(([date, count]) => ({ date, count }))
-      .reverse()
-      .slice(-7);
-
-    return { total, qualified, pending, chartData };
+    return { total, qualified, pending };
   }, [leads]);
 
   const analyticsStats = useMemo(() => {
@@ -280,35 +260,6 @@ export default function AdminPage() {
               <div className="p-3 bg-accent/10 rounded-full"><Users className="h-6 w-6 text-accent" /></div>
               <div><p className="text-sm font-medium text-muted-foreground">Leads Capturados</p><p className="text-2xl font-bold text-accent">{stats.total}</p></div>
             </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-10">
-        <Card className="lg:col-span-2 border-primary/10 bg-card/50">
-          <CardHeader>
-            <CardTitle className="text-lg flex items-center gap-2"><TrendingUp className="h-5 w-5 text-primary" />Volume de Captura</CardTitle>
-            <CardDescription>Volume de novos contatos nos últimos 7 dias</CardDescription>
-          </CardHeader>
-          <CardContent className="h-[250px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={stats.chartData}>
-                <defs><linearGradient id="colorCount" x1="0" y1="0" x2="0" y2="1"><stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.3}/><stop offset="95%" stopColor="hsl(var(--primary))" stopOpacity={0}/></linearGradient></defs>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(255,255,255,0.05)" />
-                <XAxis dataKey="date" axisLine={false} tickLine={false} tick={{fill: 'hsl(var(--muted-foreground))', fontSize: 12}} />
-                <YAxis hide />
-                <Tooltip contentStyle={{backgroundColor: 'hsl(var(--card))', borderRadius: '8px', border: '1px solid hsl(var(--border))'}} />
-                <Area type="monotone" dataKey="count" stroke="hsl(var(--primary))" fillOpacity={1} fill="url(#colorCount)" strokeWidth={2}/>
-              </AreaChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
-        <Card className="border-primary/10 bg-card/50">
-          <CardHeader><CardTitle className="text-lg">Resumo de Qualidade</CardTitle><CardDescription>Leads por classificação</CardDescription></CardHeader>
-          <CardContent className="space-y-4 pt-4">
-            <div className="flex justify-between items-center"><span className="text-sm">🔥 Quentes (4-5★)</span><span className="font-bold text-accent">{stats.qualified}</span></div>
-            <div className="flex justify-between items-center"><span className="text-sm">⏳ Pendentes</span><span className="font-bold">{stats.pending}</span></div>
-            <div className="pt-4 border-t border-border/50"><p className="text-xs text-muted-foreground text-center">Classifique os leads na tabela abaixo para organizar sua estratégia.</p></div>
           </CardContent>
         </Card>
       </div>
