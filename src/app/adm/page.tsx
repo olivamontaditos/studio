@@ -67,6 +67,7 @@ export default function AdminPage() {
     if (session === "active") {
       setIsLoggedIn(true);
       initialLoadTime.current = new Date();
+      console.log("Oliva ADM: Sessão administrativa restaurada.");
     }
   }, []);
 
@@ -178,23 +179,24 @@ export default function AdminPage() {
     setIsResetDialogOpen(false);
     
     try {
+      console.log("Oliva ADM: Iniciando limpeza de métricas...");
       const batch = writeBatch(firestore);
       
-      // Reset analytics
       const analyticsSnap = await getDocs(collection(firestore, 'analytics_events'));
       analyticsSnap.forEach(doc => batch.delete(doc.ref));
       
-      // Reset presence
       const presenceSnap = await getDocs(collection(firestore, 'presence'));
       presenceSnap.forEach(doc => batch.delete(doc.ref));
 
       await batch.commit();
+      console.log("Oliva ADM: Métricas zeradas com sucesso.");
       
       toast({
         title: "Métricas zeradas!",
         description: "Todo o histórico de interações e presença foi removido.",
       });
     } catch (e) {
+      console.error("Oliva ADM: Erro ao resetar dados", e);
       toast({
         variant: "destructive",
         title: "Erro ao resetar",
@@ -286,7 +288,9 @@ export default function AdminPage() {
       setError('');
       localStorage.setItem(ADM_AUTH_KEY, "active");
       initialLoadTime.current = new Date();
+      console.log("Oliva ADM: Login administrativo bem-sucedido.");
     } else {
+      console.warn("Oliva ADM: Tentativa de login falhou.");
       setError('Credenciais inválidas.');
     }
   };
@@ -294,6 +298,7 @@ export default function AdminPage() {
   const handleLogout = () => {
     setIsLoggedIn(false);
     localStorage.removeItem(ADM_AUTH_KEY);
+    console.log("Oliva ADM: Logout realizado.");
   };
 
   const SortIcon = ({ field }: { field: SortField }) => {
