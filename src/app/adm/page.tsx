@@ -289,6 +289,13 @@ export default function AdminPage() {
             <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">Acessos</p><p className="text-xl font-bold text-primary">{analyticsStats.pageViews}</p></div>
           </div>
         </Card>
+
+        <Card className="bg-accent/5 border-accent/10 p-4">
+          <div className="flex flex-col items-center text-center gap-2">
+            <Users className="h-5 w-5 text-accent" />
+            <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">Leads</p><p className="text-xl font-bold text-accent">{filteredAndSortedLeads.length}</p></div>
+          </div>
+        </Card>
         
         <a href={urls.whatsapp} target="_blank" rel="noopener noreferrer" className="block transition-transform hover:scale-105">
           <Card className="bg-green-500/5 border-green-500/10 p-4 cursor-pointer hover:bg-green-500/10 h-full">
@@ -304,6 +311,15 @@ export default function AdminPage() {
             <div className="flex flex-col items-center text-center gap-2">
               <ShoppingBag className="h-5 w-5 text-red-500" />
               <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">iFood</p><p className="text-xl font-bold text-red-500">{analyticsStats.ifoodClicks}</p></div>
+            </div>
+          </Card>
+        </a>
+
+        <a href={urls.review} target="_blank" rel="noopener noreferrer" className="block transition-transform hover:scale-105">
+          <Card className="bg-accent/5 border-accent/10 p-4 cursor-pointer hover:bg-accent/10 h-full">
+            <div className="flex flex-col items-center text-center gap-2">
+              <Star className="h-5 w-5 text-accent" />
+              <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">Avaliação</p><p className="text-xl font-bold text-accent">{analyticsStats.reviewClicks}</p></div>
             </div>
           </Card>
         </a>
@@ -343,22 +359,6 @@ export default function AdminPage() {
             </div>
           </Card>
         </a>
-
-        <a href={urls.review} target="_blank" rel="noopener noreferrer" className="block transition-transform hover:scale-105">
-          <Card className="bg-accent/5 border-accent/10 p-4 cursor-pointer hover:bg-accent/10 h-full">
-            <div className="flex flex-col items-center text-center gap-2">
-              <Star className="h-5 w-5 text-accent" />
-              <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">Avaliações</p><p className="text-xl font-bold text-accent">{analyticsStats.reviewClicks}</p></div>
-            </div>
-          </Card>
-        </a>
-
-        <Card className="bg-accent/5 border-accent/10 p-4">
-          <div className="flex flex-col items-center text-center gap-2">
-            <Users className="h-5 w-5 text-accent" />
-            <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">Leads</p><p className="text-xl font-bold text-accent">{filteredAndSortedLeads.length}</p></div>
-          </div>
-        </Card>
       </div>
 
       <Card className="border-primary/10 bg-card/30 backdrop-blur-sm overflow-hidden">
