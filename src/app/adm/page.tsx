@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useEffect, useMemo, useRef } from 'react';
@@ -10,7 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import { LogOut, Users, Mail, Phone, Lock, ArrowUpDown, ChevronUp, ChevronDown, Bell, Search, Star, MessageSquare, Eye, ShoppingBag, Copy } from 'lucide-react';
+import { LogOut, Users, Mail, Phone, Lock, ArrowUpDown, ChevronUp, ChevronDown, Bell, Search, Star, MessageSquare, Eye, ShoppingBag, Copy, MapPin } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
 
@@ -69,11 +68,12 @@ export default function AdminPage() {
   }, [leads]);
 
   const analyticsStats = useMemo(() => {
-    if (!analytics) return { pageViews: 0, whatsappClicks: 0, ifoodClicks: 0 };
+    if (!analytics) return { pageViews: 0, whatsappClicks: 0, ifoodClicks: 0, addressClicks: 0 };
     return {
       pageViews: analytics.filter(e => e.type === 'page_view').length,
       whatsappClicks: analytics.filter(e => e.type === 'whatsapp_click').length,
       ifoodClicks: analytics.filter(e => e.type === 'ifood_click').length,
+      addressClicks: analytics.filter(e => e.type === 'address_click').length,
     };
   }, [analytics]);
 
@@ -229,7 +229,7 @@ export default function AdminPage() {
         </Button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-10">
         <Card className="bg-primary/5 border-primary/10">
           <CardContent className="pt-6">
             <div className="flex items-center gap-4">
@@ -251,6 +251,14 @@ export default function AdminPage() {
             <div className="flex items-center gap-4">
               <div className="p-3 bg-red-500/10 rounded-full"><ShoppingBag className="h-6 w-6 text-red-500" /></div>
               <div><p className="text-sm font-medium text-muted-foreground">Cliques iFood</p><p className="text-2xl font-bold text-red-500">{analyticsStats.ifoodClicks}</p></div>
+            </div>
+          </CardContent>
+        </Card>
+        <Card className="bg-blue-500/5 border-blue-500/10">
+          <CardContent className="pt-6">
+            <div className="flex items-center gap-4">
+              <div className="p-3 bg-blue-500/10 rounded-full"><MapPin className="h-6 w-6 text-blue-500" /></div>
+              <div><p className="text-sm font-medium text-muted-foreground">Cliques Endereço</p><p className="text-2xl font-bold text-blue-500">{analyticsStats.addressClicks}</p></div>
             </div>
           </CardContent>
         </Card>

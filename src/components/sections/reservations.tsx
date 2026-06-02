@@ -1,9 +1,12 @@
+'use client';
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Phone, MapPin } from "lucide-react";
+import { useAnalytics } from "@/hooks/use-analytics";
 
 export default function ReservationsSection() {
+  const { trackEvent } = useAnalytics();
   const mapsUrl = "https://share.google/fnyW3LtaK1bazQDRv";
   return (
     <section id="encomendas" className="bg-background py-20 md:py-32">
@@ -26,7 +29,13 @@ export default function ReservationsSection() {
               Entre em Contato
             </h4>
             <div className="mt-6 space-y-4 text-muted-foreground">
-              <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center md:justify-start gap-3 hover:text-primary transition-colors">
+              <a 
+                href={mapsUrl} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="flex items-center justify-center md:justify-start gap-3 hover:text-primary transition-colors"
+                onClick={() => trackEvent('address_click')}
+              >
                 <MapPin className="h-5 w-5 text-primary" />
                 <span>
                   Avenida Desembargador Hugo Simas 2010
@@ -34,7 +43,13 @@ export default function ReservationsSection() {
                   Bom Retiro, Curitiba - PR
                 </span>
               </a>
-              <a href="https://wa.me/5541988483621" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center md:justify-start gap-3 hover:text-primary transition-colors">
+              <a 
+                href="https://wa.me/5541988483621" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="flex items-center justify-center md:justify-start gap-3 hover:text-primary transition-colors"
+                onClick={() => trackEvent('whatsapp_click')}
+              >
                 <Phone className="h-5 w-5 text-primary" />
                 <span>(41) 98848-3621</span>
               </a>
@@ -49,7 +64,7 @@ export default function ReservationsSection() {
                 <p><strong>Domingo:</strong> Fechado</p>
             </div>
             <Button asChild size="lg" className="mt-8 bg-accent text-accent-foreground hover:bg-accent/90">
-              <Link href="https://wa.me/5541988483621" target="_blank" rel="noopener noreferrer">
+              <Link href="https://wa.me/5541988483621" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('whatsapp_click')}>
                 Eventos & Encomendas
               </Link>
             </Button>

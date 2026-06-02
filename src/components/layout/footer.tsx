@@ -1,6 +1,9 @@
+'use client';
+
 import Link from "next/link";
-import { ShieldCheck, Star, Instagram, Youtube } from "lucide-react";
+import { ShieldCheck, Star, Instagram, Youtube, MapPin } from "lucide-react";
 import Copyright from "./copyright";
+import { useAnalytics } from "@/hooks/use-analytics";
 
 const TikTokIcon = (props: any) => (
   <svg
@@ -14,6 +17,7 @@ const TikTokIcon = (props: any) => (
 );
 
 export default function Footer() {
+  const { trackEvent } = useAnalytics();
   const legalLinks = [
     { href: "/termos-de-uso", text: "Termos de Uso" },
     { href: "/politica-de-privacidade", text: "Política de Privacidade" },
@@ -100,7 +104,13 @@ export default function Footer() {
               </div>
               <div>
                  <h4 className="font-semibold text-foreground">Endereço</h4>
-                 <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className="mt-4 text-sm text-muted-foreground hover:text-primary transition-colors block">
+                 <a 
+                   href={mapsUrl} 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   className="mt-4 text-sm text-muted-foreground hover:text-primary transition-colors block"
+                   onClick={() => trackEvent('address_click')}
+                 >
                     Avenida Desembargador Hugo Simas 2010
                     <br />
                     Bom Retiro, Curitiba - PR

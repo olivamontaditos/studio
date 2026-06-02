@@ -1,10 +1,9 @@
-
 'use client';
 
 import { useFirestore } from '@/firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
-export type EventType = 'page_view' | 'whatsapp_click' | 'ifood_click' | 'newsletter_submit';
+export type EventType = 'page_view' | 'whatsapp_click' | 'ifood_click' | 'newsletter_submit' | 'address_click';
 
 export function useAnalytics() {
   const firestore = useFirestore();
