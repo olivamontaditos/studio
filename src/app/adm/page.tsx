@@ -3,14 +3,19 @@
 
 import { useState, useEffect, useMemo, useRef } from 'react';
 import { useCollection, useMemoFirebase, useFirestore } from '@/firebase';
-import { collection, query, orderBy, doc, updateDoc } from 'firebase/firestore';
+import { collection, query, orderBy, doc, updateDoc, writeBatch, getDocs, Timestamp, where } from 'firebase/firestore';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { format } from 'date-fns';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription, DialogFooter } from '@/components/ui/dialog';
+import { Calendar } from '@/components/ui/calendar';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
+import { Bar, BarChart, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts';
+import { format, startOfDay, subDays, isSameDay, subMinutes } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import { LogOut, Users, Mail, Phone, Lock, ArrowUpDown, ChevronUp, ChevronDown, Bell, Search, Star, MessageSquare, Eye, ShoppingBag, Copy, MapPin, Instagram, Youtube, Download, CalendarCheck, Check } from 'lucide-react';
+import { LogOut, Users, Mail, Phone, Lock, ArrowUpDown, ChevronUp, ChevronDown, Bell, Search, Star, MessageSquare, Eye, ShoppingBag, Copy, MapPin, Instagram, Youtube, Download, CalendarCheck, Check, Trash2, Calendar as CalendarIcon, RefreshCcw } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
 
@@ -38,6 +43,8 @@ export default function AdminPage() {
   const [sortField, setSortField] = useState<SortField>('submissionDate');
   const [sortOrder, setSortOrder] = useState<SortOrder>('desc');
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
+  const [isResetDialogOpen, setIsResetDialogOpen] = useState(false);
   
   const { toast } = useToast();
   const firestore = useFirestore();
@@ -45,7 +52,6 @@ export default function AdminPage() {
   const prevLeadsCount = useRef<number | null>(null);
   const clickTimerRef = useRef<{ [key: string]: NodeJS.Timeout | null }>({});
 
-  // URLs
   const urls = {
     whatsapp: "https://wa.me/5541988483621",
     ifood: "https://www.ifood.com.br/delivery/curitiba-pr/oliva-montaditos-bom-retiro/2b88f26f-a586-4600-ab74-19d3852d4ddd?UTM_Medium=share",
@@ -56,7 +62,6 @@ export default function AdminPage() {
     review: "https://www.google.com/maps/place/Oliva+Montaditos/@-25.4017127,-49.2859022,1027m/data=!3m2!1e3!4b1!4m6!3m5!1s0x94dce7b94e3b9a4d:0xced8f0805bee5fe5!8m2!3d-25.4017127!4d-49.2833273!16s%2Fg%2F11n9htw6j1?entry=ttu&g_ep=EgoyMDI2MDUyNy4wIKXMDSoASAFQAw%3D%3D"
   };
 
-  // Check persistent session on mount
   useEffect(() => {
     const session = localStorage.getItem(ADM_AUTH_KEY);
     if (session === "active") {
@@ -65,7 +70,6 @@ export default function AdminPage() {
     }
   }, []);
 
-  // Queries
   const leadsQuery = useMemoFirebase(() => {
     if (!firestore || !isLoggedIn) return null;
     return query(collection(firestore, 'coming_soon_leads'), orderBy('submissionDate', 'desc'));
@@ -76,8 +80,17 @@ export default function AdminPage() {
     return query(collection(firestore, 'analytics_events'), orderBy('timestamp', 'desc'));
   }, [firestore, isLoggedIn]);
 
+  const activeUsersQuery = useMemoFirebase(() => {
+    if (!firestore || !isLoggedIn) return null;
+    const sixtySecondsAgo = subMinutes(new Date(), 1);
+    return query(collection(firestore, 'presence'), where('lastSeen', '>=', sixtySecondsAgo));
+  }, [firestore, isLoggedIn]);
+
   const { data: leads, isLoading: leadsLoading } = useCollection(leadsQuery);
   const { data: analytics } = useCollection(analyticsQuery);
+  const { data: activeSessions } = useCollection(activeUsersQuery);
+
+  const activeUsersCount = activeSessions?.length || 0;
 
   useEffect(() => {
     if (leads && isLoggedIn) {
@@ -107,16 +120,38 @@ export default function AdminPage() {
     };
   }, [analytics]);
 
+  const dailyStats = useMemo(() => {
+    if (!analytics) return [];
+    const last30Days = Array.from({ length: 30 }, (_, i) => subDays(new Date(), i)).reverse();
+    
+    return last30Days.map(date => {
+      const dayStart = startOfDay(date);
+      const views = analytics.filter(e => {
+        if (!e.timestamp?.toDate) return false;
+        return e.type === 'page_view' && isSameDay(e.timestamp.toDate(), dayStart);
+      }).length;
+      
+      return {
+        date: format(dayStart, "dd/MM"),
+        views: views
+      };
+    });
+  }, [analytics]);
+
   const filteredAndSortedLeads = useMemo(() => {
     if (!leads) return [];
     
     const filtered = leads.filter(lead => {
       const search = searchTerm.toLowerCase();
-      return (
+      const matchesSearch = (
         lead.name?.toLowerCase().includes(search) ||
         lead.email?.toLowerCase().includes(search) ||
         lead.whatsapp?.toLowerCase().includes(search)
       );
+      
+      const matchesDate = !selectedDate || (lead.submissionDate?.toDate && isSameDay(lead.submissionDate.toDate(), selectedDate));
+      
+      return matchesSearch && matchesDate;
     });
 
     return [...filtered].sort((a, b) => {
@@ -136,7 +171,37 @@ export default function AdminPage() {
       if (valA > valB) return sortOrder === 'asc' ? 1 : -1;
       return 0;
     });
-  }, [leads, sortField, sortOrder, searchTerm]);
+  }, [leads, sortField, sortOrder, searchTerm, selectedDate]);
+
+  const handleResetAnalytics = async () => {
+    if (!firestore) return;
+    setIsResetDialogOpen(false);
+    
+    try {
+      const batch = writeBatch(firestore);
+      
+      // Reset analytics
+      const analyticsSnap = await getDocs(collection(firestore, 'analytics_events'));
+      analyticsSnap.forEach(doc => batch.delete(doc.ref));
+      
+      // Reset presence
+      const presenceSnap = await getDocs(collection(firestore, 'presence'));
+      presenceSnap.forEach(doc => batch.delete(doc.ref));
+
+      await batch.commit();
+      
+      toast({
+        title: "Métricas zeradas!",
+        description: "Todo o histórico de interações e presença foi removido.",
+      });
+    } catch (e) {
+      toast({
+        variant: "destructive",
+        title: "Erro ao resetar",
+        description: "Não foi possível limpar os dados.",
+      });
+    }
+  };
 
   const handleSort = (field: SortField) => {
     if (sortField === field) {
@@ -161,42 +226,26 @@ export default function AdminPage() {
 
   const handleMetricAction = (url: string, label: string) => {
     if (clickTimerRef.current[label]) {
-      // É um clique duplo
       clearTimeout(clickTimerRef.current[label]!);
       clickTimerRef.current[label] = null;
-      
-      // Ação: Copia e Abre
       navigator.clipboard.writeText(url);
       window.open(url, '_blank');
-      
       toast({
         title: "Link Aberto e Copiado!",
         description: `O link do ${label} foi copiado e aberto em uma nova aba.`,
         action: <Check className="h-4 w-4 text-green-500" />
       });
     } else {
-      // Primeiro clique
       clickTimerRef.current[label] = setTimeout(() => {
-        // Foi um clique simples
         clickTimerRef.current[label] = null;
-        
-        // Ação: Apenas Copia
         navigator.clipboard.writeText(url);
         toast({
           title: "Link Copiado!",
-          description: `O link do ${label} foi copiado para sua área de transferência. Clique duas vezes para abrir.`,
+          description: `O link do ${label} foi copiado. Clique duas vezes para abrir.`,
           action: <Check className="h-4 w-4 text-blue-500" />
         });
       }, 300);
     }
-  };
-
-  const handleCopyEmail = (email: string) => {
-    navigator.clipboard.writeText(email);
-    toast({
-      title: "E-mail copiado!",
-      description: `O endereço ${email} foi copiado para sua área de transferência.`,
-    });
   };
 
   const handleExportCSV = () => {
@@ -228,11 +277,6 @@ export default function AdminPage() {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    
-    toast({
-      title: "Exportação concluída!",
-      description: "O arquivo CSV foi baixado com sucesso.",
-    });
   };
 
   const handleLogin = (e: React.FormEvent) => {
@@ -249,39 +293,12 @@ export default function AdminPage() {
 
   const handleLogout = () => {
     setIsLoggedIn(false);
-    setLogin('');
-    setPassword('');
-    setSearchTerm('');
     localStorage.removeItem(ADM_AUTH_KEY);
-    prevLeadsCount.current = null;
   };
 
   const SortIcon = ({ field }: { field: SortField }) => {
     if (sortField !== field) return <ArrowUpDown className="ml-2 h-4 w-4 opacity-50" />;
     return sortOrder === 'asc' ? <ChevronUp className="ml-2 h-4 w-4 text-primary" /> : <ChevronDown className="ml-2 h-4 w-4 text-primary" />;
-  };
-
-  const StarRating = ({ rating, leadId }: { rating: number, leadId: string }) => {
-    const [hoverRating, setHoverRating] = useState(0);
-    return (
-      <div className="flex items-center gap-0.5">
-        {[1, 2, 3, 4, 5].map((s) => (
-          <button
-            key={s}
-            type="button"
-            className="focus:outline-none transition-transform hover:scale-125"
-            onMouseEnter={() => setHoverRating(s)}
-            onMouseLeave={() => setHoverRating(0)}
-            onClick={(e) => {
-                e.stopPropagation();
-                handleRateLead(leadId, rating === s ? 0 : s);
-            }}
-          >
-            <Star className={cn("h-4 w-4", s <= (hoverRating || rating || 0) ? "fill-accent text-accent" : "text-muted-foreground/30")} />
-          </button>
-        ))}
-      </div>
-    );
   };
 
   if (!isLoggedIn) {
@@ -319,32 +336,85 @@ export default function AdminPage() {
   return (
     <div className="container mx-auto py-12 px-6 animate-in fade-in duration-500">
       <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-12">
-        <div>
-          <h1 className="font-headline text-4xl font-bold text-primary">Painel Oliva</h1>
-          <p className="text-muted-foreground mt-2">Dados em tempo real e gestão de contatos.</p>
+        <div className="flex items-center gap-4">
+          <div>
+            <h1 className="font-headline text-4xl font-bold text-primary">Painel Oliva</h1>
+            <p className="text-muted-foreground mt-2">Gestão estratégica e dados em tempo real.</p>
+          </div>
+          <div className="bg-green-500/10 border border-green-500/20 px-3 py-1 rounded-full flex items-center gap-2 animate-pulse">
+            <div className="h-2 w-2 bg-green-500 rounded-full" />
+            <span className="text-[10px] font-bold text-green-600 uppercase tracking-tighter">
+              {activeUsersCount} Online agora
+            </span>
+          </div>
         </div>
-        <Button variant="outline" onClick={handleLogout} className="group gap-2 border-destructive/20 text-destructive hover:bg-destructive hover:text-white transition-all">
-          <LogOut className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-          Sair do Painel
-        </Button>
+        <div className="flex gap-4">
+          <Dialog open={isResetDialogOpen} onOpenChange={setIsResetDialogOpen}>
+            <DialogTrigger asChild>
+              <Button variant="outline" className="gap-2 text-destructive border-destructive/20 hover:bg-destructive hover:text-white">
+                <Trash2 className="h-4 w-4" />
+                Zerar Métricas
+              </Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Tem certeza absoluta?</DialogTitle>
+                <DialogDescription>
+                  Esta ação irá deletar permanentemente todos os registros de acessos, cliques e histórico de presença. Os contatos (leads) não serão afetados.
+                </DialogDescription>
+              </DialogHeader>
+              <DialogFooter>
+                <Button variant="outline" onClick={() => setIsResetDialogOpen(false)}>Cancelar</Button>
+                <Button variant="destructive" onClick={handleResetAnalytics} className="gap-2">
+                  <RefreshCcw className="h-4 w-4" /> Sim, zerar tudo
+                </Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+          <Button variant="outline" onClick={handleLogout} className="group gap-2 border-destructive/20 text-destructive hover:bg-destructive hover:text-white">
+            <LogOut className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+            Sair
+          </Button>
+        </div>
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-10 gap-4 mb-10">
-        <Card className="bg-primary/5 border-primary/10 p-4">
-          <div className="flex flex-col items-center text-center gap-2">
-            <Eye className="h-5 w-5 text-primary" />
-            <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">Acessos</p><p className="text-xl font-bold text-primary">{analyticsStats.pageViews}</p></div>
-          </div>
-        </Card>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Card className="bg-primary/5 border-primary/10 p-4 cursor-pointer hover:bg-primary/10 transition-colors group">
+              <div className="flex flex-col items-center text-center gap-2 relative">
+                <Eye className="h-5 w-5 text-primary" />
+                <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">Acessos</p><p className="text-xl font-bold text-primary">{analyticsStats.pageViews}</p></div>
+                <ChevronUp className="h-3 w-3 absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground" />
+              </div>
+            </Card>
+          </DialogTrigger>
+          <DialogContent className="max-w-4xl">
+            <DialogHeader>
+              <DialogTitle>Estatísticas de Acesso</DialogTitle>
+              <DialogDescription>Visualização diária dos últimos 30 dias.</DialogDescription>
+            </DialogHeader>
+            <div className="h-[350px] mt-4">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={dailyStats}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--muted))" />
+                  <XAxis dataKey="date" axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: 'hsl(var(--muted-foreground))' }} />
+                  <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: 'hsl(var(--muted-foreground))' }} />
+                  <Bar dataKey="views" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </DialogContent>
+        </Dialog>
 
         <Card className="bg-accent/5 border-accent/10 p-4">
           <div className="flex flex-col items-center text-center gap-2">
             <Users className="h-5 w-5 text-accent" />
-            <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">Leads</p><p className="text-xl font-bold text-accent">{filteredAndSortedLeads.length}</p></div>
+            <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">Leads</p><p className="text-xl font-bold text-accent">{leads?.length || 0}</p></div>
           </div>
         </Card>
         
-        <div onClick={() => handleMetricAction(urls.whatsapp, "WhatsApp")} className="block transition-transform hover:scale-105 cursor-pointer select-none">
+        <div onClick={() => handleMetricAction(urls.whatsapp, "WhatsApp")} className="block cursor-pointer select-none">
           <Card className="bg-green-500/5 border-green-500/10 p-4 hover:bg-green-500/10 h-full group">
             <div className="flex flex-col items-center text-center gap-2 relative">
               <Phone className="h-5 w-5 text-green-500" />
@@ -354,17 +424,7 @@ export default function AdminPage() {
           </Card>
         </div>
 
-        <div onClick={() => handleMetricAction(urls.whatsapp, "Eventos")} className="block transition-transform hover:scale-105 cursor-pointer select-none">
-          <Card className="bg-orange-500/5 border-orange-500/10 p-4 hover:bg-orange-500/10 h-full group">
-            <div className="flex flex-col items-center text-center gap-2 relative">
-              <CalendarCheck className="h-5 w-5 text-orange-500" />
-              <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">Eventos</p><p className="text-xl font-bold text-orange-500">{analyticsStats.eventsClicks}</p></div>
-              <Copy className="h-3 w-3 absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground" />
-            </div>
-          </Card>
-        </div>
-
-        <div onClick={() => handleMetricAction(urls.ifood, "iFood")} className="block transition-transform hover:scale-105 cursor-pointer select-none">
+        <div onClick={() => handleMetricAction(urls.ifood, "iFood")} className="block cursor-pointer select-none">
           <Card className="bg-red-500/5 border-red-500/10 p-4 hover:bg-red-500/10 h-full group">
             <div className="flex flex-col items-center text-center gap-2 relative">
               <ShoppingBag className="h-5 w-5 text-red-500" />
@@ -374,7 +434,7 @@ export default function AdminPage() {
           </Card>
         </div>
 
-        <div onClick={() => handleMetricAction(urls.review, "Avaliação")} className="block transition-transform hover:scale-105 cursor-pointer select-none">
+        <div onClick={() => handleMetricAction(urls.review, "Avaliação")} className="block cursor-pointer select-none">
           <Card className="bg-accent/5 border-accent/10 p-4 hover:bg-accent/10 h-full group">
             <div className="flex flex-col items-center text-center gap-2 relative">
               <Star className="h-5 w-5 text-accent" />
@@ -384,7 +444,7 @@ export default function AdminPage() {
           </Card>
         </div>
 
-        <div onClick={() => handleMetricAction(urls.maps, "Endereço")} className="block transition-transform hover:scale-105 cursor-pointer select-none">
+        <div onClick={() => handleMetricAction(urls.maps, "Endereço")} className="block cursor-pointer select-none">
           <Card className="bg-blue-500/5 border-blue-500/10 p-4 hover:bg-blue-500/10 h-full group">
             <div className="flex flex-col items-center text-center gap-2 relative">
               <MapPin className="h-5 w-5 text-blue-500" />
@@ -394,7 +454,7 @@ export default function AdminPage() {
           </Card>
         </div>
 
-        <div onClick={() => handleMetricAction(urls.instagram, "Instagram")} className="block transition-transform hover:scale-105 cursor-pointer select-none">
+        <div onClick={() => handleMetricAction(urls.instagram, "Instagram")} className="block cursor-pointer select-none">
           <Card className="bg-pink-500/5 border-pink-500/10 p-4 hover:bg-pink-500/10 h-full group">
             <div className="flex flex-col items-center text-center gap-2 relative">
               <Instagram className="h-5 w-5 text-pink-500" />
@@ -404,7 +464,7 @@ export default function AdminPage() {
           </Card>
         </div>
 
-        <div onClick={() => handleMetricAction(urls.tiktok, "TikTok")} className="block transition-transform hover:scale-105 cursor-pointer select-none">
+        <div onClick={() => handleMetricAction(urls.tiktok, "TikTok")} className="block cursor-pointer select-none">
           <Card className="bg-foreground/5 border-foreground/10 p-4 hover:bg-foreground/10 h-full group">
             <div className="flex flex-col items-center text-center gap-2 relative">
               <TikTokIcon className="h-5 w-5 text-foreground" />
@@ -414,11 +474,21 @@ export default function AdminPage() {
           </Card>
         </div>
 
-        <div onClick={() => handleMetricAction(urls.youtube, "YouTube")} className="block transition-transform hover:scale-105 cursor-pointer select-none">
+        <div onClick={() => handleMetricAction(urls.youtube, "YouTube")} className="block cursor-pointer select-none">
           <Card className="bg-red-600/5 border-red-600/10 p-4 hover:bg-red-600/10 h-full group">
             <div className="flex flex-col items-center text-center gap-2 relative">
               <Youtube className="h-5 w-5 text-red-600" />
               <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">YouTube</p><p className="text-xl font-bold text-red-600">{analyticsStats.youtubeClicks}</p></div>
+              <Copy className="h-3 w-3 absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground" />
+            </div>
+          </Card>
+        </div>
+
+        <div onClick={() => handleMetricAction(urls.whatsapp, "Eventos")} className="block cursor-pointer select-none">
+          <Card className="bg-orange-500/5 border-orange-500/10 p-4 hover:bg-orange-500/10 h-full group">
+            <div className="flex flex-col items-center text-center gap-2 relative">
+              <CalendarCheck className="h-5 w-5 text-orange-500" />
+              <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">Eventos</p><p className="text-xl font-bold text-orange-500">{analyticsStats.eventsClicks}</p></div>
               <Copy className="h-3 w-3 absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground" />
             </div>
           </Card>
@@ -434,8 +504,27 @@ export default function AdminPage() {
               Exportar CSV
             </Button>
           </div>
-          <div className="relative w-full md:w-72">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" /><Input placeholder="Buscar por nome, email..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="pl-10 bg-background/50 h-10" />
+          <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto">
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button variant="outline" className={cn("w-full md:w-[240px] justify-start text-left font-normal", !selectedDate && "text-muted-foreground")}>
+                  <CalendarIcon className="mr-2 h-4 w-4" />
+                  {selectedDate ? format(selectedDate, "PPP", { locale: ptBR }) : <span>Filtrar por data</span>}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0" align="end">
+                <Calendar mode="single" selected={selectedDate} onSelect={setSelectedDate} initialFocus locale={ptBR} />
+                {selectedDate && (
+                  <div className="p-3 border-t">
+                    <Button variant="ghost" size="sm" onClick={() => setSelectedDate(undefined)} className="w-full text-xs">Limpar Filtro</Button>
+                  </div>
+                )}
+              </PopoverContent>
+            </Popover>
+            <div className="relative w-full md:w-72">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Input placeholder="Buscar por nome, email..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="pl-10 bg-background/50 h-10" />
+            </div>
           </div>
         </CardHeader>
         <CardContent className="p-0">
@@ -461,16 +550,25 @@ export default function AdminPage() {
                     return (
                       <TableRow key={lead.id} className={cn("transition-all", isNew ? "bg-primary/10 animate-pulse-slow border-l-4 border-l-primary" : "hover:bg-primary/5")}>
                         <TableCell className="text-muted-foreground text-xs">{lead.submissionDate?.toDate ? format(lead.submissionDate.toDate(), "dd/MM/yy HH:mm", { locale: ptBR }) : 'Agora'}</TableCell>
-                        <TableCell><StarRating rating={lead.rating} leadId={lead.id} /></TableCell>
+                        <TableCell>
+                          <div className="flex items-center gap-0.5">
+                            {[1, 2, 3, 4, 5].map((s) => (
+                              <button
+                                key={s}
+                                type="button"
+                                className="focus:outline-none transition-transform hover:scale-125"
+                                onClick={() => handleRateLead(lead.id, lead.rating === s ? 0 : s)}
+                              >
+                                <Star className={cn("h-4 w-4", s <= (lead.rating || 0) ? "fill-accent text-accent" : "text-muted-foreground/30")} />
+                              </button>
+                            ))}
+                          </div>
+                        </TableCell>
                         <TableCell className="font-semibold text-foreground">{lead.name}</TableCell>
                         <TableCell>
-                          <button 
-                            onClick={() => handleCopyEmail(lead.email)}
-                            className="text-primary hover:underline text-xs flex items-center gap-2 group/email text-left transition-all"
-                            title="Clique para copiar e-mail"
-                          >
+                          <button onClick={() => { navigator.clipboard.writeText(lead.email); toast({ title: "E-mail copiado!" }); }} className="text-primary hover:underline text-xs flex items-center gap-2 group/email text-left transition-all">
                             <span className="truncate max-w-[160px]">{lead.email}</span>
-                            <Copy className="h-3 w-3 opacity-0 group-hover/email:opacity-100 transition-opacity" />
+                            <Copy className="h-3 w-3 opacity-0 group-hover/email:opacity-100" />
                           </button>
                         </TableCell>
                         <TableCell>{lead.whatsapp ? <a href={`https://wa.me/55${lead.whatsapp}`} target="_blank" rel="noopener noreferrer" className="text-green-500 hover:underline text-xs font-medium flex items-center gap-1"><Phone className="h-3 w-3"/>{lead.whatsapp}</a> : '-'}</TableCell>

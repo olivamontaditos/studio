@@ -1,7 +1,9 @@
+
 'use client';
 
+import { useEffect, useRef } from 'react';
 import { useFirestore } from '@/firebase';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { collection, addDoc, serverTimestamp, doc, setDoc } from 'firebase/firestore';
 
 export type EventType = 
   | 'page_view' 
@@ -19,24 +21,45 @@ const ADM_AUTH_KEY = "oliva_adm_session";
 
 export function useAnalytics() {
   const firestore = useFirestore();
+  const sessionId = useRef<string | null>(null);
+
+  // Initialize heartbeat for real-time presence
+  useEffect(() => {
+    if (!firestore) return;
+    
+    const isAdmin = typeof window !== 'undefined' && localStorage.getItem(ADM_AUTH_KEY) === "active";
+    if (isAdmin) return;
+
+    if (!sessionId.current) {
+      sessionId.current = Math.random().toString(36).substring(7);
+    }
+
+    const updatePresence = () => {
+      const presenceRef = doc(firestore, 'presence', sessionId.current!);
+      setDoc(presenceRef, {
+        lastSeen: serverTimestamp()
+      }, { merge: true }).catch(() => {});
+    };
+
+    updatePresence();
+    const interval = setInterval(updatePresence, 30000); // 30s heartbeat
+
+    return () => clearInterval(interval);
+  }, [firestore]);
 
   const trackEvent = async (type: EventType) => {
     if (!firestore) return;
     
     try {
-      // Verifica se o usuário é um administrador logado
-      // Se estiver ativo no localStorage, ignoramos o rastreamento para não sujar os dados
-      const isAdmin = localStorage.getItem(ADM_AUTH_KEY) === "active";
-      if (isAdmin) {
-        return;
-      }
+      const isAdmin = typeof window !== 'undefined' && localStorage.getItem(ADM_AUTH_KEY) === "active";
+      if (isAdmin) return;
 
       addDoc(collection(firestore, 'analytics_events'), {
         type,
         timestamp: serverTimestamp(),
-      }).catch(() => {}); // Silent catch as analytics shouldn't block UI
+      }).catch(() => {});
     } catch (error) {
-      // ignore errors (like localStorage being blocked or Firestore write failing)
+      // ignore
     }
   };
 

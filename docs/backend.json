@@ -36,11 +36,21 @@
       "properties": {
         "type": {
           "type": "string",
-          "enum": ["page_view", "whatsapp_click", "ifood_click", "newsletter_submit", "address_click", "instagram_click", "tiktok_click", "youtube_click"]
+          "enum": ["page_view", "whatsapp_click", "ifood_click", "newsletter_submit", "address_click", "instagram_click", "tiktok_click", "youtube_click", "review_click", "events_click"]
         },
         "timestamp": { "type": "string", "format": "date-time" }
       },
       "required": ["type", "timestamp"]
+    },
+    "UserPresence": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "UserPresence",
+      "type": "object",
+      "description": "Track active users in real-time.",
+      "properties": {
+        "lastSeen": { "type": "string", "format": "date-time" }
+      },
+      "required": ["lastSeen"]
     }
   },
   "auth": {
@@ -59,6 +69,10 @@
       {
         "path": "/analytics_events/{eventId}",
         "definition": { "entityName": "AnalyticsEvent" }
+      },
+      {
+        "path": "/presence/{presenceId}",
+        "definition": { "entityName": "UserPresence" }
       }
     ]
   }
