@@ -279,13 +279,6 @@ export const menuCategories = [
     ],
   },
   {
-    name: "CHOPP",
-    items: [
-      { name: "Pilsen (300ml)", price: "12,00" },
-      { name: "Pilsen (500ml)", price: "18,00" },
-    ],
-  },
-  {
     name: "COQUETELARIA",
     items: [
       { name: "Taça de vinho (Tinto ou Branco)", price: "29,90" },
@@ -313,7 +306,6 @@ const iconMap: { [key: string]: React.ElementType } = {
     "CAFÉS GELADOS": Coffee,
     "CHOCOLATES QUENTES": Coffee,
     "BEBIDAS & SODAS": CupSoda,
-    "CHOPP": Wine,
     "COQUETELARIA": Wine,
 };
 
@@ -326,7 +318,6 @@ const textOnlyCategories = [
     "CAFÉS GELADOS",
     "CHOCOLATES QUENTES",
     "BEBIDAS & SODAS", 
-    "CHOPP",
     "COQUETELARIA",
 ];
 
