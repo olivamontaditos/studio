@@ -1,3 +1,4 @@
+
 'use client';
 
 import Image from 'next/image';
@@ -77,19 +78,24 @@ export const menuCategories = [
     description: "Servido de Segunda a Sábado. A combinação perfeita para o seu meio-dia.",
     items: [
       {
-        name: "Entrecôte Especial",
-        description: "Corte nobre de Entrecôte grelhado no ponto perfeito, acompanhado de arroz branco soltinho e batatas chips artesanais super crocantes. Harmonizado com nosso autêntico chimichurri e vinagrete da casa. Inclui uma refrescante salada especial de entrada.",
-        price: "49,90",
+        name: "Filé à Parmegiana (Frango ou Mignon)",
+        description: "Clássico empanado e gratinado com muçarela derretida e nosso molho de tomate artesanal. Acompanha arroz branco soltinho e batatas chips artesanais crocantes. Inclui uma refrescante salada especial de entrada.",
+        price: "Frango: 39,90 | Mignon: 59,90",
       },
       {
         name: "Strogonoff de Frango Premium",
-        description: "Clássico e irresistível! Pedaços macios de peito de frango envoltos em um molho super cremoso e perfeitamente temperado. Acompanha arroz branco bem soltinho e crocantes batatas chips douradas na medida certa. Para completar, uma refrescante salada da casa com mix de verdes, tomates-cereja e rabanete.",
+        description: "Clássico e irresistível! Pedaços macios de peito de frango envoltos em um molho super cremoso e perfeitamente temperado. Acompanha arroz branco bem soltinho e crocantes batatas chips douradas na medida certa. Para completar, uma refrescante salada da casa.",
         price: "39,90 (+ 20,00 se for de Mignon)",
       },
       {
-        name: "Tortilha de Batatas com Salada Especial",
-        description: "A clássica tortilha espanhola (batata e ovos) servida com nossa salada especial da casa. Opcional: Adicione Mignon ou Jamón Serrano por + 20,00.",
-        price: "39,90",
+        name: "Penne (Molho Branco ou Ao Sugo)",
+        description: "Massa penne servida com sua escolha de molho: branco cremoso ou ao sugo artesanal. Acompanha nossa salada especial da casa.",
+        price: "29,90",
+      },
+      {
+        name: "Adicionais para Penne",
+        description: "Adicione uma proteína grelhada para completar sua massa.",
+        price: "Frango: +10,00 | Mignon: +30,00",
       }
     ]
   },
@@ -346,9 +352,13 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                     <p className="text-sm font-bold uppercase tracking-wider text-primary">
                         {isSummary ? "Destaque" : "Cardápio"}
                     </p>
-                    <h2 className="mt-2 font-headline text-4xl font-bold text-foreground md:text-5xl">
-                        {isSummary ? "Especiais Copa do Mundo 🏆" : "Nossas Delícias"}
-                    </h2>
+                    <div className="flex items-center justify-center gap-4 mt-2">
+                        <span className="text-3xl md:text-5xl">🇧🇷</span>
+                        <h2 className="font-headline text-4xl font-bold text-foreground md:text-5xl">
+                            {isSummary ? "Especiais Copa do Mundo 🏆" : "Nossas Delícias"}
+                        </h2>
+                        <span className="text-3xl md:text-5xl">🇧🇷</span>
+                    </div>
                     <p className="mt-4 max-w-2xl mx-auto text-muted-foreground">
                         {isSummary 
                           ? "Experimente nossa seleção exclusiva inspirada nas maiores seleções do mundo."
