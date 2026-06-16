@@ -81,11 +81,13 @@ export const menuCategories = [
         name: "Filé à Parmegiana (Frango ou Mignon)",
         description: "Clássico empanado e gratinado com muçarela derretida e nosso molho de tomate artesanal. Acompanha arroz branco soltinho e batatas chips artesanais crocantes. Inclui uma refrescante salada especial de entrada.",
         price: "Frango: 39,90 | Mignon: 59,90",
+        imageUrl: "https://64.media.tumblr.com/a8af1961fee3050928960b91efeb21e3/c0372c031ba3dd4f-36/s2048x3072/ce7ecf84949535cf7cad5e7013317b67d7cc831b.jpg"
       },
       {
         name: "Strogonoff de Frango Premium",
         description: "Clássico e irresistível! Pedaços macios de peito de frango envoltos em um molho super cremoso e perfeitamente temperado. Acompanha arroz branco bem soltinho e crocantes batatas chips douradas na medida certa. Para completar, uma refrescante salada da casa.",
         price: "39,90 (+ 20,00 se for de Mignon)",
+        imageUrl: "https://64.media.tumblr.com/f4f9ca90a9dcb9455244efe870e37e2f/fce141541680375c-36/s1280x1920/5dd818c0d3be583b15c51390f56c2f91ddbe88ae.jpg"
       },
       {
         name: "Penne (Molho Branco ou Ao Sugo)",
@@ -94,8 +96,8 @@ export const menuCategories = [
       },
       {
         name: "Adicionais para Penne",
-        description: "Adicione uma proteína grelhada para completar sua massa.",
-        price: "Frango: +10,00 | Mignon: +30,00",
+        description: "Adicione uma proteína grelhada para completar sua massa. Frango: +10,00 | Mignon: +30,00",
+        price: "Ver descrição",
       }
     ]
   },
@@ -198,7 +200,7 @@ export const menuCategories = [
     items: [
       { name: "Tamanho P", price: "9,90", imageUrl: "https://64.media.tumblr.com/d41f05c45254f28886f93a71091c6bc1/0168b23b368f7428-a9/s2048x3072/c78762ee05bfbdc4f68e1ab0e1a6dcef42c11278.jpg" },
       { name: "Tamanho M", price: "29,90", imageUrl: "https://64.media.tumblr.com/867c6bd334f88f4e0ef6bf933ab8b83e/0168b23b368f7428-b1/s1280x1920/1a62c6f28db8d57f39ff8c0840df7ff015ad0b30.jpg" },
-      { name: "Tamanho G", price: "35,90", imageUrl: "https://64.media.tumblr.com/636821a5e7b8a228cab209859655dc91/0168b23b368f7428-e5/s1280x1920/667ad64a566ff175a9fde6f31930c41c281d1e7b.jpg" },
+      { name: "Tamanho G", price: "35,90", imageUrl: "https://64.media.tumblr.com/636821a5e7b8a228cab20985955dc91/0168b23b368f7428-e5/s1280x1920/667ad64a566ff175a9fde6f31930c41c281d1e7b.jpg" },
     ],
   },
   {
@@ -250,7 +252,7 @@ export const menuCategories = [
       name: "ESPECIAIS DO CAFÉ",
       items: [
         { name: "Expresso Pistache Imperial", description: "Xícara banhada em ganache e farofa crocante de pistache, expresso finalizado com nuvem de chantilly e pistache tostado por cima.", price: "26,00" },
-        { name: "Cappuccino Clássico", description: "Expresso com leite vaporizado, finalizado com ganache de chocolate e canela em pó.", price: "16,90" },
+        { name: "Cappuccino Clássico", description: "Expresso with milk vaporized, finished with chocolate ganache and cinnamon powder.", price: "16,90" },
       ]
   },
   {
@@ -316,7 +318,6 @@ const iconMap: { [key: string]: React.ElementType } = {
 };
 
 const textOnlyCategories = [
-    "ALMOÇO",
     "SORVETES ARTESANAIS (PRODUÇÃO PRÓPRIA)",
     "EXPRESSOS", 
     "LATTE", 
