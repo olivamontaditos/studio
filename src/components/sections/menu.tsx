@@ -44,7 +44,7 @@ export const menuCategories = [
       { 
         name: "M03. Jamón Serrano Supremo (Espanha)", 
         description: "Uma viagem à Espanha: o autêntico presunto cru serrano harmonizado com muçarela de búfala fresca, rúcula crocante e o toque especial de pimentões marinados no azeite de oliva.", 
-        price: "32,00", 
+        price: "36,90", 
         imageUrl: "https://64.media.tumblr.com/7fcab6e70efc0fce1fa7a286d2b2b316/0729a521a5d6cff4-cb/s2048x3072/bd1a81a520067e76c288a701d8889d820dd2ec19.jpg" 
       },
       { 
@@ -68,7 +68,7 @@ export const menuCategories = [
       { 
         name: "M09. Pastrami Oliva (EUA)", 
         description: "Pastrami defumado artesanal de alta qualidade, queijo derretido, o toque refrescante do Vinagrete do William e a cremosidade do nosso creme de queijo exclusivo.", 
-        price: "32,00", 
+        price: "36,90", 
         imageUrl: "https://64.media.tumblr.com/fb5479c4df91056aa58fb94de08f5ab9/c86b546fc7a1ad02-d0/s2048x3072/e0735eb06afe83a0512493e7c3e4a01bd5ed261b.jpg" 
       },
     ],
@@ -80,7 +80,7 @@ export const menuCategories = [
       {
         name: "Filé à Parmegiana (Frango ou Mignon)",
         description: "Clássico empanado e gratinado com muçarela derretida e nosso molho de tomate artesanal. Acompanha arroz branco soltinho e batatas chips artesanais crocantes. Inclui uma refrescante salada especial de entrada.",
-        price: "Frango: 39,90 | Mignon: 59,90",
+        price: "Frango: 39,90 | Mignon: 69,90",
         imageUrl: "https://64.media.tumblr.com/a8af1961fee3050928960b91efeb21e3/c0372c031ba3dd4f-36/s2048x3072/ce7ecf84949535cf7cad5e7013317b67d7cc831b.jpg"
       },
       {
@@ -120,7 +120,7 @@ export const menuCategories = [
       { 
         name: "M03. Jamón Serrano Supremo", 
         description: "Uma viagem à Espanha: o autêntico presunto cru serrano harmonizado com muçarela de búfala fresca, rúcula crocante e o toque especial de pimentões marinados no azeite de oliva.", 
-        price: "32,00", 
+        price: "36,90", 
         imageUrl: "https://64.media.tumblr.com/7fcab6e70efc0fce1fa7a286d2b2b316/0729a521a5d6cff4-cb/s2048x3072/bd1a81a520067e76c288a701d8889d820dd2ec19.jpg" 
       },
       { 
@@ -156,7 +156,7 @@ export const menuCategories = [
       { 
         name: "M09. Pastrami Oliva", 
         description: "Pastrami defumado artesanal de alta qualidade, queijo derretido, o toque refrescante do Vinagrete do William e a cremosidade do nosso creme de queijo exclusivo.", 
-        price: "32,00", 
+        price: "36,90", 
         imageUrl: "https://64.media.tumblr.com/fb5479c4df91056aa58fb94de08f5ab9/c86b546fc7a1ad02-d0/s2048x3072/e0735eb06afe83a0512493e7c3e4a01bd5ed261b.jpg" 
       },
       { 
@@ -331,7 +331,6 @@ const textOnlyCategories = [
 export default function MenuSection({ variant = 'full' }: { variant?: 'full' | 'summary' }) {
     const isSummary = variant === 'summary';
     
-    // Na Home (summary), priorizamos exibir apenas os itens da Copa do Mundo
     const copaCategory = menuCategories.find(c => c.name.includes("COPA DO MUNDO"));
     const summaryItems = isSummary && copaCategory 
       ? copaCategory.items 
@@ -462,7 +461,6 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                                 ) : (
                                     <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
                                     {category.items.map((item, index) => {
-                                        // Na página /menu, removemos o prefixo "MXX. " apenas para a categoria Copa
                                         const displayName = (!isSummary && isCopaCategory) 
                                             ? item.name.replace(/^M\d+\.\s*/i, '') 
                                             : item.name;
