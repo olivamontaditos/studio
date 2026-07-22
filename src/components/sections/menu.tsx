@@ -113,7 +113,7 @@ export const menuCategories = [
       },
       { 
         name: "M09. Pastrami Oliva", 
-        description: "Pastrami defumado artesanal de alta qualidade, queijo derretido, o toque refrescante do Vinagrete do William e a cremosidade do nosso creme de queijo exclusivo.", 
+        description: "Pastrami de alta qualidade, queijo derretido, o toque refrescante do Vinagrete do William e a cremosidade do nosso creme de queijo exclusivo.", 
         price: "36,90", 
         imageUrl: "https://64.media.tumblr.com/fb5479c4df91056aa58fb94de08f5ab9/c86b546fc7a1ad02-d0/s2048x3072/e0735eb06afe83a0512493e7c3e4a01bd5ed261b.jpg" 
       },
@@ -141,11 +141,11 @@ export const menuCategories = [
     name: "SOBREMESAS & MONTADITOS DOCES",
     description: "Nossos doces irresistíveis, agora servidos no autêntico Pan de Coca Espanhol.",
     items: [
-        { name: "Torta Basca de San Sebastián", description: "A autêntica cheesecake espanhola, cremosa por dentro e tostada por fora. Disponível também inteira (sob encomenda): 15cm - 159,00 | 17,5cm - 199,00 | 20cm - 239,00. Adicional de calda artesanal (frutas vermelhas, pistache e caramelo com flor de sal): + 6,00. Adicional de sorvete artesanal da casa por bola (baunilha, pistache e morango): + 10,00.", price: "29,00 (a fatia)", imageUrl: "https://64.media.tumblr.com/95f517167d957247e9f30c53696aff10/ceb08f5edd305fa6-c1/s2048x3072/0ee3f770fd647672b4ec8d01b749ab44dcc7c69e.jpg" },
-        { name: "Bolo Matilda", description: "Direto de um clássico para sua mesa: chocolate nobre, brilho intenso e muita cremosidade. Disponível também inteiro (sob consulta). Adicional de calda extra de chocolate: 5,00.", price: "22,00 (a fatia)", imageUrl: "https://64.media.tumblr.com/f4a8e4a014dc6412f75a640dc7b101e9/3a06fb4d61c7f58f-d2/s2048x3072/e683ca0ca8be44cac2caf34aeb5244cac3884e2d.jpg" },
+        { name: "Torta Basca de San Sebastián", description: "A autêntica cheesecake espanhola, cremosa por dentro e tostada por fora.", price: "29,00 (a fatia)", imageUrl: "https://64.media.tumblr.com/95f517167d957247e9f30c53696aff10/ceb08f5edd305fa6-c1/s2048x3072/0ee3f770fd647672b4ec8d01b749ab44dcc7c69e.jpg" },
+        { name: "Bolo Matilda", description: "Direto de um clássico: chocolate nobre, brilho intenso e muita cremosidade.", price: "22,00 (a fatia)", imageUrl: "https://64.media.tumblr.com/f4a8e4a014dc6412f75a640dc7b101e9/3a06fb4d61c7f58f-d2/s2048x3072/e683ca0ca8be44cac2caf34aeb5244cac3884e2d.jpg" },
         { name: "Sensação Berry", description: "Doce de leite artesanal, calda de amoras e creme aveludado de leite ninho.", price: "23,90 (a fatia)", imageUrl: "https://64.media.tumblr.com/57c9ab311429fc6fb627881fb2f549e7/0695e7378c4b0476-ef/s2048x3072/0f25addf91e9a9f731ab0377007a0259a5cb876d.jpg" },
         { name: "Torta de Santiago", description: "Autêntica torta espanhola feita com farinha de amêndoas.", price: "17,90", imageUrl: "https://64.media.tumblr.com/d013b086e25020c5941ca4272ed18824/5a7c7989b503dee1-04/s2048x3072/8869b3d6769950d53a9cca7f6c4d5913d2ea8bb1.jpg" },
-        { name: "El Montadito de Banoffi", description: "Bolacha amanteigada, doce de leite artesanal, banana prata selecionadas, creme secreto da casa, calda de caramelo e uma pitada de canela.", price: "19,90", imageUrl: "https://64.media.tumblr.com/c8dbfa862418350af0787d23f5644ca6/f6b720196de6fc4b-78/s2048x3072/47a3bac788ca6ca47f5f16b97d0109c04dc2db02.jpg" },
+        { name: "El Montadito de Banoffi", description: "Doce de leite, banana prata, creme secreto e canela.", price: "19,90", imageUrl: "https://64.media.tumblr.com/c8dbfa862418350af0787d23f5644ca6/f6b720196de6fc4b-78/s2048x3072/47a3bac788ca6ca47f5f16b97d0109c04dc2db02.jpg" },
         { name: "Montadito Pistache Real", description: "No Pan de Coca. Recheio de ganache de pistache.", price: "39,00", imageUrl: "https://64.media.tumblr.com/0add055745496740cdac0ee959142a72/0729a521a5d6cff4-03/s2048x3072/11612a18f1c46df12f7d3274d3fedb0200c84372.jpg" },
         { name: "Montadito Nutella com Morangos", description: "No Pan de Coca. Nutella original e morangos frescos.", price: "38,90", imageUrl: "https://64.media.tumblr.com/6c066210786fb0fe39f2cfa601994f94/3ff45e09a0c7dd34-ae/s2048x3072/7eed66c605a1a87e48ea908cfb53af3cfcc16037.jpg" },
         { name: "Montadito Chocolate Blend", description: "No Pan de Coca. Chocolate ao leite premium.", price: "31,00", imageUrl: "https://64.media.tumblr.com/32d746d8e9cd9113ed6811ac3e7b91e2/0729a521a5d6cff4-e9/s2048x3072/8d98fc0f020c1d091ae10db68fda56c69d7ce1cc.jpg" },
@@ -154,7 +154,7 @@ export const menuCategories = [
   },
   {
     name: "TORRONES ARTESANAIS (Receita Original Espanhola)",
-    description: "Receita original espanhola feita com mel e amêndoas torradas. Sabores: frutas vermelhas, pistache, nozes com limão siciliano ou chocolate 70%.",
+    description: "Receita original espanhola feita com mel e amêndoas torradas.",
     items: [
       { name: "Tamanho P", price: "9,90", imageUrl: "https://64.media.tumblr.com/d41f05c45254f28886f93a71091c6bc1/0168b23b368f7428-a9/s2048x3072/c78762ee05bfbdc4f68e1ab0e1a6dcef42c11278.jpg" },
       { name: "Tamanho M", price: "29,90", imageUrl: "https://64.media.tumblr.com/867c6bd334f88f4e0ef6bf933ab8b83e/0168b23b368f7428-b1/s2048x3072/260534cb4553e67025ea7b685937d3689599250e.jpg" },
@@ -166,13 +166,13 @@ export const menuCategories = [
     items: [
       {
         name: 'Combo do Estudante (O "Clássico da Tarde")',
-        description: "Montadito M11 - Clássico Madrileño + Batata Chips + Refrigerante (lata) ou Suco de Laranja. Quer trocar o refrigerante pelo Suco de Morango com Ninho por apenas + 8,00?",
+        description: "Montadito M11 + Batata Chips + Refrigerante (lata) ou Suco de Laranja.",
         price: "27,00",
         imageUrl: "https://64.media.tumblr.com/122bb499e0d332197eb0fc8b7fbcb01e/ef8bd0d492ebf856-a7/s2048x3072/9926e92285eca69d42d5ce6b3104778b25ffbf57.jpg"
       },
       {
         name: "Combo Refresh (Refrescância de Madrid)",
-        description: "Montadito M05: Madrid Fresh (Peru e Muçarela de Búfala no Pan de Coca crocante) + Soda Monin Batida (Sabor à escolha: Maçã Verde, Morango ou Framboesa).",
+        description: "Montadito M05 + Soda Monin Batida.",
         price: "35,00",
         imageUrl: "https://64.media.tumblr.com/55b653be62959a66e2c6af8fcf1700c5/53f8a4be3e21104f-24/s2048x3072/a36cbb662cb027dc8e3555109de063d564b90c5f.jpg"
       }
@@ -180,80 +180,75 @@ export const menuCategories = [
   },
   {
     name: "SORVETES ARTESANAIS (PRODUÇÃO PRÓPRIA)",
-    description: "Textura ultra cremosa aqui na Oliva. Servido na taça com 1 bola de 120g. Dica da Chef: Peça uma bola de sorvete de Baunilha para acompanhar sua fatia de Torta Matilda quente!",
+    description: "Textura ultra cremosa aqui na Oliva.",
     items: [
-      { name: "Baunilha Bourbon", description: "O clássico com favas naturais, perfeito para acompanhar nossas tortas.", price: "18,00" },
-      { name: "Morango com Nutella", description: "Sorvete de morango natural com uma generosa camada de Nutella legítima por cima.", price: "24,00" },
-      { name: "Pistache Premium", description: "Elaborado com pistaches selecionados para um sabor intenso.", price: "28,00" },
+      { name: "Baunilha Bourbon", price: "18,00" },
+      { name: "Morango com Nutella", price: "24,00" },
+      { name: "Pistache Premium", price: "28,00" },
     ],
   },
   {
     name: "EXPRESSOS",
     description: "Café gourmet moído na hora com aroma frutado.",
     items: [
-      { name: "Expresso", description: "Intenso e com crema aveludada.", price: "8,00" },
+      { name: "Expresso", price: "8,00" },
       { name: "Ristreto", price: "8,00" },
       { name: "Coado", price: "9,90" },
     ],
   },
   {
     name: "LATTE",
-    description: "Expresso with milk vaporized and a fine layer of foam.",
+    description: "Cafés com leite vaporizado.",
     items: [
-      { name: "Caffè Latte Clássico", description: "Dose de expresso com leite vaporizado e uma fina camada de espuma.", price: "12,90" },
-      { name: "Vanilla Latte", description: "Nosso latte clássico com um toque de extrato natural de baunilha.", price: "16,00" },
-      { name: "Macchiato tradicional", description: "O clássico manchado com uma nuvem de leite vaporizado.", price: "9,90" },
-      { name: "Caramel Macchiato", description: "Expresso, uma camada generosa de espuma de leite finalizada com calda de caramelo.", price: "12,90" },
+      { name: "Caffè Latte Clássico", price: "12,90" },
+      { name: "Vanilla Latte", price: "16,00" },
+      { name: "Macchiato tradicional", price: "9,90" },
+      { name: "Caramel Macchiato", price: "12,90" },
     ],
   },
   {
       name: "ESPECIAIS DO CAFÉ",
       items: [
-        { name: "Expresso Pistache Imperial", description: "Xícara banhada em ganache e farofa crocante de pistache, expresso finalizado com nuvem de chantilly e pistache tostado por cima.", price: "26,00" },
-        { name: "Cappuccino Clássico", description: "Expresso with milk vaporized, finished with chocolate ganache and cinnamon powder.", price: "16,90" },
+        { name: "Expresso Pistache Imperial", price: "26,00" },
+        { name: "Cappuccino Clássico", price: "16,90" },
       ]
   },
   {
       name: "CAFÉS GELADOS",
-      description: "ADICIONAIS: Deixe seu pedido ainda mais gostoso. Chantilly 5,00",
       items: [
-          { name: "Café Bombom Gelado", description: "Camada de leite condensado, gelo, leite batido e uma dose de expresso por cima.", price: "16,00" },
-          { name: "Affogato Oliva", description: "Uma bola generosa de sorvete de baunilha, com uma dose de expresso quente despejada por cima na hora, finalizada com farofa de pistache.", price: "22,00" },
-          { name: "Ice Pistache", description: "Ganache de pistache nas paredes do copo, gelo, leite batido e expresso. Finalizado com chantilly e farofa de pistache.", price: "26,00" },
+          { name: "Café Bombom Gelado", price: "16,00" },
+          { name: "Affogato Oliva", price: "22,00" },
+          { name: "Ice Pistache", price: "26,00" },
       ]
   },
   {
       name: "CHOCOLATES QUENTES",
       items: [
-          { name: "Chocolate Quente Tradicional", description: "Leite vaporizado, cacau em pó 50%, toque de açúcar e canela.", price: "15,90" },
-          { name: "Chocolate Suíço Cremoso", description: "Leite vaporizado, chocolate em pó 50% e um toque de amido para dar cremosidade.", price: "20,00" },
+          { name: "Chocolate Quente Tradicional", price: "15,90" },
+          { name: "Chocolate Suíço Cremoso", price: "20,00" },
       ]
   },
   {
     name: "BEBIDAS & SODAS",
     items: [
-      { name: "Soda Espanhola", description: "Maçã Verde, Framboesa, Limão Siciliano ou Pera.", price: "16,90" },
+      { name: "Soda Espanhola", price: "16,90" },
       { name: "Suco de laranja", price: "12,90" },
       { name: "Suco de abacaxi", price: "12,90" },
-      { name: "Suco de morango com leite Ninho", description: "Ultra cremoso e batido na hora.", price: "18,00" },
-      { name: "Suco de frutas vermelhas", description: "Natural (Morango, mirtilo e amora).", price: "18,00" },
+      { name: "Suco de morango com leite Ninho", price: "18,00" },
+      { name: "Suco de frutas vermelhas", price: "18,00" },
       { name: "Água com ou sem gás", price: "6,00" },
       { name: "Refrigerante", price: "8,00" },
-      { name: "Monster", description: "473ml", price: "15,00" },
-      { name: "Schweppes", price: "9,00" },
       { name: "Heineken (330ml)", price: "18,90" },
     ],
   },
   {
     name: "COQUETELARIA",
     items: [
-      { name: "Taça de vinho (Tinto ou Branco)", price: "29,90" },
-      { name: "Sangria Oliva (300ml)", description: "Vinho tinto suave, mix de frutas e um toque de licor de laranja.", price: "31,00" },
-      { name: "Jarra de Sangria", description: "Nossa sangria especial em uma jarra de 1L, perfeita para compartilhar.", price: "99,00" },
-      { name: "Oliva Sunset Gym", description: "Nossa criação exclusiva: gin premium combinado com o frescor do suco de laranja, toque aromático de licor de laranja, finalizado com dulçor e a cor intensa do Monin de framboesa.", price: "34,00" },
-      { name: "Carajillo 43", description: "Licor 43 e café expresso premium batidos com gelo e monin de pera. Aveludado e icônico.", price: "39,00" },
-      { name: "Jägermeister", description: "Licor Fino de Ervas (dose 50ml).", price: "35,00" },
-      { name: "Jägerbomb", description: "Jägermeister (50ml) with Monster (473ml).", price: "55,00" },
+      { name: "Taça de vinho", price: "29,90" },
+      { name: "Sangria Oliva (300ml)", price: "31,00" },
+      { name: "Jarra de Sangria", price: "99,00" },
+      { name: "Oliva Sunset Gym", price: "34,00" },
+      { name: "Carajillo 43", price: "39,00" },
     ],
   },
 ];
@@ -288,7 +283,6 @@ const textOnlyCategories = [
 export default function MenuSection({ variant = 'full' }: { variant?: 'full' | 'summary' }) {
     const isSummary = variant === 'summary';
     
-    // Lista de nomes exatos solicitados para o destaque da Home
     const featuredNames = [
         "Filé à Parmegiana (Frango ou Mignon)",
         "Strogonoff de Frango Premium",
@@ -304,7 +298,7 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
       ? menuCategories
           .flatMap(category => category.items)
           .filter(item => featuredNames.includes(item.name))
-          .sort((a, b) => featuredNames.indexOf(a.name) - featuredNames.indexOf(b.name)) // Mantém a ordem da lista
+          .sort((a, b) => featuredNames.indexOf(a.name) - featuredNames.indexOf(b.name))
       : [];
 
     return (
