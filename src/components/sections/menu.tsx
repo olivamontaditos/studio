@@ -24,8 +24,6 @@ import {
     Coffee,
     GraduationCap,
     IceCream2,
-    UtensilsCrossed,
-    Trophy,
     Sun,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -83,7 +81,7 @@ export const menuCategories = [
       },
       { 
         name: "M04. Germânico-Ibérico", 
-        description: "A união perfeita de tradições. Nossa salsicha artesanal premium é acompanhada pelo clássico Vinagrete do William e um toque generoso de maionese de alho no Pan de Coca crocante.", 
+        description: "A união perfeita de traditions. Nossa salsicha artesanal premium é acompanhada pelo clássico Vinagrete do William e um toque generoso de maionese de alho no Pan de Coca crocante.", 
         price: "24,00", 
         imageUrl: "https://64.media.tumblr.com/80862ce7c59ba9297564ba9c92271ccc/0729a521a5d6cff4-1a/s2048x3072/a63b54494b40a8beac1c6dd677a9fbfa3ec3a86a.jpg" 
       },
