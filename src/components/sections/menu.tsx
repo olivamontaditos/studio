@@ -75,13 +75,13 @@ export const menuCategories = [
       },
       { 
         name: "M03. Jamón Serrano Supremo", 
-        description: "Uma viagem à Espanha: o autêntico presunto cru serrano harmonizado com muçarela de búfala fresca, rúcula crocante e o toque especial de pimentões marinados no azeite de oliva.", 
+        description: "Uma viagem à Espanha: o autêntente presunto cru serrano harmonizado com muçarela de búfala fresca, rúcula crocante e o toque especial de pimentões marinados no azeite de oliva.", 
         price: "36,90", 
         imageUrl: "https://64.media.tumblr.com/7fcab6e70efc0fce1fa7a286d2b2b316/0729a521a5d6cff4-cb/s2048x3072/bd1a81a520067e76c288a701d8889d820dd2ec19.jpg" 
       },
       { 
         name: "M04. Germânico-Ibérico", 
-        description: "A união perfeita de traditions. Nossa salsicha artesanal premium é acompanhada pelo clássico Vinagrete do William e um toque generoso de maionese de alho no Pan de Coca crocante.", 
+        description: "A união perfeita de tradições. Nossa salsicha artesanal premium é acompanhada pelo clássico Vinagrete do William e um toque generoso de maionese de alho no Pan de Coca crocante.", 
         price: "24,00", 
         imageUrl: "https://64.media.tumblr.com/80862ce7c59ba9297564ba9c92271ccc/0729a521a5d6cff4-1a/s2048x3072/a63b54494b40a8beac1c6dd677a9fbfa3ec3a86a.jpg" 
       },
