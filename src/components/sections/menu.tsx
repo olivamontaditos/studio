@@ -32,48 +32,6 @@ import { cn } from "@/lib/utils";
 
 export const menuCategories = [
   {
-    name: "ESPECIAIS COPA DO MUNDO 🏆",
-    description: "Uma seleção de montaditos exclusivos inspirados nas maiores seleções do mundo. Um novo lançamento a cada dia!",
-    items: [
-      { 
-        name: "M12. Montadito Entrecot (Argentina)", 
-        description: "Pão de coca, queijo muçarela, tiras de entrecot suculentas, vinagrete artesanal, chimichurri, maionese de alho e molho de tomate e alho.", 
-        price: "35,90", 
-        imageUrl: "https://64.media.tumblr.com/a4330071a86ebeee091a1370c742cdd3/9891cbcf8be8e474-e3/s2048x3072/3797d7dc4a26dbbee1a480588598a9d567ba3933.jpg" 
-      },
-      { 
-        name: "M03. Jamón Serrano Supremo (Espanha)", 
-        description: "Uma viagem à Espanha: o autêntico presunto cru serrano harmonizado com muçarela de búfala fresca, rúcula crocante e o toque especial de pimentões marinados no azeite de oliva.", 
-        price: "36,90", 
-        imageUrl: "https://64.media.tumblr.com/7fcab6e70efc0fce1fa7a286d2b2b316/0729a521a5d6cff4-cb/s2048x3072/bd1a81a520067e76c288a701d8889d820dd2ec19.jpg" 
-      },
-      { 
-        name: "M04. Germânico-Ibérico (Alemanha)", 
-        description: "A união perfeita de tradições. Nossa salsicha artesanal premium é acompanhada pelo clássico Vinagrete do William e um toque generoso de maionese de alho no Pan de Coca crocante.", 
-        price: "24,00", 
-        imageUrl: "https://64.media.tumblr.com/80862ce7c59ba9297564ba9c92271ccc/0729a521a5d6cff4-1a/s2048x3072/a63b54494b40a8beac1c6dd677a9fbfa3ec3a86a.jpg" 
-      },
-      { 
-        name: "M06. Frango Cremoso Melt (México)", 
-        description: "Frango em tiras grelhado na hora suculento, envolvido em um creme de queijo apimentado com chilli, com cobertura de muçarela derretida e o contraste crocante da batata palha sobre o Pan de Coca artesanal.", 
-        price: "22,90", 
-        imageUrl: "https://64.media.tumblr.com/5bca88fd3ae950b2a16db082dcf707ef/60a8116118a48c16-50/s2048x3072/7041b887ac6a1325a5bebb8fdc3585be10714ed5.pnj" 
-      },
-      { 
-        name: "M08. Mignon Gruyère (França)", 
-        description: "O ápice do sabor: tiras suculentas de mignon grelhado, a sofisticação do queijo Gruyère derretido e a doçura da cebola caramelizada artesanal no nosso Pan de Coca crocante.", 
-        price: "38,90", 
-        imageUrl: "https://64.media.tumblr.com/9e260afe66273c0a6158761992ceb67d/0729a521a5d6cff4-2b/s2048x3072/2bb44eb1a215e7d3eb24b197bf77581526abaf24.jpg" 
-      },
-      { 
-        name: "M09. Pastrami Oliva (EUA)", 
-        description: "Pastrami defumado artesanal de alta qualidade, queijo derretido, o toque refrescante do Vinagrete do William e a cremosidade do nosso creme de queijo exclusivo.", 
-        price: "36,90", 
-        imageUrl: "https://64.media.tumblr.com/fb5479c4df91056aa58fb94de08f5ab9/c86b546fc7a1ad02-d0/s2048x3072/e0735eb06afe83a0512493e7c3e4a01bd5ed261b.jpg" 
-      },
-    ],
-  },
-  {
     name: "ALMOÇO",
     description: "Servido de Segunda a Sábado. A combinação perfeita para o seu meio-dia.",
     items: [
@@ -199,7 +157,7 @@ export const menuCategories = [
     description: "Receita original espanhola feita com mel e amêndoas torradas. Sabores: frutas vermelhas, pistache, nozes com limão siciliano ou chocolate 70%.",
     items: [
       { name: "Tamanho P", price: "9,90", imageUrl: "https://64.media.tumblr.com/d41f05c45254f28886f93a71091c6bc1/0168b23b368f7428-a9/s2048x3072/c78762ee05bfbdc4f68e1ab0e1a6dcef42c11278.jpg" },
-      { name: "Tamanho M", price: "29,90", imageUrl: "https://64.media.tumblr.com/867c6bd334f88f4e0ef6bf933ab8b83e/0168b23b368f7428-b1/s1280x1920/1a62c6f28db8d57f39ff8c0840df7ff015ad0b30.jpg" },
+      { name: "Tamanho M", price: "29,90", imageUrl: "https://64.media.tumblr.com/867c6bd334f88f4e0ef6bf933ab8b83e/0168b23b368f7428-b1/s2048x3072/260534cb4553e67025ea7b685937d3689599250e.jpg" },
       { name: "Tamanho G", price: "35,90", imageUrl: "https://64.media.tumblr.com/636821a5e7b8a228cab20985955dc91/0168b23b368f7428-e5/s1280x1920/667ad64a566ff175a9fde6f31930c41c281d1e7b.jpg" },
     ],
   },
@@ -302,7 +260,6 @@ export const menuCategories = [
 
 const iconMap: { [key: string]: React.ElementType } = {
     "ALMOÇO": Sun,
-    "ESPECIAIS COPA DO MUNDO 🏆": Trophy,
     "MONTADITOS (No Pan de Coca Espanhol)": Sandwich,
     "SOBREMESAS & MONTADITOS DOCES": Cake,
     "TORRONES ARTESANAIS (Receita Original Espanhola)": Gift,
@@ -331,13 +288,24 @@ const textOnlyCategories = [
 export default function MenuSection({ variant = 'full' }: { variant?: 'full' | 'summary' }) {
     const isSummary = variant === 'summary';
     
-    const copaCategory = menuCategories.find(c => c.name.includes("COPA DO MUNDO"));
-    const summaryItems = isSummary && copaCategory 
-      ? copaCategory.items 
-      : menuCategories
+    // Lista de nomes exatos solicitados para o destaque da Home
+    const featuredNames = [
+        "Filé à Parmegiana (Frango ou Mignon)",
+        "Strogonoff de Frango Premium",
+        "M01. El Clásico",
+        "M03. Jamón Serrano Supremo",
+        "M06. Frango Cremoso Melt",
+        "M08. Mignon Gruyère",
+        "Torta Basca de San Sebastián",
+        "Bolo Matilda"
+    ];
+
+    const summaryItems = isSummary 
+      ? menuCategories
           .flatMap(category => category.items)
-          .filter(item => item.imageUrl)
-          .slice(0, 6);
+          .filter(item => featuredNames.includes(item.name))
+          .sort((a, b) => featuredNames.indexOf(a.name) - featuredNames.indexOf(b.name)) // Mantém a ordem da lista
+      : [];
 
     return (
         <section 
@@ -350,18 +318,18 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
             <div className="w-full max-w-6xl mx-auto px-4">
                 <header className="text-center mb-12">
                     <p className="text-sm font-bold uppercase tracking-wider text-primary">
-                        {isSummary ? "Destaque" : "Cardápio"}
+                        {isSummary ? "Destaques da Casa" : "Cardápio"}
                     </p>
                     <div className="flex items-center justify-center gap-4 mt-2">
-                        <span className="text-3xl md:text-5xl">🇧🇷</span>
+                        <span className="text-3xl md:text-5xl">🇪🇸</span>
                         <h2 className="font-headline text-4xl font-bold text-foreground md:text-5xl">
-                            {isSummary ? "Especiais Copa do Mundo 🏆" : "Nossas Delícias"}
+                            {isSummary ? "Nossas Delícias Favoritas" : "Experiência Gastronômica"}
                         </h2>
                         <span className="text-3xl md:text-5xl">🇧🇷</span>
                     </div>
                     <p className="mt-4 max-w-2xl mx-auto text-muted-foreground">
                         {isSummary 
-                          ? "Experimente nossa seleção exclusiva inspirada nas maiores seleções do mundo."
+                          ? "Experimente os pratos mais amados pelos nossos clientes."
                           : "Explore nossas delícias artesanais, do almoço especial aos montaditos clássicos."}
                     </p>
                 </header>
@@ -370,19 +338,19 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
 
                 {isSummary ? (
                     <>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
                             {summaryItems.map((item) => (
                                 <div key={item.name} className="bg-card rounded-lg shadow-sm overflow-hidden flex flex-col transition-all duration-300 hover:shadow-md animate-in fade-in slide-in-from-bottom-4">
                                     {item.imageUrl && (
                                         <Dialog>
                                         <DialogTrigger asChild>
-                                            <div className="relative h-56 w-full cursor-pointer overflow-hidden">
+                                            <div className="relative h-48 w-full cursor-pointer overflow-hidden">
                                             <Image
                                                 src={item.imageUrl}
                                                 alt={item.name}
                                                 fill
                                                 className="object-cover transition-transform duration-500 hover:scale-110"
-                                                sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                                                sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw"
                                             />
                                             </div>
                                         </DialogTrigger>
@@ -401,13 +369,10 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                                     )}
                                     <div className="p-4 flex flex-col flex-grow">
                                         <div className="flex-grow">
-                                            <p className="text-foreground font-semibold text-lg">{item.name}</p>
-                                            {item.description && (
-                                                <p className="text-sm text-muted-foreground mt-1 line-clamp-2">{item.description}</p>
-                                            )}
+                                            <p className="text-foreground font-semibold text-base leading-tight">{item.name}</p>
                                         </div>
-                                        <div className="flex justify-between items-center mt-4">
-                                            <p className="font-bold text-xl text-primary">{item.price}</p>
+                                        <div className="flex justify-between items-center mt-3">
+                                            <p className="font-bold text-lg text-primary">{item.price}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -425,7 +390,6 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                     {menuCategories.map((category) => {
                         const Icon = iconMap[category.name] || Sandwich;
                         const isTextOnly = textOnlyCategories.includes(category.name);
-                        const isCopaCategory = category.name.includes("COPA DO MUNDO");
                         
                         return (
                         <AccordionItem 
@@ -461,10 +425,6 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                                 ) : (
                                     <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
                                     {category.items.map((item, index) => {
-                                        const displayName = (!isSummary && isCopaCategory) 
-                                            ? item.name.replace(/^M\d+\.\s*/i, '') 
-                                            : item.name;
-
                                         return (
                                             <div key={item.name} className="bg-background rounded-lg shadow-sm overflow-hidden flex flex-col transition-all duration-300 hover:shadow-md animate-in fade-in zoom-in-95 duration-300">
                                                 {item.imageUrl && (
@@ -495,7 +455,7 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                                                 )}
                                                 <div className="p-4 flex flex-col flex-grow">
                                                     <div className="flex-grow">
-                                                        <p className="text-foreground font-semibold text-lg">{displayName}</p>
+                                                        <p className="text-foreground font-semibold text-lg">{item.name}</p>
                                                         {item.description && (
                                                             <p className="text-sm text-muted-foreground mt-1">{item.description}</p>
                                                         )}
