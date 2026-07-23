@@ -1,4 +1,3 @@
-
 'use client';
 
 import Image from 'next/image';
@@ -14,7 +13,7 @@ import {
     AccordionContent,
     AccordionItem,
     AccordionTrigger,
-} from "@/components/ui/accordion";
+} from "@/accordion";
 import {
     Sandwich,
     Wine,
@@ -59,7 +58,7 @@ export const menuCategories = [
   },
   {
     name: "MONTADITOS (No Pan de Coca Espanhol)",
-    description: "Base: Emulsão de tomate, alho e azeite. Dica: Troque o Pan de Coca por Croissant Amanteigado por + 5,00.",
+    description: "Base: Emulsão de tomate, alho e azeite. Dica: Troque o Pan de Coca por Croissant Amanteigado por + R$7,50.",
     items: [
       { 
         name: "M01. El Clásico", 
