@@ -132,8 +132,18 @@ export const menuCategories = [
     name: "SOBREMESAS & MONTADITOS DOCES",
     description: "Nossos doces irresistíveis, agora servidos no autêntico Pan de Coca Espanhol.",
     items: [
-        { name: "Torta Basca de San Sebastián", description: "A autêntica cheesecake espanhola, cremosa por dentro e tostada por fora.", price: "29,00 (a fatia)", imageUrl: "https://64.media.tumblr.com/95f517167d957247e9f30c53696aff10/ceb08f5edd305fa6-c1/s2048x3072/0ee3f770fd647672b4ec8d01b749ab44dcc7c69e.jpg" },
-        { name: "Bolo Matilda", description: "Direto de um clássico: chocolate nobre, brilho intenso e muita cremosidade.", price: "25,00 (a fatia)", imageUrl: "https://64.media.tumblr.com/f4a8e4a014dc6412f75a640dc7b101e9/3a06fb4d61c7f58f-d2/s2048x3072/e683ca0ca8be44cac2caf34aeb5244cac3884e2d.jpg" },
+        { 
+          name: "Torta Basca de San Sebastián", 
+          description: "A autêntica cheesecake espanhola, cremosa por dentro e tostada por fora. Opção de fatia especial (R$ 35) com calda de frutas vermelhas, caramelo e flor de sal, pistache, chocolate ou doce de leite. Encomendas inteiras: P (6 fatias) R$ 159,90 | M (8 fatias) R$ 199,90 | G (12 fatias) R$ 249,90.", 
+          price: "29,00 (fatia simples) | 35,00 (fatia especial)", 
+          imageUrl: "https://64.media.tumblr.com/95f517167d957247e9f30c53696aff10/ceb08f5edd305fa6-c1/s2048x3072/0ee3f770fd647672b4ec8d01b749ab44dcc7c69e.jpg" 
+        },
+        { 
+          name: "Bolo Matilda", 
+          description: "Chocolate nobre, brilho intenso e muita cremosidade. Encomendas inteiras: M (6 fatias) R$ 149,90 | G (10 fatias) R$ 229,90.", 
+          price: "25,00 (a fatia)", 
+          imageUrl: "https://64.media.tumblr.com/f4a8e4a014dc6412f75a640dc7b101e9/3a06fb4d61c7f58f-d2/s2048x3072/e683ca0ca8be44cac2caf34aeb5244cac3884e2d.jpg" 
+        },
         { name: "Torta de Santiago", description: "Autêntica torta espanhola feita com farinha de amêndoas.", price: "17,90", imageUrl: "https://64.media.tumblr.com/d013b086e25020c5941ca4272ed18824/5a7c7989b503dee1-04/s2048x3072/8869b3d6769950d53a9cca7f6c4d5913d2ea8bb1.jpg" },
         { name: "Eclair", description: "Baunilha com chocolate e pistache ou doce de leite.", price: "19,90" },
         { name: "Montadito Pistache Real", description: "No Pan de Coca. Recheio de ganache de pistache.", price: "39,00", imageUrl: "https://64.media.tumblr.com/0add055745496740cdac0ee959142a72/0729a521a5d6cff4-03/s2048x3072/11612a18f1c46df12f7d3274d3fedb0200c84372.jpg" },
