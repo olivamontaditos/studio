@@ -97,14 +97,8 @@ export const menuCategories = [
         imageUrl: "https://64.media.tumblr.com/5bca88fd3ae950b2a16db082dcf707ef/60a8116118a48c16-50/s2048x3072/7041b887ac6a1325a5bebb8fdc3585be10714ed5.pnj" 
       },
       { 
-        name: "M07. Frango Iscas Gourmet", 
-        description: "Iscas de frango grelhadas na hora, muçarela derretida e tomates cereja suculentos, tudo realçado pelo sabor único da nossa maionese de alho artesanal no Pan de Coca.", 
-        price: "22,00", 
-        imageUrl: "https://64.media.tumblr.com/1780edbad6756f637032ef2521f195af/7674f98079392f13-26/s2048x3072/6032e340b7e2fa34f787f6100785cf7da117d21a.jpg" 
-      },
-      { 
         name: "M08. Mignon Gruyère", 
-        description: "O ápice do sabor: tiras suculentas de mignon grelhado, a sofisticação do queijo Gruyère derretido e a doçura da cebola caramelizada artesanal no nosso Pan de Coca crocante.", 
+        description: "O ápice do sabor: tiras suculentas de mignon grelhado, a sofisticação do queijo Gruyère derretido e a doçura da cebola caramelizada artesanal na nosso Pan de Coca crocante.", 
         price: "38,90", 
         imageUrl: "https://64.media.tumblr.com/9e260afe66273c0a6158761992ceb67d/0729a521a5d6cff4-2b/s2048x3072/2bb44eb1a215e7d3eb24b197bf77581526abaf24.jpg" 
       },
@@ -140,9 +134,8 @@ export const menuCategories = [
     items: [
         { name: "Torta Basca de San Sebastián", description: "A autêntica cheesecake espanhola, cremosa por dentro e tostada por fora.", price: "29,00 (a fatia)", imageUrl: "https://64.media.tumblr.com/95f517167d957247e9f30c53696aff10/ceb08f5edd305fa6-c1/s2048x3072/0ee3f770fd647672b4ec8d01b749ab44dcc7c69e.jpg" },
         { name: "Bolo Matilda", description: "Direto de um clássico: chocolate nobre, brilho intenso e muita cremosidade.", price: "25,00 (a fatia)", imageUrl: "https://64.media.tumblr.com/f4a8e4a014dc6412f75a640dc7b101e9/3a06fb4d61c7f58f-d2/s2048x3072/e683ca0ca8be44cac2caf34aeb5244cac3884e2d.jpg" },
-        { name: "Sensação Berry", description: "Doce de leite artesanal, calda de amoras e creme aveludado de leite ninho.", price: "23,90 (a fatia)", imageUrl: "https://64.media.tumblr.com/57c9ab311429fc6fb627881fb2f549e7/0695e7378c4b0476-ef/s2048x3072/0f25addf91e9a9f731ab0377007a0259a5cb876d.jpg" },
         { name: "Torta de Santiago", description: "Autêntica torta espanhola feita com farinha de amêndoas.", price: "17,90", imageUrl: "https://64.media.tumblr.com/d013b086e25020c5941ca4272ed18824/5a7c7989b503dee1-04/s2048x3072/8869b3d6769950d53a9cca7f6c4d5913d2ea8bb1.jpg" },
-        { name: "El Montadito de Banoffi", description: "Doce de leite, banana prata, creme secreto e canela.", price: "19,90", imageUrl: "https://64.media.tumblr.com/c8dbfa862418350af0787d23f5644ca6/f6b720196de6fc4b-78/s2048x3072/47a3bac788ca6ca47f5f16b97d0109c04dc2db02.jpg" },
+        { name: "Eclair", description: "Baunilha com chocolate e pistache ou doce de leite.", price: "19,90" },
         { name: "Montadito Pistache Real", description: "No Pan de Coca. Recheio de ganache de pistache.", price: "39,00", imageUrl: "https://64.media.tumblr.com/0add055745496740cdac0ee959142a72/0729a521a5d6cff4-03/s2048x3072/11612a18f1c46df12f7d3274d3fedb0200c84372.jpg" },
         { name: "Montadito Nutella com Morangos", description: "No Pan de Coca. Nutella original e morangos frescos.", price: "38,90", imageUrl: "https://64.media.tumblr.com/6c066210786fb0fe39f2cfa601994f94/3ff45e09a0c7dd34-ae/s2048x3072/7eed66c605a1a87e48ea908cfb53af3cfcc16037.jpg" },
         { name: "Montadito Chocolate Blend", description: "No Pan de Coca. Chocolate ao leite premium.", price: "31,00", imageUrl: "https://64.media.tumblr.com/32d746d8e9cd9113ed6811ac3e7b91e2/0729a521a5d6cff4-e9/s2048x3072/8d98fc0f020c1d091ae10db68fda56c69d7ce1cc.jpg" },
