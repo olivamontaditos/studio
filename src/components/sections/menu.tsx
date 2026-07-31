@@ -124,7 +124,7 @@ export const menuCategories = [
       },
       { 
         name: "M12. Montadito Entrecot", 
-        description: "Pão de coca, queijo muçarela, tiras de entrecot suculentas, vinagrete artesanal, chimichurri, maionese de alho e molho de tomate e alho.", 
+        description: "Pão de coca, queijo muçarela, tiras de entrecot suculentas, vinagrete artesanal, chimichurri, mainese de alho e molho de tomate e alho.", 
         price: "35,90", 
         imageUrl: "https://64.media.tumblr.com/a4330071a86ebeee091a1370c742cdd3/9891cbcf8be8e474-e3/s2048x3072/3797d7dc4a26dbbee1a480588598a9d567ba3933.jpg" 
       },
@@ -147,9 +147,9 @@ export const menuCategories = [
           imageUrl: "https://64.media.tumblr.com/f4a8e4a014dc6412f75a640dc7b101e9/3a06fb4d61c7f58f-d2/s2048x3072/e683ca0ca8be44cac2caf34aeb5244cac3884e2d.jpg" 
         },
         { name: "Torta de Santiago", description: "Autêntica torta espanhola feita with farinha de amêndoas.", price: "17,90", imageUrl: "https://64.media.tumblr.com/d013b086e25020c5941ca4272ed18824/5a7c7989b503dee1-04/s2048x3072/8869b3d6769950d53a9cca7f6c4d5913d2ea8bb1.jpg" },
-        { name: "Eclair", description: "Baunilha with chocolate e pistache ou doce de leite.", price: "19,90" },
+        { name: "Eclair", description: "Baunilha with chocolate e pistache ou doce de leite.", price: "19,90", imageUrl: "https://64.media.tumblr.com/7d6697f3b7c5ffc3338f5c53183c9aa0/92d484847e4be8ad-0c/s2048x3072/37e92036e7e6ba3576c81ec12e085154e536dd90.jpg" },
         { name: "Croissant Pistache Real", description: "Croissant amanteigado with recheio de ganache de pistache.", price: "39,00", imageUrl: "https://64.media.tumblr.com/0add055745496740cdac0ee959142a72/0729a521a5d6cff4-03/s2048x3072/11612a18f1c46df12f7d3274d3fedb0200c84372.jpg" },
-        { name: "Croissant Nutella com Morangos", description: "Croissant amanteigado with Nutella original e morangos frescos.", price: "38,90", imageUrl: "https://64.media.tumblr.com/6c066210786fb0fe39f2cfa601994f94/3ff45e09a0c7dd34-ae/s2048x3072/7eed66c605a1a87e48ea908cfb53af3cfcc16037.jpg" },
+        { name: "Croissant Nutella com Morangos", description: "Croissant amanteigado with Nutella original e morangos frescos.", price: "38,90", imageUrl: "https://64.media.tumblr.com/1b1ccb76a94fd4b5c39adb54e25e3f01/1cc38b7c97562f9d-ad/s2048x3072/6584902736470638c35ae24a6b0d1de95ac623ee.jpg" },
         { name: "Croissant Chocolate Blend", description: "Croissant amanteigado with chocolate ao leite premium.", price: "31,00", imageUrl: "https://64.media.tumblr.com/32d746d8e9cd9113ed6811ac3e7b91e2/0729a521a5d6cff4-e9/s2048x3072/8d98fc0f020c1d091ae10db68fda56c69d7ce1cc.jpg" },
         { name: "Croissant Doce de Leite com Nozes", description: "Croissant amanteigado with doce de leite artesanal with nozes crocantes.", price: "26,00", imageUrl: "https://64.media.tumblr.com/637e23898d6edb025a548a8a7ba8a92d/0729a521a5d6cff4-24/s2048x3072/c644047e9495bdbbf9b225e4dfa1df70b4a664ac.jpg" },
     ],
