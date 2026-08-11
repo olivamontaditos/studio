@@ -48,7 +48,7 @@ export const menuCategories = [
       },
       {
         name: "Penne (Molho Branco ou Ao Sugo)",
-        description: "Massa penne servida with sua escolha de molho: branco cremoso ou ao sugo artesanal. Acompanha nossa salada especial da casa.",
+        description: "Massa penne servida com sua escolha de molho: branco cremoso ou ao sugo artesanal. Acompanha nossa salada especial da casa.",
         price: "29,90",
       },
       {
@@ -88,13 +88,13 @@ export const menuCategories = [
       },
       { 
         name: "M05. Peito de Peru Light", 
-        description: "Leveza e frescor em perfeita harmonia. Finas fatias de peito de peru, muçarela de búfala derretida, tomate fresco e alface crocante, finalizados with nossa maionese de alho especial.", 
+        description: "Leveza e frescor em perfeita harmonia. Finas fatias de peito de peru, muçarela de búfala derretida, tomate fresco e alface crocante, finalizados com nossa maionese de alho especial.", 
         price: "24,90", 
         imageUrl: "https://64.media.tumblr.com/acb78441e2b45ff3bb2ee86766693d57/0729a521a5d6cff4-ad/s2048x3072/5d7e4371e74beb499fc222df02db822b708f4265.jpg" 
       },
       { 
         name: "M06. Frango Cremoso Melt", 
-        description: "Frango em tiras grelhado na hora suculento, envolvido em um creme de queijo apimentado with chilli, with cobertura de muçarela derretida e o contraste crocante da batata palha sobre o Pan de Coca artesanal.", 
+        description: "Frango em tiras grelhado na hora suculento, envolvido em um creme de queijo apimentado com chilli, com cobertura de muçarela derretida e o contraste crocante da batata palha sobre o Pan de Coca artesanal.", 
         price: "22,90", 
         imageUrl: "https://64.media.tumblr.com/5bca88fd3ae950b2a16db082dcf707ef/60a8116118a48c16-50/s2048x3072/7041b887ac6a1325a5bebb8fdc3585be10714ed5.pnj" 
       },
@@ -136,7 +136,7 @@ export const menuCategories = [
     items: [
         { 
           name: "Torta Basca de San Sebastián", 
-          description: "A autêntica cheesecake espanhola, cremosa por dentro e tostada por fora. Opção de fatia especial (R$ 35) with calda de frutas vermelhas, caramelo e flor de sal, pistache, chocolate ou doce de leite. Encomendas inteiras: P (6 fatias) R$ 159,90 | M (8 fatias) R$ 199,90 | G (12 fatias) R$ 249,90.", 
+          description: "A autêntica cheesecake espanhola, cremosa por dentro e tostada por fora. Opção de fatia especial (R$ 35) com calda de frutas vermelhas, caramelo e flor de sal, pistache, chocolate ou doce de leite. Encomendas inteiras: P (6 fatias) R$ 159,90 | M (8 fatias) R$ 199,90 | G (12 fatias) R$ 249,90.", 
           price: "29,00 (fatia simples) | 35,00 (fatia especial)", 
           imageUrl: "https://64.media.tumblr.com/95f517167d957247e9f30c53696aff10/ceb08f5edd305fa6-c1/s2048x3072/0ee3f770fd647672b4ec8d01b749ab44dcc7c69e.jpg" 
         },
@@ -146,17 +146,17 @@ export const menuCategories = [
           price: "25,00 (a fatia)", 
           imageUrl: "https://64.media.tumblr.com/f4a8e4a014dc6412f75a640dc7b101e9/3a06fb4d61c7f58f-d2/s2048x3072/e683ca0ca8be44cac2caf34aeb5244cac3884e2d.jpg" 
         },
-        { name: "Torta de Santiago", description: "Autêntica torta espanhola feita with farinha de amêndoas.", price: "17,90", imageUrl: "https://64.media.tumblr.com/d013b086e25020c5941ca4272ed18824/5a7c7989b503dee1-04/s2048x3072/8869b3d6769950d53a9cca7f6c4d5913d2ea8bb1.jpg" },
-        { name: "Eclair", description: "Baunilha with chocolate e pistache ou doce de leite.", price: "19,90", imageUrl: "https://64.media.tumblr.com/7d6697f3b7c5ffc3338f5c53183c9aa0/92d484847e4be8ad-0c/s2048x3072/37e92036e7e6ba3576c81ec12e085154e536dd90.jpg" },
-        { name: "Croissant Pistache Real", description: "Croissant amanteigado with recheio de ganache de pistache.", price: "39,00", imageUrl: "https://64.media.tumblr.com/0add055745496740cdac0ee959142a72/0729a521a5d6cff4-03/s2048x3072/11612a18f1c46df12f7d3274d3fedb0200c84372.jpg" },
-        { name: "Croissant Nutella com Morangos", description: "Croissant amanteigado with Nutella original e morangos frescos.", price: "38,90", imageUrl: "https://64.media.tumblr.com/1b1ccb76a94fd4b5c39adb54e25e3f01/1cc38b7c97562f9d-ad/s2048x3072/6584902736470638c35ae24a6b0d1de95ac623ee.jpg" },
-        { name: "Croissant Chocolate Blend", description: "Croissant amanteigado with chocolate ao leite premium.", price: "31,00", imageUrl: "https://64.media.tumblr.com/32d746d8e9cd9113ed6811ac3e7b91e2/0729a521a5d6cff4-e9/s2048x3072/8d98fc0f020c1d091ae10db68fda56c69d7ce1cc.jpg" },
-        { name: "Croissant Doce de Leite com Nozes", description: "Croissant amanteigado with doce de leite artesanal with nozes crocantes.", price: "26,00", imageUrl: "https://64.media.tumblr.com/637e23898d6edb025a548a8a7ba8a92d/0729a521a5d6cff4-24/s2048x3072/c644047e9495bdbbf9b225e4dfa1df70b4a664ac.jpg" },
+        { name: "Torta de Santiago", description: "Autêntica torta espanhola feita com farinha de amêndoas.", price: "17,90", imageUrl: "https://64.media.tumblr.com/d013b086e25020c5941ca4272ed18824/5a7c7989b503dee1-04/s2048x3072/8869b3d6769950d53a9cca7f6c4d5913d2ea8bb1.jpg" },
+        { name: "Eclair", description: "Baunilha com chocolate e pistache ou doce de leite.", price: "19,90", imageUrl: "https://64.media.tumblr.com/7d6697f3b7c5ffc3338f5c53183c9aa0/92d484847e4be8ad-0c/s2048x3072/37e92036e7e6ba3576c81ec12e085154e536dd90.jpg" },
+        { name: "Croissant Pistache Real", description: "Croissant amanteigado com ganache de pistache real.", price: "39,00", imageUrl: "https://64.media.tumblr.com/0add055745496740cdac0ee959142a72/0729a521a5d6cff4-03/s2048x3072/11612a18f1c46df12f7d3274d3fedb0200c84372.jpg" },
+        { name: "Croissant Nutella com Morangos", description: "Croissant amanteigado com Nutella original e morangos frescos.", price: "38,90", imageUrl: "https://64.media.tumblr.com/1b1ccb76a94fd4b5c39adb54e25e3f01/1cc38b7c97562f9d-ad/s2048x3072/6584902736470638c35ae24a6b0d1de95ac623ee.jpg" },
+        { name: "Croissant Chocolate Blend", description: "Croissant amanteigado com chocolate ao leite premium.", price: "31,00", imageUrl: "https://64.media.tumblr.com/32d746d8e9cd9113ed6811ac3e7b91e2/0729a521a5d6cff4-e9/s2048x3072/8d98fc0f020c1d091ae10db68fda56c69d7ce1cc.jpg" },
+        { name: "Croissant Doce de Leite com Nozes", description: "Croissant amanteigado com doce de leite artesanal com nozes crocantes.", price: "26,00", imageUrl: "https://64.media.tumblr.com/637e23898d6edb025a548a8a7ba8a92d/0729a521a5d6cff4-24/s2048x3072/c644047e9495bdbbf9b225e4dfa1df70b4a664ac.jpg" },
     ],
   },
   {
     name: "TORRONES ARTESANAIS (Receita Original Espanhola)",
-    description: "Receita original espanhola feita with mel e amêndoas torradas.",
+    description: "Receita original espanhola feita com mel e amêndoas torradas.",
     items: [
       { name: "Tamanho P", price: "12,90", imageUrl: "https://64.media.tumblr.com/d41f05c45254f28886f93a71091c6bc1/0168b23b368f7428-a9/s2048x3072/c78762ee05bfbdc4f68e1ab0e1a6dcef42c11278.jpg" },
       { name: "Tamanho M", price: "29,90", imageUrl: "https://64.media.tumblr.com/867c6bd334f88f4e0ef6bf933ab8b83e/0168b23b368f7428-b1/s2048x3072/260534cb4553e67025ea7b685937d3689599250e.jpg" },
@@ -185,13 +185,13 @@ export const menuCategories = [
     description: "Textura ultra cremosa aqui na Oliva.",
     items: [
       { name: "Baunilha Bourbon", price: "18,00" },
-      { name: "Morango with Nutella", price: "24,00" },
+      { name: "Morango com Nutella", price: "24,00" },
       { name: "Pistache Premium", price: "28,00" },
     ],
   },
   {
     name: "EXPRESSOS",
-    description: "Café gourmet moído na hora with aroma frutado.",
+    description: "Café gourmet moído na hora com aroma frutado.",
     items: [
       { name: "Expresso", price: "8,00" },
       { name: "Ristreto", price: "8,00" },
@@ -200,7 +200,7 @@ export const menuCategories = [
   },
   {
     name: "LATTE",
-    description: "Cafés with leite vaporizado.",
+    description: "Cafés com leite vaporizado.",
     items: [
       { name: "Caffè Latte Clássico", price: "12,90" },
       { name: "Vanilla Latte", price: "16,00" },
@@ -236,9 +236,9 @@ export const menuCategories = [
       { name: "Soda Espanhola", price: "16,90" },
       { name: "Suco de laranja", price: "12,90" },
       { name: "Suco de abacaxi", price: "12,90" },
-      { name: "Suco de morango with leite Ninho", price: "18,00" },
+      { name: "Suco de morango com leite Ninho", price: "18,00" },
       { name: "Suco de frutas vermelhas", price: "18,00" },
-      { name: "Água with ou sem gás", price: "6,00" },
+      { name: "Água com ou sem gás", price: "6,00" },
       { name: "Refrigerante", price: "8,00" },
       { name: "Heineken (330ml)", price: "18,90" },
     ],
