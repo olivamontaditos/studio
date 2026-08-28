@@ -95,13 +95,13 @@ export const menuCategories = [
       { 
         name: "M06. Frango Cremoso Melt", 
         description: "Frango em tiras grelhado na hora suculento, envolvido em um creme de queijo apimentado com chilli, com cobertura de muçarela derretida e o contraste crocante da batata palha sobre o Pan de Coca artesanal.", 
-        price: "22,90", 
+        price: "24,00", 
         imageUrl: "https://64.media.tumblr.com/5bca88fd3ae950b2a16db082dcf707ef/60a8116118a48c16-50/s2048x3072/7041b887ac6a1325a5bebb8fdc3585be10714ed5.pnj" 
       },
       { 
         name: "M08. Mignon Gruyère", 
         description: "O ápice do sabor: tiras suculentas de mignon grelhado, a sofisticação do queijo Gruyère derretido e a doçura da cebola caramelizada artesanal na nosso Pan de Coca crocante.", 
-        price: "38,90", 
+        price: "39,99", 
         imageUrl: "https://64.media.tumblr.com/9e260afe66273c0a6158761992ceb67d/0729a521a5d6cff4-2b/s2048x3072/2bb44eb1a215e7d3eb24b197bf77581526abaf24.jpg" 
       },
       { 
@@ -213,6 +213,14 @@ export const menuCategories = [
       items: [
         { name: "Expresso Pistache Imperial", price: "26,00" },
         { name: "Cappuccino Clássico", price: "16,90" },
+      ]
+  },
+  {
+      name: "CAFÉS GELADOS",
+      items: [
+          { name: "Café Bombom Gelado", price: "16,00" },
+          { name: "Affogato Oliva", price: "22,00" },
+          { name: "Ice Pistache", price: "26,00" },
       ]
   },
   {
