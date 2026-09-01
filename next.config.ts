@@ -1,8 +1,14 @@
 import type {NextConfig} from 'next';
 
+const isProd = process.env.NODE_ENV === 'production';
+
 const nextConfig: NextConfig = {
   output: 'export',
   trailingSlash: true,
+  // O GitHub Pages serve o site em /studio/
+  basePath: isProd ? '/studio' : '',
+  // assetPrefix ajuda a carregar assets (JS/CSS) da subpasta
+  assetPrefix: isProd ? '/studio/' : '',
   typescript: {
     ignoreBuildErrors: true,
   },
