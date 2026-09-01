@@ -134,9 +134,10 @@ export const menuCategories = [
     description: "Nossas sobremesas e croissants artesanais irresistíveis.",
     items: [
         { 
-          name: "Morangos cravejados do Oliva Montaditos!", 
+          name: "Morangos cravejados", 
           description: "Morangos fresquinhos, cobertos com uma camada irresistível de brigadeiro de ninho coberto com chocolate belga envolvido com caramelos crocantes vermelhos.", 
-          price: "29,90" 
+          price: "29,90",
+          imageUrl: "https://64.media.tumblr.com/e17fb418991b092dd0439b0c8a837c6d/8b5e2ca52ba66ed4-50/s2048x3072/98092bc0c35d472ed6f199ef211eaecdc5a7eefb.jpg"
         },
         { 
           name: "Torta Basca de San Sebastián", 
