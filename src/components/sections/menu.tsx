@@ -25,7 +25,6 @@ import {
     GraduationCap,
     IceCream2,
     Sun,
-    Croissant as CroissantIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -135,6 +134,11 @@ export const menuCategories = [
     description: "Nossas sobremesas e croissants artesanais irresistíveis.",
     items: [
         { 
+          name: "Morangos cravejados do Oliva Montaditos!", 
+          description: "Morangos fresquinhos, cobertos com uma camada irresistível de brigadeiro de ninho coberto com chocolate belga envolvido com caramelos crocantes vermelhos.", 
+          price: "29,90" 
+        },
+        { 
           name: "Torta Basca de San Sebastián", 
           description: "A autêntica cheesecake espanhola, cremosa por dentro e tostada por fora. Opção de fatia especial (R$ 35) com calda de frutas vermelhas, caramelo e flor de sal, pistache, chocolate ou doce de leite. Encomendas inteiras: P (6 fatias) R$ 159,90 | M (8 fatias) R$ 199,90 | G (12 fatias) R$ 249,90.", 
           price: "29,00 (fatia simples) | 35,00 (fatia especial)", 
@@ -142,7 +146,7 @@ export const menuCategories = [
         },
         { 
           name: "Bolo Matilda", 
-          description: "Chocolate nobre, brilho intenso e muita cremosidade. Encomendas inteiras: M (6 fatias) R$ 149,90 | G (10 fatias) R$ 229,90.", 
+          description: "Chocolate nobre, brilho intenso e muita cremosidade. Encomendas inteiras: M (6 fatias) 149,90 | G (10 fatias) 229,90.", 
           price: "25,00 (a fatia)", 
           imageUrl: "https://64.media.tumblr.com/f4a8e4a014dc6412f75a640dc7b101e9/3a06fb4d61c7f58f-d2/s2048x3072/e683ca0ca8be44cac2caf34aeb5244cac3884e2d.jpg" 
         },
@@ -213,14 +217,6 @@ export const menuCategories = [
       items: [
         { name: "Expresso Pistache Imperial", price: "26,00" },
         { name: "Cappuccino Clássico", price: "16,90" },
-      ]
-  },
-  {
-      name: "CAFÉS GELADOS",
-      items: [
-          { name: "Café Bombom Gelado", price: "16,00" },
-          { name: "Affogato Oliva", price: "22,00" },
-          { name: "Ice Pistache", price: "26,00" },
       ]
   },
   {
