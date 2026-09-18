@@ -112,7 +112,7 @@ export const menuCategories = [
         name: "M10. Caprese", 
         description: "A leveza de um clássico: Pan de Coca artesanal, muçarela de búfala fresca e tomates tostados no azeite de oliva extra virgem.", 
         price: "24,00", 
-        imageUrl: "https://64.media.tumblr.com/ba5f86c600e449dafba0667c2c2d1070/93565b85b6fa09f9-2f/s2048x3072/3f3eb87c1b18f6ad44bff3c0f59c4b90eb32b5db.jpg"
+        imageUrl: "https://64.media.tumblr.com/ba5f86c600e449dafba0667c2c2d1070/93565b85b6fa09f9-2f/s2048x3072/3f3eb87c1b18f6ad44bff3c0f59c4b90eb32b5db.jpg" 
       },
       { 
         name: "M11. Clássico Madrileño", 
@@ -142,7 +142,7 @@ export const menuCategories = [
           name: "Bolo Matilda", 
           description: "Chocolate nobre, brilho intenso e muita cremosidade. Encomendas inteiras: M (6 fatias) 149,90 | G (10 fatias) 229,90.", 
           price: "25,00 (a fatia)", 
-          imageUrl: "https://64.media.tumblr.com/f4a8e4a014dc6412f75a640dc7b101e9/3a06fb4d61c7f58f-d2/s2048x3072/e683ca0ca8be44cac2caf34aeb5244cac3884e2d.jpg" 
+          imageUrl: "https://64.media.tumblr.com/bea48e0768cb738e7bbdd4a287aedd7b/162a133d040e559b-2c/s2048x3072/339ea081e8e97d096402be862142932818e47694.jpg" 
         },
         { name: "Torta de Santiago", description: "Autêntica torta espanhola feita com farinha de amêndoas.", price: "17,90", imageUrl: "https://64.media.tumblr.com/d013b086e25020c5941ca4272ed18824/5a7c7989b503dee1-04/s2048x3072/8869b3d6769950d53a9cca7f6c4d5913d2ea8bb1.jpg" },
         { name: "Eclair", description: "Baunilha com chocolate e pistache ou doce de leite.", price: "19,90", imageUrl: "https://64.media.tumblr.com/7d6697f3b7c5ffc3338f5c53183c9aa0/92d484847e4be8ad-0c/s2048x3072/37e92036e7e6ba3576c81ec12e085154e536dd90.jpg" },
