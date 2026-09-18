@@ -1,4 +1,3 @@
-
 'use client';
 
 import Image from 'next/image';
@@ -81,7 +80,7 @@ export const menuCategories = [
       },
       { 
         name: "M04. Germânico-Ibérico", 
-        description: "A união perfeita de tradições. Nossa salsicha artesanal premium é acompanhada pelo clássico Vinagrete do William e um toque generoso de maionese de alho no Pan de Coca crocante.", 
+        description: "A união perfeita de traditions. Nossa salsicha artesanal premium é acompanhada pelo clássico Vinagrete do William e um toque generoso de maionese de alho no Pan de Coca crocante.", 
         price: "24,00", 
         imageUrl: "https://64.media.tumblr.com/80862ce7c59ba9297564ba9c92271ccc/0729a521a5d6cff4-1a/s2048x3072/a63b54494b40a8beac1c6dd677a9fbfa3ec3a86a.jpg" 
       },
@@ -133,12 +132,6 @@ export const menuCategories = [
     name: "SOBREMESAS & CROISSANTS DOCES",
     description: "Nossas sobremesas e croissants artesanais irresistíveis.",
     items: [
-        { 
-          name: "Morangos cravejados", 
-          description: "Morangos fresquinhos, cobertos com uma camada irresistível de brigadeiro de ninho coberto com chocolate belga envolvido com caramelos crocantes vermelhos.", 
-          price: "29,90",
-          imageUrl: "https://64.media.tumblr.com/e17fb418991b092dd0439b0c8a837c6d/8b5e2ca52ba66ed4-50/s2048x3072/98092bc0c35d472ed6f199ef211eaecdc5a7eefb.jpg"
-        },
         { 
           name: "Torta Basca de San Sebastián", 
           description: "A autêntica cheesecake espanhola, cremosa por dentro e tostada por fora. Opção de fatia especial (R$ 35) com calda de frutas vermelhas, caramelo e flor de sal, pistache, chocolate ou doce de leite. Encomendas inteiras: P (6 fatias) R$ 159,90 | M (8 fatias) R$ 199,90 | G (12 fatias) R$ 249,90.", 
@@ -338,95 +331,86 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                 <p className="text-center text-xs text-primary/70 -mt-8 mb-8 italic">Imagens meramente ilustrativas</p>
 
                 {isSummary ? (
-                    <>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-                            {summaryItems.map((item) => (
-                                <div key={item.name} className="bg-card rounded-lg shadow-sm overflow-hidden flex flex-col transition-all duration-300 hover:shadow-md animate-in fade-in slide-in-from-bottom-4">
-                                    {item.imageUrl && (
-                                        <Dialog>
-                                        <DialogTrigger asChild>
-                                            <div className="relative h-48 w-full cursor-pointer overflow-hidden">
-                                            <Image
-                                                src={item.imageUrl}
-                                                alt={item.name}
-                                                fill
-                                                className="object-cover transition-transform duration-500 hover:scale-110"
-                                                sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw"
-                                            />
-                                            </div>
-                                        </DialogTrigger>
-                                        <DialogContent className="p-0 border-0 max-w-2xl bg-transparent shadow-none">
-                                            <div className="relative aspect-square w-full">
-                                            <Image
-                                                src={item.imageUrl}
-                                                alt={item.name}
-                                                fill
-                                                className="object-contain rounded-lg"
-                                                sizes="100vw"
-                                            />
-                                            </div>
-                                        </DialogContent>
-                                        </Dialog>
-                                    )}
-                                    <div className="p-4 flex flex-col flex-grow">
-                                        <div className="flex-grow">
-                                            <p className="text-foreground font-semibold text-base leading-tight">{item.name}</p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                        {summaryItems.map((item) => (
+                            <div key={item.name} className="bg-card rounded-lg shadow-sm overflow-hidden flex flex-col transition-all duration-300 hover:shadow-md animate-in fade-in slide-in-from-bottom-4">
+                                {item.imageUrl && (
+                                    <Dialog>
+                                    <DialogTrigger asChild>
+                                        <div className="relative h-48 w-full cursor-pointer overflow-hidden">
+                                        <Image
+                                            src={item.imageUrl}
+                                            alt={item.name}
+                                            fill
+                                            className="object-cover transition-transform duration-500 hover:scale-110"
+                                            sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw"
+                                        />
                                         </div>
-                                        <div className="flex justify-between items-center mt-3">
-                                            <p className="font-bold text-lg text-primary">{item.price}</p>
+                                    </DialogTrigger>
+                                    <DialogContent className="p-0 border-0 max-w-2xl bg-transparent shadow-none">
+                                        <div className="relative aspect-square w-full">
+                                        <Image
+                                            src={item.imageUrl}
+                                            alt={item.name}
+                                            fill
+                                            className="object-contain rounded-lg"
+                                            sizes="100vw"
+                                        />
                                         </div>
+                                    </DialogContent>
+                                    </Dialog>
+                                )}
+                                <div className="p-4 flex flex-col flex-grow">
+                                    <div className="flex-grow">
+                                        <p className="text-foreground font-semibold text-base leading-tight">{item.name}</p>
+                                    </div>
+                                    <div className="flex justify-between items-center mt-3">
+                                        <p className="font-bold text-lg text-primary">{item.price}</p>
                                     </div>
                                 </div>
-                              ))}
-                        </div>
-                        <div className="text-center">
-                            <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 animate-pulse-slow">
-                                <Link href="/menu">Ver Cardápio Completo</Link>
-                            </Button>
-                        </div>
-                    </>
+                            </div>
+                        ))}
+                    </div>
                 ) : (
-                <>
-                <Accordion type="multiple" className="w-full space-y-4">
-                    {menuCategories.map((category) => {
-                        const Icon = iconMap[category.name] || Sandwich;
-                        const isTextOnly = textOnlyCategories.includes(category.name);
-                        
-                        return (
-                        <AccordionItem 
-                            value={category.name} 
-                            key={category.name} 
-                            className="border-b-0 rounded-lg bg-card shadow-sm transition-all overflow-hidden"
-                        >
-                            <AccordionTrigger className="p-4 hover:no-underline rounded-lg group">
-                                <div className="flex items-center gap-4 text-left">
-                                    <Icon className="h-6 w-6 text-primary flex-shrink-0 transition-all duration-300 group-hover:scale-125 group-hover:rotate-12" />
-                                    <div>
-                                        <h3 className="text-lg font-headline text-foreground transition-colors group-hover:text-primary">{category.name}</h3>
-                                        {category.description && <p className="text-sm text-muted-foreground font-normal mt-1">{category.description}</p>}
+                    <Accordion type="multiple" className="w-full space-y-4">
+                        {menuCategories.map((category) => {
+                            const Icon = iconMap[category.name] || Sandwich;
+                            const isTextOnly = textOnlyCategories.includes(category.name);
+                            
+                            return (
+                            <AccordionItem 
+                                value={category.name} 
+                                key={category.name} 
+                                className="border-b-0 rounded-lg bg-card shadow-sm transition-all overflow-hidden"
+                            >
+                                <AccordionTrigger className="p-4 hover:no-underline rounded-lg group">
+                                    <div className="flex items-center gap-4 text-left">
+                                        <Icon className="h-6 w-6 text-primary flex-shrink-0 transition-all duration-300 group-hover:scale-125 group-hover:rotate-12" />
+                                        <div>
+                                            <h3 className="text-lg font-headline text-foreground transition-colors group-hover:text-primary">{category.name}</h3>
+                                            {category.description && <p className="text-sm text-muted-foreground font-normal mt-1">{category.description}</p>}
+                                        </div>
                                     </div>
-                                </div>
-                            </AccordionTrigger>
-                            <AccordionContent className="p-4 pt-0">
-                                <div className="pt-4 border-t">
-                                {isTextOnly ? (
-                                    <div className="space-y-6">
-                                        {category.items.map((item, index) => (
-                                            <div key={item.name} className="flex justify-between items-start animate-in fade-in slide-in-from-left-2 duration-300">
-                                                <div>
-                                                    <p className="text-foreground font-semibold text-lg">{item.name}</p>
-                                                    {item.description && (
-                                                        <p className="text-sm text-muted-foreground mt-1 max-w-md">{item.description}</p>
-                                                    )}
+                                </AccordionTrigger>
+                                <AccordionContent className="p-4 pt-0">
+                                    <div className="pt-4 border-t">
+                                    {isTextOnly ? (
+                                        <div className="space-y-6">
+                                            {category.items.map((item) => (
+                                                <div key={item.name} className="flex justify-between items-start animate-in fade-in slide-in-from-left-2 duration-300">
+                                                    <div>
+                                                        <p className="text-foreground font-semibold text-lg">{item.name}</p>
+                                                        {item.description && (
+                                                            <p className="text-sm text-muted-foreground mt-1 max-w-md">{item.description}</p>
+                                                        )}
+                                                    </div>
+                                                    <p className="font-bold text-lg text-primary text-right pl-4 shrink-0">{item.price}</p>
                                                 </div>
-                                                <p className="font-bold text-lg text-primary text-right pl-4 shrink-0">{item.price}</p>
-                                            </div>
-                                        ))}
-                                    </div>
-                                ) : (
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
-                                    {category.items.map((item, index) => {
-                                        return (
+                                            ))}
+                                        </div>
+                                    ) : (
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
+                                        {category.items.map((item) => (
                                             <div key={item.name} className="bg-background rounded-lg shadow-sm overflow-hidden flex flex-col transition-all duration-300 hover:shadow-md animate-in fade-in zoom-in-95 duration-300">
                                                 {item.imageUrl && (
                                                     <Dialog>
@@ -466,17 +450,22 @@ export default function MenuSection({ variant = 'full' }: { variant?: 'full' | '
                                                     </div>
                                                 </div>
                                             </div>
-                                        );
-                                    })}
+                                        ))}
+                                        </div>
+                                    )}
                                     </div>
-                                )}
-                                </div>
-                            </AccordionContent>
-                        </AccordionItem>
-                        );
-                    })}
-                </Accordion>
-                </>
+                                </AccordionContent>
+                            </AccordionItem>
+                            );
+                        })}
+                    </Accordion>
+                )}
+                {isSummary && (
+                    <div className="text-center mt-8">
+                        <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 animate-pulse-slow">
+                            <Link href="/menu">Ver Cardápio Completo</Link>
+                        </Button>
+                    </div>
                 )}
             </div>
         </section>
