@@ -145,7 +145,11 @@ export const menuCategories = [
           price: "25,00 (a fatia)", 
           imageUrl: "https://64.media.tumblr.com/bea48e0768cb738e7bbdd4a287aedd7b/162a133d040e559b-2c/s2048x3072/339ea081e8e97d096402be862142932818e47694.jpg" 
         },
-        { name: "Cookies", description: "Cookies artesanais feitos com chocolate nobre.", price: "12,00" },
+        { 
+          name: "Cookies", 
+          description: "Cookies artesanais feitos com chocolate nobre.", 
+          price: "18,90" 
+        },
         { name: "Torta de Santiago", description: "Autêntica torta espanhola feita com farinha de amêndoas.", price: "17,90", imageUrl: "https://64.media.tumblr.com/d013b086e25020c5941ca4272ed18824/5a7c7989b503dee1-04/s2048x3072/8869b3d6769950d53a9cca7f6c4d5913d2ea8bb1.jpg" },
         { name: "Croissant Pistache Real", description: "Croissant amanteigado com ganache de pistache real.", price: "39,00", imageUrl: "https://64.media.tumblr.com/0add055745496740cdac0ee959142a72/0729a521a5d6cff4-03/s2048x3072/11612a18f1c46df12f7d3274d3fedb0200c84372.jpg" },
         { name: "Croissant Nutella com Morangos", description: "Croissant amanteigado com Nutella original e morangos frescos.", price: "38,90", imageUrl: "https://64.media.tumblr.com/1b1ccb76a94fd4b5c39adb54e25e3f01/1cc38b7c97562f9d-ad/s2048x3072/6584902736470638c35ae24a6b0d1de95ac623ee.jpg" },
