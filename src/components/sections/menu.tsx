@@ -48,6 +48,7 @@ export const menuCategories = [
         name: "Penne (Molho Branco ou Ao Sugo)",
         description: "Massa penne servida com sua escolha de molho: branco cremoso ou ao sugo artesanal. Acompanha nossa salada especial da casa.",
         price: "29,90",
+        imageUrl: "https://64.media.tumblr.com/5ca29961344e26cc6ed78020ab57493e/d9f03367dcf42ce2-5d/s2048x3072/6d3ec8457d3bc3a50db128f94e235ce75214b54c.jpg"
       },
       {
         name: "Adicionais para Penne",
