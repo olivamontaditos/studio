@@ -145,7 +145,6 @@ export const menuCategories = [
           imageUrl: "https://64.media.tumblr.com/bea48e0768cb738e7bbdd4a287aedd7b/162a133d040e559b-2c/s2048x3072/339ea081e8e97d096402be862142932818e47694.jpg" 
         },
         { name: "Torta de Santiago", description: "Autêntica torta espanhola feita com farinha de amêndoas.", price: "17,90", imageUrl: "https://64.media.tumblr.com/d013b086e25020c5941ca4272ed18824/5a7c7989b503dee1-04/s2048x3072/8869b3d6769950d53a9cca7f6c4d5913d2ea8bb1.jpg" },
-        { name: "Eclair", description: "Baunilha com chocolate e pistache ou doce de leite.", price: "19,90", imageUrl: "https://64.media.tumblr.com/7d6697f3b7c5ffc3338f5c53183c9aa0/92d484847e4be8ad-0c/s2048x3072/37e92036e7e6ba3576c81ec12e085154e536dd90.jpg" },
         { name: "Croissant Pistache Real", description: "Croissant amanteigado com ganache de pistache real.", price: "39,00", imageUrl: "https://64.media.tumblr.com/0add055745496740cdac0ee959142a72/0729a521a5d6cff4-03/s2048x3072/11612a18f1c46df12f7d3274d3fedb0200c84372.jpg" },
         { name: "Croissant Nutella com Morangos", description: "Croissant amanteigado com Nutella original e morangos frescos.", price: "38,90", imageUrl: "https://64.media.tumblr.com/1b1ccb76a94fd4b5c39adb54e25e3f01/1cc38b7c97562f9d-ad/s2048x3072/6584902736470638c35ae24a6b0d1de95ac623ee.jpg" },
         { name: "Croissant Chocolate Blend", description: "Croissant amanteigado com chocolate ao leite premium.", price: "31,00", imageUrl: "https://64.media.tumblr.com/32d746d8e9cd9113ed6811ac3e7b91e2/0729a521a5d6cff4-e9/s2048x3072/8d98fc0f020c1d091ae10db68fda56c69d7ce1cc.jpg" },
@@ -189,7 +188,7 @@ export const menuCategories = [
   },
   {
     name: "EXPRESSOS",
-    description: "Café gourmet moído na hora com aroma frutado.",
+    description: "Café gourmet gourmet moído na hora com aroma frutado.",
     items: [
       { name: "Expresso", price: "8,00" },
       { name: "Ristreto", price: "8,00" },
