@@ -62,7 +62,7 @@ export default function AdminPage() {
   const { data: appSettings } = useDoc(settingsDocRef);
 
   const urls = useMemo(() => ({
-    whatsapp: appSettings?.whatsapp || "https://wa.me/554188156424",
+    whatsapp: appSettings?.whatsapp || "https://wa.me/5541988156424",
     ifood: appSettings?.ifood || "https://www.ifood.com.br/delivery/curitiba-pr/oliva-montaditos-bom-retiro/2b88f26f-a586-4600-ab74-19d3852d4ddd?UTM_Medium=share",
     instagram: appSettings?.instagram || "https://www.instagram.com/olivamontaditos/",
     tiktok: appSettings?.tiktok || "https://www.tiktok.com/@olivamontaditos",

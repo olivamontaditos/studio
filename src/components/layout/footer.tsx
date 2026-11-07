@@ -26,7 +26,7 @@ export default function Footer() {
   const { data: settings } = useDoc(settingsDocRef);
 
   const mapsUrl = settings?.maps || "https://share.google/fnyW3LtaK1bazQDRv";
-  const whatsappUrl = settings?.whatsapp || "https://wa.me/554188156424";
+  const whatsappUrl = settings?.whatsapp || "https://wa.me/5541988156424";
   const instagramUrl = settings?.instagram || "https://www.instagram.com/olivamontaditos/";
   const tiktokUrl = settings?.tiktok || "https://www.tiktok.com/@olivamontaditos";
   const youtubeUrl = settings?.youtube || "https://www.youtube.com/@OlivaMontaditos";

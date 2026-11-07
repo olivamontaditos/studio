@@ -15,7 +15,7 @@ export default function WhatsappButton() {
   const settingsDocRef = useMemoFirebase(() => firestore ? doc(firestore, 'settings', 'links') : null, [firestore]);
   const { data: settings } = useDoc(settingsDocRef);
 
-  const whatsappUrl = settings?.whatsapp || "https://wa.me/554188156424";
+  const whatsappUrl = settings?.whatsapp || "https://wa.me/5541988156424";
 
   return (
     <div className="fixed bottom-6 left-6 z-50 flex items-center justify-center">
