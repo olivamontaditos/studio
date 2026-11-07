@@ -2,8 +2,8 @@
 "use client";
 
 import { useState, useEffect, useMemo, useRef } from 'react';
-import { useCollection, useMemoFirebase, useFirestore } from '@/firebase';
-import { collection, query, orderBy, doc, updateDoc, writeBatch, getDocs, Timestamp, where } from 'firebase/firestore';
+import { useCollection, useMemoFirebase, useFirestore, useDoc } from '@/firebase';
+import { collection, query, orderBy, doc, updateDoc, writeBatch, getDocs, Timestamp, where, setDoc } from 'firebase/firestore';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -15,9 +15,10 @@ import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/
 import { Bar, BarChart, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts';
 import { format, startOfDay, subDays, isSameDay, subMinutes } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import { LogOut, Users, Mail, Phone, Lock, ArrowUpDown, ChevronUp, ChevronDown, Bell, Search, Star, MessageSquare, Eye, ShoppingBag, Copy, MapPin, Instagram, Youtube, Download, CalendarCheck, Check, Trash2, Calendar as CalendarIcon, RefreshCcw, Gift } from 'lucide-react';
+import { LogOut, Users, Mail, Phone, Lock, ArrowUpDown, ChevronUp, ChevronDown, Bell, Search, Star, MessageSquare, Eye, ShoppingBag, Copy, MapPin, Instagram, Youtube, Download, CalendarCheck, Check, Trash2, Calendar as CalendarIcon, RefreshCcw, Gift, Settings, Save } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const ADM_AUTH_KEY = "oliva_adm_session";
 
@@ -53,22 +54,36 @@ export default function AdminPage() {
   const prevLeadsCount = useRef<number | null>(null);
   const clickTimerRef = useRef<{ [key: string]: NodeJS.Timeout | null }>({});
 
-  const urls = {
-    whatsapp: "https://wa.me/5541988483621",
-    ifood: "https://www.ifood.com.br/delivery/curitiba-pr/oliva-montaditos-bom-retiro/2b88f26f-a586-4600-ab74-19d3852d4ddd?UTM_Medium=share",
-    instagram: "https://www.instagram.com/olivamontaditos/",
-    tiktok: "https://www.tiktok.com/@olivamontaditos",
-    youtube: "https://www.youtube.com/@OlivaMontaditos",
-    maps: "https://share.google/fnyW3LtaK1bazQDRv",
-    review: "https://www.google.com/maps/place/Oliva+Montaditos/@-25.4017127,-49.2859022,1027m/data=!3m2!1e3!4b1!4m6!3m5!1s0x94dce7b94e3b9a4d:0xced8f0805bee5fe5!8m2!3d-25.4017127!4d-49.2833273!16s%2Fg%2F11n9htw6j1?entry=ttu&g_ep=EgoyMDI2MDUyNy4wIKXMDSoASAFQAw%3D%3D"
-  };
+  const settingsDocRef = useMemoFirebase(() => {
+    if (!firestore) return null;
+    return doc(firestore, 'settings', 'links');
+  }, [firestore]);
+
+  const { data: appSettings } = useDoc(settingsDocRef);
+
+  const urls = useMemo(() => ({
+    whatsapp: appSettings?.whatsapp || "https://wa.me/554188156424",
+    ifood: appSettings?.ifood || "https://www.ifood.com.br/delivery/curitiba-pr/oliva-montaditos-bom-retiro/2b88f26f-a586-4600-ab74-19d3852d4ddd?UTM_Medium=share",
+    instagram: appSettings?.instagram || "https://www.instagram.com/olivamontaditos/",
+    tiktok: appSettings?.tiktok || "https://www.tiktok.com/@olivamontaditos",
+    youtube: appSettings?.youtube || "https://www.youtube.com/@OlivaMontaditos",
+    maps: appSettings?.maps || "https://share.google/fnyW3LtaK1bazQDRv",
+    review: appSettings?.review || "https://www.google.com/maps/place/Oliva+Montaditos/@-25.4017127,-49.2859022,1027m/data=!3m2!1e3!4b1!4m6!3m5!1s0x94dce7b94e3b9a4d:0xced8f0805bee5fe5!8m2!3d-25.4017127!4d-49.2833273!16s%2Fg%2F11n9htw6j1?entry=ttu&g_ep=EgoyMDI2MDUyNy4wIKXMDSoASAFQAw%3D%3D"
+  }), [appSettings]);
+
+  const [editLinks, setEditLinks] = useState(urls);
+
+  useEffect(() => {
+    if (appSettings) {
+        setEditLinks(urls);
+    }
+  }, [appSettings, urls]);
 
   useEffect(() => {
     const session = localStorage.getItem(ADM_AUTH_KEY);
     if (session === "active") {
       setIsLoggedIn(true);
       initialLoadTime.current = new Date();
-      console.log("Oliva ADM: Sessão administrativa restaurada.");
     }
   }, []);
 
@@ -187,29 +202,40 @@ export default function AdminPage() {
     setIsResetDialogOpen(false);
     
     try {
-      console.log("Oliva ADM: Iniciando limpeza de métricas...");
       const batch = writeBatch(firestore);
-      
       const analyticsSnap = await getDocs(collection(firestore, 'analytics_events'));
       analyticsSnap.forEach(doc => batch.delete(doc.ref));
-      
       const presenceSnap = await getDocs(collection(firestore, 'presence'));
       presenceSnap.forEach(doc => batch.delete(doc.ref));
-
       await batch.commit();
-      console.log("Oliva ADM: Métricas zeradas com sucesso.");
       
       toast({
         title: "Métricas zeradas!",
         description: "Todo o histórico de interações e presença foi removido.",
       });
     } catch (e) {
-      console.error("Oliva ADM: Erro ao resetar dados", e);
       toast({
         variant: "destructive",
         title: "Erro ao resetar",
         description: "Não foi possível limpar os dados.",
       });
+    }
+  };
+
+  const handleSaveLinks = async () => {
+    if (!firestore) return;
+    try {
+        await setDoc(doc(firestore, 'settings', 'links'), editLinks);
+        toast({
+            title: "Links salvos!",
+            description: "As mídias digitais foram atualizadas com sucesso.",
+        });
+    } catch (e) {
+        toast({
+            variant: "destructive",
+            title: "Erro ao salvar",
+            description: "Não foi possível atualizar os links.",
+        });
     }
   };
 
@@ -260,7 +286,6 @@ export default function AdminPage() {
 
   const handleExportCSV = () => {
     if (filteredAndSortedLeads.length === 0) return;
-
     const headers = ['Data Envio', 'Status (Estrelas)', 'Nome', 'E-mail', 'WhatsApp', 'Aniversário', 'Notas'];
     const rows = filteredAndSortedLeads.map(lead => {
       const date = lead.submissionDate?.toDate ? format(lead.submissionDate.toDate(), "dd/MM/yyyy HH:mm") : '-';
@@ -275,12 +300,7 @@ export default function AdminPage() {
         `"${(lead.notes || '').replace(/"/g, '""')}"`
       ];
     });
-
-    const csvContent = [
-      headers.join(','),
-      ...rows.map(row => row.join(','))
-    ].join('\n');
-
+    const csvContent = [headers.join(','), ...rows.map(row => row.join(','))].join('\n');
     const blob = new Blob(['\ufeff' + csvContent], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
@@ -298,9 +318,7 @@ export default function AdminPage() {
       setError('');
       localStorage.setItem(ADM_AUTH_KEY, "active");
       initialLoadTime.current = new Date();
-      console.log("Oliva ADM: Login administrativo bem-sucedido.");
     } else {
-      console.warn("Oliva ADM: Tentativa de login falhou.");
       setError('Credenciais inválidas.');
     }
   };
@@ -308,7 +326,6 @@ export default function AdminPage() {
   const handleLogout = () => {
     setIsLoggedIn(false);
     localStorage.removeItem(ADM_AUTH_KEY);
-    console.log("Oliva ADM: Logout realizado.");
   };
 
   const SortIcon = ({ field }: { field: SortField }) => {
@@ -387,235 +404,291 @@ export default function AdminPage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-11 gap-4 mb-10">
-        <Dialog>
-          <DialogTrigger asChild>
-            <Card className="bg-primary/5 border-primary/10 p-4 cursor-pointer hover:bg-primary/10 transition-colors group">
-              <div className="flex flex-col items-center text-center gap-2 relative">
-                <Eye className="h-5 w-5 text-primary" />
-                <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">Acessos</p><p className="text-xl font-bold text-primary">{analyticsStats.pageViews}</p></div>
-                <ChevronUp className="h-3 w-3 absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground" />
-              </div>
-            </Card>
-          </DialogTrigger>
-          <DialogContent className="max-w-4xl">
-            <DialogHeader>
-              <DialogTitle>Estatísticas de Acesso</DialogTitle>
-              <DialogDescription>Visualização diária dos últimos 30 dias.</DialogDescription>
-            </DialogHeader>
-            <div className="h-[350px] mt-4">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={dailyStats}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--muted))" />
-                  <XAxis dataKey="date" axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: 'hsl(var(--muted-foreground))' }} />
-                  <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: 'hsl(var(--muted-foreground))' }} />
-                  <Bar dataKey="views" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-          </DialogContent>
-        </Dialog>
+      <Tabs defaultValue="overview" className="space-y-8">
+        <TabsList className="bg-background border">
+            <TabsTrigger value="overview" className="gap-2"><Eye className="h-4 w-4" /> Visão Geral</TabsTrigger>
+            <TabsTrigger value="leads" className="gap-2"><Users className="h-4 w-4" /> Contatos</TabsTrigger>
+            <TabsTrigger value="links" className="gap-2"><Settings className="h-4 w-4" /> Links Sociais</TabsTrigger>
+        </TabsList>
 
-        <Card className="bg-accent/5 border-accent/10 p-4">
-          <div className="flex flex-col items-center text-center gap-2">
-            <Users className="h-5 w-5 text-accent" />
-            <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">Leads</p><p className="text-xl font-bold text-accent">{leads?.length || 0}</p></div>
-          </div>
-        </Card>
-        
-        <div onClick={() => handleMetricAction(urls.whatsapp, "WhatsApp")} className="block cursor-pointer select-none">
-          <Card className="bg-green-500/5 border-green-500/10 p-4 hover:bg-green-500/10 h-full group">
-            <div className="flex flex-col items-center text-center gap-2 relative">
-              <Phone className="h-5 w-5 text-green-500" />
-              <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">WhatsApp</p><p className="text-xl font-bold text-green-500">{analyticsStats.whatsappClicks}</p></div>
-              <Copy className="h-3 w-3 absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground" />
-            </div>
-          </Card>
-        </div>
+        <TabsContent value="overview">
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-11 gap-4 mb-10">
+                <Dialog>
+                    <DialogTrigger asChild>
+                        <Card className="bg-primary/5 border-primary/10 p-4 cursor-pointer hover:bg-primary/10 transition-colors group">
+                        <div className="flex flex-col items-center text-center gap-2 relative">
+                            <Eye className="h-5 w-5 text-primary" />
+                            <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">Acessos</p><p className="text-xl font-bold text-primary">{analyticsStats.pageViews}</p></div>
+                            <ChevronUp className="h-3 w-3 absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground" />
+                        </div>
+                        </Card>
+                    </DialogTrigger>
+                    <DialogContent className="max-w-4xl">
+                        <DialogHeader>
+                        <DialogTitle>Estatísticas de Acesso</DialogTitle>
+                        <DialogDescription>Visualização diária dos últimos 30 dias.</DialogDescription>
+                        </DialogHeader>
+                        <div className="h-[350px] mt-4">
+                        <ResponsiveContainer width="100%" height="100%">
+                            <BarChart data={dailyStats}>
+                            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--muted))" />
+                            <XAxis dataKey="date" axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: 'hsl(var(--muted-foreground))' }} />
+                            <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: 'hsl(var(--muted-foreground))' }} />
+                            <Bar dataKey="views" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
+                            </BarChart>
+                        </ResponsiveContainer>
+                        </div>
+                    </DialogContent>
+                </Dialog>
 
-        <div onClick={() => handleMetricAction(urls.ifood, "iFood")} className="block cursor-pointer select-none">
-          <Card className="bg-red-500/5 border-red-500/10 p-4 hover:bg-red-500/10 h-full group">
-            <div className="flex flex-col items-center text-center gap-2 relative">
-              <ShoppingBag className="h-5 w-5 text-red-500" />
-              <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">iFood</p><p className="text-xl font-bold text-red-500">{analyticsStats.ifoodClicks}</p></div>
-              <Copy className="h-3 w-3 absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground" />
-            </div>
-          </Card>
-        </div>
+                <Card className="bg-accent/5 border-accent/10 p-4">
+                <div className="flex flex-col items-center text-center gap-2">
+                    <Users className="h-5 w-5 text-accent" />
+                    <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">Leads</p><p className="text-xl font-bold text-accent">{leads?.length || 0}</p></div>
+                </div>
+                </Card>
+                
+                <div onClick={() => handleMetricAction(urls.whatsapp, "WhatsApp")} className="block cursor-pointer select-none">
+                <Card className="bg-green-500/5 border-green-500/10 p-4 hover:bg-green-500/10 h-full group">
+                    <div className="flex flex-col items-center text-center gap-2 relative">
+                    <Phone className="h-5 w-5 text-green-500" />
+                    <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">WhatsApp</p><p className="text-xl font-bold text-green-500">{analyticsStats.whatsappClicks}</p></div>
+                    <Copy className="h-3 w-3 absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground" />
+                    </div>
+                </Card>
+                </div>
 
-        <div onClick={() => handleMetricAction(urls.review, "Avaliação")} className="block cursor-pointer select-none">
-          <Card className="bg-accent/5 border-accent/10 p-4 hover:bg-accent/10 h-full group">
-            <div className="flex flex-col items-center text-center gap-2 relative">
-              <Star className="h-5 w-5 text-accent" />
-              <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">Avaliação</p><p className="text-xl font-bold text-accent">{analyticsStats.reviewClicks}</p></div>
-              <Copy className="h-3 w-3 absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground" />
-            </div>
-          </Card>
-        </div>
+                <div onClick={() => handleMetricAction(urls.ifood, "iFood")} className="block cursor-pointer select-none">
+                <Card className="bg-red-500/5 border-red-500/10 p-4 hover:bg-red-500/10 h-full group">
+                    <div className="flex flex-col items-center text-center gap-2 relative">
+                    <ShoppingBag className="h-5 w-5 text-red-500" />
+                    <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">iFood</p><p className="text-xl font-bold text-red-500">{analyticsStats.ifoodClicks}</p></div>
+                    <Copy className="h-3 w-3 absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground" />
+                    </div>
+                </Card>
+                </div>
 
-        <div onClick={() => handleMetricAction(urls.maps, "Endereço")} className="block cursor-pointer select-none">
-          <Card className="bg-blue-500/5 border-blue-500/10 p-4 hover:bg-blue-500/10 h-full group">
-            <div className="flex flex-col items-center text-center gap-2 relative">
-              <MapPin className="h-5 w-5 text-blue-500" />
-              <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">Endereço</p><p className="text-xl font-bold text-blue-500">{analyticsStats.addressClicks}</p></div>
-              <Copy className="h-3 w-3 absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground" />
-            </div>
-          </Card>
-        </div>
+                <div onClick={() => handleMetricAction(urls.review, "Avaliação")} className="block cursor-pointer select-none">
+                <Card className="bg-accent/5 border-accent/10 p-4 hover:bg-accent/10 h-full group">
+                    <div className="flex flex-col items-center text-center gap-2 relative">
+                    <Star className="h-5 w-5 text-accent" />
+                    <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">Avaliação</p><p className="text-xl font-bold text-accent">{analyticsStats.reviewClicks}</p></div>
+                    <Copy className="h-3 w-3 absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground" />
+                    </div>
+                </Card>
+                </div>
 
-        <div onClick={() => handleMetricAction(urls.instagram, "Instagram")} className="block cursor-pointer select-none">
-          <Card className="bg-pink-500/5 border-pink-500/10 p-4 hover:bg-pink-500/10 h-full group">
-            <div className="flex flex-col items-center text-center gap-2 relative">
-              <Instagram className="h-5 w-5 text-pink-500" />
-              <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">Instagram</p><p className="text-xl font-bold text-pink-500">{analyticsStats.instagramClicks}</p></div>
-              <Copy className="h-3 w-3 absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground" />
-            </div>
-          </Card>
-        </div>
+                <div onClick={() => handleMetricAction(urls.maps, "Endereço")} className="block cursor-pointer select-none">
+                <Card className="bg-blue-500/5 border-blue-500/10 p-4 hover:bg-blue-500/10 h-full group">
+                    <div className="flex flex-col items-center text-center gap-2 relative">
+                    <MapPin className="h-5 w-5 text-blue-500" />
+                    <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">Endereço</p><p className="text-xl font-bold text-blue-500">{analyticsStats.addressClicks}</p></div>
+                    <Copy className="h-3 w-3 absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground" />
+                    </div>
+                </Card>
+                </div>
 
-        <div onClick={() => handleMetricAction(urls.tiktok, "TikTok")} className="block cursor-pointer select-none">
-          <Card className="bg-foreground/5 border-foreground/10 p-4 hover:bg-foreground/10 h-full group">
-            <div className="flex flex-col items-center text-center gap-2 relative">
-              <TikTokIcon className="h-5 w-5 text-foreground" />
-              <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">TikTok</p><p className="text-xl font-bold text-foreground">{analyticsStats.tiktokClicks}</p></div>
-              <Copy className="h-3 w-3 absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground" />
-            </div>
-          </Card>
-        </div>
+                <div onClick={() => handleMetricAction(urls.instagram, "Instagram")} className="block cursor-pointer select-none">
+                <Card className="bg-pink-500/5 border-pink-500/10 p-4 hover:bg-pink-500/10 h-full group">
+                    <div className="flex flex-col items-center text-center gap-2 relative">
+                    <Instagram className="h-5 w-5 text-pink-500" />
+                    <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">Instagram</p><p className="text-xl font-bold text-pink-500">{analyticsStats.instagramClicks}</p></div>
+                    <Copy className="h-3 w-3 absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground" />
+                    </div>
+                </Card>
+                </div>
 
-        <div onClick={() => handleMetricAction(urls.youtube, "YouTube")} className="block cursor-pointer select-none">
-          <Card className="bg-red-600/5 border-red-600/10 p-4 hover:bg-red-600/10 h-full group">
-            <div className="flex flex-col items-center text-center gap-2 relative">
-              <Youtube className="h-5 w-5 text-red-600" />
-              <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">YouTube</p><p className="text-xl font-bold text-red-600">{analyticsStats.youtubeClicks}</p></div>
-              <Copy className="h-3 w-3 absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground" />
-            </div>
-          </Card>
-        </div>
+                <div onClick={() => handleMetricAction(urls.tiktok, "TikTok")} className="block cursor-pointer select-none">
+                <Card className="bg-foreground/5 border-foreground/10 p-4 hover:bg-foreground/10 h-full group">
+                    <div className="flex flex-col items-center text-center gap-2 relative">
+                    <TikTokIcon className="h-5 w-5 text-foreground" />
+                    <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">TikTok</p><p className="text-xl font-bold text-foreground">{analyticsStats.tiktokClicks}</p></div>
+                    <Copy className="h-3 w-3 absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground" />
+                    </div>
+                </Card>
+                </div>
 
-        <div onClick={() => handleMetricAction(urls.whatsapp, "Eventos")} className="block cursor-pointer select-none">
-          <Card className="bg-orange-500/5 border-orange-500/10 p-4 hover:bg-orange-500/10 h-full group">
-            <div className="flex flex-col items-center text-center gap-2 relative">
-              <CalendarCheck className="h-5 w-5 text-orange-500" />
-              <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">Eventos</p><p className="text-xl font-bold text-orange-500">{analyticsStats.eventsClicks}</p></div>
-              <Copy className="h-3 w-3 absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground" />
-            </div>
-          </Card>
-        </div>
+                <div onClick={() => handleMetricAction(urls.youtube, "YouTube")} className="block cursor-pointer select-none">
+                <Card className="bg-red-600/5 border-red-600/10 p-4 hover:bg-red-600/10 h-full group">
+                    <div className="flex flex-col items-center text-center gap-2 relative">
+                    <Youtube className="h-5 w-5 text-red-600" />
+                    <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">YouTube</p><p className="text-xl font-bold text-red-600">{analyticsStats.youtubeClicks}</p></div>
+                    <Copy className="h-3 w-3 absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground" />
+                    </div>
+                </Card>
+                </div>
 
-        <Card className="bg-green-500/5 border-green-500/10 p-4 group">
-          <div className="flex flex-col items-center text-center gap-2 relative">
-            <div className="relative flex h-3 w-3 mb-1">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-            </div>
-            <div>
-              <p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">Online</p>
-              <p className="text-xl font-bold text-green-500">{activeUsersCount}</p>
-            </div>
-          </div>
-        </Card>
-      </div>
+                <div onClick={() => handleMetricAction(urls.whatsapp, "Eventos")} className="block cursor-pointer select-none">
+                <Card className="bg-orange-500/5 border-orange-500/10 p-4 hover:bg-orange-500/10 h-full group">
+                    <div className="flex flex-col items-center text-center gap-2 relative">
+                    <CalendarCheck className="h-5 w-5 text-orange-500" />
+                    <div><p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">Eventos</p><p className="text-xl font-bold text-orange-500">{analyticsStats.eventsClicks}</p></div>
+                    <Copy className="h-3 w-3 absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground" />
+                    </div>
+                </Card>
+                </div>
 
-      <Card className="border-primary/10 bg-card/30 backdrop-blur-sm overflow-hidden">
-        <CardHeader className="bg-primary/5 border-b border-primary/10 flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div className="flex items-center justify-between w-full md:w-auto gap-4">
-            <CardTitle className="text-xl flex items-center gap-2"><Mail className="h-5 w-5 text-primary" />Contatos Detalhados</CardTitle>
-            <Button variant="outline" size="sm" onClick={handleExportCSV} disabled={filteredAndSortedLeads.length === 0} className="gap-2 text-xs md:text-sm">
-              <Download className="h-4 w-4" />
-              Exportar CSV
-            </Button>
-          </div>
-          <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto">
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button variant="outline" className={cn("w-full md:w-[240px] justify-start text-left font-normal", !selectedDate && "text-muted-foreground")}>
-                  <CalendarIcon className="mr-2 h-4 w-4" />
-                  {selectedDate ? format(selectedDate, "PPP", { locale: ptBR }) : <span>Filtrar por data</span>}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0" align="end">
-                <Calendar mode="single" selected={selectedDate} onSelect={setSelectedDate} initialFocus locale={ptBR} />
-                {selectedDate && (
-                  <div className="p-3 border-t">
-                    <Button variant="ghost" size="sm" onClick={() => setSelectedDate(undefined)} className="w-full text-xs">Limpar Filtro</Button>
-                  </div>
+                <Card className="bg-green-500/5 border-green-500/10 p-4 group">
+                <div className="flex flex-col items-center text-center gap-2 relative">
+                    <div className="relative flex h-3 w-3 mb-1">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                    </div>
+                    <div>
+                    <p className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">Online</p>
+                    <p className="text-xl font-bold text-green-500">{activeUsersCount}</p>
+                    </div>
+                </div>
+                </Card>
+            </div>
+        </TabsContent>
+
+        <TabsContent value="leads">
+            <Card className="border-primary/10 bg-card/30 backdrop-blur-sm overflow-hidden">
+                <CardHeader className="bg-primary/5 border-b border-primary/10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div className="flex items-center justify-between w-full md:w-auto gap-4">
+                    <CardTitle className="text-xl flex items-center gap-2"><Mail className="h-5 w-5 text-primary" />Contatos Detalhados</CardTitle>
+                    <Button variant="outline" size="sm" onClick={handleExportCSV} disabled={filteredAndSortedLeads.length === 0} className="gap-2 text-xs md:text-sm">
+                    <Download className="h-4 w-4" />
+                    Exportar CSV
+                    </Button>
+                </div>
+                <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto">
+                    <Popover>
+                    <PopoverTrigger asChild>
+                        <Button variant="outline" className={cn("w-full md:w-[240px] justify-start text-left font-normal", !selectedDate && "text-muted-foreground")}>
+                        <CalendarIcon className="mr-2 h-4 w-4" />
+                        {selectedDate ? format(selectedDate, "PPP", { locale: ptBR }) : <span>Filtrar por data</span>}
+                        </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="end">
+                        <Calendar mode="single" selected={selectedDate} onSelect={setSelectedDate} initialFocus locale={ptBR} />
+                        {selectedDate && (
+                        <div className="p-3 border-t">
+                            <Button variant="ghost" size="sm" onClick={() => setSelectedDate(undefined)} className="w-full text-xs">Limpar Filtro</Button>
+                        </div>
+                        )}
+                    </PopoverContent>
+                    </Popover>
+                    <div className="relative w-full md:w-72">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                    <Input placeholder="Buscar por nome, email..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="pl-10 bg-background/50 h-10" />
+                    </div>
+                </div>
+                </CardHeader>
+                <CardContent className="p-0">
+                {leadsLoading ? (
+                    <div className="flex flex-col items-center justify-center py-20 gap-4"><div className="h-10 w-10 border-4 border-primary border-t-transparent rounded-full animate-spin" /><p className="text-muted-foreground font-medium">Carregando...</p></div>
+                ) : filteredAndSortedLeads.length > 0 ? (
+                    <div className="overflow-x-auto">
+                    <Table>
+                        <TableHeader className="bg-muted/50">
+                        <TableRow>
+                            <TableHead className="w-[140px] cursor-pointer" onClick={() => handleSort('submissionDate')}>Data <SortIcon field="submissionDate" /></TableHead>
+                            <TableHead className="w-[100px] cursor-pointer" onClick={() => handleSort('rating')}>Status <SortIcon field="rating" /></TableHead>
+                            <TableHead className="cursor-pointer" onClick={() => handleSort('name')}>Nome <SortIcon field="name" /></TableHead>
+                            <TableHead className="w-[180px] cursor-pointer" onClick={() => handleSort('email')}>E-mail <SortIcon field="email" /></TableHead>
+                            <TableHead className="w-[130px] cursor-pointer" onClick={() => handleSort('whatsapp')}>WhatsApp <SortIcon field="whatsapp" /></TableHead>
+                            <TableHead className="w-[110px] cursor-pointer" onClick={() => handleSort('birthDate')}>Niver <SortIcon field="birthDate" /></TableHead>
+                            <TableHead className="w-[200px]"><div className="flex items-center gap-2"><MessageSquare className="h-4 w-4 text-primary" />Notas</div></TableHead>
+                        </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                        {filteredAndSortedLeads.map((lead: any) => {
+                            const submissionDate = lead.submissionDate?.toDate?.() || new Date();
+                            const isNew = submissionDate > initialLoadTime.current;
+                            const birthDate = lead.birthDate ? format(new Date(lead.birthDate + 'T00:00:00'), "dd/MM") : '-';
+                            return (
+                            <TableRow key={lead.id} className={cn("transition-all", isNew ? "bg-primary/10 animate-pulse-slow border-l-4 border-l-primary" : "hover:bg-primary/5")}>
+                                <TableCell className="text-muted-foreground text-xs">{lead.submissionDate?.toDate ? format(lead.submissionDate.toDate(), "dd/MM/yy HH:mm", { locale: ptBR }) : 'Agora'}</TableCell>
+                                <TableCell>
+                                <div className="flex items-center gap-0.5">
+                                    {[1, 2, 3, 4, 5].map((s) => (
+                                    <button
+                                        key={s}
+                                        type="button"
+                                        className="focus:outline-none transition-transform hover:scale-125"
+                                        onClick={() => handleRateLead(lead.id, lead.rating === s ? 0 : s)}
+                                    >
+                                        <Star className={cn("h-4 w-4", s <= (lead.rating || 0) ? "fill-accent text-accent" : "text-muted-foreground/30")} />
+                                    </button>
+                                    ))}
+                                </div>
+                                </TableCell>
+                                <TableCell className="font-semibold text-foreground">{lead.name}</TableCell>
+                                <TableCell>
+                                <button onClick={() => { navigator.clipboard.writeText(lead.email); toast({ title: "E-mail copiado!" }); }} className="text-primary hover:underline text-xs flex items-center gap-2 group/email text-left transition-all">
+                                    <span className="truncate max-w-[140px]">{lead.email}</span>
+                                    <Copy className="h-3 w-3 opacity-0 group-hover/email:opacity-100" />
+                                </button>
+                                </TableCell>
+                                <TableCell>{lead.whatsapp ? <a href={`https://wa.me/55${lead.whatsapp}`} target="_blank" rel="noopener noreferrer" className="text-green-500 hover:underline text-xs font-medium flex items-center gap-1"><Phone className="h-3 w-3"/>{lead.whatsapp}</a> : '-'}</TableCell>
+                                <TableCell className="text-xs font-medium">
+                                {lead.birthDate ? (
+                                    <div className="flex items-center gap-1.5 text-accent">
+                                    <Gift className="h-3 w-3" />
+                                    {birthDate}
+                                    </div>
+                                ) : '-'}
+                                </TableCell>
+                                <TableCell><Input defaultValue={lead.notes || ''} placeholder="Nota..." className="bg-transparent border-none text-xs h-8" onBlur={(e) => handleUpdateNote(lead.id, e.target.value)} /></TableCell>
+                            </TableRow>
+                            );
+                        })}
+                        </TableBody>
+                    </Table>
+                    </div>
+                ) : (
+                    <div className="flex flex-col items-center justify-center py-20 text-center"><Users className="h-12 w-12 text-muted-foreground/30 mb-4" /><p className="text-xl font-headline text-muted-foreground">Nenhum resultado.</p></div>
                 )}
-              </PopoverContent>
-            </Popover>
-            <div className="relative w-full md:w-72">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input placeholder="Buscar por nome, email..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="pl-10 bg-background/50 h-10" />
-            </div>
-          </div>
-        </CardHeader>
-        <CardContent className="p-0">
-          {leadsLoading ? (
-            <div className="flex flex-col items-center justify-center py-20 gap-4"><div className="h-10 w-10 border-4 border-primary border-t-transparent rounded-full animate-spin" /><p className="text-muted-foreground font-medium">Carregando...</p></div>
-          ) : filteredAndSortedLeads.length > 0 ? (
-            <div className="overflow-x-auto">
-              <Table>
-                <TableHeader className="bg-muted/50">
-                  <TableRow>
-                    <TableHead className="w-[140px] cursor-pointer" onClick={() => handleSort('submissionDate')}>Data <SortIcon field="submissionDate" /></TableHead>
-                    <TableHead className="w-[100px] cursor-pointer" onClick={() => handleSort('rating')}>Status <SortIcon field="rating" /></TableHead>
-                    <TableHead className="cursor-pointer" onClick={() => handleSort('name')}>Nome <SortIcon field="name" /></TableHead>
-                    <TableHead className="w-[180px] cursor-pointer" onClick={() => handleSort('email')}>E-mail <SortIcon field="email" /></TableHead>
-                    <TableHead className="w-[130px] cursor-pointer" onClick={() => handleSort('whatsapp')}>WhatsApp <SortIcon field="whatsapp" /></TableHead>
-                    <TableHead className="w-[110px] cursor-pointer" onClick={() => handleSort('birthDate')}>Niver <SortIcon field="birthDate" /></TableHead>
-                    <TableHead className="w-[200px]"><div className="flex items-center gap-2"><MessageSquare className="h-4 w-4 text-primary" />Notas</div></TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {filteredAndSortedLeads.map((lead: any) => {
-                    const submissionDate = lead.submissionDate?.toDate?.() || new Date();
-                    const isNew = submissionDate > initialLoadTime.current;
-                    const birthDate = lead.birthDate ? format(new Date(lead.birthDate + 'T00:00:00'), "dd/MM") : '-';
-                    return (
-                      <TableRow key={lead.id} className={cn("transition-all", isNew ? "bg-primary/10 animate-pulse-slow border-l-4 border-l-primary" : "hover:bg-primary/5")}>
-                        <TableCell className="text-muted-foreground text-xs">{lead.submissionDate?.toDate ? format(lead.submissionDate.toDate(), "dd/MM/yy HH:mm", { locale: ptBR }) : 'Agora'}</TableCell>
-                        <TableCell>
-                          <div className="flex items-center gap-0.5">
-                            {[1, 2, 3, 4, 5].map((s) => (
-                              <button
-                                key={s}
-                                type="button"
-                                className="focus:outline-none transition-transform hover:scale-125"
-                                onClick={() => handleRateLead(lead.id, lead.rating === s ? 0 : s)}
-                              >
-                                <Star className={cn("h-4 w-4", s <= (lead.rating || 0) ? "fill-accent text-accent" : "text-muted-foreground/30")} />
-                              </button>
-                            ))}
-                          </div>
-                        </TableCell>
-                        <TableCell className="font-semibold text-foreground">{lead.name}</TableCell>
-                        <TableCell>
-                          <button onClick={() => { navigator.clipboard.writeText(lead.email); toast({ title: "E-mail copiado!" }); }} className="text-primary hover:underline text-xs flex items-center gap-2 group/email text-left transition-all">
-                            <span className="truncate max-w-[140px]">{lead.email}</span>
-                            <Copy className="h-3 w-3 opacity-0 group-hover/email:opacity-100" />
-                          </button>
-                        </TableCell>
-                        <TableCell>{lead.whatsapp ? <a href={`https://wa.me/55${lead.whatsapp}`} target="_blank" rel="noopener noreferrer" className="text-green-500 hover:underline text-xs font-medium flex items-center gap-1"><Phone className="h-3 w-3"/>{lead.whatsapp}</a> : '-'}</TableCell>
-                        <TableCell className="text-xs font-medium">
-                          {lead.birthDate ? (
-                            <div className="flex items-center gap-1.5 text-accent">
-                              <Gift className="h-3 w-3" />
-                              {birthDate}
-                            </div>
-                          ) : '-'}
-                        </TableCell>
-                        <TableCell><Input defaultValue={lead.notes || ''} placeholder="Nota..." className="bg-transparent border-none text-xs h-8" onBlur={(e) => handleUpdateNote(lead.id, e.target.value)} /></TableCell>
-                      </TableRow>
-                    );
-                  })}
-                </TableBody>
-              </Table>
-            </div>
-          ) : (
-            <div className="flex flex-col items-center justify-center py-20 text-center"><Users className="h-12 w-12 text-muted-foreground/30 mb-4" /><p className="text-xl font-headline text-muted-foreground">Nenhum resultado.</p></div>
-          )}
-        </CardContent>
-      </Card>
+                </CardContent>
+            </Card>
+        </TabsContent>
+
+        <TabsContent value="links">
+            <Card className="border-primary/10 bg-card/30 backdrop-blur-sm max-w-2xl mx-auto">
+                <CardHeader>
+                    <CardTitle className="flex items-center gap-2"><Settings className="h-5 w-5 text-primary" />Gerenciar Links</CardTitle>
+                    <CardDescription>Atualize os links das mídias digitais que aparecem em todo o site.</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                    <div className="grid gap-4">
+                        <div className="space-y-2">
+                            <label className="text-sm font-medium">WhatsApp (Link Direto)</label>
+                            <Input value={editLinks.whatsapp} onChange={(e) => setEditLinks({...editLinks, whatsapp: e.target.value})} placeholder="https://wa.me/..." />
+                        </div>
+                        <div className="space-y-2">
+                            <label className="text-sm font-medium">Instagram</label>
+                            <Input value={editLinks.instagram} onChange={(e) => setEditLinks({...editLinks, instagram: e.target.value})} placeholder="https://instagram.com/..." />
+                        </div>
+                        <div className="space-y-2">
+                            <label className="text-sm font-medium">TikTok</label>
+                            <Input value={editLinks.tiktok} onChange={(e) => setEditLinks({...editLinks, tiktok: e.target.value})} placeholder="https://tiktok.com/@..." />
+                        </div>
+                        <div className="space-y-2">
+                            <label className="text-sm font-medium">YouTube</label>
+                            <Input value={editLinks.youtube} onChange={(e) => setEditLinks({...editLinks, youtube: e.target.value})} placeholder="https://youtube.com/..." />
+                        </div>
+                        <div className="space-y-2">
+                            <label className="text-sm font-medium">iFood</label>
+                            <Input value={editLinks.ifood} onChange={(e) => setEditLinks({...editLinks, ifood: e.target.value})} placeholder="https://ifood.com.br/..." />
+                        </div>
+                        <div className="space-y-2">
+                            <label className="text-sm font-medium">Google Maps</label>
+                            <Input value={editLinks.maps} onChange={(e) => setEditLinks({...editLinks, maps: e.target.value})} placeholder="https://goo.gl/maps/..." />
+                        </div>
+                        <div className="space-y-2">
+                            <label className="text-sm font-medium">Link de Avaliação</label>
+                            <Input value={editLinks.review} onChange={(e) => setEditLinks({...editLinks, review: e.target.value})} placeholder="https://g.page/..." />
+                        </div>
+                    </div>
+                    <Button onClick={handleSaveLinks} className="w-full gap-2">
+                        <Save className="h-4 w-4" /> Salvar Alterações
+                    </Button>
+                </CardContent>
+            </Card>
+        </TabsContent>
+      </Tabs>
     </div>
   );
 }

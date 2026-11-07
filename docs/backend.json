@@ -52,6 +52,21 @@
         "lastSeen": { "type": "string", "format": "date-time" }
       },
       "required": ["lastSeen"]
+    },
+    "AppSettings": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "AppSettings",
+      "type": "object",
+      "description": "General application settings like social media links.",
+      "properties": {
+        "whatsapp": { "type": "string" },
+        "instagram": { "type": "string" },
+        "tiktok": { "type": "string" },
+        "youtube": { "type": "string" },
+        "ifood": { "type": "string" },
+        "maps": { "type": "string" },
+        "review": { "type": "string" }
+      }
     }
   },
   "auth": {
@@ -74,6 +89,10 @@
       {
         "path": "/presence/{presenceId}",
         "definition": { "entityName": "UserPresence" }
+      },
+      {
+        "path": "/settings/{settingId}",
+        "definition": { "entityName": "AppSettings" }
       }
     ]
   }

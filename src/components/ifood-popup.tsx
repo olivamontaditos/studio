@@ -10,6 +10,8 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { useAnalytics } from "@/hooks/use-analytics";
+import { useDoc, useMemoFirebase, useFirestore } from '@/firebase';
+import { doc } from 'firebase/firestore';
 
 type PopupState = 'initial' | 'floating' | 'closed';
 
@@ -17,7 +19,12 @@ export default function IfoodPopup() {
   const [popupState, setPopupState] = useState<PopupState>('closed');
   const pathname = usePathname();
   const { trackEvent } = useAnalytics();
-  const ifoodUrl = "https://www.ifood.com.br/delivery/curitiba-pr/oliva-montaditos-bom-retiro/2b88f26f-a586-4600-ab74-19d3852d4ddd?UTM_Medium=share";
+  
+  const firestore = useFirestore();
+  const settingsDocRef = useMemoFirebase(() => firestore ? doc(firestore, 'settings', 'links') : null, [firestore]);
+  const { data: settings } = useDoc(settingsDocRef);
+
+  const ifoodUrl = settings?.ifood || "https://www.ifood.com.br/delivery/curitiba-pr/oliva-montaditos-bom-retiro/2b88f26f-a586-4600-ab74-19d3852d4ddd?UTM_Medium=share";
   
   const allowedPaths = ['/', '/menu/'];
   const popupRef = useRef<HTMLDivElement>(null);

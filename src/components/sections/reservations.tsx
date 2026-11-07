@@ -1,13 +1,22 @@
+
 'use client';
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Phone, MapPin } from "lucide-react";
 import { useAnalytics } from "@/hooks/use-analytics";
+import { useDoc, useMemoFirebase, useFirestore } from '@/firebase';
+import { doc } from 'firebase/firestore';
 
 export default function ReservationsSection() {
   const { trackEvent } = useAnalytics();
-  const mapsUrl = "https://share.google/fnyW3LtaK1bazQDRv";
+  const firestore = useFirestore();
+  const settingsDocRef = useMemoFirebase(() => firestore ? doc(firestore, 'settings', 'links') : null, [firestore]);
+  const { data: settings } = useDoc(settingsDocRef);
+
+  const mapsUrl = settings?.maps || "https://share.google/fnyW3LtaK1bazQDRv";
+  const whatsappUrl = settings?.whatsapp || "https://wa.me/554188156424";
+
   return (
     <section id="encomendas" className="bg-background py-20 md:py-32">
       <div className="container mx-auto px-6">
@@ -44,14 +53,14 @@ export default function ReservationsSection() {
                 </span>
               </a>
               <a 
-                href="https://wa.me/5541988483621" 
+                href={whatsappUrl} 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="flex items-center justify-center md:justify-start gap-3 hover:text-primary transition-colors"
                 onClick={() => trackEvent('whatsapp_click')}
               >
                 <Phone className="h-5 w-5 text-primary" />
-                <span>(41) 98848-3621</span>
+                <span>(41) 8815-6424</span>
               </a>
             </div>
           </div>
@@ -64,7 +73,7 @@ export default function ReservationsSection() {
                 <p><strong>Domingo:</strong> Fechado</p>
             </div>
             <Button asChild size="lg" className="mt-8 bg-accent text-accent-foreground hover:bg-accent/90">
-              <Link href="https://wa.me/5541988483621" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('events_click')}>
+              <Link href={whatsappUrl} target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('events_click')}>
                 Eventos & Encomendas
               </Link>
             </Button>

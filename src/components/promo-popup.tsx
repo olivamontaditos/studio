@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -12,13 +13,19 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
+import { useDoc, useMemoFirebase, useFirestore } from '@/firebase';
+import { doc } from 'firebase/firestore';
 
 export default function PromoPopup() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
-  const whatsappUrl = "https://wa.me/5541988483621?text=Olá! Gostaria de encomendar uma cesta de Dia das Mães.";
+  const firestore = useFirestore();
+  const settingsDocRef = useMemoFirebase(() => firestore ? doc(firestore, 'settings', 'links') : null, [firestore]);
+  const { data: settings } = useDoc(settingsDocRef);
+
+  const baseWhatsappUrl = settings?.whatsapp || "https://wa.me/554188156424";
+  const whatsappUrl = `${baseWhatsappUrl}${baseWhatsappUrl.includes('?') ? '&' : '?'}text=Olá! Gostaria de encomendar uma cesta de Dia das Mães.`;
   
-  // Imagem oficial fornecida para o Dia das Mães
   const promoImageUrl = "https://64.media.tumblr.com/fad519b744233667a898e31653a0ef6f/6ac289b10acbc18b-99/s1280x1920/d23b1f1701999e9738bfe7cb1c4e1f89ccd6be11.pnj";
 
   useEffect(() => {

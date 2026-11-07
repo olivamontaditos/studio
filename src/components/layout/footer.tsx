@@ -5,6 +5,8 @@ import Link from "next/link";
 import { ShieldCheck, Star, Instagram, Youtube, MapPin, MessageCircle } from "lucide-react";
 import Copyright from "./copyright";
 import { useAnalytics } from "@/hooks/use-analytics";
+import { useDoc, useMemoFirebase, useFirestore } from '@/firebase';
+import { doc } from 'firebase/firestore';
 
 const TikTokIcon = (props: any) => (
   <svg
@@ -19,13 +21,22 @@ const TikTokIcon = (props: any) => (
 
 export default function Footer() {
   const { trackEvent } = useAnalytics();
+  const firestore = useFirestore();
+  const settingsDocRef = useMemoFirebase(() => firestore ? doc(firestore, 'settings', 'links') : null, [firestore]);
+  const { data: settings } = useDoc(settingsDocRef);
+
+  const mapsUrl = settings?.maps || "https://share.google/fnyW3LtaK1bazQDRv";
+  const whatsappUrl = settings?.whatsapp || "https://wa.me/554188156424";
+  const instagramUrl = settings?.instagram || "https://www.instagram.com/olivamontaditos/";
+  const tiktokUrl = settings?.tiktok || "https://www.tiktok.com/@olivamontaditos";
+  const youtubeUrl = settings?.youtube || "https://www.youtube.com/@OlivaMontaditos";
+  const reviewUrl = settings?.review || "https://g.page/r/CeVf7luA8NjOEBM/review";
+
   const legalLinks = [
     { href: "/termos-de-uso", text: "Termos de Uso" },
     { href: "/politica-de-privacidade", text: "Política de Privacidade" },
     { href: "/politica-de-cookies", text: "Política de Cookies" },
   ];
-  const mapsUrl = "https://share.google/fnyW3LtaK1bazQDRv";
-  const whatsappUrl = "https://wa.me/5541988483621";
 
   return (
     <footer className="bg-background border-t border-white/10">
@@ -50,7 +61,7 @@ export default function Footer() {
                 <MessageCircle className="h-6 w-6" />
               </a>
               <a
-                href="https://www.instagram.com/olivamontaditos/"
+                href={instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground transition-colors hover:text-primary"
@@ -60,7 +71,7 @@ export default function Footer() {
                 <Instagram className="h-6 w-6" />
               </a>
               <a
-                href="https://www.tiktok.com/@olivamontaditos"
+                href={tiktokUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground transition-colors hover:text-primary"
@@ -70,7 +81,7 @@ export default function Footer() {
                 <TikTokIcon className="h-6 w-6" />
               </a>
               <a
-                href="https://www.youtube.com/@OlivaMontaditos"
+                href={youtubeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground transition-colors hover:text-primary"
@@ -89,7 +100,7 @@ export default function Footer() {
                   <li className="flex items-center gap-2">
                     <Star className="h-4 w-4 text-accent" />
                     <a
-                      href="https://g.page/r/CeVf7luA8NjOEBM/review"
+                      href={reviewUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="hover:text-primary transition-colors"
